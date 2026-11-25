@@ -315,7 +315,12 @@
     }
 
     var used = {};
-    var html = '<div class="doc-toc-heading">Nesta página</div>';
+    var frag = document.createDocumentFragment();
+    var headingLabel = document.createElement('div');
+    headingLabel.className = 'doc-toc-heading';
+    headingLabel.textContent = 'Nesta página';
+    frag.appendChild(headingLabel);
+
     var pairs = [];
 
     headings.forEach(function (h) {
@@ -332,11 +337,17 @@
       }
       used[id] = true;
       var isSub = h.tagName.toLowerCase() === 'h3';
-      html += '<a href="#' + id + '" class="doc-toc-link' + (isSub ? ' is-sub' : '') + '">' + h.textContent.trim() + '</a>';
+      var link = document.createElement('a');
+      link.href = '#' + id;
+      link.className = 'doc-toc-link' + (isSub ? ' is-sub' : '');
+      // Usar textContent evita que tags literais em títulos (ex.: <pre>, <details>) quebrem o HTML do TOC
+      link.textContent = h.textContent.trim();
+      frag.appendChild(link);
       pairs.push({ id: id, heading: h });
     });
 
-    tocEl.innerHTML = html;
+    tocEl.innerHTML = '';
+    tocEl.appendChild(frag);
     var tocLinks = Array.prototype.slice.call(tocEl.querySelectorAll('.doc-toc-link'));
 
     function updateActive() {
