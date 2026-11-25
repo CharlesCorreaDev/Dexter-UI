@@ -43,12 +43,14 @@
     global.DexterAlert = kit.Alert;
     global.DexterOffcanvas = kit.Offcanvas;
     global.DexterNavbar = kit.Navbar;
+    global.DexterSidenav = kit.Sidenav;
     global.DexterTooltip = kit.Tooltip;
     global.DexterPopover = kit.Popover;
     global.dexter = global.dexter || {};
     global.dexter.Alert = kit.Alert;
     global.dexter.Offcanvas = kit.Offcanvas;
     global.dexter.Navbar = kit.Navbar;
+    global.dexter.Sidenav = kit.Sidenav;
     global.dexter.Tooltip = kit.Tooltip;
     global.dexter.Popover = kit.Popover;
   }
@@ -275,15 +277,128 @@
   };
 
   // =========================================================================
-  // 3. DexterNavbar (Colapso de Barra de Navegação / Responsive Navbar Collapse)
+  // 3. DexterNavbar & DexterSidenav (Navbar BS6/Materialize + Sidenav Drawer)
   // =========================================================================
+
+  var sidenavMap = new WeakMap();
+
+  function DexterSidenav(element) {
+    this.el = typeof element === 'string' ? document.querySelector(element) : element;
+    if (!this.el) return;
+    if (sidenavMap.has(this.el)) return sidenavMap.get(this.el);
+
+    this.overlay = null;
+    this.isOpen = this.el.classList.contains('show');
+    this._opener = null;
+    sidenavMap.set(this.el, this);
+  }
+
+  DexterSidenav.prototype._ensureOverlay = function () {
+    if (this.overlay && document.body.contains(this.overlay)) return this.overlay;
+    var ov = document.createElement('div');
+    ov.className = 'sidenav-overlay';
+    var self = this;
+    ov.addEventListener('click', function () {
+      self.close();
+    });
+    document.body.appendChild(ov);
+    this.overlay = ov;
+    return ov;
+  };
+
+  DexterSidenav.prototype.open = function (opener) {
+    if (this.isOpen) return;
+    if (opener) this._opener = opener;
+    this.isOpen = true;
+    var ov = this._ensureOverlay();
+    this.el.classList.add('show');
+    this.el.setAttribute('aria-hidden', 'false');
+    ov.classList.add('show');
+    dispatch(this.el, 'dx:sidenav:show');
+  };
+
+  DexterSidenav.prototype.close = function () {
+    if (!this.isOpen) return;
+    this.isOpen = false;
+    this.el.classList.remove('show');
+    this.el.setAttribute('aria-hidden', 'true');
+    if (this.overlay) {
+      this.overlay.classList.remove('show');
+    }
+    if (this._opener && typeof this._opener.focus === 'function') {
+      try { this._opener.focus(); } catch (e) {}
+    }
+    dispatch(this.el, 'dx:sidenav:hide');
+  };
+
+  DexterSidenav.prototype.toggle = function (opener) {
+    if (this.isOpen) this.close();
+    else this.open(opener);
+  };
+
+  DexterSidenav.getOrCreateInstance = function (el) {
+    var node = typeof el === 'string' ? document.querySelector(el) : el;
+    if (!node) return null;
+    return sidenavMap.get(node) || new DexterSidenav(node);
+  };
+
+  DexterSidenav.init = function () {
+    if (DexterSidenav._bound) return;
+    DexterSidenav._bound = true;
+
+    document.addEventListener('click', function (e) {
+      var trigger = e.target.closest('.sidenav-trigger');
+      if (trigger) {
+        var sel = trigger.getAttribute('data-target') || trigger.getAttribute('data-dx-target') || trigger.getAttribute('href');
+        if (sel && sel.charAt(0) !== '#') sel = '#' + sel;
+        var target = sel ? document.querySelector(sel) : null;
+        if (target && target.classList.contains('sidenav')) {
+          e.preventDefault();
+          DexterSidenav.getOrCreateInstance(target).toggle(trigger);
+        }
+        return;
+      }
+
+      var closeBtn = e.target.closest('.sidenav .sidenav-close, .sidenav [data-dx-dismiss="sidenav"]');
+      if (closeBtn) {
+        var navEl = closeBtn.closest('.sidenav');
+        if (navEl) {
+          e.preventDefault();
+          DexterSidenav.getOrCreateInstance(navEl).close();
+        }
+      }
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.sidenav.show').forEach(function (nav) {
+          DexterSidenav.getOrCreateInstance(nav).close();
+        });
+      }
+    });
+  };
 
   var DexterNavbar = {
     init: function () {
       if (DexterNavbar._bound) return;
       DexterNavbar._bound = true;
 
+      DexterSidenav.init();
+
       document.addEventListener('click', function (e) {
+        // Clear de campo de pesquisa estilo Materialize
+        var clearBtn = e.target.closest('.nav-wrapper .dx-nav-search-clear, .nav-wrapper [data-dx-nav-clear]');
+        if (clearBtn) {
+          var field = clearBtn.closest('.input-field');
+          var input = field ? field.querySelector('input[type="search"], input') : null;
+          if (input) {
+            input.value = '';
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.focus();
+          }
+          return;
+        }
+
         var toggler = e.target.closest('.navbar-toggler[data-dx-toggle="collapse"], .navbar-toggler[data-bs-toggle="collapse"]');
         if (!toggler) return;
 
@@ -291,7 +406,7 @@
         if (!sel || sel === '#') return;
 
         var target = document.querySelector(sel);
-        if (!target || !target.classList.contains('navbar-collapse')) return;
+        if (!target || (!target.classList.contains('navbar-collapse') && !target.classList.contains('collapse'))) return;
 
         e.preventDefault();
         var expanded = target.classList.toggle('show');
@@ -521,6 +636,7 @@
     Alert: DexterAlert,
     Offcanvas: DexterOffcanvas,
     Navbar: DexterNavbar,
+    Sidenav: DexterSidenav,
     Tooltip: DexterTooltip,
     Popover: DexterPopover,
     Badge: DexterBadge,

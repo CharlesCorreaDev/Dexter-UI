@@ -1,0 +1,934 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_navbar.scss
+ * @description [PT-BR] Suíte unificada de Barra de Navegação (Navbar) e Sidenav para o
+ *                      Dexter UI, combinando Materialize CSS (.nav-wrapper, .nav-extended,
+ *                      .brand-logo, barra de pesquisa e .sidenav), Bootstrap 6.0
+ *                      (.navbar, .navbar-expand-*, .navbar-nav-scroll, conteúdo externo
+ *                      .collapse e .offcanvas no navbar) e daisyUI (.navbar-start,
+ *                      .navbar-center, .navbar-end, .navbar-glass, .navbar-floating),
+ *                      com 28 cores oficiais + semânticas, contraste WCAG e Dark Mode.
+ *              [EN]    Unified Navbar and Sidenav suite for Dexter UI combining Materialize CSS,
+ *                      Bootstrap 6.0 and daisyUI patterns across 28 official colors & Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Barra de Navegação Unificada (BS6, Materialize & daisyUI) | Unified Navbar */
+
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$navbar-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$navbar-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning");
+$navbar-palette: map.merge($all-colors, $navbar-semantic-colors);
+
+// ---------------------------------------------------------------------------
+// 1. Base Bootstrap 6.0 Navbar (.navbar, .navbar-brand, .navbar-nav, .navbar-toggler)
+// EN: Bootstrap 6.0 Navbar Architecture & CSS Custom Properties
+// ---------------------------------------------------------------------------
+.navbar {
+  --#{$prefix}-navbar-padding-x: 1rem;
+  --#{$prefix}-navbar-padding-y: 0.625rem;
+  --#{$prefix}-navbar-bg: transparent;
+  --#{$prefix}-navbar-color: inherit;
+  --#{$prefix}-navbar-hover-bg: rgba(15, 23, 42, 0.06);
+  --#{$prefix}-navbar-active-bg: rgba(15, 23, 42, 0.09);
+  --#{$prefix}-navbar-disabled-opacity: 0.45;
+  --#{$prefix}-navbar-brand-font-size: 1.15rem;
+  --#{$prefix}-navbar-brand-color: inherit;
+  --#{$prefix}-navbar-toggler-border-color: rgba(128, 128, 128, 0.32);
+  --#{$prefix}-navbar-toggler-focus-ring: rgba(59, 89, 152, 0.28);
+  --#{$prefix}-navbar-border-color: rgba(15, 23, 42, 0.08);
+  --#{$prefix}-navbar-border-radius: 0;
+
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--#{$prefix}-navbar-padding-y) var(--#{$prefix}-navbar-padding-x);
+  gap: 0.75rem;
+  background-color: var(--#{$prefix}-navbar-bg);
+  color: var(--#{$prefix}-navbar-color);
+  border-radius: var(--#{$prefix}-navbar-border-radius);
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+  > .container,
+  > .container-fluid,
+  > .container-sm,
+  > .container-md,
+  > .container-lg,
+  > .container-xl,
+  > .container-2xl {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.75rem;
+  }
+}
+
+.navbar-brand {
+  padding-block: 0.25rem;
+  margin-inline-end: 0.75rem;
+  font-size: var(--#{$prefix}-navbar-brand-font-size, 1.15rem);
+  font-weight: 700;
+  color: var(--#{$prefix}-navbar-brand-color, inherit);
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: opacity 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.9;
+    color: var(--#{$prefix}-navbar-brand-color, inherit);
+    outline: none;
+  }
+}
+
+.navbar-text {
+  padding-block: 0.45rem;
+  font-size: 0.92rem;
+  opacity: 0.88;
+}
+
+.navbar-nav {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+  gap: 0.25rem;
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.75rem;
+    color: inherit;
+    text-decoration: none;
+    border-radius: var(--#{$prefix}-radius-sm, 0.35rem);
+    opacity: 0.86;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+      background-color: var(--#{$prefix}-navbar-hover-bg, rgba(0, 0, 0, 0.06));
+      outline: none;
+    }
+
+    &.active,
+    &[aria-current="page"] {
+      opacity: 1;
+      font-weight: 600;
+      background-color: var(--#{$prefix}-navbar-active-bg, rgba(0, 0, 0, 0.09));
+    }
+
+    &.disabled,
+    &[aria-disabled="true"] {
+      opacity: var(--#{$prefix}-navbar-disabled-opacity, 0.45);
+      pointer-events: none;
+      cursor: default;
+    }
+  }
+}
+
+.navbar-nav-scroll {
+  max-height: var(--#{$prefix}-scroll-height, 75vh);
+  overflow-y: auto;
+}
+
+.navbar-toggler {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.6rem;
+  font-size: 1.15rem;
+  line-height: 1;
+  color: inherit;
+  background-color: transparent;
+  border: 1px solid var(--#{$prefix}-navbar-toggler-border-color, rgba(128, 128, 128, 0.32));
+  border-radius: var(--#{$prefix}-radius-sm, 0.35rem);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease, border-color 0.15s ease;
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem var(--#{$prefix}-navbar-toggler-focus-ring, rgba(59, 89, 152, 0.28));
+  }
+}
+
+.navbar-toggler-icon {
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  vertical-align: middle;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2830, 41, 59, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+.navbar-dark {
+  --#{$prefix}-navbar-color: #f8fafc;
+  --#{$prefix}-navbar-hover-bg: rgba(255, 255, 255, 0.14);
+  --#{$prefix}-navbar-active-bg: rgba(255, 255, 255, 0.22);
+  --#{$prefix}-navbar-toggler-border-color: rgba(255, 255, 255, 0.35);
+
+  color: #f8fafc;
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+}
+
+.navbar-collapse {
+  flex-basis: 100%;
+  flex-grow: 1;
+  align-items: center;
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
+
+@mixin dx-navbar-expand-rules {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+
+  .navbar-nav {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .navbar-nav-scroll {
+    overflow: visible;
+    max-height: none;
+  }
+
+  .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+
+  .navbar-toggler {
+    display: none;
+  }
+
+  .offcanvas {
+    position: static;
+    z-index: auto;
+    flex-grow: 1;
+    width: auto !important;
+    height: auto !important;
+    visibility: visible !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    transition: none;
+
+    .offcanvas-header {
+      display: none;
+    }
+
+    .offcanvas-body {
+      display: flex;
+      align-items: center;
+      flex-grow: 0;
+      padding: 0;
+      overflow-y: visible;
+    }
+  }
+}
+
+.navbar-expand {
+  @include dx-navbar-expand-rules;
+}
+
+@media (min-width: 576px) {
+  .navbar-expand-sm { @include dx-navbar-expand-rules; }
+}
+
+@media (min-width: 768px) {
+  .navbar-expand-md { @include dx-navbar-expand-rules; }
+}
+
+@media (min-width: 1024px) {
+  .navbar-expand-lg { @include dx-navbar-expand-rules; }
+}
+
+@media (min-width: 1280px) {
+  .navbar-expand-xl { @include dx-navbar-expand-rules; }
+}
+
+@media (min-width: 1400px) {
+  .navbar-expand-xxl { @include dx-navbar-expand-rules; }
+}
+
+@media (min-width: 1536px) {
+  .navbar-expand-2xl { @include dx-navbar-expand-rules; }
+}
+
+// pt-BR: Tamanhos e estilos estruturais extras (Bootstrap / daisyUI)
+// EN: Extra Structural Styles & Sizes
+.navbar-sm {
+  --#{$prefix}-navbar-padding-y: 0.4rem;
+  --#{$prefix}-navbar-brand-font-size: 1rem;
+}
+
+.navbar-lg {
+  --#{$prefix}-navbar-padding-y: 0.9rem;
+  --#{$prefix}-navbar-brand-font-size: 1.3rem;
+}
+
+.navbar-bordered {
+  border: 1px solid var(--#{$prefix}-navbar-border-color, rgba(15, 23, 42, 0.1));
+}
+
+.navbar-floating {
+  border-radius: 0.85rem;
+  box-shadow: 0 8px 24px -6px rgba(15, 23, 42, 0.14);
+}
+
+.navbar-glass {
+  background-color: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.fixed-bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.sticky-bottom {
+  position: sticky;
+  bottom: 0;
+  z-index: 1020;
+}
+
+// ---------------------------------------------------------------------------
+// 2. daisyUI Navbar 3-Zone Architecture (.navbar-start, .navbar-center, .navbar-end)
+// EN: daisyUI 3-Zone Flex Navbar Architecture
+// ---------------------------------------------------------------------------
+.navbar:has(> .navbar-start),
+.navbar:has(> .navbar-center),
+.navbar:has(> .navbar-end) {
+  flex-wrap: nowrap;
+  min-height: 4rem;
+}
+
+.navbar-start,
+.navbar-end {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.navbar-start {
+  width: 50%;
+  justify-content: flex-start;
+}
+
+.navbar-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 0.35rem;
+}
+
+.navbar-end {
+  width: 50%;
+  justify-content: flex-end;
+}
+
+.navbar-menu {
+  display: inline-flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0.25rem;
+
+  > li > a,
+  > li > button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.45rem 0.75rem;
+    color: inherit;
+    text-decoration: none;
+    border-radius: var(--#{$prefix}-radius-sm, 0.35rem);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font: inherit;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+
+    &:hover,
+    &.active {
+      background-color: var(--#{$prefix}-navbar-hover-bg, rgba(15, 23, 42, 0.08));
+    }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .navbar:has(> .navbar-start):not(.navbar-keep-inline) {
+    flex-wrap: wrap;
+    .navbar-start,
+    .navbar-end {
+      width: auto;
+      flex: 1 1 auto;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Materialize CSS Navbar (.nav-wrapper, .nav-extended, .brand-logo, .sidenav)
+// EN: Materialize CSS Navbar, Extended Tabs Wrapper, Search Input & Sidenav
+// ---------------------------------------------------------------------------
+nav.nav-material,
+nav.nav-extended,
+nav:has(> .nav-wrapper),
+.navbar.nav-material {
+  --#{$prefix}-navbar-bg: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-navbar-color: #ffffff;
+  --#{$prefix}-navbar-hover-bg: rgba(255, 255, 255, 0.14);
+  --#{$prefix}-navbar-active-bg: rgba(0, 0, 0, 0.16);
+
+  width: 100%;
+  background-color: var(--#{$prefix}-navbar-bg);
+  color: var(--#{$prefix}-navbar-color);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.16);
+  position: relative;
+  display: block;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .nav-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding-inline: 1.25rem;
+    gap: 1rem;
+  }
+
+  .brand-logo {
+    position: static;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 1.55rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    letter-spacing: -0.01em;
+
+    &.center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    &.right {
+      margin-left: auto;
+      order: 3;
+    }
+  }
+
+  .sidenav-trigger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-inline-start: -0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--#{$prefix}-navbar-hover-bg);
+      outline: none;
+    }
+  }
+
+  .nav-wrapper > ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    gap: 0.15rem;
+
+    &.right {
+      margin-left: auto;
+    }
+
+    &.left {
+      margin-right: auto;
+    }
+
+    > li {
+      display: inline-flex;
+      align-items: center;
+
+      > a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0 0.9rem;
+        min-height: 64px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: background-color 0.18s ease;
+
+        &:hover,
+        &:focus-visible {
+          background-color: var(--#{$prefix}-navbar-hover-bg);
+          outline: none;
+        }
+      }
+
+      &.active > a {
+        background-color: var(--#{$prefix}-navbar-active-bg);
+        font-weight: 600;
+      }
+    }
+  }
+
+  // Barra de pesquisa estilo Materialize
+  .nav-wrapper form {
+    width: 100%;
+  }
+
+  .nav-wrapper .input-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 46px;
+    background-color: rgba(255, 255, 255, 0.14);
+    border-radius: 0.45rem;
+    transition: background-color 0.2s ease;
+
+    &:focus-within {
+      background-color: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+      .label-icon,
+      .dx-nav-search-clear {
+        color: #475569;
+      }
+
+      input[type="search"] {
+        color: #0f172a;
+        &::placeholder {
+          color: #64748b;
+        }
+      }
+    }
+
+    input[type="search"] {
+      width: 100%;
+      height: 46px;
+      padding: 0 2.75rem;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      font-size: 0.98rem;
+      outline: none;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      &::-webkit-search-cancel-button {
+        -webkit-appearance: none;
+      }
+    }
+
+    .label-icon {
+      position: absolute;
+      left: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .dx-nav-search-clear {
+      position: absolute;
+      right: 0.65rem;
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: inherit;
+      width: 1.85rem;
+      height: 1.85rem;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.75;
+      transition: opacity 0.15s ease, background-color 0.15s ease;
+
+      &:hover {
+        opacity: 1;
+        background-color: rgba(15, 23, 42, 0.1);
+      }
+    }
+  }
+
+  &.nav-extended {
+    .nav-wrapper {
+      min-height: 60px;
+    }
+
+    .nav-content {
+      position: relative;
+      padding: 0 1.25rem 0.65rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+
+      .nav-title {
+        display: block;
+        font-size: 1.35rem;
+        font-weight: 700;
+        padding: 0.65rem 0 0.35rem;
+      }
+
+      .tabs-transparent {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        .tab a {
+          display: inline-flex;
+          align-items: center;
+          padding: 0.5rem 0.9rem;
+          font-size: 0.88rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 0.04em;
+          border-bottom: 2px solid transparent;
+          opacity: 0.8;
+          transition: opacity 0.15s ease, border-color 0.15s ease;
+
+          &:hover,
+          &.active {
+            opacity: 1;
+            border-bottom-color: currentColor;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1023.98px) {
+  nav.nav-material,
+  nav.nav-extended,
+  nav:has(> .nav-wrapper),
+  .navbar.nav-material {
+    .nav-wrapper {
+      min-height: 56px;
+    }
+
+    .sidenav-trigger {
+      display: inline-flex;
+    }
+
+    .hide-on-med-and-down {
+      display: none !important;
+    }
+
+    .brand-logo {
+      font-size: 1.3rem;
+      &:not(.right):not(.left) {
+        margin-inline: auto;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Materialize Mobile Sidenav Drawer (.sidenav & .sidenav-overlay)
+// EN: Materialize Sidenav Slide-out Drawer & Overlay
+// ---------------------------------------------------------------------------
+.sidenav-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1044;
+  background-color: rgba(15, 23, 42, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.24s ease, visibility 0.24s ease;
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    backdrop-filter: blur(2px);
+  }
+}
+
+.sidenav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 280px;
+  max-width: 85vw;
+  margin: 0;
+  padding: 0.5rem 0 2.5rem;
+  list-style: none;
+  background-color: #ffffff;
+  color: #0f172a;
+  z-index: 1050;
+  overflow-y: auto;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.24);
+  transform: translateX(-105%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.sidenav-right {
+    left: auto;
+    right: 0;
+    transform: translateX(105%);
+  }
+
+  &.show {
+    transform: translateX(0);
+  }
+
+  .user-view {
+    position: relative;
+    padding: 1.5rem 1.25rem 1rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, var(--#{$prefix}-primary, #{$primary}), var(--#{$prefix}-secondary, #{$secondary}));
+    color: #ffffff;
+
+    .name,
+    .email {
+      display: block;
+      font-size: 0.875rem;
+      line-height: 1.4;
+    }
+
+    .name { font-weight: 700; margin-top: 0.5rem; }
+    .email { opacity: 0.85; }
+  }
+
+  .divider {
+    height: 1px;
+    margin: 0.45rem 0;
+    background-color: rgba(15, 23, 42, 0.1);
+  }
+
+  .subheader {
+    display: block;
+    padding: 0.5rem 1.25rem 0.25rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #64748b;
+  }
+
+  > li > a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.7rem 1.25rem;
+    color: inherit;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+
+    &:hover,
+    &:focus-visible {
+      background-color: rgba(148, 163, 184, 0.12);
+      outline: none;
+    }
+  }
+
+  > li.active > a {
+    background-color: rgba(59, 89, 152, 0.1);
+    color: var(--#{$prefix}-primary, #{$primary});
+    font-weight: 600;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Cores Oficiais (28 Cores + Semânticas) & Dark Mode
+// EN: Official 28-Color Palette + Soft Variants + Dark Mode
+// ---------------------------------------------------------------------------
+@each $name, $hex in $navbar-palette {
+  $is-light: list.index($navbar-light-names, $name) != null;
+  $fg: #ffffff;
+
+  @if $is-light {
+    $fg: #130f10;
+  }
+
+  .navbar-#{$name},
+  nav.nav-material.navbar-#{$name},
+  nav.nav-extended.navbar-#{$name} {
+    --#{$prefix}-navbar-bg: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-navbar-color: #{$fg};
+    --#{$prefix}-navbar-brand-color: #{$fg};
+
+    @if $is-light {
+      --#{$prefix}-navbar-hover-bg: rgba(19, 15, 16, 0.08);
+      --#{$prefix}-navbar-active-bg: rgba(19, 15, 16, 0.14);
+      --#{$prefix}-navbar-toggler-border-color: rgba(19, 15, 16, 0.28);
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2819, 15, 16, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+    } @else {
+      --#{$prefix}-navbar-hover-bg: rgba(255, 255, 255, 0.15);
+      --#{$prefix}-navbar-active-bg: rgba(0, 0, 0, 0.2);
+      --#{$prefix}-navbar-toggler-border-color: rgba(255, 255, 255, 0.35);
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.92%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+      }
+    }
+  }
+
+  .navbar-soft-#{$name} {
+    --#{$prefix}-navbar-bg: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 12%, #ffffff);
+    --#{$prefix}-navbar-color: #0f172a;
+    --#{$prefix}-navbar-hover-bg: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 16%, transparent);
+    --#{$prefix}-navbar-active-bg: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 24%, transparent);
+    border: 1px solid color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 25%, transparent);
+
+    .navbar-brand {
+      color: var(--#{$prefix}-#{$name}, #{$hex});
+    }
+  }
+}
+
+[data-#{$prefix}-theme="dark"],
+[data-bs-theme="dark"] {
+  .navbar-light,
+  .navbar:not(.navbar-dark):not([class*="navbar-"]) {
+    --#{$prefix}-navbar-hover-bg: rgba(255, 255, 255, 0.08);
+    --#{$prefix}-navbar-active-bg: rgba(255, 255, 255, 0.14);
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28226, 232, 240, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+  }
+
+  .navbar-glass {
+    background-color: rgba(22, 31, 48, 0.78) !important;
+    border-color: rgba(148, 163, 184, 0.22);
+    color: #f1f5f9;
+  }
+
+  [class*="navbar-soft-"] {
+    --#{$prefix}-navbar-color: #e2e8f0;
+    background-color: color-mix(in srgb, #161f30 85%, currentColor);
+    border-color: rgba(148, 163, 184, 0.2);
+
+    .navbar-brand {
+      color: #f8fafc;
+    }
+  }
+
+  .sidenav {
+    background-color: #161f30;
+    color: #e2e8f0;
+
+    .divider {
+      background-color: rgba(148, 163, 184, 0.18);
+    }
+
+    .subheader {
+      color: #94a3b8;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Acessibilidade (Movimento Reduzido)
+// EN: Reduced Motion Support
+// ---------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .navbar-nav .nav-link,
+  .navbar-toggler,
+  .sidenav,
+  .sidenav-overlay,
+  .nav-wrapper > ul > li > a {
+    transition: none;
+    animation: none;
+  }
+}
