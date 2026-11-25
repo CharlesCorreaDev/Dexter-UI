@@ -261,13 +261,13 @@
     btnPrev.id = 'cboxPrevious';
     btnPrev.type = 'button';
     btnPrev.setAttribute('aria-label', 'Anterior');
-    btnPrev.innerHTML = '&#8249;';
+    btnPrev.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>';
 
     var btnNext = document.createElement('button');
     btnNext.id = 'cboxNext';
     btnNext.type = 'button';
     btnNext.setAttribute('aria-label', 'Próxima');
-    btnNext.innerHTML = '&#8250;';
+    btnNext.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>';
 
     var btnSlideshow = document.createElement('button');
     btnSlideshow.id = 'cboxSlideshow';
@@ -289,7 +289,7 @@
     btnClose.id = 'cboxClose';
     btnClose.type = 'button';
     btnClose.setAttribute('aria-label', 'Fechar');
-    btnClose.innerHTML = '&times;';
+    btnClose.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
 
     bar.appendChild(navGroup);
     bar.appendChild(titleEl);
@@ -365,8 +365,14 @@
     var els = state.els;
     els.loaded.style.width = opts.innerWidth || opts.width || '';
     els.loaded.style.height = opts.innerHeight || opts.height || '';
-    els.loaded.style.maxWidth = opts.maxWidth || '';
-    els.loaded.style.maxHeight = opts.maxHeight || '';
+
+    // Evita que maxWidth/maxHeight em '%' encolham #cboxLoadedContent para menos de 100% dentro de #cboxContent
+    var mw = opts.maxWidth ? String(opts.maxWidth).trim() : '';
+    var mh = opts.maxHeight ? String(opts.maxHeight).trim() : '';
+    els.wrapper.style.maxWidth = /%$/.test(mw) ? (mw.slice(0, -1) + 'vw') : mw;
+    els.wrapper.style.maxHeight = /%$/.test(mh) ? (mh.slice(0, -1) + 'vh') : mh;
+    els.loaded.style.maxWidth = '100%';
+    els.loaded.style.maxHeight = /%$/.test(mh) ? ('calc(' + mh.slice(0, -1) + 'vh - 72px)') : (mh || '');
     els.loaded.style.overflow = opts.scrolling === false ? 'hidden' : 'auto';
   }
 
@@ -457,7 +463,7 @@
     dispatchCboxEvent('cbox_load', { settings: opts });
 
     els.loaded.innerHTML = '';
-    els.loaded.classList.remove('cbox-no-padding');
+    els.loaded.classList.remove('cbox-no-padding', 'cbox-is-photo');
     els.loadingOverlay.classList.add('is-loading');
 
     // 1. Direct HTML
@@ -517,7 +523,7 @@
 
     // 4. Photo
     if (isPhotoHref(opts.href, opts)) {
-      els.loaded.classList.add('cbox-no-padding');
+      els.loaded.classList.add('cbox-no-padding', 'cbox-is-photo');
       var pre = new Image();
       pre.onload = function () {
         if (myToken !== state.loadToken) return;

@@ -146,20 +146,23 @@ $cbox-palette: map.merge($all-colors, $cbox-semantic-colors);
   position: relative;
   display: flex;
   flex-direction: column;
-  min-width: 260px;
+  width: fit-content;
+  max-width: 100%;
+  min-width: 280px;
   min-height: 140px;
   background-color: var(--#{$prefix}-cbox-bg);
   color: var(--#{$prefix}-cbox-color);
   border: 1px solid var(--#{$prefix}-cbox-border);
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 #cboxLoadedContent {
   position: relative;
+  width: 100%;
   overflow: auto;
-  max-width: calc(92vw - 32px);
-  max-height: calc(84vh - 54px);
+  max-width: 100%;
+  max-height: calc(88vh - 68px);
   padding: 1.25rem;
   box-sizing: border-box;
 
@@ -167,13 +170,20 @@ $cbox-palette: map.merge($all-colors, $cbox-semantic-colors);
     padding: 0;
   }
 
+  &.cbox-is-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #0b1120;
+  }
+
   .cboxPhoto {
     display: block;
     max-width: 100%;
-    max-height: calc(84vh - 58px);
+    max-height: calc(88vh - 72px);
     width: auto;
     height: auto;
-    margin: 0 auto;
     object-fit: contain;
     cursor: pointer;
     user-select: none;
@@ -227,9 +237,9 @@ $cbox-palette: map.merge($all-colors, $cbox-semantic-colors);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.65rem;
-  min-height: 44px;
-  padding: 0.4rem 0.75rem;
+  gap: 0.75rem;
+  min-height: 48px;
+  padding: 0.5rem 0.9rem;
   background-color: var(--#{$prefix}-cbox-bar-bg);
   border-top: 1px solid var(--#{$prefix}-cbox-border);
   font-size: 0.85rem;
@@ -239,7 +249,7 @@ $cbox-palette: map.merge($all-colors, $cbox-semantic-colors);
 .cbox-nav-group {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.4rem;
   flex: 0 0 auto;
 }
 
@@ -250,18 +260,26 @@ $cbox-palette: map.merge($all-colors, $cbox-semantic-colors);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 30px;
-  height: 30px;
-  padding: 0 0.45rem;
-  border-radius: 0.4rem;
-  border: 1px solid var(--#{$prefix}-cbox-border);
-  background-color: transparent;
+  gap: 0.3rem;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 0.55rem;
+  border-radius: 0.45rem;
+  border: 1px solid rgba(148, 163, 184, 0.32);
+  background-color: rgba(148, 163, 184, 0.12);
   color: var(--#{$prefix}-cbox-color);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   line-height: 1;
   cursor: pointer;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+    flex-shrink: 0;
+  }
 
   &:hover {
     background-color: var(--#{$prefix}-cbox-accent);
@@ -277,9 +295,8 @@ $cbox-palette: map.merge($all-colors, $cbox-semantic-colors);
 
 #cboxClose {
   margin-left: auto;
-  font-size: 1.15rem;
   border-radius: 999px;
-  width: 30px;
+  width: 34px;
   padding: 0;
 }
 
