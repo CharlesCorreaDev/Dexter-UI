@@ -1,0 +1,339 @@
+@charset "UTF-8";
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        email/dexter-email.scss
+ * @description [PT-BR] Motor autônomo de estilos para E-mails HTML Responsivos (inspirado
+ *              em Foundation for Emails / ZURB). Compila apenas valores hexadecimais
+ *              resolvidos (zero CSS Custom Properties var()), estruturado para tabelas
+ *              600px compatíveis com Outlook, Gmail, Apple Mail e Yahoo, botões bulletproof,
+ *              callouts, espaçadores e media query mobile (< 600px).
+ *              [EN]    Standalone Responsive HTML Email Engine (inspired by Foundation for
+ *              Emails / ZURB). Compiles strictly resolved hex values (no CSS var()),
+ *              tailored for 600px tables across Outlook, Gmail, Apple Mail & Yahoo, with
+ *              bulletproof buttons, callouts, spacers and mobile column stacking (< 600px).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* ==========================================================================
+   Motor de E-mail HTML Responsivo / Responsive HTML Email Engine
+   ========================================================================== */
+body,
+.email-wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #f1f5f9;
+  color: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+img {
+  border: 0;
+  line-height: 100%;
+  outline: none;
+  text-decoration: none;
+  max-width: 100%;
+  height: auto;
+}
+
+.email-preheader {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  color: transparent;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  mso-hide: all;
+}
+
+.email-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.email-header {
+  padding: 24px 28px;
+  background-color: #3b5998;
+  color: #ffffff;
+}
+
+.email-body {
+  padding: 28px;
+  color: #1e293b;
+  font-size: 15px;
+}
+
+.email-footer {
+  padding: 20px 28px;
+  background-color: #f8fafc;
+  color: #64748b;
+  font-size: 12px;
+  text-align: center;
+  border-top: 1px solid #e2e8f0;
+}
+
+.email-callout {
+  padding: 16px 20px;
+  margin: 18px 0;
+  background-color: #f1f5f9;
+  border-left: 4px solid #3b5998;
+  border-radius: 4px;
+  color: #1e293b;
+}
+
+.email-divider {
+  height: 1px;
+  background-color: #e2e8f0;
+  margin: 20px 0;
+  border: 0;
+}
+
+.email-spacer {
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+}
+
+.email-menu {
+  width: 100%;
+  text-align: center;
+}
+.email-menu a {
+  display: inline-block;
+  padding: 6px 12px;
+  color: #3b5998;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.email-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #3b5998;
+  color: #ffffff !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid #3b5998;
+  text-align: center;
+}
+
+.email-btn-primary {
+  background-color: #3b5998;
+  border-color: #3b5998;
+  color: #ffffff !important;
+}
+
+.email-btn-secondary {
+  background-color: #14306b;
+  border-color: #14306b;
+  color: #ffffff !important;
+}
+
+.email-btn-tertiary {
+  background-color: #869dcc;
+  border-color: #869dcc;
+  color: #ffffff !important;
+}
+
+.email-btn-quaternary {
+  background-color: #224389;
+  border-color: #224389;
+  color: #ffffff !important;
+}
+
+.email-btn-quinary {
+  background-color: #5772ac;
+  border-color: #5772ac;
+  color: #ffffff !important;
+}
+
+.email-btn-purple {
+  background-color: #501b85;
+  border-color: #501b85;
+  color: #ffffff !important;
+}
+
+.email-btn-red {
+  background-color: #cf000f;
+  border-color: #cf000f;
+  color: #ffffff !important;
+}
+
+.email-btn-navy {
+  background-color: #003171;
+  border-color: #003171;
+  color: #ffffff !important;
+}
+
+.email-btn-brown {
+  background-color: #3f1b0f;
+  border-color: #3f1b0f;
+  color: #ffffff !important;
+}
+
+.email-btn-green {
+  background-color: #1b7021;
+  border-color: #1b7021;
+  color: #ffffff !important;
+}
+
+.email-btn-midnight {
+  background-color: #2c3e50;
+  border-color: #2c3e50;
+  color: #ffffff !important;
+}
+
+.email-btn-silver-light {
+  background-color: #e9eaeb;
+  border-color: #e9eaeb;
+  color: #130f10 !important;
+}
+
+.email-btn-silver {
+  background-color: #8e9aa2;
+  border-color: #8e9aa2;
+  color: #ffffff !important;
+}
+
+.email-btn-light {
+  background-color: #f7f7f7;
+  border-color: #f7f7f7;
+  color: #130f10 !important;
+}
+
+.email-btn-turquoise {
+  background-color: #007e65;
+  border-color: #007e65;
+  color: #ffffff !important;
+}
+
+.email-btn-cyan {
+  background-color: #0099a7;
+  border-color: #0099a7;
+  color: #ffffff !important;
+}
+
+.email-btn-dark {
+  background-color: #130f10;
+  border-color: #130f10;
+  color: #ffffff !important;
+}
+
+.email-btn-black {
+  background-color: #030303;
+  border-color: #030303;
+  color: #ffffff !important;
+}
+
+.email-btn-beige {
+  background-color: #e9d7be;
+  border-color: #e9d7be;
+  color: #130f10 !important;
+}
+
+.email-btn-olive {
+  background-color: #546c00;
+  border-color: #546c00;
+  color: #ffffff !important;
+}
+
+.email-btn-steelblue {
+  background-color: #4682b4;
+  border-color: #4682b4;
+  color: #ffffff !important;
+}
+
+.email-btn-aquamarine {
+  background-color: #7fffd4;
+  border-color: #7fffd4;
+  color: #130f10 !important;
+}
+
+.email-btn-coral {
+  background-color: #ff7f50;
+  border-color: #ff7f50;
+  color: #ffffff !important;
+}
+
+.email-btn-lime {
+  background-color: #00ff00;
+  border-color: #00ff00;
+  color: #130f10 !important;
+}
+
+.email-btn-teal {
+  background-color: #008080;
+  border-color: #008080;
+  color: #ffffff !important;
+}
+
+.email-btn-indigo {
+  background-color: #4b0082;
+  border-color: #4b0082;
+  color: #ffffff !important;
+}
+
+.email-btn-gray {
+  background-color: #808080;
+  border-color: #808080;
+  color: #ffffff !important;
+}
+
+.email-btn-fuchsia {
+  background-color: #ff00ff;
+  border-color: #ff00ff;
+  color: #ffffff !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .email-container {
+    width: 100% !important;
+    border-radius: 0 !important;
+  }
+  .email-col {
+    display: block !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .email-hide-mobile {
+    display: none !important;
+  }
+}
+/*# sourceMappingURL=dexter-email.css.map */
