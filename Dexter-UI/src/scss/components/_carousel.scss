@@ -1,0 +1,273 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _carousel.scss
+ * @description [PT-BR] Suíte completa de Carrossel e Slider de Múltiplos Itens (Multi-Item Carousel & Card Slider),
+ *              inspirada e aprimorada a partir do bootstrap5-carousel-multi (github.com/jibarradelgado/bootstrap5-carousel-multi).
+ *              Elimina a limitação do Bootstrap nativo com controlador vanilla JS (DexterCarousel) que desliza suavemente
+ *              1 item por vez em vez de blocos inteiros, suporte responsivo a múltiplos cards por tela (1 a 4+ colunas),
+ *              deslize por toque (touch swipe), autoplay com pausa ao passar o mouse, botões flutuantes circulares com sombra,
+ *              indicadores em pontos/pílulas dinâmicas, integração às 28 cores oficiais e Dark Mode.
+ *              [EN]    Complete Multi-Item Carousel and Card Slider Suite, inspired and enhanced from
+ *              bootstrap5-carousel-multi (github.com/jibarradelgado/bootstrap5-carousel-multi). Eliminates native
+ *              Bootstrap limitations with a zero-dependency vanilla JS controller (DexterCarousel) that slides
+ *              smoothly 1 item at a time, responsive multi-card display (1 to 4+ columns), touch swipe support,
+ *              autoplay with pause on hover, circular floating controls with soft shadows, dynamic pill/dot
+ *              indicators, full 28-color palette, and native Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Carrossel e Slider Multi-Itens | Carousel and Multi-Item Slider */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Tokens do Carrossel
+// EN: Carousel Tokens and CSS Variables
+// ---------------------------------------------------------------------------
+
+:root {
+  --#{$prefix}-carousel-transition-duration: 400ms;
+  --#{$prefix}-carousel-transition-timing: cubic-bezier(0.16, 1, 0.3, 1);
+  --#{$prefix}-carousel-control-color: #ffffff;
+  --#{$prefix}-carousel-control-bg: rgba(15, 23, 42, 0.65);
+  --#{$prefix}-carousel-control-hover-bg: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-carousel-indicator-color: rgba(148, 163, 184, 0.4);
+  --#{$prefix}-carousel-indicator-active-color: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-carousel-gap: 1rem;
+}
+
+[data-#{$prefix}-theme="dark"] {
+  --#{$prefix}-carousel-control-bg: rgba(30, 41, 59, 0.8);
+  --#{$prefix}-carousel-control-hover-bg: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-carousel-indicator-color: rgba(255, 255, 255, 0.2);
+  --#{$prefix}-carousel-indicator-active-color: var(--#{$prefix}-primary, #3b5998);
+}
+
+// ---------------------------------------------------------------------------
+// 2. Contêiner do Carrossel (.carousel / .dx-carousel)
+// EN: Carousel Container (.carousel / .dx-carousel)
+// ---------------------------------------------------------------------------
+
+.carousel,
+.dx-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+// ---------------------------------------------------------------------------
+// 3. Trilho e Itens Deslizantes (.carousel-inner / .carousel-track)
+// EN: Track and Sliding Items (.carousel-inner / .carousel-track)
+// ---------------------------------------------------------------------------
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  align-items: stretch;
+  gap: var(--#{$prefix}-carousel-gap);
+  width: 100%;
+  will-change: transform;
+  transition: transform var(--#{$prefix}-carousel-transition-duration) var(--#{$prefix}-carousel-transition-timing);
+}
+
+// Item individual do carrossel (Slide ou Card)
+.carousel-item {
+  flex: 0 0 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  transition: opacity 300ms ease;
+}
+
+// ---------------------------------------------------------------------------
+// 4. Modificador Multi-Itens Responsivo (.carousel-multi)
+// EN: Responsive Multi-Item Modifier (.carousel-multi)
+// ---------------------------------------------------------------------------
+
+.carousel-multi {
+  --items-visible: 1;
+
+  .carousel-item {
+    flex: 0 0 calc((100% - (var(--#{$prefix}-carousel-gap) * (var(--items-visible) - 1))) / var(--items-visible));
+    max-width: calc((100% - (var(--#{$prefix}-carousel-gap) * (var(--items-visible) - 1))) / var(--items-visible));
+  }
+
+  // 2 cards no mobile landscape / tablet pequeno (sm >= 576px)
+  @media (min-width: 576px) {
+    --items-visible: 2;
+  }
+
+  // 3 cards no tablet / desktop médio (md >= 768px)
+  @media (min-width: 768px) {
+    --items-visible: 3;
+  }
+
+  // 4 cards no desktop grande (lg >= 992px)
+  @media (min-width: 992px) {
+    --items-visible: 4;
+  }
+
+  // Variantes forçadas por classe
+  &.carousel-items-2 { --items-visible: 2 !important; }
+  &.carousel-items-3 { --items-visible: 3 !important; }
+  &.carousel-items-4 { --items-visible: 4 !important; }
+  &.carousel-items-5 { --items-visible: 5 !important; }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Botões de Navegação (.carousel-control-prev / .carousel-control-next)
+// EN: Navigation Controls (.carousel-control-prev / .carousel-control-next)
+// ---------------------------------------------------------------------------
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  color: var(--#{$prefix}-carousel-control-color);
+  background-color: var(--#{$prefix}-carousel-control-bg);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: all 180ms ease-in-out;
+  backdrop-filter: blur(4px);
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    fill: currentColor;
+    transition: transform 150ms ease;
+  }
+
+  &:hover {
+    background-color: var(--#{$prefix}-carousel-control-hover-bg);
+    color: #ffffff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+  }
+
+  &.is-disabled,
+  &:disabled {
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: default;
+  }
+}
+
+.carousel-control-prev {
+  left: 0.75rem;
+}
+
+.carousel-control-next {
+  right: 0.75rem;
+}
+
+// Botões posicionados fora do conteúdo (nas margens externas)
+.carousel-controls-outside {
+  padding: 0 3.25rem;
+
+  .carousel-control-prev {
+    left: 0;
+  }
+  .carousel-control-next {
+    right: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Indicadores de Posição (.carousel-indicators)
+// EN: Position Indicators (.carousel-indicators)
+// ---------------------------------------------------------------------------
+
+.carousel-indicators {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0 0;
+  margin: 0;
+  list-style: none;
+  z-index: 10;
+
+  button {
+    width: 0.625rem;
+    height: 0.625rem;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--#{$prefix}-carousel-indicator-color);
+    cursor: pointer;
+    transition: all 220ms cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--#{$prefix}-carousel-indicator-active-color) 60%, transparent);
+    }
+
+    &.active {
+      width: 1.75rem;
+      border-radius: 50rem;
+      background-color: var(--#{$prefix}-carousel-indicator-active-color);
+    }
+  }
+
+  // Estilo Linha
+  &.indicators-lines button {
+    width: 1.5rem;
+    height: 0.25rem;
+    border-radius: 0.125rem;
+
+    &.active {
+      width: 2.25rem;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Integração às 28 Cores Oficiais (.carousel-{cor})
+// EN: Official 28-Color Palette Integration (.carousel-{cor})
+// ---------------------------------------------------------------------------
+
+@each $color-name, $color-value in $all-colors {
+  .carousel-#{$color-name} {
+    --#{$prefix}-carousel-control-hover-bg: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    --#{$prefix}-carousel-indicator-active-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+  }
+}

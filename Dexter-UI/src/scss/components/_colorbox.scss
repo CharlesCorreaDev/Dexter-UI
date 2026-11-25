@@ -1,0 +1,364 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_colorbox.scss
+ * @description [PT-BR] Lightbox e Modal Multimídia compatível drop-in com
+ *              Jack Moore Colorbox & Example 5 (sem sprites PNG externos,
+ *              sem jQuery). Suporta fotos agrupadas, slideshow automático,
+ *              conteúdo inline com preservação do DOM, HTML direto, iframe,
+ *              AJAX, transições elastic/fade/none, 28 cores e Dark Mode.
+ *              [EN]    Drop-in compatible Lightbox & Multimedia Modal inspired
+ *              by Jack Moore's Colorbox & Example 5 (pure CSS controls, zero
+ *              external sprites or jQuery). Supports grouped galleries,
+ *              slideshow, DOM-preserving inline HTML, direct HTML, iframe,
+ *              AJAX, elastic/fade/none transitions, 28 colors & Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Colorbox (Lightbox & Modal Multimídia) | Colorbox Lightbox & Media Modal */
+
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$cbox-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$cbox-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning", "yellow", "gold");
+$cbox-palette: map.merge($all-colors, $cbox-semantic-colors);
+
+// ---------------------------------------------------------------------------
+// 1. Overlay & Modal Container (#cboxOverlay, #colorbox)
+// EN: Backdrop Overlay & Main Centered Container
+// ---------------------------------------------------------------------------
+#cboxOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1097;
+  background-color: rgba(15, 23, 42, 0.78);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.24s ease, visibility 0.24s ease;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+#colorbox {
+  --#{$prefix}-cbox-bg: #ffffff;
+  --#{$prefix}-cbox-color: #1e293b;
+  --#{$prefix}-cbox-muted: #64748b;
+  --#{$prefix}-cbox-bar-bg: #f8fafc;
+  --#{$prefix}-cbox-border: rgba(15, 23, 42, 0.12);
+  --#{$prefix}-cbox-accent: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-cbox-accent-fg: #ffffff;
+  --#{$prefix}-cbox-frame-bg: rgba(15, 23, 42, 0.48);
+
+  position: fixed;
+  inset: 0;
+  z-index: 1098;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  outline: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.24s ease, visibility 0.24s ease;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+// Moldura Translúcida Signature (Example 5) | Example 5 Translucent Frame
+#cboxWrapper {
+  position: relative;
+  max-width: min(94vw, 1080px);
+  max-height: 92vh;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: var(--#{$prefix}-cbox-frame-bg);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 28px 64px -12px rgba(0, 0, 0, 0.55);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease;
+}
+
+#colorbox.cbox-trans-elastic:not(.is-open) #cboxWrapper {
+  transform: scale(0.88);
+}
+
+#colorbox.cbox-trans-elastic.is-open #cboxWrapper {
+  transform: scale(1);
+}
+
+#colorbox.cbox-trans-none,
+#colorbox.cbox-trans-none #cboxWrapper,
+#cboxOverlay.cbox-trans-none {
+  transition: none;
+}
+
+#colorbox.cbox-theme-modern #cboxWrapper {
+  padding: 0;
+  background-color: transparent;
+  backdrop-filter: none;
+  border-radius: 0.75rem;
+}
+
+#colorbox.cbox-theme-modern #cboxContent {
+  border-top: 4px solid var(--#{$prefix}-cbox-accent);
+  border-radius: 0.75rem;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Conteúdo Interno, Fotos, Iframe e Spinner (#cboxContent, #cboxLoadedContent)
+// EN: Inner Card Content, Photos, Iframes & CSS Loader
+// ---------------------------------------------------------------------------
+#cboxContent {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 260px;
+  min-height: 140px;
+  background-color: var(--#{$prefix}-cbox-bg);
+  color: var(--#{$prefix}-cbox-color);
+  border: 1px solid var(--#{$prefix}-cbox-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+#cboxLoadedContent {
+  position: relative;
+  overflow: auto;
+  max-width: calc(92vw - 32px);
+  max-height: calc(84vh - 54px);
+  padding: 1.25rem;
+  box-sizing: border-box;
+
+  &.cbox-no-padding {
+    padding: 0;
+  }
+
+  .cboxPhoto {
+    display: block;
+    max-width: 100%;
+    max-height: calc(84vh - 58px);
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .cboxIframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background-color: #ffffff;
+  }
+}
+
+#cboxLoadingOverlay {
+  position: absolute;
+  inset: 0;
+  bottom: 44px;
+  z-index: 4;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(15, 23, 42, 0.16);
+  backdrop-filter: blur(2px);
+
+  &.is-loading {
+    display: flex;
+  }
+}
+
+#cboxLoadingGraphic {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 3px solid rgba(148, 163, 184, 0.35);
+  border-top-color: var(--#{$prefix}-cbox-accent);
+  animation: dx-cbox-spin 0.75s linear infinite;
+}
+
+@keyframes dx-cbox-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Barra de Controle Example 5 (.cbox-bar) — Sem Sprites Externos
+// EN: Example 5 Bottom Control Bar — Pure CSS / Unicode Controls
+// ---------------------------------------------------------------------------
+.cbox-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  min-height: 44px;
+  padding: 0.4rem 0.75rem;
+  background-color: var(--#{$prefix}-cbox-bar-bg);
+  border-top: 1px solid var(--#{$prefix}-cbox-border);
+  font-size: 0.85rem;
+  color: var(--#{$prefix}-cbox-color);
+}
+
+.cbox-nav-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex: 0 0 auto;
+}
+
+#cboxPrevious,
+#cboxNext,
+#cboxSlideshow,
+#cboxClose {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 0.45rem;
+  border-radius: 0.4rem;
+  border: 1px solid var(--#{$prefix}-cbox-border);
+  background-color: transparent;
+  color: var(--#{$prefix}-cbox-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background-color: var(--#{$prefix}-cbox-accent);
+    border-color: var(--#{$prefix}-cbox-accent);
+    color: var(--#{$prefix}-cbox-accent-fg);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--#{$prefix}-cbox-accent);
+    outline-offset: 1px;
+  }
+}
+
+#cboxClose {
+  margin-left: auto;
+  font-size: 1.15rem;
+  border-radius: 999px;
+  width: 30px;
+  padding: 0;
+}
+
+#cboxSlideshow.cboxSlideshow_on {
+  background-color: color-mix(in srgb, var(--#{$prefix}-cbox-accent) 16%, transparent);
+  border-color: var(--#{$prefix}-cbox-accent);
+  color: var(--#{$prefix}-cbox-accent);
+}
+
+#cboxCurrent {
+  margin-left: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--#{$prefix}-cbox-muted);
+  white-space: nowrap;
+}
+
+#cboxTitle {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
+  font-weight: 600;
+  color: var(--#{$prefix}-cbox-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// ---------------------------------------------------------------------------
+// 4. Paleta Oficial (28 Cores + Semânticas) & Dark Mode
+// EN: Official 28-Color Palette + Semantic Variants & Dark Mode
+// ---------------------------------------------------------------------------
+@each $name, $hex in $cbox-palette {
+  $is-light: list.index($cbox-light-names, $name) != null;
+  $fg: #ffffff;
+
+  @if $is-light {
+    $fg: #130f10;
+  }
+
+  #colorbox.cbox-#{$name} {
+    --#{$prefix}-cbox-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-cbox-accent-fg: #{$fg};
+  }
+}
+
+[data-dx-theme="dark"] #colorbox,
+[data-bs-theme="dark"] #colorbox {
+  --#{$prefix}-cbox-bg: #161f30;
+  --#{$prefix}-cbox-color: #f1f5f9;
+  --#{$prefix}-cbox-muted: #94a3b8;
+  --#{$prefix}-cbox-bar-bg: #0f172a;
+  --#{$prefix}-cbox-border: rgba(148, 163, 184, 0.2);
+  --#{$prefix}-cbox-frame-bg: rgba(2, 6, 23, 0.72);
+}
+
+@media (max-width: 575.98px) {
+  .cbox-bar {
+    flex-wrap: wrap;
+    padding: 0.5rem;
+  }
+
+  #cboxTitle {
+    order: -1;
+    flex-basis: 100%;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #cboxOverlay,
+  #colorbox,
+  #cboxWrapper,
+  #cboxLoadingGraphic,
+  #cboxPrevious,
+  #cboxNext,
+  #cboxSlideshow,
+  #cboxClose {
+    transition: none;
+    animation: none;
+  }
+}

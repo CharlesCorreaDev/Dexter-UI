@@ -1,0 +1,319 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_waiting.scss
+ * @description [PT-BR] Diálogo modal de espera e progresso assíncrono (Waiting For Dialog)
+ *              inspirado e compatível drop-in com ehpc/bootstrap-waitingfor.
+ *              Zero dependências externas (sem jQuery e sem Bootstrap JS), com barra
+ *              de progresso listrada/animada ou determinada por percentual, integração
+ *              com loaders CSS, modo cancelável, suporte às 28 cores + semânticas,
+ *              Dark Mode nativo e acessibilidade prefers-reduced-motion.
+ *              [EN]    Async waiting & progress modal dialog (Waiting For Dialog) inspired
+ *              and drop-in compatible with ehpc/bootstrap-waitingfor.
+ *              Zero external dependencies (no jQuery, no Bootstrap JS), featuring striped/
+ *              animated or determinate percentage progress bar, integrated CSS loaders,
+ *              cancellable mode, 28 official + semantic colors, native Dark Mode and
+ *              prefers-reduced-motion accessibility.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Diálogo de Espera e Progresso | Waiting For Progress Dialog */
+
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Tokens Escopados e Paleta Clara / Escura
+// EN: Scoped Tokens & Light / Dark Theme Overrides
+// ---------------------------------------------------------------------------
+$wf-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$wf-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning");
+$wf-palette: map.merge($all-colors, $wf-semantic-colors);
+
+.dx-waiting-modal {
+  --#{$prefix}-wf-bg: #ffffff;
+  --#{$prefix}-wf-surface: #f8fafc;
+  --#{$prefix}-wf-border: rgba(15, 23, 42, 0.12);
+  --#{$prefix}-wf-color: #1e293b;
+  --#{$prefix}-wf-muted: #64748b;
+  --#{$prefix}-wf-track: #e2e8f0;
+  --#{$prefix}-wf-accent: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-wf-accent-contrast: #ffffff;
+  --#{$prefix}-wf-radius: 0.85rem;
+  --#{$prefix}-wf-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.28);
+  --#{$prefix}-wf-zindex: 1090;
+
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: var(--#{$prefix}-wf-zindex);
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  color: var(--#{$prefix}-wf-color);
+  font-family: inherit;
+  box-sizing: border-box;
+
+  &.is-open,
+  &.show {
+    display: flex;
+    animation: dx-wf-fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+[data-dx-theme="dark"] .dx-waiting-modal,
+[data-bs-theme="dark"] .dx-waiting-modal {
+  --#{$prefix}-wf-bg: #161f30;
+  --#{$prefix}-wf-surface: #1e293b;
+  --#{$prefix}-wf-border: rgba(148, 163, 184, 0.2);
+  --#{$prefix}-wf-color: #e2e8f0;
+  --#{$prefix}-wf-muted: #94a3b8;
+  --#{$prefix}-wf-track: #273549;
+  --#{$prefix}-wf-shadow: 0 24px 54px -12px rgba(0, 0, 0, 0.65);
+}
+
+// ---------------------------------------------------------------------------
+// 2. Backdrop Desfocado (.dx-waiting-backdrop)
+// EN: Blurred Backdrop (.dx-waiting-backdrop)
+// ---------------------------------------------------------------------------
+.dx-waiting-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1089;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  &.is-open,
+  &.show {
+    display: block;
+    opacity: 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Card do Diálogo & Tamanhos (.dx-wf-dialog)
+// EN: Dialog Card & Size Modifiers (.dx-wf-dialog)
+// ---------------------------------------------------------------------------
+.dx-wf-dialog {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--#{$prefix}-wf-bg);
+  color: var(--#{$prefix}-wf-color);
+  border: 1px solid var(--#{$prefix}-wf-border);
+  border-top: 4px solid var(--#{$prefix}-wf-accent);
+  border-radius: var(--#{$prefix}-wf-radius);
+  box-shadow: var(--#{$prefix}-wf-shadow);
+  overflow: hidden;
+  margin: 0 auto;
+
+  &.dx-wf-sm {
+    max-width: 360px;
+  }
+
+  &.dx-wf-m,
+  &.dx-wf-md {
+    max-width: 480px;
+  }
+
+  &.dx-wf-lg {
+    max-width: 620px;
+  }
+
+  &.dx-wf-xl {
+    max-width: 760px;
+  }
+}
+
+.dx-wf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--#{$prefix}-wf-border);
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--#{$prefix}-wf-color);
+  }
+}
+
+.dx-wf-header-start {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.dx-wf-loader-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--#{$prefix}-wf-accent);
+
+  .loader,
+  [class^="lds-"],
+  [class*=" lds-"] {
+    --size: 1px;
+    --color-1: var(--#{$prefix}-wf-accent);
+    --color-2: var(--#{$prefix}-wf-accent);
+    transform: scale(0.75);
+  }
+}
+
+.dx-wf-percent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  flex-shrink: 0;
+  background-color: color-mix(in srgb, var(--#{$prefix}-wf-accent) 14%, transparent);
+  color: var(--#{$prefix}-wf-accent);
+}
+
+.dx-wf-body {
+  padding: 1.15rem 1.25rem;
+
+  .content,
+  .dx-wf-message {
+    margin: 0 0 0.85rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--#{$prefix}-wf-muted);
+  }
+}
+
+.dx-wf-progress {
+  width: 100%;
+  height: 0.85rem;
+  border-radius: 999px;
+  background-color: var(--#{$prefix}-wf-track);
+  overflow: hidden;
+  position: relative;
+}
+
+.dx-wf-bar {
+  height: 100%;
+  width: 100%;
+  background-color: var(--#{$prefix}-wf-accent);
+  color: var(--#{$prefix}-wf-accent-contrast);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+
+  &.is-striped {
+    background-image: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.22) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(255, 255, 255, 0.22) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: 1rem 1rem;
+  }
+
+  &.is-animated {
+    animation: dx-wf-stripes 0.9s linear infinite;
+  }
+}
+
+.dx-wf-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--#{$prefix}-wf-border);
+  background-color: var(--#{$prefix}-wf-surface);
+}
+
+@keyframes dx-wf-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dx-wf-stripes {
+  from {
+    background-position: 1rem 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Paleta Oficial (28 Cores + Semânticas success, danger, warning, info)
+// EN: Official 28-Color Palette + Semantic Accent Variants
+// ---------------------------------------------------------------------------
+@each $name, $hex in $wf-palette {
+  $is-light: list.index($wf-light-names, $name) != null;
+  $contrast: #ffffff;
+
+  @if $is-light {
+    $contrast: #130f10;
+  }
+
+  .dx-wf-accent-#{$name} {
+    --#{$prefix}-wf-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-wf-accent-contrast: #{$contrast};
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Acessibilidade (Movimento Reduzido)
+// EN: Reduced Motion Accessibility
+// ---------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .dx-waiting-modal,
+  .dx-waiting-backdrop,
+  .dx-wf-bar {
+    transition: none;
+    animation: none;
+  }
+}

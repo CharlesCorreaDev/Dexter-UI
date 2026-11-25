@@ -1,0 +1,498 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _toasts.scss
+ * @description [PT-BR] Suíte completa de Notificações Toast & Snackbars para o Dexter UI,
+ *              inspirada e aprimorada a partir do chrisgo/bootstrap5-toast e Script47/Toast.
+ *              Elimina a dependência de jQuery com controlador nativo vanilla JS (DexterToast),
+ *              grid de posicionamento em 9 quadrantes, barra de progresso temporal animada (countdown),
+ *              pausa ao passar o mouse (pauseDelayOnHover), avatares/ícones SVG integrados,
+ *              botões de ação, variantes em Vidro Fosco (Glassmorphism), snacks compactos em pílula,
+ *              suporte a todas as 28 cores oficiais da paleta e compatibilidade total com Dark Mode.
+ *              [EN]    Complete Toast & Snackbar notification suite for Dexter UI,
+ *              inspired and enhanced from chrisgo/bootstrap5-toast and Script47/Toast.
+ *              Eliminates jQuery dependency with a zero-dependency vanilla JS controller (DexterToast),
+ *              9-quadrant viewport placement grid, animated countdown progress bar,
+ *              pause-on-hover capability, integrated SVG icons/avatars, action buttons,
+ *              Glassmorphism variants, compact pill snacks, full 28-color palette support
+ *              and native Dark Mode compatibility.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Notificações Toast e Snackbars | Toast Notifications and Snackbars */
+
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Tokens de Toast
+// EN: Toast Tokens and CSS Variables
+// ---------------------------------------------------------------------------
+:root {
+  --#{$prefix}-toast-max-width: 360px;
+  --#{$prefix}-toast-font-size: 0.875rem;
+  --#{$prefix}-toast-color: var(--#{$prefix}-text-main, #1e293b);
+  --#{$prefix}-toast-bg: rgba(255, 255, 255, 0.96);
+  --#{$prefix}-toast-border-width: 1px;
+  --#{$prefix}-toast-border-color: rgba(203, 213, 225, 0.8);
+  --#{$prefix}-toast-border-radius: var(--#{$prefix}-radius-lg, 0.5rem);
+  --#{$prefix}-toast-box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.06);
+  --#{$prefix}-toast-header-color: var(--#{$prefix}-gray-700, #334155);
+  --#{$prefix}-toast-header-bg: transparent;
+  --#{$prefix}-toast-header-border-color: rgba(226, 232, 240, 0.8);
+  --#{$prefix}-toast-progress-bg: var(--#{$prefix}-primary, #3b5998);
+}
+
+[data-dx-theme="dark"] {
+  --#{$prefix}-toast-color: #f1f5f9;
+  --#{$prefix}-toast-bg: rgba(30, 41, 59, 0.96);
+  --#{$prefix}-toast-border-color: rgba(51, 65, 85, 0.8);
+  --#{$prefix}-toast-box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  --#{$prefix}-toast-header-color: #cbd5e1;
+  --#{$prefix}-toast-header-border-color: rgba(51, 65, 85, 0.7);
+  --#{$prefix}-toast-progress-bg: var(--#{$prefix}-primary, #4c6ef5);
+}
+
+// ---------------------------------------------------------------------------
+// 2. Contêiner de Toasts (Grid de 9 Posições)
+// EN: Toast Container (9 Placement Quadrants)
+// ---------------------------------------------------------------------------
+.toast-container {
+  position: fixed;
+  z-index: 1090;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  pointer-events: none;
+  max-width: 100vw;
+  box-sizing: border-box;
+
+  // Superior
+  &.top-right,
+  &.top-0.end-0 {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    align-items: flex-end;
+  }
+
+  &.top-left,
+  &.top-0.start-0 {
+    top: 0;
+    left: 0;
+    bottom: auto;
+    right: auto;
+    align-items: flex-start;
+  }
+
+  &.top-center,
+  &.top-0.start-50 {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: auto;
+    right: auto;
+    align-items: center;
+  }
+
+  // Meio / Central
+  &.middle-left,
+  &.top-50.start-0 {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    bottom: auto;
+    right: auto;
+    align-items: flex-start;
+  }
+
+  &.middle-center,
+  &.top-50.start-50 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    bottom: auto;
+    right: auto;
+    align-items: center;
+  }
+
+  &.middle-right,
+  &.top-50.end-0 {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    bottom: auto;
+    left: auto;
+    align-items: flex-end;
+  }
+
+  // Inferior
+  &.bottom-right,
+  &.bottom-0.end-0 {
+    bottom: 0;
+    right: 0;
+    top: auto;
+    left: auto;
+    align-items: flex-end;
+    flex-direction: column-reverse;
+  }
+
+  &.bottom-left,
+  &.bottom-0.start-0 {
+    bottom: 0;
+    left: 0;
+    top: auto;
+    right: auto;
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+
+  &.bottom-center,
+  &.bottom-0.start-50 {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    top: auto;
+    right: auto;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Estrutura Principal do Toast (.toast)
+// EN: Main Toast Structure (.toast)
+// ---------------------------------------------------------------------------
+.toast {
+  pointer-events: auto;
+  width: var(--#{$prefix}-toast-max-width);
+  max-width: calc(100vw - 2rem);
+  font-family: inherit;
+  font-size: var(--#{$prefix}-toast-font-size);
+  color: var(--#{$prefix}-toast-color);
+  background-color: var(--#{$prefix}-toast-bg);
+  border: var(--#{$prefix}-toast-border-width) solid var(--#{$prefix}-toast-border-color);
+  border-radius: var(--#{$prefix}-toast-border-radius);
+  box-shadow: var(--#{$prefix}-toast-box-shadow);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.97);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.showing {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  &.hide {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+  }
+
+  // Cabeçalho (.toast-header)
+  .toast-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 0.875rem;
+    color: var(--#{$prefix}-toast-header-color);
+    background-color: var(--#{$prefix}-toast-header-bg);
+    border-bottom: 1px solid var(--#{$prefix}-toast-header-border-color);
+
+    .toast-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.5rem;
+      flex-shrink: 0;
+
+      svg {
+        width: 1.125rem;
+        height: 1.125rem;
+      }
+    }
+
+    .toast-title {
+      font-weight: 600;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      margin-right: auto;
+    }
+
+    .toast-subtitle {
+      font-size: 0.75rem;
+      color: var(--#{$prefix}-text-muted, #64748b);
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      white-space: nowrap;
+    }
+
+    .btn-close {
+      border: 0;
+      background: transparent;
+      background-image: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      margin: -0.25rem -0.25rem -0.25rem auto;
+      font-size: 0.875rem;
+      line-height: 1;
+      color: currentColor;
+      opacity: 0.55;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+
+      &:hover {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  // Corpo (.toast-body)
+  .toast-body {
+    padding: 0.75rem 0.875rem;
+    line-height: 1.5;
+    word-break: break-word;
+
+    .toast-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--#{$prefix}-toast-header-border-color);
+    }
+  }
+
+  // Barra de Progresso / Countdown (.toast-progress)
+  .toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: var(--#{$prefix}-toast-progress-bg);
+    transform-origin: left;
+    transition: width 0.1s linear;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Formato Compacto Snack / Snackbar (.toast-snack)
+// EN: Compact Snack / Snackbar Variant (.toast-snack)
+// ---------------------------------------------------------------------------
+.toast-snack {
+  width: auto;
+  min-width: 260px;
+  max-width: 460px;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.2);
+
+  .toast-content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .toast-snack-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .toast-snack-text {
+    flex: 1 1 auto;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .toast-snack-action {
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+
+  .btn-close {
+    border: 0;
+    background: transparent;
+    background-image: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    font-size: 0.875rem;
+    line-height: 1;
+    color: currentColor;
+    opacity: 0.65;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem;
+    transition: opacity 0.15s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Vidro Fosco / Glassmorphism (.toast-glass)
+// EN: Frosted Glass / Glassmorphism (.toast-glass)
+// ---------------------------------------------------------------------------
+.toast-glass {
+  background: rgba(255, 255, 255, 0.75) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+  border-color: rgba(255, 255, 255, 0.4) !important;
+
+  [data-dx-theme="dark"] & {
+    background: rgba(15, 23, 42, 0.75) !important;
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Variantes Semânticas e Paleta Oficial (Sólidas e Soft)
+// EN: Semantic & Official 28-Color Palette Variants (Solid and Soft Tonal)
+// ---------------------------------------------------------------------------
+$toast-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "error":   $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$toast-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning");
+$toast-palette: map.merge($all-colors, $toast-semantic-colors);
+
+@each $color-name, $color-value in $toast-palette {
+  $is-light: list.index($toast-light-names, $color-name) != null;
+  $fg: #ffffff;
+  $subtitle-fg: rgba(255, 255, 255, 0.85);
+  $header-bg: rgba(0, 0, 0, 0.15);
+  $header-border: rgba(255, 255, 255, 0.2);
+  $progress-fg: rgba(255, 255, 255, 0.75);
+  $soft-accent: $color-value;
+
+  @if $is-light {
+    $fg: #130f10;
+    $subtitle-fg: rgba(19, 15, 16, 0.72);
+    $header-bg: rgba(0, 0, 0, 0.06);
+    $header-border: rgba(19, 15, 16, 0.14);
+    $progress-fg: rgba(19, 15, 16, 0.45);
+  }
+
+  @if $color-name == "warning" {
+    $soft-accent: #b45309;
+  }
+
+  // 6.1 Toast Sólido
+  .toast-#{$color-name} {
+    background-color: var(--#{$prefix}-#{$color-name}, #{$color-value}) !important;
+    border-color: var(--#{$prefix}-#{$color-name}, #{$color-value}) !important;
+    color: #{$fg} !important;
+
+    .toast-header {
+      background-color: #{$header-bg} !important;
+      border-bottom-color: #{$header-border} !important;
+      color: #{$fg} !important;
+
+      .toast-subtitle {
+        color: #{$subtitle-fg} !important;
+      }
+
+      .btn-close {
+        color: #{$fg} !important;
+      }
+    }
+
+    .toast-body {
+      color: #{$fg} !important;
+    }
+
+    .toast-progress {
+      background-color: #{$progress-fg} !important;
+    }
+  }
+
+  // 6.2 Toast Soft (Tonal com Borda Lateral)
+  .toast-soft-#{$color-name} {
+    background-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 10%, #ffffff) !important;
+    border-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 30%, #cbd5e1) !important;
+    border-left: 4px solid var(--#{$prefix}-#{$color-name}, #{$color-value}) !important;
+    color: var(--#{$prefix}-text-main, #1e293b) !important;
+
+    .toast-header {
+      color: #{$soft-accent} !important;
+      border-bottom-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 20%, #e2e8f0) !important;
+
+      .toast-icon {
+        color: #{$soft-accent} !important;
+      }
+    }
+
+    .toast-progress {
+      background-color: var(--#{$prefix}-#{$color-name}, #{$color-value}) !important;
+    }
+
+    [data-dx-theme="dark"] & {
+      background-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 18%, #0f172a) !important;
+      border-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 35%, #1e293b) !important;
+      color: #f1f5f9 !important;
+
+      .toast-header {
+        color: color-mix(in srgb, #{$color-value} 45%, #ffffff) !important;
+        border-bottom-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 25%, #1e293b) !important;
+
+        .toast-icon {
+          color: color-mix(in srgb, #{$color-value} 45%, #ffffff) !important;
+        }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Aliases Semânticos em Português
+// EN: Semantic Aliases in Portuguese
+// ---------------------------------------------------------------------------
+@each $alias, $canonical in $color-aliases {
+  .toast-#{$alias} {
+    @extend .toast-#{$canonical};
+  }
+  .toast-soft-#{$alias} {
+    @extend .toast-soft-#{$canonical};
+  }
+}

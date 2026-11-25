@@ -1,0 +1,429 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_toc.scss
+ * @description [PT-BR] Suíte completa de estilização para Sumário Automático
+ *              (Table of Contents - TOC) com rastreamento ScrollSpy, inspirada no
+ *              bootstrap-toc (afeld/bootstrap-toc), com suporte a hierarquia
+ *              aninhada de títulos (H1 a H5), geração automática de âncoras/slugs,
+ *              rolagem suave, modo recolhível (collapsible), indicador de trilha
+ *              (track bar), posicionamento sticky, 28 cores temáticas oficiais e
+ *              Modo Escuro nativo.
+ *              [EN]    Complete styling suite for automated Table of Contents (TOC)
+ *              with ScrollSpy tracking, inspired by bootstrap-toc (afeld/bootstrap-toc),
+ *              with support for nested heading hierarchy (H1 to H5), automatic
+ *              anchor/slug generation, smooth scrolling, collapsible mode, track
+ *              bar indicator, sticky positioning, all 28 official theme colors and
+ *              native Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Sumário Automático | Table of Contents (TOC) */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Tokens Globais do TOC / Global TOC Tokens
+// ---------------------------------------------------------------------------
+
+:root {
+  --#{$prefix}-toc-bg: transparent;
+  --#{$prefix}-toc-color: var(--#{$prefix}-text-muted, #64748b);
+  --#{$prefix}-toc-hover-color: var(--#{$prefix}-heading-color, #0f172a);
+  --#{$prefix}-toc-active-color: var(--#{$prefix}-primary, #4361ee);
+  --#{$prefix}-toc-active-bg: rgba(67, 97, 238, 0.08);
+  --#{$prefix}-toc-active-font-weight: 600;
+  --#{$prefix}-toc-border-color: var(--#{$prefix}-border-color, #e2e8f0);
+  --#{$prefix}-toc-border-width: 2px;
+  --#{$prefix}-toc-active-border-color: var(--#{$prefix}-primary, #4361ee);
+  --#{$prefix}-toc-font-size: 0.875rem;
+  --#{$prefix}-toc-line-height: 1.45;
+  --#{$prefix}-toc-padding-y: 0.35rem;
+  --#{$prefix}-toc-padding-x: 0.75rem;
+  --#{$prefix}-toc-indent: 1rem;
+  --#{$prefix}-toc-border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  --#{$prefix}-toc-transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --#{$prefix}-toc-sticky-top: 5.5rem;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Estrutura Principal do TOC / Main TOC Structure
+// ---------------------------------------------------------------------------
+
+.dx-toc,
+.toc,
+nav[data-toggle="toc"],
+nav[data-dx-toc],
+[data-toc] {
+  display: block;
+  font-size: var(--#{$prefix}-toc-font-size);
+  line-height: var(--#{$prefix}-toc-line-height);
+  color: var(--#{$prefix}-toc-color);
+  background-color: var(--#{$prefix}-toc-bg);
+
+  // Cabeçalho opcional / Optional header
+  .dx-toc-header,
+  .toc-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.075em;
+    color: var(--#{$prefix}-heading-color, #1e293b);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid var(--#{$prefix}-toc-border-color);
+
+    .dx-toc-header-icon {
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
+      opacity: 0.75;
+    }
+  }
+
+  // Lista de navegação / Navigation list
+  .dx-toc-nav,
+  .toc-nav {
+    display: block;
+  }
+
+  .dx-toc-list,
+  .toc-list,
+  ul.nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+
+    // Trilha contínua na borda esquerda / Continuous track on left border
+    &.toc-track,
+    &:not(.toc-pills) {
+      border-inline-start: var(--#{$prefix}-toc-border-width) solid var(--#{$prefix}-toc-border-color);
+    }
+  }
+
+  // Itens da lista / List items
+  .dx-toc-item,
+  .toc-item,
+  li {
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  // Links do Sumário / TOC Links
+  .dx-toc-link,
+  .toc-link,
+  a.nav-link {
+    display: block;
+    position: relative;
+    padding: var(--#{$prefix}-toc-padding-y) var(--#{$prefix}-toc-padding-x);
+    color: var(--#{$prefix}-toc-color);
+    text-decoration: none;
+    font-size: var(--#{$prefix}-toc-font-size);
+    font-weight: 400;
+    line-height: var(--#{$prefix}-toc-line-height);
+    margin-inline-start: calc(var(--#{$prefix}-toc-border-width) * -1);
+    border-inline-start: var(--#{$prefix}-toc-border-width) solid transparent;
+    border-radius: 0 var(--#{$prefix}-toc-border-radius) var(--#{$prefix}-toc-border-radius) 0;
+    transition: var(--#{$prefix}-toc-transition);
+    word-break: break-word;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--#{$prefix}-toc-hover-color);
+      border-inline-start-color: var(--#{$prefix}-toc-hover-color);
+      background-color: rgba(0, 0, 0, 0.025);
+      outline: none;
+    }
+
+    // Estado Ativo / Active State (ScrollSpy)
+    &.active,
+    &[aria-current="true"] {
+      color: var(--#{$prefix}-toc-active-color);
+      font-weight: var(--#{$prefix}-toc-active-font-weight);
+      border-inline-start-color: var(--#{$prefix}-toc-active-border-color);
+      background-color: var(--#{$prefix}-toc-active-bg);
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 3. Hierarquia e Indentação Aninhada / Nested Hierarchy & Indentation
+  // -------------------------------------------------------------------------
+
+  // Níveis de cabeçalhos por classes
+  .toc-item-h1 > .toc-link,
+  .toc-item-h1 > .dx-toc-link {
+    font-weight: 600;
+    padding-inline-start: var(--#{$prefix}-toc-padding-x);
+  }
+
+  .toc-item-h2 > .toc-link,
+  .toc-item-h2 > .dx-toc-link {
+    padding-inline-start: var(--#{$prefix}-toc-padding-x);
+  }
+
+  .toc-item-h3 > .toc-link,
+  .toc-item-h3 > .dx-toc-link {
+    padding-inline-start: calc(var(--#{$prefix}-toc-padding-x) + var(--#{$prefix}-toc-indent));
+    font-size: calc(var(--#{$prefix}-toc-font-size) * 0.94);
+  }
+
+  .toc-item-h4 > .toc-link,
+  .toc-item-h4 > .dx-toc-link {
+    padding-inline-start: calc(var(--#{$prefix}-toc-padding-x) + (var(--#{$prefix}-toc-indent) * 2));
+    font-size: calc(var(--#{$prefix}-toc-font-size) * 0.88);
+  }
+
+  .toc-item-h5 > .toc-link,
+  .toc-item-h5 > .dx-toc-link {
+    padding-inline-start: calc(var(--#{$prefix}-toc-padding-x) + (var(--#{$prefix}-toc-indent) * 3));
+    font-size: calc(var(--#{$prefix}-toc-font-size) * 0.82);
+  }
+
+  // Sublistas aninhadas / Nested Sublists
+  .dx-toc-sublist,
+  .toc-sublist,
+  ul.nav ul.nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-inline-start: none !important;
+
+    .dx-toc-link,
+    .toc-link,
+    a.nav-link {
+      padding-inline-start: calc(var(--#{$prefix}-toc-padding-x) + var(--#{$prefix}-toc-indent));
+    }
+
+    ul.nav .dx-toc-link,
+    ul.nav .toc-link,
+    ul.nav a.nav-link {
+      padding-inline-start: calc(var(--#{$prefix}-toc-padding-x) + (var(--#{$prefix}-toc-indent) * 2));
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 4. Modo Recolhível / Collapsible Mode
+  // -------------------------------------------------------------------------
+
+  &.toc-collapsible {
+    .dx-toc-sublist,
+    .toc-sublist,
+    ul.nav ul.nav {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      pointer-events: none;
+      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.25s ease-in-out;
+    }
+
+    // Expande quando o item pai é ativo ou tem filho ativo
+    .dx-toc-item.is-expanded > .dx-toc-sublist,
+    .dx-toc-item.has-active > .dx-toc-sublist,
+    .toc-item.is-expanded > .toc-sublist,
+    .toc-item.has-active > .toc-sublist,
+    li.is-expanded > ul.nav,
+    li.has-active > ul.nav,
+    li:has(> a.active) > ul.nav {
+      max-height: 800px;
+      opacity: 1;
+      overflow: visible;
+      pointer-events: auto;
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // 5. Variantes de Estilo / Style Variants
+  // -------------------------------------------------------------------------
+
+  // Variante Pills (cápsula sem borda lateral contínua)
+  &.toc-pills {
+    .dx-toc-list,
+    .toc-list,
+    ul.nav {
+      border-inline-start: none;
+    }
+
+    .dx-toc-link,
+    .toc-link,
+    a.nav-link {
+      margin-inline-start: 0;
+      border-inline-start: none;
+      border-radius: var(--#{$prefix}-radius-pill, 50rem);
+      padding: 0.35rem 0.85rem;
+      margin-bottom: 0.15rem;
+
+      &.active,
+      &[aria-current="true"] {
+        background-color: var(--#{$prefix}-toc-active-color);
+        color: #ffffff;
+      }
+    }
+  }
+
+  // Variante Marcador com Ponto / Dot Indicator
+  &.toc-dots {
+    .dx-toc-link,
+    .toc-link,
+    a.nav-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--#{$prefix}-toc-border-color);
+        transition: transform 0.2s ease, background-color 0.2s ease;
+        flex-shrink: 0;
+      }
+
+      &:hover::before {
+        background-color: var(--#{$prefix}-toc-hover-color);
+        transform: scale(1.2);
+      }
+
+      &.active::before,
+      &[aria-current="true"]::before {
+        background-color: var(--#{$prefix}-toc-active-color);
+        transform: scale(1.4);
+      }
+    }
+  }
+
+  // Tamanhos / Sizes
+  &.toc-sm {
+    --#{$prefix}-toc-font-size: 0.8rem;
+    --#{$prefix}-toc-padding-y: 0.25rem;
+    --#{$prefix}-toc-padding-x: 0.65rem;
+    --#{$prefix}-toc-indent: 0.85rem;
+  }
+
+  &.toc-lg {
+    --#{$prefix}-toc-font-size: 0.95rem;
+    --#{$prefix}-toc-padding-y: 0.45rem;
+    --#{$prefix}-toc-padding-x: 0.9rem;
+    --#{$prefix}-toc-indent: 1.25rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Barra Lateral Sticky / Sticky Sidebar Container
+// ---------------------------------------------------------------------------
+
+.toc-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: var(--#{$prefix}-toc-sticky-top);
+  max-height: calc(100vh - var(--#{$prefix}-toc-sticky-top) - 1.5rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--#{$prefix}-border-color, #cbd5e1) transparent;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--#{$prefix}-border-color, #cbd5e1);
+    border-radius: 4px;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Todas as 28 Cores Temáticas Oficiais / All 28 Theme Color Variants
+// ---------------------------------------------------------------------------
+
+@each $key, $color in $theme-colors {
+  .toc-#{$key} {
+    --#{$prefix}-toc-active-color: #{$color};
+    --#{$prefix}-toc-active-border-color: #{$color};
+    --#{$prefix}-toc-active-bg: rgba(#{$color}, 0.08);
+
+    &.toc-pills {
+      .dx-toc-link.active,
+      .toc-link.active,
+      a.nav-link.active {
+        background-color: #{$color};
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 8. Modo Escuro / Dark Mode
+// ---------------------------------------------------------------------------
+
+[data-dx-theme="dark"] {
+  --#{$prefix}-toc-color: #94a3b8;
+  --#{$prefix}-toc-hover-color: #f8fafc;
+  --#{$prefix}-toc-border-color: rgba(255, 255, 255, 0.12);
+  --#{$prefix}-toc-active-bg: rgba(67, 97, 238, 0.15);
+
+  .dx-toc,
+  .toc,
+  nav[data-toggle="toc"],
+  nav[data-dx-toc],
+  [data-toc] {
+    .dx-toc-header,
+    .toc-header {
+      color: #f1f5f9;
+      border-bottom-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .dx-toc-link,
+    .toc-link,
+    a.nav-link {
+      &:hover,
+      &:focus-visible {
+        background-color: rgba(255, 255, 255, 0.04);
+      }
+    }
+  }
+
+  .toc-sticky {
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  @each $key, $color in $theme-colors {
+    .toc-#{$key} {
+      --#{$prefix}-toc-active-bg: rgba(#{$color}, 0.18);
+    }
+  }
+}

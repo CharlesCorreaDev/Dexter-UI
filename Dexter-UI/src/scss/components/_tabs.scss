@@ -1,0 +1,1176 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _tabs.scss
+ * @description [PT-BR] Suíte completa de Abas Horizontais e Abas Verticais Responsivas (Vertical Tabs)
+ *              inspirada e aprimorada a partir do bootstrap-5-vertical-tabs (tromgy) e nos padrões
+ *              canônicos do Bootstrap 5, eliminando qualquer dependência externa.
+ *              Inclui abas à esquerda (.vtabs, .vtabs-left) e à direita (.vtabs-right), fusão perfeita
+ *              de bordas com o painel de conteúdo, estilos clássicos (.nav-tabs), pílulas (.nav-pills)
+ *              e indicador moderno em linha (.nav-underline), colapso responsivo fluido para mobile,
+ *              suporte a truncamento de texto (.ellipsis), ícones, badges, 28 cores oficiais e Dark Mode.
+ *              [EN]    Complete Horizontal and Responsive Vertical Tabs Suite inspired and enhanced from
+ *              bootstrap-5-vertical-tabs (tromgy) and canonical Bootstrap 5 patterns, zero external dependencies.
+ *              Includes left-aligned (.vtabs, .vtabs-left) and right-aligned (.vtabs-right) vertical tabs,
+ *              seamless active tab border fusion with content panels, classic borders (.nav-tabs),
+ *              pills (.nav-pills) and modern edge indicator (.nav-underline), responsive mobile collapse,
+ *              text truncation (.ellipsis), icons, badges, 28 official colors and Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Abas e Abas Verticais | Tabs and Vertical Tabs */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis & Tokens CSS (.nav, .nav-tabs, .vtabs)
+// EN: Variables & CSS Tokens (.nav, .nav-tabs, .vtabs)
+// ---------------------------------------------------------------------------
+
+:root {
+  --#{$prefix}-tabs-border-color: var(--#{$prefix}-midnight-200, #cbd5e1);
+  --#{$prefix}-tabs-link-color: var(--#{$prefix}-text-muted, #64748b);
+  --#{$prefix}-tabs-link-hover-color: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-tabs-active-color: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-tabs-active-bg: var(--#{$prefix}-card-bg, #ffffff);
+  --#{$prefix}-tabs-active-border-color: var(--#{$prefix}-midnight-200, #cbd5e1);
+  --#{$prefix}-tabs-border-radius: var(--#{$prefix}-radius-md, 0.375rem);
+  --#{$prefix}-tabs-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  --#{$prefix}-vtabs-breakpoint: 768px;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Base de Navegação (.nav, .nav-link, .nav-item)
+// EN: Navigation Base (.nav, .nav-link, .nav-item)
+// ---------------------------------------------------------------------------
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  gap: 0.25rem;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: var(--#{$prefix}-tabs-link-color);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: var(--#{$prefix}-tabs-border-radius);
+  transition: var(--#{$prefix}-tabs-transition);
+  cursor: pointer;
+  user-select: none;
+  line-height: 1.5;
+
+  &:hover {
+    color: var(--#{$prefix}-tabs-link-hover-color);
+  }
+
+  &:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--#{$prefix}-primary) 25%, transparent);
+  }
+
+  &.disabled,
+  &:disabled {
+    color: var(--#{$prefix}-midnight-400, #94a3b8) !important;
+    pointer-events: none !important;
+    cursor: default !important;
+    opacity: 0.65;
+  }
+
+  // Ícones e badges integrados
+  .tab-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-inline-end: 0.5rem;
+    font-size: 1.1em;
+    line-height: 1;
+
+    svg {
+      width: 1em;
+      height: 1em;
+      fill: currentColor;
+    }
+  }
+
+  .badge {
+    margin-inline-start: auto;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Abas Horizontais Clássicas (.nav-tabs)
+// EN: Classic Horizontal Tabs (.nav-tabs)
+// ---------------------------------------------------------------------------
+
+.nav-tabs {
+  border-bottom: 1px solid var(--#{$prefix}-tabs-border-color);
+  gap: 0;
+  position: relative;
+  z-index: 2;
+
+  .nav-link {
+    margin-bottom: -1px;
+    border-radius: var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) 0 0;
+    border: 1px solid transparent;
+    position: relative;
+    z-index: 1;
+
+    &:hover {
+      border-color: var(--#{$prefix}-tabs-border-color) var(--#{$prefix}-tabs-border-color) transparent;
+    }
+
+    &.active,
+    &[aria-selected="true"] {
+      color: var(--#{$prefix}-tabs-active-color);
+      background-color: var(--#{$prefix}-tabs-active-bg);
+      border-color: var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-bg);
+      font-weight: 600;
+      z-index: 3;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3.1 Abas com Rolagem Horizontal & Controles de Navegação (.tabs-scrollable, .nav-tabs-scrollable)
+// EN: Scrollable Horizontal Tabs with Navigation Controls (.tabs-scrollable, .nav-tabs-scrollable)
+// ---------------------------------------------------------------------------
+
+.nav-tabs-scrollable {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-link {
+    flex-shrink: 0;
+  }
+}
+
+// Invólucro inteligente com setas de rolagem inspiradas no scrollable-tabs-bootstrap-5
+.tabs-scrollable {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  margin-bottom: var(--#{$prefix}-tabs-margin-bottom, 1rem);
+
+  .tabs-scrollable-track,
+  .nav-tabs-scrollable {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    flex-grow: 1;
+    margin-bottom: 0;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-link {
+      flex-shrink: 0;
+    }
+  }
+
+  // Botões de navegação lateral (Setas esquerda/direita)
+  .tabs-scroller-btn,
+  .scroller-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.5rem;
+    min-height: 2.5rem;
+    padding: 0;
+    border: 1px solid var(--#{$prefix}-tabs-border-color);
+    background-color: var(--#{$prefix}-body-bg, #ffffff);
+    color: var(--#{$prefix}-tabs-link-color);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 200ms ease-in-out, color 200ms ease-in-out, border-color 200ms ease-in-out, opacity 200ms ease-in-out, transform 150ms ease-in-out;
+    z-index: 2;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
+      pointer-events: none;
+    }
+
+    &:hover:not(:disabled):not(.disabled) {
+      background-color: var(--#{$prefix}-primary-050, rgba(234, 88, 12, 0.08));
+      color: var(--#{$prefix}-primary, #ea580c);
+      border-color: var(--#{$prefix}-primary, #ea580c);
+    }
+
+    &:active:not(:disabled):not(.disabled) {
+      transform: scale(0.92);
+    }
+
+    &:disabled,
+    &.disabled,
+    &[aria-disabled="true"] {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &.is-hidden {
+      display: none !important;
+    }
+  }
+
+  .tabs-scroller-left,
+  .scroller-left {
+    border-top-left-radius: var(--#{$prefix}-tabs-border-radius, 0.375rem);
+    border-bottom-left-radius: 0;
+    border-right: 0;
+  }
+
+  .tabs-scroller-right,
+  .scroller-right {
+    border-top-right-radius: var(--#{$prefix}-tabs-border-radius, 0.375rem);
+    border-bottom-right-radius: 0;
+    border-left: 0;
+  }
+
+  // Estilização com nav-pills
+  &:has(.nav-pills) {
+    .tabs-scroller-left {
+      border-radius: var(--#{$prefix}-radius-pill, 50rem) 0 0 var(--#{$prefix}-radius-pill, 50rem);
+    }
+    .tabs-scroller-right {
+      border-radius: 0 var(--#{$prefix}-radius-pill, 50rem) var(--#{$prefix}-radius-pill, 50rem) 0;
+    }
+  }
+
+  // Máscara opcional com fade lateral (.has-fade)
+  &.has-fade {
+    .tabs-scrollable-track,
+    .nav-tabs-scrollable {
+      mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 2rem, black calc(100% - 2rem), transparent);
+    }
+  }
+}
+
+// Suporte ao modo escuro para os botões de rolagem
+[data-dx-theme="dark"] .tabs-scrollable {
+  .tabs-scroller-btn,
+  .scroller-btn {
+    background-color: #161b22;
+    border-color: var(--#{$prefix}-border-color, #30363d);
+    color: var(--#{$prefix}-tabs-link-color, #8b949e);
+
+    &:hover:not(:disabled):not(.disabled) {
+      background-color: #21262d;
+      color: var(--#{$prefix}-primary, #ea580c);
+      border-color: var(--#{$prefix}-primary, #ea580c);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3.2 Abas na Base (.tabs-bottom)
+// EN: Bottom Tabs (.tabs-bottom)
+// ---------------------------------------------------------------------------
+
+.tabs-bottom {
+  display: flex;
+  flex-direction: column-reverse;
+
+  .nav-tabs {
+    border-bottom: 0;
+    border-top: 1px solid var(--#{$prefix}-tabs-border-color);
+
+    .nav-link {
+      margin-bottom: 0;
+      margin-top: -1px;
+      border-radius: 0 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius);
+
+      &:hover {
+        border-color: transparent var(--#{$prefix}-tabs-border-color) var(--#{$prefix}-tabs-border-color);
+      }
+
+      &.active,
+      &[aria-selected="true"] {
+        border-color: var(--#{$prefix}-tabs-active-bg) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color);
+      }
+    }
+  }
+
+  &.tab-content-bordered > .tab-content {
+    margin-top: 0;
+    margin-bottom: -1px;
+    border-radius: var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) 0 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3.3 Painel com Borda para Abas Horizontais (.tab-content-bordered)
+// EN: Bordered Panel for Horizontal Tabs (.tab-content-bordered)
+// ---------------------------------------------------------------------------
+
+.tab-content-bordered:not(.vtabs):not(.tabs-vertical) {
+  > .tab-content {
+    margin-top: -1px;
+    padding: 1.5rem;
+    border: 1px solid var(--#{$prefix}-tabs-border-color);
+    background-color: var(--#{$prefix}-tabs-active-bg);
+    border-radius: 0 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius);
+    position: relative;
+    z-index: 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Abas em Pílula (.nav-pills)
+// EN: Pill Tabs (.nav-pills)
+// ---------------------------------------------------------------------------
+
+.nav-pills {
+  .nav-link {
+    border-radius: var(--#{$prefix}-radius-pill, 50rem);
+
+    &.active,
+    &[aria-selected="true"] {
+      color: #ffffff;
+      background-color: var(--#{$prefix}-primary);
+      box-shadow: 0 2px 6px color-mix(in srgb, var(--#{$prefix}-primary) 35%, transparent);
+      font-weight: 600;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Abas com Indicador em Linha (.nav-underline)
+// EN: Underline Tabs (.nav-underline)
+// ---------------------------------------------------------------------------
+
+.nav-underline {
+  border-bottom: 1px solid var(--#{$prefix}-tabs-border-color);
+  gap: 1rem;
+
+  .nav-link {
+    padding-left: 0;
+    padding-right: 0;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    margin-bottom: -1px;
+
+    &:hover {
+      border-bottom-color: color-mix(in srgb, var(--#{$prefix}-primary) 50%, transparent);
+    }
+
+    &.active,
+    &[aria-selected="true"] {
+      color: var(--#{$prefix}-tabs-active-color);
+      border-bottom-color: var(--#{$prefix}-primary);
+      font-weight: 600;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Abas Justificadas e Preenchidas (.nav-fill, .nav-justified)
+// EN: Fill & Justified Nav Tabs (.nav-fill, .nav-justified)
+// ---------------------------------------------------------------------------
+
+.nav-fill {
+  > .nav-link,
+  .nav-item {
+    flex: 1 1 auto;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+.nav-justified {
+  > .nav-link,
+  .nav-item {
+    flex-basis: 0;
+    flex-grow: 1;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Suíte de Abas Verticais (.vtabs, .vtabs-left, .vtabs-right, .tabs-vertical)
+// EN: Vertical Tabs Suite (.vtabs, .vtabs-left, .vtabs-right, .tabs-vertical)
+// ---------------------------------------------------------------------------
+
+.vtabs,
+.tabs-vertical {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+
+  // Navegação vertical em coluna
+  .nav-tabs,
+  .nav-pills,
+  .nav-underline,
+  .nav {
+    flex-direction: column;
+    flex-shrink: 0;
+    width: var(--#{$prefix}-vtabs-width, 220px);
+    margin-bottom: 0;
+
+    .nav-item {
+      width: 100%;
+    }
+
+    .nav-link {
+      width: 100%;
+      display: flex;
+    }
+  }
+
+  // Painel de conteúdo flexível adjacente
+  .tab-content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  // 7.1 Abas Verticais à Esquerda (.vtabs-left ou padrão .vtabs)
+  &,
+  &.vtabs-left {
+    .nav-tabs {
+      border-bottom: 0;
+      border-right: 1px solid var(--#{$prefix}-tabs-border-color);
+      z-index: 2;
+      position: relative;
+
+      .nav-link {
+        width: 100%;
+        margin-bottom: 0.25rem;
+        margin-right: 0;
+        border-radius: var(--#{$prefix}-tabs-border-radius) 0 0 var(--#{$prefix}-tabs-border-radius);
+        border: 1px solid transparent;
+        text-align: start;
+        justify-content: flex-start;
+        position: relative;
+        z-index: 1;
+
+        &:hover {
+          border-color: var(--#{$prefix}-tabs-border-color) transparent var(--#{$prefix}-tabs-border-color) var(--#{$prefix}-tabs-border-color);
+        }
+
+        &.active,
+        &[aria-selected="true"] {
+          width: calc(100% + 1px);
+          margin-right: -1px;
+          color: var(--#{$prefix}-tabs-active-color);
+          background-color: var(--#{$prefix}-tabs-active-bg);
+          border-color: var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-bg) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color);
+          font-weight: 600;
+          z-index: 3;
+        }
+      }
+    }
+
+    // Estilo Underline vertical à esquerda
+    .nav-underline {
+      border-bottom: 0;
+      border-right: 1px solid var(--#{$prefix}-tabs-border-color);
+
+      .nav-link {
+        width: 100%;
+        margin-right: -1px;
+        padding: 0.5rem 1rem;
+        border: 0;
+        border-right: 3px solid transparent;
+        text-align: start;
+        justify-content: flex-start;
+
+        &:hover {
+          border-right-color: color-mix(in srgb, var(--#{$prefix}-primary) 50%, transparent);
+        }
+
+        &.active,
+        &[aria-selected="true"] {
+          color: var(--#{$prefix}-tabs-active-color);
+          border-right-color: var(--#{$prefix}-primary);
+          background-color: color-mix(in srgb, var(--#{$prefix}-primary) 8%, transparent);
+          font-weight: 600;
+        }
+      }
+    }
+
+    // Pílulas verticais à esquerda
+    .nav-pills {
+      .nav-link {
+        width: 100%;
+        border-radius: var(--#{$prefix}-tabs-border-radius);
+        text-align: start;
+        justify-content: flex-start;
+      }
+    }
+
+    // Conteúdo adjacente à direita
+    .tab-content {
+      padding: 1rem 1.5rem;
+    }
+
+    // Borda ao redor do conteúdo se ativo
+    &.tab-content-bordered {
+      .tab-content {
+        margin-left: -1px;
+        padding: 1.5rem;
+        border: 1px solid var(--#{$prefix}-tabs-border-color);
+        background-color: var(--#{$prefix}-tabs-active-bg);
+        border-radius: 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius);
+        position: relative;
+        z-index: 1;
+      }
+    }
+  }
+
+  // 7.2 Abas Verticais à Direita (.vtabs-right)
+  &.vtabs-right {
+    flex-direction: row-reverse;
+
+    .nav-tabs {
+      border-bottom: 0;
+      border-left: 1px solid var(--#{$prefix}-tabs-border-color);
+      border-right: 0;
+      z-index: 2;
+      position: relative;
+
+      .nav-link {
+        width: 100%;
+        margin-bottom: 0.25rem;
+        margin-left: 0;
+        margin-right: 0;
+        border-radius: 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) 0;
+        border: 1px solid transparent;
+        text-align: start;
+        justify-content: flex-start;
+        position: relative;
+        z-index: 1;
+
+        &:hover {
+          border-color: var(--#{$prefix}-tabs-border-color) var(--#{$prefix}-tabs-border-color) var(--#{$prefix}-tabs-border-color) transparent;
+        }
+
+        &.active,
+        &[aria-selected="true"] {
+          width: calc(100% + 1px);
+          margin-left: -1px;
+          color: var(--#{$prefix}-tabs-active-color);
+          background-color: var(--#{$prefix}-tabs-active-bg);
+          border-color: var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-bg);
+          font-weight: 600;
+          z-index: 3;
+        }
+      }
+    }
+
+    // Estilo Underline vertical à direita
+    .nav-underline {
+      border-bottom: 0;
+      border-left: 1px solid var(--#{$prefix}-tabs-border-color);
+      border-right: 0;
+
+      .nav-link {
+        width: 100%;
+        margin-left: -1px;
+        margin-right: 0;
+        padding: 0.5rem 1rem;
+        border: 0;
+        border-left: 3px solid transparent;
+        border-right: 0;
+        text-align: start;
+        justify-content: flex-start;
+
+        &:hover {
+          border-left-color: color-mix(in srgb, var(--#{$prefix}-primary) 50%, transparent);
+        }
+
+        &.active,
+        &[aria-selected="true"] {
+          color: var(--#{$prefix}-tabs-active-color);
+          border-left-color: var(--#{$prefix}-primary);
+          background-color: color-mix(in srgb, var(--#{$prefix}-primary) 8%, transparent);
+          font-weight: 600;
+        }
+      }
+    }
+
+    // Conteúdo adjacente à esquerda
+    .tab-content {
+      padding: 1rem 1.5rem;
+    }
+
+    &.tab-content-bordered {
+      .tab-content {
+        margin-left: 0;
+        margin-right: -1px;
+        padding: 1.5rem;
+        border: 1px solid var(--#{$prefix}-tabs-border-color);
+        background-color: var(--#{$prefix}-tabs-active-bg);
+        border-radius: var(--#{$prefix}-tabs-border-radius) 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius);
+        position: relative;
+        z-index: 1;
+      }
+    }
+  }
+
+  // 7.3 Larguras Customizadas para Abas Verticais
+  &.vtabs-sm .nav { width: 160px; }
+  &.vtabs-md .nav { width: 220px; }
+  &.vtabs-lg .nav { width: 280px; }
+  &.vtabs-xl .nav { width: 340px; }
+}
+
+// ---------------------------------------------------------------------------
+// 8. Truncamento com Reticências (.ellipsis / .tab-text)
+// EN: Text Truncation with Ellipsis (.ellipsis / .tab-text)
+// ---------------------------------------------------------------------------
+
+.ellipsis,
+.tab-truncate {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ---------------------------------------------------------------------------
+// 9. Colapso Responsivo para Mobile (.vtabs-responsive)
+// EN: Responsive Mobile Collapse (.vtabs-responsive)
+// ---------------------------------------------------------------------------
+
+@media (max-width: 767.98px) {
+  .vtabs.vtabs-responsive,
+  .tabs-vertical.vtabs-responsive {
+    flex-direction: column !important;
+
+    .nav-tabs,
+    .nav-pills,
+    .nav-underline,
+    .nav {
+      flex-direction: row !important;
+      width: 100% !important;
+      overflow-x: auto;
+      flex-wrap: nowrap;
+      border-right: 0 !important;
+      border-left: 0 !important;
+      border-bottom: 1px solid var(--#{$prefix}-tabs-border-color) !important;
+      padding-bottom: 0;
+      -webkit-overflow-scrolling: touch;
+
+      // Oculta scrollbar mantendo toque suave
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      scrollbar-width: none;
+    }
+
+    .nav-tabs .nav-link {
+      margin-bottom: -1px;
+      margin-right: 0;
+      margin-left: 0;
+      border-radius: var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) 0 0 !important;
+      white-space: nowrap;
+
+      &.active,
+      &[aria-selected="true"] {
+        border-color: var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color) transparent !important;
+      }
+    }
+
+    .nav-underline .nav-link {
+      border-right: 0 !important;
+      border-left: 0 !important;
+      border-bottom: 2px solid transparent !important;
+      margin-bottom: -1px;
+
+      &.active,
+      &[aria-selected="true"] {
+        border-bottom-color: var(--#{$prefix}-primary) !important;
+        background-color: transparent !important;
+      }
+    }
+
+    .tab-content {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+      padding-top: 1.25rem !important;
+    }
+
+    &.tab-content-bordered .tab-content {
+      border: 1px solid var(--#{$prefix}-tabs-border-color) !important;
+      border-top: 0 !important;
+      border-radius: 0 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) !important;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 10. Painéis de Conteúdo (.tab-content, .tab-pane)
+// EN: Tab Panes and Transitions (.tab-content, .tab-pane)
+// ---------------------------------------------------------------------------
+
+.tab-content {
+  position: relative;
+
+  > .tab-pane {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
+  // Transição Fade suave
+  > .fade {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    opacity: 0;
+    transform: translateY(4px);
+
+    &.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 11. Cores Oficiais do Dexter UI (.vtabs-{cor}, .nav-tabs-{cor}, .nav-pills-{cor})
+// EN: Official Dexter UI 28 Colors (.vtabs-{cor}, .nav-tabs-{cor}, .nav-pills-{cor})
+// ---------------------------------------------------------------------------
+
+@each $color-name, $color-value in $theme-colors {
+  .vtabs-#{$color-name},
+  .nav-tabs-#{$color-name},
+  .nav-pills-#{$color-name},
+  .nav-underline-#{$color-name} {
+    --#{$prefix}-primary: var(--#{$prefix}-#{$color-name});
+    --#{$prefix}-tabs-active-color: var(--#{$prefix}-#{$color-name});
+    --#{$prefix}-tabs-link-hover-color: var(--#{$prefix}-#{$color-name});
+
+    .nav-link.active,
+    .nav-link[aria-selected="true"] {
+      color: var(--#{$prefix}-#{$color-name}) !important;
+    }
+
+    &.nav-pills .nav-link.active,
+    &.nav-pills .nav-link[aria-selected="true"],
+    .nav-pills .nav-link.active,
+    .nav-pills .nav-link[aria-selected="true"] {
+      color: #ffffff !important;
+      background-color: var(--#{$prefix}-#{$color-name}) !important;
+      box-shadow: 0 2px 6px color-mix(in srgb, var(--#{$prefix}-#{$color-name}) 35%, transparent);
+    }
+
+    &.nav-underline .nav-link.active,
+    .nav-underline .nav-link.active {
+      border-bottom-color: var(--#{$prefix}-#{$color-name}) !important;
+      border-right-color: var(--#{$prefix}-#{$color-name}) !important;
+      border-left-color: var(--#{$prefix}-#{$color-name}) !important;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 12. Modo Escuro (Dark Mode: [data-dx-theme="dark"])
+// EN: Dark Mode Theme ([data-dx-theme="dark"])
+// ---------------------------------------------------------------------------
+
+[data-dx-theme="dark"] {
+  --#{$prefix}-tabs-border-color: var(--#{$prefix}-midnight-700, #273b64);
+  --#{$prefix}-tabs-link-color: var(--#{$prefix}-midnight-300, #cbd5e1);
+  --#{$prefix}-tabs-active-bg: var(--#{$prefix}-midnight-900, #151f33);
+  --#{$prefix}-tabs-active-border-color: var(--#{$prefix}-midnight-700, #273b64);
+
+  .nav-tabs .nav-link {
+    &:hover {
+      border-color: var(--#{$prefix}-midnight-700, #273b64) var(--#{$prefix}-midnight-700, #273b64) transparent;
+      color: #ffffff;
+    }
+
+    &.active,
+    &[aria-selected="true"] {
+      background-color: var(--#{$prefix}-tabs-active-bg);
+      border-color: var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-bg);
+      color: #ffffff;
+    }
+  }
+
+  .vtabs,
+  .tabs-vertical {
+    &,
+    &.vtabs-left {
+      .nav-tabs .nav-link {
+        &:hover {
+          border-color: var(--#{$prefix}-midnight-700, #273b64) transparent var(--#{$prefix}-midnight-700, #273b64) var(--#{$prefix}-midnight-700, #273b64);
+        }
+
+        &.active,
+        &[aria-selected="true"] {
+          background-color: var(--#{$prefix}-tabs-active-bg);
+          border-color: var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-bg) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color);
+          color: #ffffff;
+        }
+      }
+    }
+
+    &.vtabs-right {
+      .nav-tabs .nav-link {
+        &:hover {
+          border-color: var(--#{$prefix}-midnight-700, #273b64) var(--#{$prefix}-midnight-700, #273b64) var(--#{$prefix}-midnight-700, #273b64) transparent;
+        }
+
+        &.active,
+        &[aria-selected="true"] {
+          background-color: var(--#{$prefix}-tabs-active-bg);
+          border-color: var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-bg);
+          color: #ffffff;
+        }
+      }
+    }
+
+    &.tab-content-bordered .tab-content {
+      background-color: var(--#{$prefix}-midnight-900, #151f33);
+      border-color: var(--#{$prefix}-midnight-700, #273b64);
+    }
+  }
+
+  .tab-content-bordered:not(.vtabs):not(.tabs-vertical) > .tab-content {
+    background-color: var(--#{$prefix}-midnight-900, #151f33);
+    border-color: var(--#{$prefix}-midnight-700, #273b64);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 11. Tabs-X Estendido (kartik-v/bootstrap-tabs-x: orientações, sideways, alturas, loading)
+// EN: Extended Tabs-X Suite (above/below/left/right, sideways, heights, AJAX loading)
+// ---------------------------------------------------------------------------
+
+.tabs-x {
+  display: flex;
+  flex-direction: column;
+
+  > .nav-tabs,
+  > .nav-pills {
+    gap: 0.25rem;
+  }
+
+  > .tab-content {
+    min-width: 0;
+  }
+
+  // Alinhamento das abas
+  &.tab-align-left > .nav-tabs,
+  &.tab-align-left > .nav-pills {
+    justify-content: flex-start;
+  }
+
+  &.tab-align-center > .nav-tabs,
+  &.tab-align-center > .nav-pills {
+    justify-content: center;
+  }
+
+  &.tab-align-right > .nav-tabs,
+  &.tab-align-right > .nav-pills {
+    justify-content: flex-end;
+  }
+
+  // Acima (.tabs-above)
+  &.tabs-above {
+    > .nav-tabs {
+      order: 1;
+      border-bottom: 1px solid var(--#{$prefix}-tabs-border-color);
+    }
+
+    > .tab-content {
+      order: 2;
+    }
+
+    &.tab-bordered > .tab-content {
+      border: 1px solid var(--#{$prefix}-tabs-border-color);
+      border-top: 0;
+      border-radius: 0 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius);
+      background-color: var(--#{$prefix}-tabs-active-bg);
+      padding: 1rem;
+    }
+  }
+
+  // Abaixo (.tabs-below)
+  &.tabs-below {
+    > .tab-content {
+      order: 1;
+    }
+
+    > .nav-tabs,
+    > .nav-pills {
+      order: 2;
+      border-bottom: 0;
+      border-top: 1px solid var(--#{$prefix}-tabs-border-color);
+      padding-top: 0.25rem;
+    }
+
+    > .nav-tabs .nav-link {
+      border-radius: 0 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius);
+      margin-top: -1px;
+
+      &.active,
+      &[aria-selected="true"] {
+        background-color: var(--#{$prefix}-tabs-active-bg);
+        color: var(--#{$prefix}-tabs-active-color);
+        border-color: var(--#{$prefix}-tabs-active-bg) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color);
+      }
+    }
+
+    &.tab-bordered > .tab-content {
+      border: 1px solid var(--#{$prefix}-tabs-border-color);
+      border-bottom: 0;
+      border-radius: var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) 0 0;
+      background-color: var(--#{$prefix}-tabs-active-bg);
+      padding: 1rem;
+    }
+  }
+
+  // Esquerda (.tabs-left) e Direita (.tabs-right)
+  &.tabs-left,
+  &.tabs-right {
+    flex-direction: row;
+    align-items: stretch;
+
+    > .nav-tabs,
+    > .nav-pills {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      flex-shrink: 0;
+      min-width: 150px;
+      border-bottom: 0;
+    }
+
+    > .tab-content {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+  }
+
+  &.tabs-left {
+    > .nav-tabs,
+    > .nav-pills {
+      order: 1;
+      border-right: 1px solid var(--#{$prefix}-tabs-border-color);
+      padding-right: 0;
+    }
+
+    > .nav-tabs .nav-link {
+      border-radius: var(--#{$prefix}-tabs-border-radius) 0 0 var(--#{$prefix}-tabs-border-radius);
+      margin-right: -1px;
+
+      &.active,
+      &[aria-selected="true"] {
+        background-color: var(--#{$prefix}-tabs-active-bg);
+        color: var(--#{$prefix}-tabs-active-color);
+        border-color: var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-bg) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color);
+      }
+    }
+
+    > .tab-content {
+      order: 2;
+    }
+
+    &.tab-bordered > .tab-content {
+      border: 1px solid var(--#{$prefix}-tabs-border-color);
+      border-left: 0;
+      border-radius: 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) 0;
+      background-color: var(--#{$prefix}-tabs-active-bg);
+      padding: 1rem;
+    }
+  }
+
+  &.tabs-right {
+    > .nav-tabs,
+    > .nav-pills {
+      order: 2;
+      border-left: 1px solid var(--#{$prefix}-tabs-border-color);
+      padding-left: 0;
+    }
+
+    > .nav-tabs .nav-link {
+      border-radius: 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) 0;
+      margin-left: -1px;
+
+      &.active,
+      &[aria-selected="true"] {
+        background-color: var(--#{$prefix}-tabs-active-bg);
+        color: var(--#{$prefix}-tabs-active-color);
+        border-color: var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-border-color) var(--#{$prefix}-tabs-active-bg);
+      }
+    }
+
+    > .tab-content {
+      order: 1;
+    }
+
+    &.tab-bordered > .tab-content {
+      border: 1px solid var(--#{$prefix}-tabs-border-color);
+      border-right: 0;
+      border-radius: var(--#{$prefix}-tabs-border-radius) 0 0 var(--#{$prefix}-tabs-border-radius);
+      background-color: var(--#{$prefix}-tabs-active-bg);
+      padding: 1rem;
+    }
+  }
+
+  // Modo Sideways Vertical (.tab-sideways usando CSS writing-mode)
+  &.tab-sideways.tabs-left > .nav-tabs,
+  &.tab-sideways.tabs-right > .nav-tabs {
+    min-width: auto;
+    width: auto;
+  }
+
+  &.tab-sideways.tabs-left > .nav-tabs .nav-link {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 0.85rem 0.45rem;
+    white-space: nowrap;
+    border-radius: 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) 0;
+  }
+
+  &.tab-sideways.tabs-right > .nav-tabs .nav-link {
+    writing-mode: vertical-rl;
+    padding: 0.85rem 0.45rem;
+    white-space: nowrap;
+  }
+
+  // Indicador de Carregamento Remoto Pure CSS (.kv-tab-loading)
+  .nav-link.kv-tab-loading {
+    opacity: 0.72;
+    cursor: wait;
+
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 0.75rem;
+      height: 0.75rem;
+      margin-inline-start: 0.45rem;
+      border-radius: 999px;
+      border: 2px solid currentColor;
+      border-top-color: transparent;
+      animation: dx-tabsx-spin 0.65s linear infinite;
+    }
+  }
+
+  @media (max-width: 767.98px) {
+    &.tabs-left,
+    &.tabs-right {
+      flex-direction: column;
+
+      > .nav-tabs,
+      > .nav-pills {
+        order: 1;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        min-width: 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--#{$prefix}-tabs-border-color);
+      }
+
+      > .nav-tabs .nav-link {
+        margin-left: 0;
+        margin-right: 0;
+        white-space: nowrap;
+        border-radius: var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius) 0 0;
+      }
+
+      > .tab-content {
+        order: 2;
+      }
+
+      &.tab-bordered > .tab-content {
+        border: 1px solid var(--#{$prefix}-tabs-border-color);
+        border-top: 0;
+        border-radius: 0 0 var(--#{$prefix}-tabs-border-radius) var(--#{$prefix}-tabs-border-radius);
+      }
+    }
+
+    &.tab-sideways.tabs-left > .nav-tabs .nav-link,
+    &.tab-sideways.tabs-right > .nav-tabs .nav-link {
+      writing-mode: horizontal-tb;
+      transform: none;
+      padding: 0.5rem 0.9rem;
+    }
+  }
+}
+
+// Alturas fixas com rolagem (.tab-height-xs..lg)
+.tab-height-xs > .tab-content { height: 135px; overflow: auto; }
+.tab-height-sm > .tab-content { height: 195px; overflow: auto; }
+.tab-height-md > .tab-content { height: 280px; overflow: auto; }
+.tab-height-lg > .tab-content { height: 400px; overflow: auto; }
+
+@keyframes dx-tabsx-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// Cores Oficiais (.tabs-x-{cor})
+@each $name, $hex in $all-colors {
+  .tabs-x-#{$name} {
+    --#{$prefix}-tabs-active-color: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-tabs-link-hover-color: var(--#{$prefix}-#{$name}, #{$hex});
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs-x .nav-link.kv-tab-loading::after {
+    animation: none;
+  }
+}

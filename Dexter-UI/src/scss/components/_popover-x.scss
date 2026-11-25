@@ -1,0 +1,422 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_popover-x.scss
+ * @description [PT-BR] Popover Estendido com comportamento Modal (Popover-X) para
+ *              o Dexter UI, inspirado e compatível drop-in com kartik-v/bootstrap-popover-x.
+ *              Suporta cabeçalho, rodapé com botões de ação (.popover-footer), carregamento
+ *              remoto (.popover-loading), 12 posicionamentos direcionais e 7 automáticos
+ *              com setas CSS alinhadas, 4 tamanhos (.popover-sm a .popover-xl), variantes
+ *              suaves e sólidas nas 28 cores oficiais + semânticas e Dark Mode nativo.
+ *              [EN]    Extended Popover with modal behavior (Popover-X) for Dexter UI,
+ *              inspired and drop-in compatible with kartik-v/bootstrap-popover-x.
+ *              Supports header, footer actions, remote loading state, 12 directional and
+ *              7 auto placements with color-matched CSS arrows, 4 sizes, 28 official +
+ *              semantic color themes (soft and solid) and native Dark Mode support.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Popover Estendido Modal (Popover-X) | Extended Modal Popover (Popover-X) */
+
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$px-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$px-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning");
+$px-palette: map.merge($all-colors, $px-semantic-colors);
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Container Base (.popover-x)
+// EN: Variables & Base Container (.popover-x)
+// ---------------------------------------------------------------------------
+.popover-x {
+  --#{$prefix}-px-bg: #ffffff;
+  --#{$prefix}-px-header-bg: #f8fafc;
+  --#{$prefix}-px-header-color: #1e293b;
+  --#{$prefix}-px-footer-bg: #f8fafc;
+  --#{$prefix}-px-border: rgba(15, 23, 42, 0.14);
+  --#{$prefix}-px-color: #1e293b;
+  --#{$prefix}-px-muted: #64748b;
+  --#{$prefix}-px-radius: 0.65rem;
+  --#{$prefix}-px-shadow: 0 18px 40px -10px rgba(15, 23, 42, 0.24);
+  --#{$prefix}-px-zindex: 1068;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: var(--#{$prefix}-px-zindex);
+  display: none;
+  width: 310px;
+  max-width: calc(100vw - 1.5rem);
+  background-color: var(--#{$prefix}-px-bg);
+  color: var(--#{$prefix}-px-color);
+  border: 1px solid var(--#{$prefix}-px-border);
+  border-radius: var(--#{$prefix}-px-radius);
+  box-shadow: var(--#{$prefix}-px-shadow);
+  box-sizing: border-box;
+  margin: 0;
+
+  &.is-open,
+  &.show,
+  &.in {
+    display: block;
+    animation: dx-px-fade 0.16s ease-out forwards;
+  }
+
+  // Tamanhos
+  &.popover-sm { width: 260px; }
+  &.popover-md { width: 380px; }
+  &.popover-lg { width: 500px; }
+  &.popover-xl { width: 620px; }
+
+  // Cabeçalho e botão de fechar
+  .popover-header,
+  .popover-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.3;
+    background-color: var(--#{$prefix}-px-header-bg);
+    color: var(--#{$prefix}-px-header-color);
+    border-bottom: 1px solid var(--#{$prefix}-px-border);
+    border-radius: calc(var(--#{$prefix}-px-radius) - 1px) calc(var(--#{$prefix}-px-radius) - 1px) 0 0;
+  }
+
+  .close,
+  .popover-x-close {
+    order: 2;
+    margin-inline-start: auto;
+    border: 0;
+    background: transparent;
+    color: currentColor;
+    opacity: 0.65;
+    cursor: pointer;
+    font-size: 1.25rem;
+    line-height: 1;
+    padding: 0 0.2rem;
+    transition: opacity 0.15s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .popover-body,
+  .popover-content {
+    padding: 0.95rem 1rem;
+    font-size: 0.885rem;
+    line-height: 1.55;
+    color: var(--#{$prefix}-px-color);
+  }
+
+  .popover-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    background-color: var(--#{$prefix}-px-footer-bg);
+    border-top: 1px solid var(--#{$prefix}-px-border);
+    border-radius: 0 0 calc(var(--#{$prefix}-px-radius) - 1px) calc(var(--#{$prefix}-px-radius) - 1px);
+  }
+
+  .popover-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+
+    &::after {
+      content: "";
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      border: 2.5px solid var(--#{$prefix}-px-border);
+      border-top-color: var(--#{$prefix}-primary, #{$primary});
+      animation: dx-px-spin 0.7s linear infinite;
+    }
+  }
+}
+
+[data-dx-theme="dark"] .popover-x,
+[data-bs-theme="dark"] .popover-x {
+  --#{$prefix}-px-bg: #161f30;
+  --#{$prefix}-px-header-bg: #1e293b;
+  --#{$prefix}-px-header-color: #f1f5f9;
+  --#{$prefix}-px-footer-bg: #1e293b;
+  --#{$prefix}-px-border: rgba(148, 163, 184, 0.22);
+  --#{$prefix}-px-color: #e2e8f0;
+  --#{$prefix}-px-muted: #94a3b8;
+  --#{$prefix}-px-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.65);
+}
+
+// ---------------------------------------------------------------------------
+// 2. Setas Direcionais (.arrow / .popover-arrow) e 12 Posições
+// EN: Directional Arrows & 12 Corner/Center Placements
+// ---------------------------------------------------------------------------
+.popover-x .arrow,
+.popover-x .popover-arrow {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  pointer-events: none;
+
+  &::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+  }
+}
+
+.popover-x.top {
+  .arrow,
+  .popover-arrow {
+    bottom: -10px;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 10px 10px 0;
+    border-top-color: var(--#{$prefix}-px-border);
+
+    &::after {
+      bottom: 1px;
+      margin-left: -10px;
+      border-width: 10px 10px 0;
+      border-top-color: var(--#{$prefix}-px-bg);
+    }
+  }
+
+  &.has-footer .arrow::after,
+  &.has-footer .popover-arrow::after {
+    border-top-color: var(--#{$prefix}-px-footer-bg);
+  }
+}
+
+.popover-x.bottom {
+  .arrow,
+  .popover-arrow {
+    top: -10px;
+    left: 50%;
+    margin-left: -10px;
+    border-width: 0 10px 10px;
+    border-bottom-color: var(--#{$prefix}-px-border);
+
+    &::after {
+      top: 1px;
+      margin-left: -10px;
+      border-width: 0 10px 10px;
+      border-bottom-color: var(--#{$prefix}-px-header-bg);
+    }
+  }
+}
+
+.popover-x.left {
+  .arrow,
+  .popover-arrow {
+    top: 50%;
+    right: -10px;
+    margin-top: -10px;
+    border-width: 10px 0 10px 10px;
+    border-left-color: var(--#{$prefix}-px-border);
+
+    &::after {
+      right: 1px;
+      bottom: -10px;
+      border-width: 10px 0 10px 10px;
+      border-left-color: var(--#{$prefix}-px-bg);
+    }
+  }
+}
+
+.popover-x.right {
+  .arrow,
+  .popover-arrow {
+    top: 50%;
+    left: -10px;
+    margin-top: -10px;
+    border-width: 10px 10px 10px 0;
+    border-right-color: var(--#{$prefix}-px-border);
+
+    &::after {
+      left: 1px;
+      bottom: -10px;
+      border-width: 10px 10px 10px 0;
+      border-right-color: var(--#{$prefix}-px-bg);
+    }
+  }
+}
+
+.popover-x.top-left .arrow,
+.popover-x.bottom-left .arrow,
+.popover-x.top-left .popover-arrow,
+.popover-x.bottom-left .popover-arrow {
+  left: 1.15rem;
+  margin-left: 0;
+}
+
+.popover-x.top-right .arrow,
+.popover-x.bottom-right .arrow,
+.popover-x.top-right .popover-arrow,
+.popover-x.bottom-right .popover-arrow {
+  left: auto;
+  right: 1.15rem;
+  margin-left: 0;
+}
+
+.popover-x.left-top .arrow,
+.popover-x.left-top .popover-arrow {
+  top: 1.15rem;
+  margin-top: 0;
+
+  &::after {
+    border-left-color: var(--#{$prefix}-px-header-bg);
+  }
+}
+
+.popover-x.right-top .arrow,
+.popover-x.right-top .popover-arrow {
+  top: 1.15rem;
+  margin-top: 0;
+
+  &::after {
+    border-right-color: var(--#{$prefix}-px-header-bg);
+  }
+}
+
+.popover-x.left-bottom,
+.popover-x.right-bottom {
+  .arrow,
+  .popover-arrow {
+    top: auto;
+    bottom: 1.15rem;
+    margin-top: 0;
+  }
+
+  &.has-footer.left-bottom .arrow::after,
+  &.has-footer.left-bottom .popover-arrow::after {
+    border-left-color: var(--#{$prefix}-px-footer-bg);
+  }
+
+  &.has-footer.right-bottom .arrow::after,
+  &.has-footer.right-bottom .popover-arrow::after {
+    border-right-color: var(--#{$prefix}-px-footer-bg);
+  }
+}
+
+@keyframes dx-px-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dx-px-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Temas Oficiais (Default + 28 Cores + Semânticas)
+// EN: Official Color Themes (Default + 28 Colors + Semantic Variants)
+// ---------------------------------------------------------------------------
+.popover-default {
+  --#{$prefix}-px-header-bg: #f1f5f9;
+  --#{$prefix}-px-header-color: #1e293b;
+}
+
+[data-dx-theme="dark"] .popover-default,
+[data-bs-theme="dark"] .popover-default {
+  --#{$prefix}-px-header-bg: #1e293b;
+  --#{$prefix}-px-header-color: #f1f5f9;
+}
+
+@each $name, $hex in $px-palette {
+  $is-light: list.index($px-light-names, $name) != null;
+  $solid-fg: #ffffff;
+  $soft-fg: $hex;
+
+  @if $is-light {
+    $solid-fg: #130f10;
+  }
+
+  @if $name == "warning" {
+    $soft-fg: #92400e;
+  }
+
+  // Suave (compatível Bootstrap Popover-X .popover-primary, .popover-success, etc.)
+  .popover-#{$name} {
+    --#{$prefix}-px-header-bg: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 14%, #ffffff);
+    --#{$prefix}-px-header-color: #{$soft-fg};
+    --#{$prefix}-px-border: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 32%, #cbd5e1);
+  }
+
+  [data-dx-theme="dark"] .popover-#{$name},
+  [data-bs-theme="dark"] .popover-#{$name} {
+    --#{$prefix}-px-header-bg: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 24%, #1e293b);
+    --#{$prefix}-px-header-color: color-mix(in srgb, #{$hex} 45%, #ffffff);
+    --#{$prefix}-px-border: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 40%, #334155);
+  }
+
+  // Sólido (.popover-solid-{cor})
+  .popover-solid-#{$name} {
+    --#{$prefix}-px-header-bg: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-px-header-color: #{$solid-fg};
+    --#{$prefix}-px-border: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 45%, #cbd5e1);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Acessibilidade (Movimento Reduzido)
+// EN: Reduced Motion Support
+// ---------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .popover-x.is-open,
+  .popover-x.show,
+  .popover-x.in,
+  .popover-x .close,
+  .popover-x .popover-loading::after {
+    animation: none;
+    transition: none;
+  }
+}

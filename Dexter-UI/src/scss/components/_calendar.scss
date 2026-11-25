@@ -1,0 +1,373 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_calendar.scss
+ * @description [PT-BR] Suíte de Calendário de Eventos para Dexter UI, inspirada e aprimorada
+ *                      a partir do jquery-bs-calendar (ThomasDev-de/jquery-bs-calendar).
+ *                      Funciona inline em cartões (.card), dropdowns, navbars e offcanvas,
+ *                      com cabeçalho de hoje clicável, grade mensal responsiva, contadores de
+ *                      compromissos, popover flutuante de resumo, lista de eventos integrável
+ *                      (interna ou externa), 28 cores oficiais e Modo Escuro nativo.
+ *              [EN]    Event Calendar suite for Dexter UI, inspired and enhanced from
+ *                      jquery-bs-calendar (ThomasDev-de/jquery-bs-calendar). Works inline inside
+ *                      cards, dropdowns, navbars and offcanvas, with clickable today header,
+ *                      responsive month grid, appointment counters, hover summary popover,
+ *                      embedded or external event list, 28 official colors and Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Calendário de Eventos | Event Calendar */
+
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$cal-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+$cal-color-palette: map.merge($all-colors, $cal-semantic-colors);
+$cal-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning");
+
+:root {
+  --#{$prefix}-cal-bg: #ffffff;
+  --#{$prefix}-cal-color: var(--#{$prefix}-body-color, #1e293b);
+  --#{$prefix}-cal-border: var(--#{$prefix}-border-color, #e2e8f0);
+  --#{$prefix}-cal-radius: var(--#{$prefix}-radius-lg, 0.5rem);
+  --#{$prefix}-cal-header-bg: rgba(59, 89, 152, 0.06);
+  --#{$prefix}-cal-accent: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-cal-accent-fg: #ffffff;
+  --#{$prefix}-cal-hover-bg: rgba(59, 89, 152, 0.1);
+  --#{$prefix}-cal-muted: var(--#{$prefix}-text-muted, #64748b);
+  --#{$prefix}-cal-counter-bg: var(--#{$prefix}-red, #cf000f);
+  --#{$prefix}-cal-counter-fg: #ffffff;
+  --#{$prefix}-cal-day-size: 2.35rem;
+}
+
+.dx-calendar,
+.bs-calendar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: var(--#{$prefix}-cal-width, 310px);
+  max-width: 100%;
+  background-color: var(--#{$prefix}-cal-bg);
+  color: var(--#{$prefix}-cal-color);
+  border: 1px solid var(--#{$prefix}-cal-border);
+  border-radius: var(--#{$prefix}-cal-radius);
+  padding: 0.875rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  font-size: 0.875rem;
+
+  &.calendar-fluid {
+    width: 100%;
+  }
+
+  &.calendar-sm {
+    --#{$prefix}-cal-day-size: 2rem;
+    padding: 0.65rem;
+    font-size: 0.8125rem;
+  }
+
+  &.calendar-lg {
+    --#{$prefix}-cal-day-size: 2.85rem;
+    padding: 1.125rem;
+    font-size: 0.9375rem;
+  }
+}
+
+.dx-cal-today-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.45rem 0.65rem;
+  margin-bottom: 0.65rem;
+  background-color: var(--#{$prefix}-cal-header-bg);
+  border-radius: var(--#{$prefix}-radius-md, 0.375rem);
+  cursor: pointer;
+  border: none;
+  width: 100%;
+  text-align: left;
+  color: var(--#{$prefix}-cal-accent);
+  font-weight: 600;
+  font-size: 0.8125rem;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--#{$prefix}-cal-hover-bg);
+  }
+}
+
+.dx-cal-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+
+.dx-cal-month-btn {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-transform: capitalize;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--#{$prefix}-cal-hover-bg);
+  }
+}
+
+.dx-cal-nav-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dx-cal-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border: 1px solid var(--#{$prefix}-cal-border);
+  background: transparent;
+  color: inherit;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--#{$prefix}-cal-hover-bg);
+    border-color: var(--#{$prefix}-cal-accent);
+  }
+
+  svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+}
+
+.dx-cal-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-bottom: 0;
+
+  th {
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--#{$prefix}-cal-muted);
+    padding-bottom: 0.45rem;
+    border: none;
+
+    &.is-today-col {
+      color: var(--#{$prefix}-cal-accent);
+      font-weight: 700;
+    }
+  }
+
+  td {
+    text-align: center;
+    padding: 0.15rem;
+    border: none;
+    vertical-align: middle;
+  }
+}
+
+.dx-cal-day {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--#{$prefix}-cal-day-size);
+  height: var(--#{$prefix}-cal-day-size);
+  max-width: 100%;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--#{$prefix}-cal-color);
+  font-size: 0.84375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    background-color: var(--#{$prefix}-cal-hover-bg);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  }
+
+  &.is-outside {
+    color: var(--#{$prefix}-cal-muted);
+    opacity: 0.5;
+    font-weight: 400;
+  }
+
+  &.is-in-month {
+    font-weight: 600;
+  }
+
+  &.is-active:not(.is-today) {
+    border-color: var(--#{$prefix}-cal-accent);
+    background-color: var(--#{$prefix}-cal-hover-bg);
+    color: var(--#{$prefix}-cal-accent);
+    font-weight: 700;
+  }
+
+  &.is-today {
+    background-color: var(--#{$prefix}-cal-accent);
+    color: var(--#{$prefix}-cal-accent-fg);
+    font-weight: 700;
+
+    &.is-active {
+      box-shadow: 0 0 0 2px var(--#{$prefix}-cal-bg), 0 0 0 4px var(--#{$prefix}-cal-accent);
+    }
+  }
+}
+
+.dx-cal-counter {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 1rem;
+  height: 1rem;
+  padding: 0 0.25rem;
+  border-radius: 50rem;
+  background-color: var(--#{$prefix}-cal-counter-bg);
+  color: var(--#{$prefix}-cal-counter-fg);
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dx-cal-events {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--#{$prefix}-cal-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dx-cal-event-item {
+  padding: 0.55rem 0.7rem;
+  border-radius: var(--#{$prefix}-radius-md, 0.375rem);
+  border: 1px solid var(--#{$prefix}-cal-border);
+  border-inline-start: 3px solid var(--#{$prefix}-cal-accent);
+  background-color: rgba(0, 0, 0, 0.015);
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: var(--#{$prefix}-cal-header-bg);
+  }
+}
+
+.dx-cal-event-time {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--#{$prefix}-cal-accent);
+  margin-bottom: 0.125rem;
+}
+
+.dx-cal-event-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 1.3;
+}
+
+.dx-cal-event-desc {
+  font-size: 0.8rem;
+  color: var(--#{$prefix}-cal-muted);
+  margin-top: 0.2rem;
+}
+
+.dx-cal-empty {
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--#{$prefix}-cal-muted);
+}
+
+.dx-cal-popover {
+  position: fixed;
+  z-index: 1085;
+  max-width: 260px;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--#{$prefix}-cal-bg);
+  color: var(--#{$prefix}-cal-color);
+  border: 1px solid var(--#{$prefix}-cal-border);
+  border-radius: var(--#{$prefix}-radius-md, 0.375rem);
+  box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.2);
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+
+@each $name, $hex in $cal-color-palette {
+  $is-light: list.index($cal-light-names, $name) != null;
+  $fg: #ffffff;
+  @if $is-light {
+    $fg: #130f10;
+  }
+
+  .calendar-#{$name} {
+    --#{$prefix}-cal-accent: #{$hex};
+    --#{$prefix}-cal-accent-fg: #{$fg};
+    --#{$prefix}-cal-header-bg: rgba(#{color.mix($hex, #ffffff, 100%)}, 0.09);
+    --#{$prefix}-cal-hover-bg: rgba(#{color.mix($hex, #ffffff, 100%)}, 0.14);
+  }
+}
+
+[data-#{$prefix}-theme="dark"] {
+  --#{$prefix}-cal-bg: #161b22;
+  --#{$prefix}-cal-color: #e6edf3;
+  --#{$prefix}-cal-border: #30363d;
+  --#{$prefix}-cal-muted: #94a3b8;
+  --#{$prefix}-cal-header-bg: rgba(88, 166, 255, 0.1);
+  --#{$prefix}-cal-hover-bg: rgba(88, 166, 255, 0.16);
+
+  .dx-cal-event-item {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dx-cal-day,
+  .dx-cal-nav-btn,
+  .dx-cal-today-header {
+    transition: none;
+  }
+}

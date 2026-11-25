@@ -1,0 +1,252 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_media-zoom.scss
+ * @description [PT-BR] Estilos para os utilitários Autosize (expansão automática
+ *              de textarea), DexterZoom (lupa e pan em 4 modos: mouseover, grab,
+ *              click e toggle) e DexterWheelzoom (zoom por scroll do mouse e
+ *              arrasto sobre imagem), inspirados em jacklmoore.com.
+ *              [EN]    Styles for Textarea Autosize, DexterZoom (hover/grab/click/
+ *              toggle magnifier) and DexterWheelzoom (mouse-wheel zoom & pan),
+ *              inspired by Jack Moore plugins.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Zoom, Wheelzoom & Autosize | Image Zoom, Wheelzoom & Textarea Autosize */
+
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$mz-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$mz-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning", "yellow", "gold");
+$mz-palette: map.merge($all-colors, $mz-semantic-colors);
+
+// ---------------------------------------------------------------------------
+// 1. Textarea Autosize (.dx-autosize)
+// EN: Automatic Textarea Expansion (.dx-autosize)
+// ---------------------------------------------------------------------------
+.dx-autosize {
+  resize: none;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  min-height: 2.75rem;
+}
+
+.dx-autosize-smooth {
+  transition: height 0.14s ease;
+}
+
+.dx-autosize-max {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Image Magnifier / Zoom (.dx-zoom)
+// EN: Image Magnifier / Pan Container (.dx-zoom)
+// ---------------------------------------------------------------------------
+.dx-zoom {
+  --#{$prefix}-mz-accent: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-mz-accent-fg: #ffffff;
+
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  max-width: 100%;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  user-select: none;
+  vertical-align: middle;
+
+  > img:not(.zoomImg) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .zoomImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    max-width: none !important;
+    max-height: none !important;
+    border: 0;
+    pointer-events: none;
+    transition: opacity 0.14s ease;
+  }
+
+  &.is-zooming .zoomImg {
+    opacity: 1;
+  }
+
+  &.dx-zoom-mouseover {
+    cursor: zoom-in;
+  }
+
+  &.dx-zoom-grab {
+    cursor: grab;
+
+    &.is-zooming {
+      cursor: grabbing;
+    }
+  }
+
+  &.dx-zoom-click,
+  &.dx-zoom-toggle {
+    cursor: zoom-in;
+
+    &.is-zooming {
+      cursor: zoom-out;
+    }
+  }
+
+  .dx-zoom-badge {
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    z-index: 2;
+    padding: 0.22rem 0.6rem;
+    border-radius: 999px;
+    background-color: rgba(15, 23, 42, 0.72);
+    color: #f8fafc;
+    font-size: 0.74rem;
+    font-weight: 600;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
+  }
+
+  &.is-zooming .dx-zoom-badge {
+    opacity: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Wheelzoom Stage & Controls (.dx-wheelzoom-stage, img.dx-wheelzoom)
+// EN: Scroll-Wheel Zoom & Pan Stage
+// ---------------------------------------------------------------------------
+.dx-wheelzoom-stage {
+  --#{$prefix}-mz-accent: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-mz-accent-fg: #ffffff;
+
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+}
+
+img.dx-wheelzoom {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+
+  &.is-dragging {
+    cursor: grabbing;
+  }
+}
+
+.dx-wheelzoom-controls {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background-color: rgba(15, 23, 42, 0.76);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  button {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 0.5rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background-color: var(--#{$prefix}-mz-accent);
+      color: var(--#{$prefix}-mz-accent-fg);
+    }
+  }
+
+  .dx-wheelzoom-level {
+    padding: 0 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    white-space: nowrap;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Paleta Oficial (28 Cores + Dark Mode)
+// EN: Official 28-Color Palette & Dark Mode
+// ---------------------------------------------------------------------------
+@each $name, $hex in $mz-palette {
+  $is-light: list.index($mz-light-names, $name) != null;
+  $fg: #ffffff;
+
+  @if $is-light {
+    $fg: #130f10;
+  }
+
+  .dx-zoom-#{$name},
+  .dx-wheelzoom-#{$name} {
+    --#{$prefix}-mz-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-mz-accent-fg: #{$fg};
+  }
+}
+
+[data-dx-theme="dark"] .dx-zoom,
+[data-bs-theme="dark"] .dx-zoom,
+[data-dx-theme="dark"] .dx-wheelzoom-stage,
+[data-bs-theme="dark"] .dx-wheelzoom-stage {
+  border-color: rgba(148, 163, 184, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dx-autosize-smooth,
+  .dx-zoom .zoomImg,
+  .dx-zoom .dx-zoom-badge,
+  .dx-wheelzoom-controls button {
+    transition: none;
+  }
+}

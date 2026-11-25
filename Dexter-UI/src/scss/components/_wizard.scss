@@ -1,0 +1,548 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _wizard.scss
+ * @description [PT-BR] Suíte completa de Assistente de Passos e Formulários Multi-Step (Step Wizard)
+ *              inspirada e aprimorada a partir do jqueryBootstrapWizard e step-wizard-ui-bootstrap,
+ *              completamente nativa, responsiva e com zero dependências externas.
+ *              Inclui círculos numerados com checkmarks, linha conectora de progresso dinâmico,
+ *              layouts horizontal e vertical (.wizard-vertical), validação de campos por etapa,
+ *              ações de navegação (Anterior, Próximo, Concluir), 28 cores oficiais e Dark Mode.
+ *              [EN]    Complete Step Wizard and Multi-Step Forms Suite inspired and enhanced from
+ *              jqueryBootstrapWizard and step-wizard-ui-bootstrap, completely native, responsive, zero dependencies.
+ *              Includes numbered circles with checkmarks, dynamic connecting progress bar,
+ *              horizontal and vertical (.wizard-vertical) layouts, step validation,
+ *              navigation actions (Previous, Next, Finish), 28 official colors and Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Assistente de Passos | Step Wizard */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis & Tokens CSS (.wizard)
+// EN: Variables & CSS Tokens (.wizard)
+// ---------------------------------------------------------------------------
+
+:root {
+  --#{$prefix}-wizard-track-bg: var(--#{$prefix}-midnight-200, #e2e8f0);
+  --#{$prefix}-wizard-circle-size: 2.5rem;
+  --#{$prefix}-wizard-circle-bg: var(--#{$prefix}-card-bg, #ffffff);
+  --#{$prefix}-wizard-circle-border: var(--#{$prefix}-midnight-300, #cbd5e1);
+  --#{$prefix}-wizard-circle-color: var(--#{$prefix}-text-muted, #64748b);
+  --#{$prefix}-wizard-active-color: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-wizard-active-bg: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-wizard-completed-color: var(--#{$prefix}-green, #10b981);
+  --#{$prefix}-wizard-transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// ---------------------------------------------------------------------------
+// 2. Contêiner Base (.wizard)
+// EN: Base Container (.wizard)
+// ---------------------------------------------------------------------------
+
+.wizard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+// ---------------------------------------------------------------------------
+// 3. Cabeçalho de Passos (.wizard-header, .wizard-steps)
+// EN: Steps Header (.wizard-header, .wizard-steps)
+// ---------------------------------------------------------------------------
+
+.wizard-header {
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 0.5rem 0;
+}
+
+.wizard-progress {
+  position: absolute;
+  top: calc(var(--#{$prefix}-wizard-circle-size) / 2);
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--#{$prefix}-wizard-track-bg);
+  border-radius: var(--#{$prefix}-radius-pill, 50rem);
+  transform: translateY(-50%);
+  z-index: 1;
+
+  .wizard-progress-bar {
+    height: 100%;
+    background-color: var(--#{$prefix}-wizard-active-color);
+    border-radius: inherit;
+    transition: width 0.35s ease-in-out;
+    width: 0%;
+  }
+}
+
+.wizard-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.wizard-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+
+  .step-trigger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    font-family: inherit;
+    width: 100%;
+
+    &:focus-visible {
+      outline: none;
+
+      .step-circle {
+        box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--#{$prefix}-wizard-active-color) 35%, transparent);
+      }
+    }
+  }
+
+  // Círculo com o número do passo
+  .step-circle {
+    width: var(--#{$prefix}-wizard-circle-size);
+    height: var(--#{$prefix}-wizard-circle-size);
+    border-radius: 50%;
+    background-color: var(--#{$prefix}-wizard-circle-bg);
+    border: 2px solid var(--#{$prefix}-wizard-circle-border);
+    color: var(--#{$prefix}-wizard-circle-color);
+    font-size: 0.9375rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--#{$prefix}-wizard-transition);
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+
+    .step-icon-check {
+      display: none;
+      width: 1rem;
+      height: 1rem;
+      fill: currentColor;
+    }
+  }
+
+  // Rótulos do passo
+  .step-content {
+    margin-top: 0.625rem;
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .step-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--#{$prefix}-wizard-circle-color);
+    transition: color 0.2s ease;
+    display: block;
+    line-height: 1.3;
+  }
+
+  .step-subtitle {
+    font-size: 0.75rem;
+    color: var(--#{$prefix}-midnight-400, #94a3b8);
+    display: block;
+    margin-top: 0.125rem;
+  }
+
+  // -------------------------------------------------------------------------
+  // Estados do Passo (Active, Completed, Disabled)
+  // -------------------------------------------------------------------------
+
+  // Passo Ativo
+  &.active {
+    .step-circle {
+      background-color: var(--#{$prefix}-wizard-active-bg);
+      border-color: var(--#{$prefix}-wizard-active-color);
+      color: #ffffff;
+      box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--#{$prefix}-wizard-active-color) 25%, transparent), 0 4px 10px rgba(0, 0, 0, 0.12);
+      transform: scale(1.08);
+    }
+
+    .step-title {
+      color: var(--#{$prefix}-wizard-active-color);
+      font-weight: 700;
+    }
+  }
+
+  // Passo Concluído
+  &.completed {
+    .step-circle {
+      background-color: var(--#{$prefix}-wizard-completed-color);
+      border-color: var(--#{$prefix}-wizard-completed-color);
+      color: #ffffff;
+
+      .step-number {
+        display: none;
+      }
+
+      .step-icon-check {
+        display: inline-block;
+      }
+    }
+
+    .step-title {
+      color: var(--#{$prefix}-text-emphasis, #1e293b);
+    }
+  }
+
+  // Passo Desabilitado / Bloqueado
+  &.disabled,
+  &[disabled] {
+    opacity: 0.65;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Painéis de Conteúdo (.wizard-body, .wizard-pane)
+// EN: Content Panes (.wizard-body, .wizard-pane)
+// ---------------------------------------------------------------------------
+
+.wizard-body {
+  position: relative;
+  min-height: 120px;
+}
+
+.wizard-pane {
+  display: none;
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
+
+  &.active {
+    display: block;
+    animation-name: wizardFadeIn;
+  }
+}
+
+@keyframes wizardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Barra de Ações & Navegação (.wizard-footer)
+// EN: Navigation Footer (.wizard-footer)
+// ---------------------------------------------------------------------------
+
+.wizard-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--#{$prefix}-tabs-border-color, #cbd5e1);
+  gap: 0.75rem;
+
+  .wizard-actions-left {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .wizard-actions-right {
+    display: flex;
+    gap: 0.5rem;
+    margin-left: auto;
+  }
+
+  .wizard-btn-prev,
+  .wizard-btn-next,
+  .wizard-btn-finish {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Layout Vertical (.wizard-vertical)
+// EN: Vertical Wizard Layout (.wizard-vertical)
+// ---------------------------------------------------------------------------
+
+.wizard-vertical {
+  flex-direction: row;
+  align-items: stretch;
+  gap: 2rem;
+
+  .wizard-header {
+    width: 260px;
+    flex-shrink: 0;
+    margin-bottom: 0;
+    padding: 0;
+  }
+
+  .wizard-progress {
+    top: 0;
+    bottom: 0;
+    left: calc(var(--#{$prefix}-wizard-circle-size) / 2);
+    width: 4px;
+    height: auto;
+    right: auto;
+    transform: translateX(-50%);
+
+    .wizard-progress-bar {
+      width: 100%;
+      height: 0%;
+      transition: height 0.35s ease-in-out;
+    }
+  }
+
+  .wizard-steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    height: 100%;
+  }
+
+  .wizard-step {
+    flex-direction: row;
+    align-items: center;
+    text-align: start;
+    width: 100%;
+
+    .step-trigger {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .step-content {
+      margin-top: 0;
+      margin-left: 1rem;
+      padding: 0;
+    }
+  }
+
+  .wizard-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .wizard-body {
+    flex: 1 1 auto;
+  }
+}
+
+// Responsividade para o wizard vertical
+@media (max-width: 767.98px) {
+  .wizard-vertical {
+    flex-direction: column;
+
+    .wizard-header {
+      width: 100%;
+    }
+
+    .wizard-progress {
+      top: calc(var(--#{$prefix}-wizard-circle-size) / 2);
+      bottom: auto;
+      left: 0;
+      right: 0;
+      width: auto;
+      height: 4px;
+      transform: translateY(-50%);
+
+      .wizard-progress-bar {
+        width: 0%;
+        height: 100%;
+      }
+    }
+
+    .wizard-steps {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 0;
+      height: auto;
+    }
+
+    .wizard-step {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      .step-trigger {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .step-content {
+        margin-left: 0;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Variações Cromáticas Oficiais (.wizard-{cor})
+// EN: Official 28 Color Variations (.wizard-{cor})
+// ---------------------------------------------------------------------------
+
+@each $color-name, $color-value in $all-colors {
+  .wizard-#{$color-name} {
+    --#{$prefix}-wizard-active-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    --#{$prefix}-wizard-active-bg: var(--#{$prefix}-#{$color-name}, #{$color-value});
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 8. Compatibilidade BootstrapFormWizard (Pills / Tab Stepper & Steppanel)
+// EN: BootstrapFormWizard Compatibility (Pills / Tab Stepper & Steppanel)
+// ---------------------------------------------------------------------------
+
+.wizard-pills,
+.bfw-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.25rem;
+
+  .nav-link,
+  [data-bs-toggle="step"],
+  [data-dx-toggle="step"] {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--#{$prefix}-wizard-circle-color, #64748b);
+    background-color: var(--#{$prefix}-wizard-circle-bg, #ffffff);
+    border: 1px solid var(--#{$prefix}-wizard-circle-border, #cbd5e1);
+    border-radius: var(--#{$prefix}-radius-pill, 50rem);
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--#{$prefix}-wizard-transition);
+
+    &:hover {
+      border-color: var(--#{$prefix}-wizard-active-color);
+      color: var(--#{$prefix}-wizard-active-color);
+    }
+
+    &.active {
+      background-color: var(--#{$prefix}-wizard-active-bg);
+      border-color: var(--#{$prefix}-wizard-active-bg);
+      color: #ffffff;
+      font-weight: 600;
+      box-shadow: 0 4px 10px -2px rgba(59, 89, 152, 0.3);
+    }
+
+    &.completed:not(.active) {
+      border-color: var(--#{$prefix}-wizard-completed-color);
+      color: var(--#{$prefix}-wizard-completed-color);
+    }
+
+    &.is-invalid-step {
+      border-color: var(--#{$prefix}-red, #cf000f);
+      color: var(--#{$prefix}-red, #cf000f);
+    }
+  }
+}
+
+.tab-pane[role="steppanel"],
+.bfw-step-panel {
+  display: none;
+  animation: dx-bfw-fade 0.25s ease;
+
+  &.active,
+  &.show.active {
+    display: block;
+  }
+}
+
+@keyframes dx-bfw-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// ---------------------------------------------------------------------------
+// 9. Modo Escuro (Dark Mode: [data-dx-theme="dark"])
+// EN: Dark Mode Theme ([data-dx-theme="dark"])
+// ---------------------------------------------------------------------------
+
+[data-dx-theme="dark"] {
+  --#{$prefix}-wizard-track-bg: var(--#{$prefix}-midnight-700, #273b64);
+  --#{$prefix}-wizard-circle-bg: var(--#{$prefix}-midnight-900, #151f33);
+  --#{$prefix}-wizard-circle-border: var(--#{$prefix}-midnight-600, #334155);
+  --#{$prefix}-wizard-circle-color: var(--#{$prefix}-midnight-300, #94a3b8);
+
+  .wizard-footer {
+    border-top-color: var(--#{$prefix}-midnight-700, #273b64);
+  }
+
+  .wizard-step {
+    &.completed .step-title {
+      color: #f1f5f9;
+    }
+  }
+
+  .wizard-pills,
+  .bfw-nav {
+    .nav-link:not(.active),
+    [data-bs-toggle="step"]:not(.active),
+    [data-dx-toggle="step"]:not(.active) {
+      background-color: #161b22;
+      border-color: #30363d;
+      color: #94a3b8;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tab-pane[role="steppanel"],
+  .bfw-step-panel {
+    animation: none;
+  }
+}

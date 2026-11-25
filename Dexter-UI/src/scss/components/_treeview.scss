@@ -1,0 +1,320 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_treeview.scss
+ * @description [PT-BR] Suíte de Árvore Hierárquica (Tree View) para Dexter UI,
+ *                      inspirada e aprimorada a partir do nhmvienna/bs5treeview (chniter/bstreeview).
+ *                      Elimina dependências de jQuery, Bootstrap JS e FontAwesome com
+ *                      chevron vetorial nativo rotativo, suporte a checkboxes tri-state
+ *                      em cascata (:indeterminate), pesquisa com destaque (.is-match),
+ *                      linhas guia (.treeview-lines), contadores, 28 cores e Dark Mode.
+ *              [EN]    Hierarchical Tree View suite for Dexter UI, inspired and enhanced
+ *                      from nhmvienna/bs5treeview (chniter/bstreeview). Removes jQuery,
+ *                      Bootstrap JS and FontAwesome dependencies with native rotating SVG
+ *                      chevron, cascading tri-state checkboxes (:indeterminate), search
+ *                      highlighting (.is-match), guide lines (.treeview-lines), counts,
+ *                      all 28 theme colors and Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Árvore Hierárquica | Tree View */
+
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$tree-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+$tree-color-palette: map.merge($all-colors, $tree-semantic-colors);
+$tree-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning");
+
+:root {
+  --#{$prefix}-tree-bg: #ffffff;
+  --#{$prefix}-tree-color: var(--#{$prefix}-body-color, #1e293b);
+  --#{$prefix}-tree-border: var(--#{$prefix}-border-color, #e2e8f0);
+  --#{$prefix}-tree-radius: var(--#{$prefix}-radius-md, 0.375rem);
+  --#{$prefix}-tree-hover-bg: rgba(59, 89, 152, 0.06);
+  --#{$prefix}-tree-active-bg: rgba(59, 89, 152, 0.12);
+  --#{$prefix}-tree-active-color: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-tree-accent: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-tree-muted: var(--#{$prefix}-text-muted, #64748b);
+  --#{$prefix}-tree-line-color: rgba(148, 163, 184, 0.35);
+  --#{$prefix}-tree-padding-y: 0.5rem;
+  --#{$prefix}-tree-padding-x: 0.875rem;
+  --#{$prefix}-tree-font-size: 0.9rem;
+}
+
+.dx-treeview,
+.bstreeview {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: var(--#{$prefix}-tree-bg);
+  color: var(--#{$prefix}-tree-color);
+  border: 1px solid var(--#{$prefix}-tree-border);
+  border-radius: var(--#{$prefix}-tree-radius);
+  padding: 0;
+  overflow: hidden;
+  font-size: var(--#{$prefix}-tree-font-size);
+
+  &.treeview-flush {
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+  }
+
+  &.treeview-sm {
+    --#{$prefix}-tree-padding-y: 0.325rem;
+    --#{$prefix}-tree-padding-x: 0.65rem;
+    --#{$prefix}-tree-font-size: 0.825rem;
+  }
+
+  &.treeview-lg {
+    --#{$prefix}-tree-padding-y: 0.6875rem;
+    --#{$prefix}-tree-padding-x: 1.05rem;
+    --#{$prefix}-tree-font-size: 1rem;
+  }
+
+  .list-group {
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .dx-tree-group,
+  .list-group.collapse {
+    display: none;
+    position: relative;
+
+    &.show {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .dx-tree-item,
+  .list-group-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-top: 1px solid var(--#{$prefix}-tree-border);
+    border-radius: 0;
+    padding-block: var(--#{$prefix}-tree-padding-y);
+    padding-inline-end: var(--#{$prefix}-tree-padding-x);
+    background-color: transparent;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &:hover:not(.is-disabled) {
+      background-color: var(--#{$prefix}-tree-hover-bg);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: inset 0 0 0 2px var(--#{$prefix}-tree-accent);
+    }
+
+    &.is-selected,
+    &.active {
+      background-color: var(--#{$prefix}-tree-active-bg);
+      color: var(--#{$prefix}-tree-active-color);
+      font-weight: 600;
+      border-color: var(--#{$prefix}-tree-border);
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background-color: var(--#{$prefix}-tree-accent);
+      }
+    }
+
+    &.is-disabled {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: not-allowed;
+    }
+
+    &.is-match {
+      background-color: rgba(245, 158, 11, 0.14);
+
+      .dx-tree-label {
+        font-weight: 700;
+        color: var(--#{$prefix}-tree-accent);
+      }
+    }
+
+    &.is-hidden {
+      display: none !important;
+    }
+  }
+
+  > .dx-tree-item:first-child,
+  > .list-group-item:first-child {
+    border-top: none;
+  }
+
+  .state-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    color: var(--#{$prefix}-tree-muted);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.15s ease;
+
+    svg {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+  }
+
+  .dx-tree-spacer {
+    display: inline-block;
+    width: 1rem;
+    flex-shrink: 0;
+  }
+
+  .is-expanded > .state-icon.is-chevron {
+    transform: rotate(90deg);
+    color: var(--#{$prefix}-tree-accent);
+  }
+
+  .item-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--#{$prefix}-tree-accent);
+    opacity: 0.85;
+  }
+
+  .dx-tree-checkbox {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    flex-shrink: 0;
+    accent-color: var(--#{$prefix}-tree-accent);
+    cursor: pointer;
+  }
+
+  .dx-tree-label {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dx-tree-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border-radius: 50rem;
+    background-color: var(--#{$prefix}-tree-hover-bg);
+    color: var(--#{$prefix}-tree-accent);
+    flex-shrink: 0;
+  }
+
+  .dx-tree-empty {
+    padding: 1rem;
+    text-align: center;
+    color: var(--#{$prefix}-tree-muted);
+    font-size: 0.875rem;
+  }
+
+  &.treeview-lines {
+    .dx-tree-group {
+      box-shadow: inset 1.75rem 0 0 -1.75rem var(--#{$prefix}-tree-line-color);
+    }
+
+    .dx-tree-group .dx-tree-item::after {
+      content: "";
+      position: absolute;
+      left: 0.75rem;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background-color: var(--#{$prefix}-tree-line-color);
+      pointer-events: none;
+    }
+  }
+}
+
+@each $name, $hex in $tree-color-palette {
+  $is-light: list.index($tree-light-names, $name) != null;
+  $accent: #{$hex};
+  @if $is-light {
+    $accent: color.mix($hex, #030303, 45%);
+  }
+
+  .treeview-#{$name} {
+    --#{$prefix}-tree-accent: #{$accent};
+    --#{$prefix}-tree-active-color: #{$accent};
+    --#{$prefix}-tree-active-bg: #{rgba($hex, 0.12)};
+    --#{$prefix}-tree-hover-bg: #{rgba($hex, 0.07)};
+  }
+}
+
+[data-#{$prefix}-theme="dark"] {
+  --#{$prefix}-tree-bg: #161b22;
+  --#{$prefix}-tree-color: #e6edf3;
+  --#{$prefix}-tree-border: #30363d;
+  --#{$prefix}-tree-muted: #94a3b8;
+  --#{$prefix}-tree-hover-bg: rgba(255, 255, 255, 0.05);
+  --#{$prefix}-tree-active-bg: rgba(88, 166, 255, 0.15);
+  --#{$prefix}-tree-active-color: #60a5fa;
+  --#{$prefix}-tree-accent: #60a5fa;
+  --#{$prefix}-tree-line-color: rgba(148, 163, 184, 0.2);
+
+  .dx-treeview .dx-tree-item.is-match,
+  .bstreeview .list-group-item.is-match {
+    background-color: rgba(245, 158, 11, 0.18);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dx-treeview .dx-tree-item,
+  .dx-treeview .state-icon,
+  .bstreeview .list-group-item,
+  .bstreeview .state-icon {
+    transition: none;
+  }
+}

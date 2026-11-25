@@ -1,0 +1,496 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_cookie-consent.scss
+ * @description [PT-BR] Suíte completa de Consentimento de Cookies (LGPD / GDPR) para
+ *              o Dexter UI, inspirada e compatível drop-in com shaack/bootstrap-cookie-consent-settings.
+ *              Inclui três modos de layout (Modal Centralizado, Barra Inferior e Card Flutuante),
+ *              acordeão nativo de preferências granulares, switches/checkboxes acessíveis,
+ *              suporte às 28 cores oficiais da paleta, Dark Mode nativo e respeito a prefers-reduced-motion.
+ *              [EN]    Complete Cookie Consent Settings suite (LGPD / GDPR) for Dexter UI,
+ *              inspired and drop-in compatible with shaack/bootstrap-cookie-consent-settings.
+ *              Features three layout modes (Centered Modal, Bottom Bar, Floating Card),
+ *              native granular preferences accordion, accessible switches/checkboxes,
+ *              28 official palette variants, native Dark Mode and prefers-reduced-motion support.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Consentimento de Cookies (LGPD/GDPR) | Cookie Consent Settings */
+
+@use "sass:list";
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Tokens Escopados e Paleta Clara / Escura
+// EN: Scoped Tokens & Light / Dark Surface Tokens
+// ---------------------------------------------------------------------------
+$cc-light-names: ("light", "silver-light", "beige", "aquamarine", "lime");
+
+.dx-cookie-consent {
+  --#{$prefix}-cc-bg: #ffffff;
+  --#{$prefix}-cc-surface: #f8fafc;
+  --#{$prefix}-cc-border: rgba(15, 23, 42, 0.12);
+  --#{$prefix}-cc-color: #1e293b;
+  --#{$prefix}-cc-muted: #64748b;
+  --#{$prefix}-cc-accent: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-cc-accent-contrast: #ffffff;
+  --#{$prefix}-cc-radius: 0.85rem;
+  --#{$prefix}-cc-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.25);
+  --#{$prefix}-cc-zindex: 1085;
+
+  display: none;
+  color: var(--#{$prefix}-cc-color);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+[data-dx-theme="dark"] .dx-cookie-consent,
+[data-bs-theme="dark"] .dx-cookie-consent {
+  --#{$prefix}-cc-bg: #161f30;
+  --#{$prefix}-cc-surface: #1e293b;
+  --#{$prefix}-cc-border: rgba(148, 163, 184, 0.2);
+  --#{$prefix}-cc-color: #e2e8f0;
+  --#{$prefix}-cc-muted: #94a3b8;
+  --#{$prefix}-cc-shadow: 0 24px 54px -12px rgba(0, 0, 0, 0.65);
+}
+
+// ---------------------------------------------------------------------------
+// 2. Backdrop Desfocado (Modo Modal)
+// EN: Blurred Backdrop (Modal Mode)
+// ---------------------------------------------------------------------------
+.dx-cc-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1084;
+  background-color: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+
+  &.is-open,
+  &.show {
+    display: block;
+    opacity: 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Modos de Layout (Modal, Barra Inferior, Card Flutuante)
+// EN: Layout Modes (Modal, Bottom Bar, Floating Card)
+// ---------------------------------------------------------------------------
+.dx-cookie-consent.dx-cc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: var(--#{$prefix}-cc-zindex);
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+
+  &.is-open,
+  &.show {
+    display: flex;
+    animation: dx-cc-fade-in 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .dx-cc-dialog {
+    width: 100%;
+    max-width: 680px;
+    max-height: calc(100vh - 2rem);
+    border-radius: var(--#{$prefix}-cc-radius);
+    border-top: 4px solid var(--#{$prefix}-cc-accent);
+  }
+}
+
+.dx-cookie-consent.dx-cc-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: var(--#{$prefix}-cc-zindex);
+
+  &.is-open,
+  &.show {
+    display: block;
+    animation: dx-cc-slide-up 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .dx-cc-dialog {
+    width: 100%;
+    max-width: 100%;
+    max-height: 88vh;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-top: 3px solid var(--#{$prefix}-cc-accent);
+  }
+}
+
+.dx-cookie-consent.dx-cc-floating-end,
+.dx-cookie-consent.dx-cc-floating-start {
+  position: fixed;
+  bottom: 1.25rem;
+  z-index: var(--#{$prefix}-cc-zindex);
+  width: calc(100% - 2rem);
+  max-width: 440px;
+
+  &.is-open,
+  &.show {
+    display: block;
+    animation: dx-cc-slide-up 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .dx-cc-dialog {
+    width: 100%;
+    max-height: 85vh;
+    border-radius: var(--#{$prefix}-cc-radius);
+    border-top: 4px solid var(--#{$prefix}-cc-accent);
+  }
+}
+
+.dx-cookie-consent.dx-cc-floating-end {
+  right: 1.25rem;
+  left: auto;
+}
+
+.dx-cookie-consent.dx-cc-floating-start {
+  left: 1.25rem;
+  right: auto;
+}
+
+@keyframes dx-cc-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dx-cc-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Estrutura Interna do Diálogo (.dx-cc-dialog, Header, Body, Footer)
+// EN: Internal Dialog Anatomy (.dx-cc-dialog, Header, Body, Footer)
+// ---------------------------------------------------------------------------
+.dx-cc-dialog {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--#{$prefix}-cc-bg);
+  color: var(--#{$prefix}-cc-color);
+  border: 1px solid var(--#{$prefix}-cc-border);
+  box-shadow: var(--#{$prefix}-cc-shadow);
+  margin: 0 auto;
+}
+
+.dx-cc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.35rem;
+  border-bottom: 1px solid var(--#{$prefix}-cc-border);
+  flex-shrink: 0;
+}
+
+.dx-cc-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.dx-cc-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 0.55rem;
+  flex-shrink: 0;
+  background-color: color-mix(in srgb, var(--#{$prefix}-cc-accent) 14%, transparent);
+  color: var(--#{$prefix}-cc-accent);
+}
+
+.dx-cc-title {
+  margin: 0;
+  font-size: 1.075rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--#{$prefix}-cc-color);
+}
+
+.dx-cc-law-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background-color: color-mix(in srgb, var(--#{$prefix}-cc-accent) 12%, transparent);
+  color: var(--#{$prefix}-cc-accent);
+}
+
+.dx-cc-body {
+  padding: 1.15rem 1.35rem;
+  overflow-y: auto;
+  flex: 1 1 auto;
+}
+
+.bccs-body-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--#{$prefix}-cc-muted);
+
+  p {
+    margin: 0 0 0.75rem;
+  }
+
+  a {
+    color: var(--#{$prefix}-cc-accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+.dx-cc-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+  font-size: 0.875rem;
+
+  a {
+    color: var(--#{$prefix}-cc-accent);
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.dx-cc-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 0.45rem;
+  border: 1px solid var(--#{$prefix}-cc-border);
+  background-color: var(--#{$prefix}-cc-surface);
+  color: var(--#{$prefix}-cc-color);
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: var(--#{$prefix}-cc-accent);
+    color: var(--#{$prefix}-cc-accent);
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    width: 0.78rem;
+    height: 0.78rem;
+    background-color: currentColor;
+    -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23000' fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23000' fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    transition: transform 0.2s ease;
+  }
+
+  &[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+  }
+}
+
+.dx-cc-options {
+  display: none;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--#{$prefix}-cc-border);
+
+  &.show {
+    display: block;
+  }
+}
+
+.bccs-option,
+.dx-cc-option {
+  background-color: var(--#{$prefix}-cc-surface);
+  border: 1px solid var(--#{$prefix}-cc-border);
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.65rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  .dx-cc-option-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.35rem;
+
+    .form-check {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .form-check-input {
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .form-check-label {
+      cursor: pointer;
+      color: var(--#{$prefix}-cc-color);
+      font-size: 0.92rem;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.5rem;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--#{$prefix}-cc-muted);
+  }
+}
+
+.dx-cc-badge-required,
+.dx-cc-badge-optional {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dx-cc-badge-required {
+  background-color: color-mix(in srgb, var(--#{$prefix}-cc-accent) 14%, transparent);
+  color: var(--#{$prefix}-cc-accent);
+}
+
+.dx-cc-badge-optional {
+  background-color: rgba(100, 116, 139, 0.14);
+  color: var(--#{$prefix}-cc-muted);
+}
+
+.dx-cc-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  padding: 0.95rem 1.35rem;
+  border-top: 1px solid var(--#{$prefix}-cc-border);
+  background-color: var(--#{$prefix}-cc-surface);
+  flex-shrink: 0;
+
+  @media (max-width: 575.98px) {
+    flex-direction: column-reverse;
+    align-items: stretch;
+
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+.dx-cc-reopen-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--#{$prefix}-cc-border);
+  background-color: var(--#{$prefix}-cc-bg);
+  color: var(--#{$prefix}-cc-color);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+  cursor: pointer;
+}
+
+// ---------------------------------------------------------------------------
+// 5. Variantes Cromáticas das 28 Cores (.cookie-consent-{cor})
+// EN: Official 28-Color Palette Variants (.cookie-consent-{color})
+// ---------------------------------------------------------------------------
+@each $name, $hex in $all-colors {
+  $is-light: list.index($cc-light-names, $name) != null;
+  $contrast: #ffffff;
+
+  @if $is-light {
+    $contrast: #130f10;
+  }
+
+  .cookie-consent-#{$name} {
+    --#{$prefix}-cc-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-cc-accent-contrast: #{$contrast};
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Acessibilidade (Movimento Reduzido)
+// EN: Reduced Motion Support
+// ---------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .dx-cc-backdrop,
+  .dx-cookie-consent,
+  .dx-cc-toggle-btn,
+  .dx-cc-toggle-btn::after {
+    transition: none;
+    animation: none;
+  }
+}
