@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar &amp; Sidenav (Materialize, BS6 &amp; daisyUI) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <!-- Breadcrumbs -->
+      <nav aria-label="breadcrumb" class="mb-3">
+        <small class="text-muted">Documentação &gt; Core UI &gt; <strong style="color: inherit;">Navbar &amp; Sidenav (Materialize, BS6 &amp; daisyUI)</strong></small>
+      </nav>
+
+      <h1 class="mb-2">Navbar &amp; Sidenav Unificados (Materialize, Bootstrap 6 &amp; daisyUI)</h1>
+      <p class="lead text-muted mb-4">Barras de navegação versáteis reunindo o layout em 3 zonas da <strong>daisyUI</strong> (<code>.navbar-start</code>, <code>.navbar-center</code>, <code>.navbar-end</code>), o sistema responsivo e Offcanvas do <strong>Bootstrap 6.0</strong> (<code>.navbar-expand-*</code>, <code>.navbar-nav-scroll</code>, conteúdo externo <code>.collapse</code>) e o padrão completo do <strong>Materialize CSS</strong> (<code>.nav-wrapper</code>, <code>.brand-logo</code>, <code>.nav-extended</code>, barra de pesquisa e <code>.sidenav</code>), com 28 cores oficiais e Dark Mode.</p>
+      <hr class="my-4">
+
+      <!-- 1. daisyUI 3-Zone Navbar -->
+      <section id="nav-daisyui" class="mb-5">
+        <h2>1. Arquitetura em 3 Zonas (daisyUI: Start, Center &amp; End)</h2>
+        <p class="text-muted">Use <code>.navbar-start</code>, <code>.navbar-center</code> e <code>.navbar-end</code> para manter os links ou marca perfeitamente centralizados mesmo quando esquerda e direita possuem larguras diferentes. Combine com <code>.navbar-floating</code> ou <code>.navbar-glass</code>.</p>
+
+        <div class="doc-card d-grid gap-3">
+          <nav class="navbar navbar-bordered navbar-floating" style="background-color: var(--doc-surface, #ffffff);" aria-label="Exemplo daisyUI 3 zonas">
+            <div class="navbar-start">
+              <a class="navbar-brand" href="#nav-daisyui">&#9889; DexterUI</a>
+            </div>
+            <div class="navbar-center d-none d-md-inline-flex">
+              <ul class="navbar-menu">
+                <li><a href="#nav-daisyui" class="active">Início</a></li>
+                <li><a href="#nav-bs6">Componentes</a></li>
+                <li><a href="#nav-materialize">Materialize</a></li>
+              </ul>
+            </div>
+            <div class="navbar-end">
+              <span class="badge badge-soft-teal">Beta 0.1</span>
+              <a href="#nav-colors" class="btn btn-sm btn-primary">Começar</a>
+            </div>
+          </nav>
+
+          <div class="p-4 rounded position-relative overflow-hidden" style="background: linear-gradient(135deg, #3b5998, #4b0082);">
+            <nav class="navbar navbar-glass navbar-floating" aria-label="Navbar Efeito Vidro">
+              <div class="navbar-start">
+                <span class="navbar-brand">&#10024; Glass Navbar</span>
+              </div>
+              <div class="navbar-center d-none d-sm-inline-flex small fw-semibold">
+                Backdrop Blur + Superfície Translúcida
+              </div>
+              <div class="navbar-end">
+                <button type="button" class="btn btn-sm btn-dark">Ação</button>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Bootstrap 6 Responsive Collapse & Scrolling -->
+      <section id="nav-bs6" class="mb-5">
+        <h2>2. Bootstrap 6.0 Responsivo, Collapse &amp; <code>.navbar-nav-scroll</code></h2>
+        <p class="text-muted">Com <code>.navbar-expand-lg</code>, a barra exibe o botão <code>.navbar-toggler</code> em telas menores e expande os itens no desktop. Adicione <code>.navbar-nav-scroll</code> com <code>--dx-scroll-height</code> para limitar a altura em listas longas colapsadas.</p>
+
+        <div class="doc-card">
+          <nav class="navbar navbar-expand-md navbar-dark navbar-midnight navbar-floating" aria-label="Navbar Bootstrap 6">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#nav-bs6">Dexter BS6</a>
+              <button class="navbar-toggler"
+                      type="button"
+                      id="btnDemoNavbarCollapse"
+                      data-dx-toggle="collapse"
+                      data-dx-target="#demoBsNavbarCollapse"
+                      aria-controls="demoBsNavbarCollapse"
+                      aria-expanded="false"
+                      aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="demoBsNavbarCollapse">
+                <ul class="navbar-nav navbar-nav-scroll me-auto" style="--dx-scroll-height: 160px;">
+                  <li class="nav-item"><a class="nav-link active" aria-current="page" href="#nav-bs6">Painel</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#nav-bs6">Relatórios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#nav-bs6">Integrações</a></li>
+                  <li class="nav-item"><a class="nav-link disabled" aria-disabled="true" href="#nav-bs6">Desabilitado</a></li>
+                </ul>
+                <span class="navbar-text d-none d-lg-inline">Status: Online</span>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </section>
+
+      <!-- 3. External Content & Offcanvas Navbar (BS6) -->
+      <section id="nav-bs6-offcanvas" class="mb-5">
+        <h2>3. Conteúdo Externo (<code>.collapse</code>) &amp; Navbar com Offcanvas (BS6)</h2>
+        <p class="text-muted">Suporte nativo aos dois padrões especiais do Bootstrap 6: painel externo expansível acima/abaixo da barra e menu lateral <code>.offcanvas</code> embutido dentro da <code>.navbar</code>.</p>
+
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="doc-card h-100 p-0 overflow-hidden">
+              <div class="collapse" id="navbarToggleExternalContent">
+                <div class="p-4 bg-dark text-white">
+                  <h5 class="mb-1">Painel de Conteúdo Externo</h5>
+                  <p class="mb-0 small" style="opacity: 0.8;">Exibido acima da barra sem poluir o layout principal.</p>
+                </div>
+              </div>
+              <nav class="navbar navbar-dark navbar-indigo" aria-label="Navbar Conteúdo Externo">
+                <div class="container-fluid">
+                  <button class="navbar-toggler"
+                          type="button"
+                          id="btnExternalNavToggle"
+                          data-dx-toggle="collapse"
+                          data-dx-target="#navbarToggleExternalContent"
+                          aria-controls="navbarToggleExternalContent"
+                          aria-expanded="false"
+                          aria-label="Abrir conteúdo externo">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <span class="navbar-brand ms-2">External Content</span>
+                </div>
+              </nav>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="doc-card h-100 d-flex align-items-center">
+              <nav class="navbar navbar-teal navbar-dark w-100 navbar-floating" aria-label="Offcanvas Navbar">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#nav-bs6-offcanvas">Offcanvas Navbar</a>
+                  <button class="navbar-toggler"
+                          type="button"
+                          id="btnNavbarOffcanvas"
+                          data-dx-toggle="offcanvas"
+                          data-dx-target="#offcanvasNavbarDemo"
+                          aria-controls="offcanvasNavbarDemo"
+                          aria-label="Abrir menu lateral">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offcanvas vinculado ao Navbar Offcanvas -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbarDemo" aria-labelledby="offcanvasNavbarDemoLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold mb-0" id="offcanvasNavbarDemoLabel">Menu Offcanvas (BS6)</h5>
+            <button type="button" class="btn-close" data-dx-dismiss="offcanvas" aria-label="Fechar"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav flex-grow-1 pe-3">
+              <li class="nav-item"><a class="nav-link active" href="#nav-bs6-offcanvas">Visão Geral</a></li>
+              <li class="nav-item"><a class="nav-link" href="sidebar.html">Sidebar Admin</a></li>
+              <li class="nav-item"><a class="nav-link" href="collections.html">Collections</a></li>
+              <li class="nav-item"><a class="nav-link" href="footer.html">Footer &amp; Sticky</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Materialize Classic, Brand Alinhamentos & Mobile Sidenav -->
+      <section id="nav-materialize" class="mb-5">
+        <h2>4. Materialize CSS: <code>.nav-wrapper</code>, <code>.brand-logo</code> &amp; <code>.sidenav</code></h2>
+        <p class="text-muted">Compatível com a marcação clássica do Materialize (<code>&lt;nav&gt;&lt;div class="nav-wrapper"&gt;...</code>): alinhamento de logotipo à esquerda, centro (<code>.brand-logo.center</code>) ou direita (<code>.brand-logo.right</code>), além de gaveta <code>.sidenav</code> em Vanilla JS (clique no ícone de menu abaixo ou no botão de teste).</p>
+
+        <div class="doc-card d-grid gap-3">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+            <span class="small text-muted">Acione a gaveta lateral <code>.sidenav</code> com suporte a teclado <code>Escape</code> e overlay:</span>
+            <button type="button" class="btn btn-sm btn-coral sidenav-trigger" data-target="mobileDemoSidenav" id="btnTriggerSidenav">Abrir Materialize Sidenav</button>
+          </div>
+
+          <!-- Padrão esquerda + links à direita -->
+          <nav class="nav-material navbar-coral rounded overflow-hidden" aria-label="Materialize Padrão">
+            <div class="nav-wrapper">
+              <a href="#nav-materialize" class="brand-logo">Dexter</a>
+              <a href="#!" data-target="mobileDemoSidenav" class="sidenav-trigger" aria-label="Menu mobile">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+              </a>
+              <ul class="right hide-on-med-and-down">
+                <li class="active"><a href="#nav-materialize">Sass</a></li>
+                <li><a href="#nav-extended">Componentes</a></li>
+                <li><a href="#nav-search">Pesquisa</a></li>
+              </ul>
+            </div>
+          </nav>
+
+          <!-- Logotipo Centralizado -->
+          <nav class="nav-material navbar-teal rounded overflow-hidden" aria-label="Materialize Logo Centralizado">
+            <div class="nav-wrapper">
+              <a href="#nav-materialize" class="brand-logo center">Logo Centralizado</a>
+              <ul class="left hide-on-med-and-down">
+                <li><a href="#nav-materialize">Início</a></li>
+                <li class="active"><a href="#nav-materialize">Docs</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+
+        <!-- Materialize Mobile Sidenav Drawer -->
+        <ul class="sidenav" id="mobileDemoSidenav" aria-label="Menu Sidenav Materialize">
+          <li>
+            <div class="user-view">
+              <span class="name">Charles Corrêa</span>
+              <span class="email">charlescorreaweb@gmail.com</span>
+            </div>
+          </li>
+          <li class="active"><a href="#nav-materialize" class="sidenav-close">Dashboard Inicial</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="footer.html">Footer &amp; Sticky Footer</a></li>
+          <li><div class="divider"></div></li>
+          <li><span class="subheader">Controles</span></li>
+          <li><a href="#!" class="sidenav-close">Fechar Gaveta</a></li>
+        </ul>
+      </section>
+
+      <!-- 5. Materialize Extended Navbar (.nav-extended) -->
+      <section id="nav-extended" class="mb-5">
+        <h2>5. Materialize Navbar Estendida (<code>.nav-extended</code> + <code>.nav-content</code>)</h2>
+        <p class="text-muted">Adicione <code>.nav-extended</code> para incorporar uma segunda faixa inferior (<code>.nav-content</code>) com subtítulo ou abas transparentes (<code>.tabs-transparent</code>).</p>
+
+        <div class="doc-card p-0 overflow-hidden">
+          <nav class="nav-extended navbar-indigo" aria-label="Navbar Estendida com Abas">
+            <div class="nav-wrapper">
+              <a href="#nav-extended" class="brand-logo">Dexter Cloud</a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="#nav-extended">Projetos</a></li>
+                <li><a href="#nav-extended">Deployments</a></li>
+                <li><a href="#nav-extended">Configurações</a></li>
+              </ul>
+            </div>
+            <div class="nav-content">
+              <ul class="tabs-transparent" role="tablist">
+                <li class="tab"><a href="#nav-extended" class="active">Visão Geral</a></li>
+                <li class="tab"><a href="#nav-extended">Métricas</a></li>
+                <li class="tab"><a href="#nav-extended">Logs ao Vivo</a></li>
+                <li class="tab"><a href="#nav-extended">Segurança</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </section>
+
+      <!-- 6. Search Bar Integrada -->
+      <section id="nav-search" class="mb-5">
+        <h2>6. Barra de Pesquisa no Navbar (Search Bar)</h2>
+        <p class="text-muted">Estrutura estilo Materialize dentro de <code>.nav-wrapper &gt; form &gt; .input-field</code> com transição suave ao focar e botão de limpeza rápida (<code>.dx-nav-search-clear</code>).</p>
+
+        <div class="doc-card">
+          <nav class="nav-material navbar-purple rounded overflow-hidden" aria-label="Navbar de Busca">
+            <div class="nav-wrapper">
+              <form onsubmit="return false;">
+                <div class="input-field">
+                  <input id="navSearchInputDemo" type="search" placeholder="Pesquisar componentes, utilitários ou variáveis --dx-*..." required>
+                  <label class="label-icon" for="navSearchInputDemo" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  </label>
+                  <button type="button" class="dx-nav-search-clear" id="btnNavSearchClear" aria-label="Limpar busca">&times;</button>
+                </div>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </section>
+
+      <!-- 7. Paleta Oficial (28 Cores + Soft Variants) -->
+      <section id="nav-colors" class="mb-5">
+        <h2>7. Paleta Oficial (<code>.navbar-{cor}</code> &amp; <code>.navbar-soft-{cor}</code>)</h2>
+        <p class="text-muted">Alterne abaixo qualquer cor oficial ou semântica com ajuste automático de contraste WCAG nos links e ícones:</p>
+
+        <div class="doc-card">
+          <div class="d-flex flex-wrap gap-2 mb-3" id="navColorControls">
+            <button type="button" class="btn btn-sm btn-primary" data-nav-cls="navbar-primary">primary</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-nav-cls="navbar-teal">teal</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-nav-cls="navbar-indigo">indigo</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-nav-cls="navbar-coral">coral</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-nav-cls="navbar-lime">lime (clara)</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-nav-cls="navbar-warning">warning (clara)</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-nav-cls="navbar-soft-indigo">soft-indigo</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-nav-cls="navbar-soft-teal">soft-teal</button>
+          </div>
+
+          <nav id="demoColoredNavbar" class="navbar navbar-primary navbar-floating" aria-label="Preview de Cores Navbar">
+            <div class="navbar-start">
+              <span class="navbar-brand" id="navActiveColorLabel">navbar-primary</span>
+            </div>
+            <div class="navbar-end">
+              <ul class="navbar-menu">
+                <li><a href="#nav-colors" class="active">Ativo</a></li>
+                <li><a href="#nav-colors">Config</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </section>
+
+      <!-- 8. Código HTML & API -->
+      <section id="nav-code" class="mb-5">
+        <h2>8. Exemplos de Código HTML &amp; JS</h2>
+
+        <div class="code-window mb-0" data-dx-copy="true">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+            <div class="code-actions"><span class="code-badge">HTML</span><button type="button" class="code-copy-btn">Copiar</button></div>
+          </div>
+          <pre class="code-block"><code class="language-html">&lt;!-- 1. Estilo daisyUI (3 Zonas) --&gt;
+&lt;nav class="navbar navbar-glass navbar-floating"&gt;
+  &lt;div class="navbar-start"&gt;&lt;a class="navbar-brand" href="#"&gt;DexterUI&lt;/a&gt;&lt;/div&gt;
+  &lt;div class="navbar-center"&gt;&lt;ul class="navbar-menu"&gt;&lt;li&gt;&lt;a href="#"&gt;Home&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+  &lt;div class="navbar-end"&gt;&lt;a class="btn btn-sm btn-primary" href="#"&gt;Entrar&lt;/a&gt;&lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;!-- 2. Estilo Materialize Estendido + Sidenav --&gt;
+&lt;nav class="nav-extended navbar-indigo"&gt;
+  &lt;div class="nav-wrapper"&gt;
+    &lt;a href="#" class="brand-logo"&gt;Logo&lt;/a&gt;
+    &lt;a href="#!" data-target="mobile-nav" class="sidenav-trigger"&gt;Menu&lt;/a&gt;
+    &lt;ul class="right hide-on-med-and-down"&gt;...&lt;/ul&gt;
+  &lt;/div&gt;
+  &lt;div class="nav-content"&gt;...&lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Navegação Inferior -->
+      <div class="d-flex justify-content-between pt-4 border-top mt-5">
+        <a href="footer.html" class="doc-header-link text-primary fw-semibold">
+          &larr; Anterior: Footer &amp; Sticky Footer (Materialize)
+        </a>
+        <a href="templates-email.html" class="doc-header-link text-primary fw-semibold">
+          Próximo: Templates Web &amp; E-mail HTML &rarr;
+        </a>
+      </div>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('demoColoredNavbar');
+      var label = document.getElementById('navActiveColorLabel');
+      var controls = document.getElementById('navColorControls');
+
+      if (nav && label && controls) {
+        controls.addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-nav-cls]');
+          if (!btn) return;
+          var cls = btn.getAttribute('data-nav-cls');
+          nav.className = 'navbar ' + cls + ' navbar-floating';
+          label.textContent = cls;
+
+          controls.querySelectorAll('[data-nav-cls]').forEach(function (b) {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-outline-primary');
+          });
+          btn.classList.remove('btn-outline-primary');
+          btn.classList.add('btn-primary');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

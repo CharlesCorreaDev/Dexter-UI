@@ -216,9 +216,122 @@
         </div>
       </section>
 
-      <!-- 3. Estrutura HTML & API -->
+      <!-- 3. Sidebar Offcanvas & Gaveta Deslizante (.offcanvas) -->
+      <section id="sidebar-offcanvas" class="mb-5">
+        <h2>3. Sidebar Offcanvas &amp; Gavetas Deslizantes (<code>.offcanvas</code>)</h2>
+        <p class="text-muted">
+          Combine a barra lateral administrativa ou o <code>.dx-sidebar-list</code> diretamente dentro do container <code>.offcanvas</code> (<code>DexterOffcanvas</code>) para abrir menus laterais deslizantes pela esquerda (<code>.offcanvas-start</code>), direita (<code>.offcanvas-end</code>), topo (<code>.offcanvas-top</code>) ou base (<code>.offcanvas-bottom</code>), com backdrop e fechamento por <code>Escape</code>.
+        </p>
+
+        <div class="doc-card">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-primary" data-dx-toggle="offcanvas" data-dx-target="#sidebarOffcanvasStart" id="btnOpenOffcanvasStart">
+              &#9776; Abrir Sidebar Offcanvas (Esquerda)
+            </button>
+            <button type="button" class="btn btn-outline-primary" data-dx-toggle="offcanvas" data-dx-target="#sidebarOffcanvasEnd" id="btnOpenOffcanvasEnd">
+              Filtros Offcanvas (Direita)
+            </button>
+            <button type="button" class="btn btn-outline-secondary" data-dx-toggle="offcanvas" data-dx-target="#sidebarOffcanvasTop" id="btnOpenOffcanvasTop">
+              Atalhos Topo (.offcanvas-top)
+            </button>
+            <button type="button" class="btn btn-outline-secondary" data-dx-toggle="offcanvas" data-dx-target="#sidebarOffcanvasBottom" id="btnOpenOffcanvasBottom">
+              Notificações Base (.offcanvas-bottom)
+            </button>
+          </div>
+          <p class="small text-muted mb-0">
+            Compatível tanto com atributos <code>data-dx-toggle="offcanvas"</code> quanto com <code>data-bs-toggle="offcanvas"</code> e <code>DexterOffcanvas.getOrCreateInstance(el)</code>.
+          </p>
+        </div>
+
+        <!-- Offcanvas Esquerda com Menu Multinível -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarOffcanvasStart" aria-labelledby="sidebarOffcanvasStartLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold mb-0" id="sidebarOffcanvasStartLabel">⚡ Navegação Dexter Admin</h5>
+            <button type="button" class="btn-close" data-dx-dismiss="offcanvas" aria-label="Fechar"></button>
+          </div>
+          <div class="offcanvas-body d-flex flex-column justify-content-between p-0">
+            <div class="dx-sidebar-list p-3">
+              <ul class="list mb-0">
+                <li class="list-item">
+                  <p class="list-title text-uppercase">Principal</p>
+                  <ul>
+                    <li><a href="#sidebar-offcanvas" class="list-link link-current"><span class="list-icon">🏠</span>Visão Geral</a></li>
+                    <li>
+                      <a href="#sidebar-offcanvas" class="list-link link-arrow"><span class="list-icon">📦</span>Módulos UI</a>
+                      <ul class="list-hidden">
+                        <li><a href="navbar.html" class="list-link">Navbar Unificado</a></li>
+                        <li><a href="collections.html" class="list-link">Collections</a></li>
+                        <li><a href="footer.html" class="list-link">Page Footer</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="list-item">
+                  <p class="list-title text-uppercase">Configurações</p>
+                  <ul>
+                    <li><a href="#sidebar-offcanvas" class="list-link"><span class="list-icon">🔑</span>Permissões</a></li>
+                    <li><a href="#sidebar-offcanvas" class="list-link"><span class="list-icon">🔔</span>Alertas do Sistema</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="p-3 border-top small text-muted">
+              Conectado como <strong>Charles Corrêa</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offcanvas Direita -->
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="sidebarOffcanvasEnd" aria-labelledby="sidebarOffcanvasEndLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold mb-0" id="sidebarOffcanvasEndLabel">Filtros &amp; Preferências</h5>
+            <button type="button" class="btn-close" data-dx-dismiss="offcanvas" aria-label="Fechar"></button>
+          </div>
+          <div class="offcanvas-body">
+            <p class="text-muted small">Painel lateral direito ideal para inspetores de propriedades, carrinhos ou filtros de tabela.</p>
+            <div class="mb-3">
+              <label class="form-label small fw-semibold" for="offcanvasStatusSelect">Status</label>
+              <select id="offcanvasStatusSelect" class="form-select form-select-sm">
+                <option value="all">Todos os registros</option>
+                <option value="active">Apenas ativos</option>
+                <option value="pending">Pendentes</option>
+              </select>
+            </div>
+            <button type="button" class="btn btn-primary btn-sm w-100" data-dx-dismiss="offcanvas">Aplicar Filtros</button>
+          </div>
+        </div>
+
+        <!-- Offcanvas Topo -->
+        <div class="offcanvas offcanvas-top" tabindex="-1" id="sidebarOffcanvasTop" aria-labelledby="sidebarOffcanvasTopLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold mb-0" id="sidebarOffcanvasTopLabel">Atalhos Rápidos (Top Drawer)</h5>
+            <button type="button" class="btn-close" data-dx-dismiss="offcanvas" aria-label="Fechar"></button>
+          </div>
+          <div class="offcanvas-body">
+            <div class="d-flex flex-wrap gap-2">
+              <a href="ui-kit.html" class="btn btn-sm btn-outline-primary">Core UI Kit</a>
+              <a href="navbar.html" class="btn btn-sm btn-outline-primary">Navbar &amp; Sidenav</a>
+              <a href="dashboard.html" class="btn btn-sm btn-outline-primary">Dashboard Skeleton</a>
+              <a href="treeview.html" class="btn btn-sm btn-outline-primary">TreeView</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Offcanvas Base -->
+        <div class="offcanvas offcanvas-bottom" tabindex="-1" id="sidebarOffcanvasBottom" aria-labelledby="sidebarOffcanvasBottomLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title fw-bold mb-0" id="sidebarOffcanvasBottomLabel">Central de Notificações (Bottom Sheet)</h5>
+            <button type="button" class="btn-close" data-dx-dismiss="offcanvas" aria-label="Fechar"></button>
+          </div>
+          <div class="offcanvas-body">
+            <p class="mb-0 text-muted small">Gaveta inferior responsiva ideal para folhas de ação em dispositivos móveis e logs rápidos.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Estrutura HTML & API -->
       <section id="sidebar-usage" class="mb-5">
-        <h2>3. Estrutura HTML e API JavaScript</h2>
+        <h2>4. Estrutura HTML e API JavaScript</h2>
         <div class="code-window" data-dx-copy="true">
           <div class="code-window-header">
             <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>

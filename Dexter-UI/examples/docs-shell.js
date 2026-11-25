@@ -69,6 +69,7 @@
         { file: 'data-display.html', title: 'Dados, Chat, Timeline & Stats' },
         { file: 'collections.html', title: 'Collections (Listas Materialize)' },
         { file: 'footer.html', title: 'Footer & Sticky Footer (Materialize)' },
+        { file: 'navbar.html', title: 'Navbar & Sidenav (Materialize, BS6 & daisyUI)' },
         { file: 'templates-email.html', title: 'Templates Web & E-mail HTML' }
       ]
     },
