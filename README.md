@@ -1,8 +1,8 @@
 # Dexter UI Framework
 
-> **Versão Beta (`0.1.0-beta.1`)** &bull; Framework modular CSS/SCSS &amp; Vanilla JavaScript para aplicações **Web** e **E-mail HTML** com zero dependências externas, **28 cores oficiais** com escala tonal, contraste WCAG, Dark Mode nativo e portal interativo com **45 páginas de documentação**.
+> **Versão Beta (`0.1.0-beta.2`)** &bull; Framework modular CSS/SCSS &amp; Vanilla JavaScript para aplicações **Web** e **E-mail HTML** com zero dependências externas, **28 cores oficiais** com escala tonal, contraste WCAG, Dark Mode nativo e portal interativo com **46 páginas de documentação**.
 >
-> *Beta Release (`0.1.0-beta.1`) &bull; Zero-dependency modular CSS/SCSS &amp; Vanilla JavaScript framework for **Web** and **HTML Email**, featuring **28 official colors** with tonal scales, WCAG contrast, native Dark Mode, and a **45-page interactive documentation portal**.*
+> *Beta Release (`0.1.0-beta.2`) &bull; Zero-dependency modular CSS/SCSS &amp; Vanilla JavaScript framework for **Web** and **HTML Email**, featuring **28 official colors** with tonal scales, WCAG contrast, native Dark Mode, and a **46-page interactive documentation portal**.*
 
 ---
 
@@ -12,7 +12,7 @@
 - **Paleta Oficial de 28 Cores + Semânticas:** Escala tonal de 13 passos (`025` a `950`), suporte completo a `--dx-*` tokens e pares de contraste calculados conforme diretrizes WCAG (`primary`, `secondary`, `tertiary`, `quaternary`, `quinary`, `purple`, `red`, `navy`, `brown`, `green`, `midnight`, `silver-light`, `silver`, `light`, `turquoise`, `cyan`, `dark`, `black`, `beige`, `olive`, `steelblue`, `aquamarine`, `coral`, `lime`, `teal`, `indigo`, `gray`, `fuchsia` + `success`, `danger`, `warning`, `info`).
 - **Grid Responsivo de 14 Colunas + CSS Grid v4:** Sistema de layout em Flexbox de 14 colunas aliado a utilitários modernos de CSS Grid (`grid-cols-*`), Container Queries (`.dx-cq-grid`) e espaçamentos responsivos.
 - **Dark Mode Nativo & Acessibilidade:** Suporte imediato via `[data-dx-theme="dark"]` e `[data-bs-theme="dark"]`, navegação WAI-ARIA por teclado, foco visível e respeito automático a `@media (prefers-reduced-motion: reduce)`.
-- **Engine de E-mail HTML & Impressão:** Entradas dedicadas (`dexter-email.scss` sem CSS Custom Properties para clientes de e-mail e `dexter-print.scss` para `@media print`).
+- **Portal de Documentação & E-mail HTML:** 46 páginas interativas em `Dexter-UI/examples/` + motor autônomo (`dexter-email.scss` sem CSS Custom Properties para clientes de e-mail e `dexter-print.scss` para `@media print`).
 
 ---
 
@@ -21,7 +21,7 @@
 | Categoria / Category | Componentes Incluídos / Included Components |
 |---|---|
 | **Design System & Base** | Sistema de Cores (28 + tonal), Tipografia Fluida, Prose Editorial, Utilitários CSS & Grid, HTML5 Nativos, CSS Moderno (TW4/BS6), Impressão (`@media print`) |
-| **Core UI & Layout** | Botões, Alertas, Cards, Badges (Bootstrap 6.0 & Stylify CSS), Avatares & Story Rings, Ribbons (57 estilos modulares), Loaders (25 modelos + Materialize Preloaders + Skeletons), Tabelas (`DexterTable`), Collections (Materialize), Page Footer & Sticky Footer, Data Display (`timeline`, `chat`, `stats`), Sidebar Admin (`Next-Sidebar` & `SidebarMenu`), Dashboard Skeleton, Sumário Automático (`DexterTOC`) |
+| **Core UI & Layout** | Botões, Alertas, Cards, Badges (Bootstrap 6.0 & Stylify CSS), Avatares & Story Rings, Ribbons (57 estilos modulares), Loaders (25 modelos + Materialize Preloaders + Skeletons), Tabelas (`DexterTable`), Collections (Materialize), Page Footer & Sticky Footer, Navbar & Sidenav (`Materialize`, `Bootstrap 6` & `daisyUI`), Data Display (`timeline`, `chat`, `stats`), Sidebar Admin (`Next-Sidebar`, `SidebarMenu` & Offcanvas), Dashboard Skeleton, Sumário Automático (`DexterTOC`) |
 | **Formulários / Forms** | Controles base, `DexterSelect`, `DexterMultiSelect`, `DexterTags` (Chips & Autocomplete), `DexterFileInput`, `DexterRating`, `DexterInputSpinner`, `DexterAutosize` |
 | **Interativos & Widgets** | Accordion, Tabs, Wizard, Modais, Dropdowns multiníveis, Toasts (`DexterToast` 9 posições), Carousel (autoplay & hover-pause), Calendário (`DexterCalendar`), TreeView (`DexterTreeView` tri-state), Cookie Consent (`DexterCookieConsent` LGPD/GDPR), Waiting Dialog (`DexterWaiting`), Alertify (`DexterAlertify`), Colorbox (`DexterColorbox`), Popover-X (`DexterPopoverX`), Zoom & Wheelzoom, Lightbox, Diff, OTP, Ripple & FAB Speed Dial |
 
@@ -38,7 +38,7 @@ Dexter-CSS/
 │  ├─ dist/
 │  │  ├─ css/                  # dexter.css, dexter.min.css, dexter-print.css, dexter-email.css (+ .map)
 │  │  └─ js/                   # Módulos prontos para inclusão em páginas web
-│  ├─ examples/                # Portal de documentação interativa (45 páginas + docs-shell.js)
+│  ├─ examples/                # Portal de documentação interativa (46 páginas + docs-shell.js)
 │  ├─ templates/               # Templates Web (starter, landing, parallax) e E-mail HTML
 │  └─ scripts/                 # build-css.mjs, serve-dexter.mjs
 ├─ .agents/                    # Documentação técnica para agentes de IA e especificações
@@ -108,9 +108,9 @@ node Dexter-UI/scripts/serve-dexter.mjs
 
 ## Aviso da Versão Beta / Beta Notice
 
-Esta é uma versão **Beta pública (`0.1.0-beta.1`)**. As APIs de classes CSS, tokens `--dx-*` e controladores JavaScript já são utilizáveis e foram validadas nas 45 páginas de documentação, mas pequenos ajustes de nomenclatura e novos componentes podem ocorrer antes da versão `1.0.0`.
+Esta é uma versão **Beta pública (`0.1.0-beta.2`)**. As APIs de classes CSS, tokens `--dx-*` e controladores JavaScript já são utilizáveis e foram validadas nas 46 páginas de documentação, mas pequenos ajustes de nomenclatura e novos componentes podem ocorrer antes da versão `1.0.0`.
 
-*This is a public **Beta release (`0.1.0-beta.1`)**. CSS class APIs, `--dx-*` tokens, and Vanilla JS controllers are ready for evaluation across all 45 documentation pages, with minor refinements expected before `1.0.0`.*
+*This is a public **Beta release (`0.1.0-beta.2`)**. CSS class APIs, `--dx-*` tokens, and Vanilla JS controllers are ready for evaluation across all 46 documentation pages, with minor refinements expected before `1.0.0`.*
 
 ---
 
