@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barra Lateral Administrativa (Admin Sidebar / Next-sidebar) - Dexter UI</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-4">
+        <h1 class="display-6 fw-bold mb-2">Barra Lateral Administrativa (Admin Sidebar)</h1>
+        <p class="lead text-muted mb-0">
+          Menu administrativo completo inspirado no <strong>Nelh/Next-sidebar</strong>, reconstruído 100% em Vanilla JS
+          e CSS moderno (zero jQuery, zero PerfectScrollbar). Inclui recolhimento para trilho de ícones (70px),
+          expansão automática ao passar o mouse (hover-expand), acordeão multinível sem limite de profundidade,
+          pesquisa expansível no topo, tema claro/escuro e 28 cores oficiais.
+        </p>
+      </div>
+
+      <!-- 1. Preview Contido ao Vivo -->
+      <section id="sidebar-live" class="mb-5">
+        <h2>1. Demonstração Interativa (.app.app-contained)</h2>
+        <p class="text-muted">
+          Clique no botão <strong>&#9776;</strong> na barra superior para alternar entre expandida e recolhida. No desktop recolhido, passe o mouse sobre a barra lateral para expandir temporariamente!
+        </p>
+
+        <div class="d-flex flex-wrap gap-2 mb-3">
+          <button type="button" class="btn btn-sm btn-primary" id="btnSbToggle">Alternar Colapso (toggle)</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" id="btnSbCollapse">Recolher (collapse)</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" id="btnSbExpand">Expandir (expand)</button>
+          <button type="button" class="btn btn-sm btn-outline-dark" id="btnSbThemeDark">Tema Escuro</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" id="btnSbThemeLight">Tema Claro (.sidebar-light)</button>
+          <button type="button" class="btn btn-sm btn-indigo" id="btnSbThemeIndigo">Indigo (.sidebar-indigo)</button>
+          <button type="button" class="btn btn-sm btn-turquoise" id="btnSbThemeTurquoise">Turquoise (.sidebar-turquoise)</button>
+        </div>
+
+        <div class="app app-contained" id="adminSidebarDemo">
+          <aside class="sidebar" id="adminSidebarEl" aria-label="Menu Administrativo Demo">
+            <div class="sidebar-inner">
+              <div class="sidebar-logo">
+                <a class="sidebar-link" href="#sidebar-live">
+                  <span class="logo-sm">⚡</span>
+                  <span class="logo-text">Dexter Admin</span>
+                </a>
+                <div class="mobile-toggle sidebar-toggle">
+                  <button type="button" aria-label="Fechar menu">✕</button>
+                </div>
+              </div>
+
+              <ul class="sidebar-menu">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#sidebar-live">
+                    <span class="icon-holder">🏠</span>
+                    <span class="title">Dashboard</span>
+                  </a>
+                </li>
+                <li class="nav-item dropdown open">
+                  <a class="nav-link dropdown-toggle" href="#sidebar-live">
+                    <span class="icon-holder">📊</span>
+                    <span class="title">Relatórios &amp; BI</span>
+                    <span class="arrow">▶</span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="sidebar-link" href="#sidebar-live">Vendas Mensais</a></li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#sidebar-live">
+                        <span class="title">Subnível 3 (Financeiro)</span>
+                        <span class="arrow">▶</span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a class="sidebar-link" href="#sidebar-live">Fluxo de Caixa</a></li>
+                        <li><a class="sidebar-link" href="#sidebar-live">Conciliação</a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#sidebar-live">
+                    <span class="icon-holder">⚙️</span>
+                    <span class="title">Configurações</span>
+                    <span class="arrow">▶</span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><a class="sidebar-link" href="#sidebar-live">Usuários &amp; Perfis</a></li>
+                    <li><a class="sidebar-link" href="#sidebar-live">Chaves de API</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </aside>
+
+          <div class="container-wide">
+            <nav class="navbar navbar-expand navbar-light border-bottom" style="background: var(--doc-surface);">
+              <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                  <a class="sidebar-toggle nav-link fw-bold" href="#sidebar-live" title="Recolher/Expandir Sidebar">☰</a>
+                </li>
+                <li class="nav-item"><span class="nav-link fw-semibold">Painel de Controle</span></li>
+              </ul>
+              <div class="search-box ms-auto">
+                <div class="search-input">
+                  <input type="search" class="form-control form-control-sm" placeholder="Pesquisar no admin...">
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary search-toggle" title="Buscar">🔍</button>
+              </div>
+            </nav>
+
+            <div class="p-4">
+              <div class="alert alert-primary mb-3">
+                <strong>Layout Sincronizado:</strong> O container <code>.container-wide</code> ajusta seu <code>padding-left</code> suavemente de <code>280px</code> para <code>70px</code> conforme a barra recolhe.
+              </div>
+              <div class="row g-3">
+                <div class="col-md-4"><div class="card p-3"><strong>1.240</strong><div class="small text-muted">Usuários ativos</div></div></div>
+                <div class="col-md-4"><div class="card p-3"><strong>99.98%</strong><div class="small text-muted">Uptime SLA</div></div></div>
+                <div class="col-md-4"><div class="card p-3"><strong>Zero jQuery</strong><div class="small text-muted">100% Vanilla JS</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Compostrap Sidebar Menu Multinível (compostrap/sidebar-menu) -->
+      <section id="sidebar-compostrap" class="mb-5">
+        <h2>2. Menu Lateral Multinível (compostrap/sidebar-menu)</h2>
+        <p class="text-muted">
+          Compatibilidade direta zero-dependência com <code>SidebarMenuApp.init()</code>, marcação <code>.list-item</code> /
+          <code>.list-link</code> / <code>.link-arrow</code> / <code>.list-hidden</code>, linhas guia hierárquicas,
+          animação <code>.bell</code> nos ícones, destaque <code>.link-current</code> (<code>aria-current="page"</code>)
+          e variante cápsula (<code>.sidebar-menu-pills</code>):
+        </p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <div class="doc-card h-100 mb-0">
+              <h6 class="fw-bold mb-3">Clássico com Linhas Guia &amp; Animação .bell</h6>
+              <div class="dx-sidebar-list" id="compostrapDemoClassic">
+                <ul class="list mb-0">
+                  <li class="list-item">
+                    <p class="list-title text-uppercase">Conta Conectada</p>
+                    <ul>
+                      <li>
+                        <a href="#sidebar-compostrap" class="list-link link-arrow">
+                          <span class="list-icon"><span class="bell">👤</span></span>Carlos Corrêa
+                        </a>
+                        <ul class="list-hidden">
+                          <li><a href="#sidebar-compostrap" class="list-link">Meu Perfil</a></li>
+                          <li><a href="#sidebar-compostrap" class="list-link">Sair</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="list-item">
+                    <p class="list-title text-uppercase">Sistema</p>
+                    <ul>
+                      <li>
+                        <a href="#sidebar-compostrap" class="list-link link-current">
+                          <span class="list-icon"><span class="bell">🏠</span></span>Painel Inicial
+                        </a>
+                      </li>
+                      <li>
+                        <a class="list-link link-arrow link-current" id="compoExpandedParent">
+                          <span class="list-icon"><span class="bell">🔔</span></span>Operações
+                          <span class="badge bg-primary text-white">3</span>
+                        </a>
+                        <ul class="list-hidden">
+                          <li><a href="#sidebar-compostrap" class="list-link link-current" id="compoLeafCurrent">Auditoria Ativa</a></li>
+                          <li>
+                            <a href="#sidebar-compostrap" class="list-link link-arrow">Subnível Fiscal</a>
+                            <ul class="list-hidden">
+                              <li><a href="#sidebar-compostrap" class="list-link">Notas Emitidas</a></li>
+                              <li><a href="#sidebar-compostrap" class="list-link">Guias Mensais</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="doc-card h-100 mb-0">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <h6 class="fw-bold mb-0">Modo Cápsula (.sidebar-menu-pills)</h6>
+                <button type="button" class="btn btn-xs btn-outline-primary" id="btnCompoAddItem">+ Adicionar Item Dinâmico</button>
+              </div>
+              <div class="dx-sidebar-list sidebar-menu-pills" id="compostrapDemoPills">
+                <ul class="list mb-0">
+                  <li class="list-item">
+                    <p class="list-title text-uppercase">Workspace</p>
+                    <ul id="compoPillsList">
+                      <li><a href="#sidebar-compostrap" class="list-link link-current"><span class="list-icon">⚡</span>Projetos</a></li>
+                      <li>
+                        <a class="list-link link-arrow"><span class="list-icon">📁</span>Arquivos</a>
+                        <ul class="list-hidden">
+                          <li><a href="#sidebar-compostrap" class="list-link">Documentos PDF</a></li>
+                          <li><a href="#sidebar-compostrap" class="list-link">Planilhas CSV</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Estrutura HTML & API -->
+      <section id="sidebar-usage" class="mb-5">
+        <h2>3. Estrutura HTML e API JavaScript</h2>
+        <div class="code-window" data-dx-copy="true">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+            <div class="code-actions"><span class="code-badge">HTML</span><button type="button" class="code-copy-btn">Copiar</button></div>
+          </div>
+          <pre class="code-block"><code class="language-html">&lt;body class="app"&gt;
+  &lt;aside class="sidebar sidebar-indigo"&gt;
+    &lt;div class="sidebar-inner"&gt;
+      &lt;div class="sidebar-logo"&gt;...&lt;/div&gt;
+      &lt;ul class="sidebar-menu"&gt;
+        &lt;li class="nav-item dropdown"&gt;
+          &lt;a class="nav-link dropdown-toggle" href="#"&gt;
+            &lt;span class="icon-holder"&gt;...&lt;/span&gt;
+            &lt;span class="title"&gt;Menu&lt;/span&gt;
+            &lt;span class="arrow"&gt;▶&lt;/span&gt;
+          &lt;/a&gt;
+          &lt;ul class="dropdown-menu"&gt;...&lt;/ul&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/aside&gt;
+  &lt;div class="container-wide"&gt;...&lt;/div&gt;
+&lt;/body&gt;</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-sidebar.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const app = document.getElementById('adminSidebarDemo');
+      const sbEl = document.getElementById('adminSidebarEl');
+      const inst = DexterSidebar.getOrCreateInstance(app);
+
+      document.getElementById('btnSbToggle')?.addEventListener('click', () => inst.toggle());
+      document.getElementById('btnSbCollapse')?.addEventListener('click', () => inst.collapse());
+      document.getElementById('btnSbExpand')?.addEventListener('click', () => inst.expand());
+
+      const setThemeClass = (cls) => {
+        sbEl.className = 'sidebar' + (cls ? ' ' + cls : '');
+      };
+      document.getElementById('btnSbThemeDark')?.addEventListener('click', () => setThemeClass(''));
+      document.getElementById('btnSbThemeLight')?.addEventListener('click', () => setThemeClass('sidebar-light'));
+      document.getElementById('btnSbThemeIndigo')?.addEventListener('click', () => setThemeClass('sidebar-indigo'));
+      document.getElementById('btnSbThemeTurquoise')?.addEventListener('click', () => setThemeClass('sidebar-turquoise'));
+
+      // Adicionar item dinâmico e reinicializar SidebarMenuApp
+      let addedCount = 1;
+      document.getElementById('btnCompoAddItem')?.addEventListener('click', () => {
+        const list = document.getElementById('compoPillsList');
+        if (!list) return;
+        const li = document.createElement('li');
+        li.innerHTML =
+          '<a class="list-link link-arrow"><span class="list-icon">✨</span>Novo Item #' + addedCount + '</a>' +
+          '<ul class="list-hidden"><li><a href="#sidebar-compostrap" class="list-link">Subitem Dinâmico ' + addedCount + '</a></li></ul>';
+        list.appendChild(li);
+        addedCount++;
+        if (window.SidebarMenuApp) SidebarMenuApp.init(list.closest('.dx-sidebar-list'));
+      });
+    });
+  </script>
+</body>
+</html>

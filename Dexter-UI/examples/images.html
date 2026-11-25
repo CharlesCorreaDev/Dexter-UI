@@ -1,0 +1,762 @@
+<!--
+  =============================================================================
+  Dexter UI Framework
+  =============================================================================
+
+  @file        examples/images.html
+  @description [PT-BR] Demonstração completa de Imagens, Formas, Filtros e Efeitos:
+                       responsividade (.img-fluid), miniaturas, polaroid, efeitos hover (700ms),
+                       alinhamento, figures, picture, dual image, corner images, filtros CSS,
+                       recortes (clip-path), máscaras e modos de mesclagem (blend modes).
+               [EN]    Full showcase of Images, Shapes, Filters and Effects:
+                       responsiveness (.img-fluid), thumbnails, polaroid, hover effects (700ms),
+                       alignment, figures, picture, dual image, corner images, CSS filters,
+                       clip-paths, masks and blend modes.
+
+  @author      Charles Corrêa
+  @contact     E-mail: charlescorreaweb@gmail.com
+  @website     https://charlescorrea.com.br
+  @github      https://github.com/CharlesCorreaDev
+
+  @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+  @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+  @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+  @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+  @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+
+  @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+  @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+               [EN]    MIT – see the LICENSE file at the repository root.
+  =============================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Imagens, Formas e Filtros – Dexter UI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <small class="text-muted">Documentação &gt; Componentes &amp; Mídia &gt; <strong style="color: inherit;">Imagens, Formas e Filtros</strong></small>
+        </nav>
+
+        <h1 class="mb-2">Imagens, Formas, Filtros e Efeitos</h1>
+        <p class="lead text-muted mb-4">Suíte completa de estilização de mídia: responsividade, miniaturas, molduras polaroid analógicas, efeitos hover com transição em 700ms, filtros CSS, recortes poligonais, máscaras e modos de mesclagem.</p>
+        <hr class="my-4">
+
+        <!-- 1. Imagens Responsivas & Proporção -->
+        <section id="responsive" class="mb-5">
+          <h2>1. Imagens Responsivas (.img-fluid / .img-responsive)</h2>
+          <p class="text-muted">A classe <code>.img-fluid</code> garante que a imagem nunca ultrapasse a largura do contêiner pai, redimensionando proporcionalmente.</p>
+          <div class="doc-card">
+            <svg class="img-fluid rounded mb-2" style="width: 100%; height: 200px; background: linear-gradient(135deg, #003171, #007e65);" xmlns="http://www.w3.org/2000/svg">
+              <text x="50%" y="50%" fill="#ffffff" font-size="20" font-family="sans-serif" text-anchor="middle" dominant-baseline="middle">.img-fluid (100% responsiva)</text>
+            </svg>
+            <div class="d-flex gap-2 flex-wrap mt-2">
+              <span class="badge bg-primary-050 text-primary border border-primary-200">max-width: 100%</span>
+              <span class="badge bg-primary-050 text-primary border border-primary-200">height: auto</span>
+              <span class="badge bg-primary-050 text-primary border border-primary-200">display: block</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Miniaturas (Thumbnails) & Polaroid -->
+        <section id="thumbnails-polaroid" class="mb-5">
+          <h2>2. Miniaturas (.img-thumbnail) e Polaroid (.img-polaroid)</h2>
+          <p class="text-muted">Bordas elegantes, sombras e a estética clássica de foto instantânea com área para legenda e inclinação opcional:</p>
+          <div class="row g-4 align-items-center">
+            
+            <!-- Thumbnail -->
+            <div class="col-md-6 col-lg-4 text-center">
+              <div class="doc-card h-100 d-flex flex-column align-items-center justify-content-center">
+                <svg class="img-thumbnail mb-2" style="width: 180px; height: 180px; background: linear-gradient(45deg, #2c3e50, #4682b4);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="50%" fill="#fff" font-size="14" text-anchor="middle">.img-thumbnail</text>
+                </svg>
+                <small class="text-muted mt-1">Borda, padding e transição de hover em 700ms</small>
+              </div>
+            </div>
+
+            <!-- Polaroid Reto -->
+            <div class="col-md-6 col-lg-4 text-center">
+              <div class="doc-card h-100 d-flex flex-column align-items-center justify-content-center">
+                <figure class="img-polaroid mb-0">
+                  <svg style="width: 180px; height: 150px; background: linear-gradient(135deg, #501b85, #cf000f);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="14" text-anchor="middle">Porto Alegre, 2026</text>
+                  </svg>
+                  <figcaption class="polaroid-caption">.img-polaroid clássico</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <!-- Polaroid Inclinado -->
+            <div class="col-md-6 col-lg-4 text-center">
+              <div class="doc-card h-100 d-flex flex-column align-items-center justify-content-center">
+                <figure class="img-polaroid polaroid-tilt-start mb-0">
+                  <svg style="width: 180px; height: 150px; background: linear-gradient(135deg, #007e65, #0099a7);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="14" text-anchor="middle">Foto Instantânea</text>
+                  </svg>
+                  <figcaption class="polaroid-caption">.polaroid-tilt-start</figcaption>
+                </figure>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 3. Efeitos Hover em Imagens -->
+        <section id="hover-effects" class="mb-5">
+          <h2>3. Efeitos de Hover (Transição 700ms ease-in-out)</h2>
+          <p class="text-muted">Animações fluidas padronizadas na curva suave de 700ms do Dexter UI:</p>
+          <div class="row g-4">
+            
+            <div class="col-md-4 text-center">
+              <div class="doc-card">
+                <div class="img-hover-zoom mb-2">
+                  <svg style="width: 100%; height: 160px; background: linear-gradient(135deg, #cf000f, #ff7f50);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="16" text-anchor="middle">.img-hover-zoom</text>
+                  </svg>
+                </div>
+                <code class="d-block">.img-hover-zoom</code>
+                <small class="text-muted">Zoom suave contido</small>
+              </div>
+            </div>
+
+            <div class="col-md-4 text-center">
+              <div class="doc-card">
+                <div class="img-hover-lift rounded mb-2">
+                  <svg class="rounded" style="width: 100%; height: 160px; background: linear-gradient(135deg, #003171, #4682b4);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="16" text-anchor="middle">.img-hover-lift</text>
+                  </svg>
+                </div>
+                <code class="d-block">.img-hover-lift</code>
+                <small class="text-muted">Elevação vertical + sombra profunda</small>
+              </div>
+            </div>
+
+            <div class="col-md-4 text-center">
+              <div class="doc-card">
+                <div class="img-hover-glow rounded mb-2">
+                  <svg class="rounded" style="width: 100%; height: 160px; background: linear-gradient(135deg, #1b7021, #00ff00);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="16" text-anchor="middle">.img-hover-glow</text>
+                  </svg>
+                </div>
+                <code class="d-block">.img-hover-glow</code>
+                <small class="text-muted">Projeção de brilho suave</small>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 4. Imagem Dupla / Dual Image (Swap) -->
+        <section id="dual-image" class="mb-5">
+          <h2>4. Imagem Dupla / Dual Image &amp; Swap (.img-dual / .img-swap)</h2>
+          <p class="text-muted">Efeito de transição cruzada (crossfade em 700ms) entre imagem primária e secundária ao passar o mouse (ideal para produtos de e-commerce e fotos de antes/depois):</p>
+          <div class="doc-card text-center">
+            <div class="img-swap cursor-pointer" style="max-width: 380px; margin: 0 auto;">
+              <svg class="img-primary rounded" style="width: 100%; height: 220px; background: #2c3e50;" xmlns="http://www.w3.org/2000/svg">
+                <text x="50%" y="50%" fill="#ffffff" font-size="18" text-anchor="middle">1. Imagem Primária (Frente)</text>
+              </svg>
+              <svg class="img-secondary rounded" style="width: 100%; height: 220px; background: #cf000f;" xmlns="http://www.w3.org/2000/svg">
+                <text x="50%" y="50%" fill="#ffffff" font-size="18" text-anchor="middle">2. Imagem Secundária (Hover Swap!)</text>
+              </svg>
+            </div>
+            <p class="text-muted mt-3 mb-0" style="font-size: 0.875rem;">Passe o mouse sobre a caixa acima para ver a transição cruzada suave de 700ms.</p>
+          </div>
+        </section>
+
+        <!-- 5. Imagens de Canto (Corner Image & Ribbon) -->
+        <section id="corner-image" class="mb-5">
+          <h2>5. Imagens e Selos de Canto (.corner-img / .corner-ribbon)</h2>
+          <p class="text-muted">Emblemas, ícones, logos e faixas diagonais ancorados exatamente nos vértices de um contêiner:</p>
+          <div class="row g-4">
+            
+            <div class="col-md-6">
+              <div class="doc-card corner-img-container p-4" style="min-height: 180px;">
+                <div class="corner-ribbon corner-ribbon-top-start">NOVO</div>
+                <h4 class="mt-2">Card com Faixa de Canto</h4>
+                <p class="text-muted mb-0">Faixa diagonal ancorada com <code>.corner-ribbon-top-start</code> para destacar produtos, promoções ou lançamentos.</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="doc-card corner-img-container p-4" style="min-height: 180px;">
+                <svg class="corner-img corner-img-sm corner-top-end" style="width: 48px; height: 48px;" viewBox="0 0 24 24" fill="none" stroke="var(--dx-primary)" stroke-width="2">
+                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                <h4>Card com Ícone de Canto</h4>
+                <p class="text-muted mb-0">Ícone fixado no canto superior direito usando <code>.corner-img .corner-top-end</code>.</p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 6. Figures e Picture -->
+        <section id="figures-picture" class="mb-5">
+          <h2>6. Figures, Figcaptions e Picture</h2>
+          <p class="text-muted">Estruturas semânticas para legendas e direção de arte responsiva com múltiplas fontes:</p>
+          <div class="doc-card">
+            <figure class="figure mb-0">
+              <svg class="figure-img img-fluid rounded" style="width: 100%; height: 180px; background: linear-gradient(135deg, #4682b4, #7fffd4);" xmlns="http://www.w3.org/2000/svg">
+                <text x="50%" y="50%" fill="#003171" font-size="18" text-anchor="middle">&lt;figure class="figure"&gt;</text>
+              </svg>
+              <figcaption class="figure-caption figure-caption-center mt-2">
+                Figura 1.1: Legenda centralizada com <code>figcaption.figure-caption-center</code>.
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- 7. Filtros de Imagem (CSS Filters) -->
+        <section id="filters" class="mb-5">
+          <h2>7. Filtros de Imagem (CSS Filters &amp; Hover)</h2>
+          <p class="text-muted">Efeitos visuais avançados aplicados via GPU com suporte a transições no hover:</p>
+          <div class="row g-3">
+            
+            <div class="col-6 col-md-3 text-center">
+              <div class="doc-card">
+                <svg class="filter-grayscale rounded mb-2" style="width: 100%; height: 90px; background: linear-gradient(45deg, #cf000f, #ff7f50);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="50%" fill="#fff" font-size="12" text-anchor="middle">Grayscale</text>
+                </svg>
+                <code>.filter-grayscale</code>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3 text-center">
+              <div class="doc-card">
+                <svg class="filter-sepia rounded mb-2" style="width: 100%; height: 90px; background: linear-gradient(45deg, #007e65, #7fffd4);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="50%" fill="#fff" font-size="12" text-anchor="middle">Sepia</text>
+                </svg>
+                <code>.filter-sepia</code>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3 text-center">
+              <div class="doc-card">
+                <svg class="filter-blur rounded mb-2" style="width: 100%; height: 90px; background: linear-gradient(45deg, #501b85, #0099a7);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="50%" fill="#fff" font-size="12" text-anchor="middle">Blur</text>
+                </svg>
+                <code>.filter-blur</code>
+              </div>
+            </div>
+
+            <div class="col-6 col-md-3 text-center">
+              <div class="doc-card">
+                <svg class="filter-invert rounded mb-2" style="width: 100%; height: 90px; background: linear-gradient(45deg, #003171, #ff7f50);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="50%" fill="#fff" font-size="12" text-anchor="middle">Invert</text>
+                </svg>
+                <code>.filter-invert</code>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="doc-card mt-3 text-center">
+            <h5>Filtro com Remoção Suave no Hover (700ms)</h5>
+            <svg class="filter-grayscale filter-hover-none rounded cursor-pointer" style="width: 280px; height: 120px; background: linear-gradient(135deg, #501b85, #cf000f, #ff7f50);" xmlns="http://www.w3.org/2000/svg">
+              <text x="50%" y="50%" fill="#fff" font-size="14" text-anchor="middle">Passe o mouse para colorir!</text>
+            </svg>
+            <p class="text-muted mt-2 mb-0" style="font-size: 0.8rem;"><code>.filter-grayscale .filter-hover-none</code> (transição 700ms ease-in-out)</p>
+          </div>
+        </section>
+
+        <!-- 8. Formas, Recortes e Máscaras -->
+        <section id="shapes-masks" class="mb-5">
+          <h2>8. Formas, Recortes (Clip-Path) e Máscaras (Mask-Image)</h2>
+          <p class="text-muted">Geometrias sofisticadas e máscaras graduais que integram fotos de forma orgânica ao layout:</p>
+          
+          <div class="row g-4 text-center">
+            
+            <!-- Shape Circle -->
+            <div class="col-6 col-md-3">
+              <div class="doc-card">
+                <svg class="shape-circle mx-auto mb-2" style="width: 100px; height: 100px; background: linear-gradient(135deg, #003171, #4682b4);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="50%" fill="#fff" font-size="12" text-anchor="middle">Circle</text>
+                </svg>
+                <code>.shape-circle</code>
+              </div>
+            </div>
+
+            <!-- Clip Hexagon -->
+            <div class="col-6 col-md-3">
+              <div class="doc-card">
+                <svg class="clip-hexagon mx-auto mb-2" style="width: 100px; height: 100px; background: linear-gradient(135deg, #1b7021, #00ff00);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="50%" fill="#fff" font-size="12" text-anchor="middle">Hexagon</text>
+                </svg>
+                <code>.clip-hexagon</code>
+              </div>
+            </div>
+
+            <!-- Clip Octagon -->
+            <div class="col-6 col-md-3">
+              <div class="doc-card">
+                <svg class="clip-octagon mx-auto mb-2" style="width: 100px; height: 100px; background: linear-gradient(135deg, #501b85, #ff00ff);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="50%" fill="#fff" font-size="12" text-anchor="middle">Octagon</text>
+                </svg>
+                <code>.clip-octagon</code>
+              </div>
+            </div>
+
+            <!-- Clip Bevel -->
+            <div class="col-6 col-md-3">
+              <div class="doc-card">
+                <svg class="clip-bevel mx-auto mb-2" style="width: 100px; height: 100px; background: linear-gradient(135deg, #cf000f, #ff7f50);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="50%" fill="#fff" font-size="12" text-anchor="middle">Bevel</text>
+                </svg>
+                <code>.clip-bevel</code>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Máscaras e Shape-outside -->
+          <div class="row g-4 mt-1">
+            <div class="col-md-6">
+              <div class="doc-card text-center">
+                <h5>Máscara de Esvanecimento na Base</h5>
+                <svg class="mask-fade-bottom rounded mx-auto" style="width: 100%; height: 140px; background: linear-gradient(135deg, #2c3e50, #007e65);" xmlns="http://www.w3.org/2000/svg">
+                  <text x="50%" y="40%" fill="#fff" font-size="16" text-anchor="middle">.mask-fade-bottom</text>
+                </svg>
+                <small class="text-muted d-block mt-2">Fundos se dissolvem suavemente para o transparente</small>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="doc-card">
+                <h5>Contorno Circular de Texto</h5>
+                <div>
+                  <svg class="shape-outside-circle shape-outside-margin" style="width: 80px; height: 80px; background: #003171;" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="10" text-anchor="middle">Shape</text>
+                  </svg>
+                  <p style="font-size: 0.85rem;" class="mb-0">Com <code>.shape-outside-circle</code> o parágrafo contorna perfeitamente a curvatura da foto circular em vez de criar uma caixa retangular rígida, permitindo diagramação editorial moderna.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Mesclagem e Sobreposição (Blend Modes & Overlays) -->
+        <section id="blends-overlays" class="mb-5">
+          <h2>9. Mesclagem (Blend Modes) e Sobreposição (Overlays)</h2>
+          <p class="text-muted">Fusão de imagens com cores de fundo e cartões editoriais com gradientes de texto legíveis:</p>
+
+          <div class="row g-4">
+            
+            <!-- Overlay com Gradiente -->
+            <div class="col-md-6">
+              <div class="doc-card p-0 overflow-hidden">
+                <div class="img-overlay-container" style="height: 240px;">
+                  <svg style="width: 100%; height: 100%; background: linear-gradient(135deg, #4682b4, #2c3e50);" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50%" cy="40%" r="60" fill="rgba(255,255,255,0.15)" />
+                  </svg>
+                  <div class="img-overlay overlay-gradient-bottom">
+                    <span class="badge bg-primary text-white align-self-start mb-2">Editorial</span>
+                    <h4 class="text-white mb-1">Título com Overlay Gradiente</h4>
+                    <p class="text-white-50 mb-0" style="font-size: 0.85rem;">Legibilidade perfeita com contraste WCAG garantido pelo gradiente inferior.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Overlay com Revelação no Hover -->
+            <div class="col-md-6">
+              <div class="doc-card p-0 overflow-hidden">
+                <div class="img-overlay-container cursor-pointer" style="height: 240px;">
+                  <svg style="width: 100%; height: 100%; background: linear-gradient(135deg, #501b85, #007e65);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="40%" fill="#fff" font-size="16" text-anchor="middle">Passe o mouse sobre o card</text>
+                  </svg>
+                  <div class="img-overlay overlay-primary overlay-hover text-center justify-content-center">
+                    <h4 class="text-white mb-2">Efeito Revelado!</h4>
+                    <p class="text-white mb-0" style="font-size: 0.85rem;"><code>.overlay-primary .overlay-hover</code> surge suavemente em 700ms.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 10. Efeito Imagem 2.5D (Perspectiva & Profundidade) -->
+        <section id="effect-25d" class="mb-5">
+          <h2>10. Efeito Imagem 2.5D (.img-25d)</h2>
+          <p class="text-muted">Inclinação em perspectiva 3D e sombra projetada dinâmica com transição em 700ms ease-in-out:</p>
+          <div class="row g-4 text-center">
+            
+            <div class="col-md-4">
+              <div class="doc-card perspective-1000 py-4">
+                <div class="img-25d cursor-pointer">
+                  <svg class="rounded" style="width: 200px; height: 140px; background: linear-gradient(135deg, #003171, #4682b4);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="15" text-anchor="middle">.img-25d</text>
+                  </svg>
+                </div>
+                <small class="text-muted d-block mt-3">Inclinação e profundidade no hover</small>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="doc-card perspective-1000 py-4">
+                <div class="img-25d img-25d-tilt-start cursor-pointer">
+                  <svg class="rounded" style="width: 200px; height: 140px; background: linear-gradient(135deg, #501b85, #cf000f);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="15" text-anchor="middle">.img-25d-tilt-start</text>
+                  </svg>
+                </div>
+                <small class="text-muted d-block mt-3">Inclinado fixo, alinha no hover</small>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="doc-card perspective-1000 py-4">
+                <div class="img-25d img-25d-tilt-end cursor-pointer">
+                  <svg class="rounded" style="width: 200px; height: 140px; background: linear-gradient(135deg, #007e65, #0099a7);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="15" text-anchor="middle">.img-25d-tilt-end</text>
+                  </svg>
+                </div>
+                <small class="text-muted d-block mt-3">Ângulo reverso em 3D</small>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 11. Visão Noturna Militar (Night Vision) -->
+        <section id="night-vision" class="mb-5">
+          <h2>11. Visão Noturna &amp; Efeitos Táticos (.night-vision)</h2>
+          <p class="text-muted">Autêntica visão noturna estilo óculos NVG militares com scanlines, vinheta óptica e fósforo fosforescente:</p>
+          <div class="row g-4 text-center">
+            
+            <!-- Fósforo Verde -->
+            <div class="col-md-4">
+              <div class="doc-card">
+                <div class="night-vision mb-2">
+                  <svg style="width: 220px; height: 150px; background: #2c3e50;" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50%" cy="50%" r="45" fill="#4682b4" />
+                    <text x="50%" y="85%" fill="#fff" font-size="12" text-anchor="middle">PVS-14 NVG</text>
+                  </svg>
+                </div>
+                <code>.night-vision</code>
+                <small class="text-muted d-block">Fósforo Verde Clássico</small>
+              </div>
+            </div>
+
+            <!-- Fósforo Branco -->
+            <div class="col-md-4">
+              <div class="doc-card">
+                <div class="night-vision night-vision-white mb-2">
+                  <svg style="width: 220px; height: 150px; background: #2c3e50;" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50%" cy="50%" r="45" fill="#4682b4" />
+                    <text x="50%" y="85%" fill="#fff" font-size="12" text-anchor="middle">PVS-31 WP</text>
+                  </svg>
+                </div>
+                <code>.night-vision-white</code>
+                <small class="text-muted d-block">Fósforo Branco Moderno</small>
+              </div>
+            </div>
+
+            <!-- Térmica -->
+            <div class="col-md-4">
+              <div class="doc-card">
+                <div class="night-vision night-vision-thermal mb-2">
+                  <svg style="width: 220px; height: 150px; background: #2c3e50;" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50%" cy="50%" r="45" fill="#4682b4" />
+                    <text x="50%" y="85%" fill="#fff" font-size="12" text-anchor="middle">FLIR Thermal</text>
+                  </svg>
+                </div>
+                <code>.night-vision-thermal</code>
+                <small class="text-muted d-block">Visão Térmica Heatmap</small>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="doc-card text-center mt-3">
+            <h5>Visão Noturna Ativada no Hover (700ms)</h5>
+            <div class="night-vision night-vision-hover cursor-pointer" style="max-width: 320px; margin: 0 auto;">
+              <svg style="width: 100%; height: 160px; background: linear-gradient(135deg, #130f10, #2c3e50);" xmlns="http://www.w3.org/2000/svg">
+                <text x="50%" y="50%" fill="#fff" font-size="14" text-anchor="middle">Passe o mouse para modo tático</text>
+              </svg>
+            </div>
+            <code class="d-block mt-2">.night-vision-hover</code>
+          </div>
+        </section>
+
+        <!-- 12. Revelação de Imagem (Image Reveal) -->
+        <section id="image-reveal" class="mb-5">
+          <h2>12. Revelação Cinemática (.img-reveal-curtain / .img-reveal-blur)</h2>
+          <p class="text-muted">Efeitos modernos de cortina deslizante (wipe) e desfoque progressivo no hover:</p>
+          <div class="row g-4 text-center">
+            
+            <div class="col-md-6">
+              <div class="doc-card">
+                <div class="img-reveal-curtain cursor-pointer mb-2" style="max-width: 320px; margin: 0 auto;">
+                  <svg style="width: 100%; height: 180px; background: linear-gradient(135deg, #4682b4, #007e65);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="16" text-anchor="middle">Foto Revelada!</text>
+                  </svg>
+                </div>
+                <code>.img-reveal-curtain</code>
+                <small class="text-muted d-block">Cortina deslizante horizontal no hover (700ms)</small>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="doc-card">
+                <div class="img-reveal-blur cursor-pointer mb-2" style="max-width: 320px; margin: 0 auto;">
+                  <svg class="rounded" style="width: 100%; height: 180px; background: linear-gradient(135deg, #501b85, #cf000f);" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#fff" font-size="16" text-anchor="middle">Desfoque para Nítido</text>
+                  </svg>
+                </div>
+                <code>.img-reveal-blur</code>
+                <small class="text-muted d-block">Transição de desfoque suave no hover</small>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 13. Imagem Fatiada (Sliced Image) -->
+        <section id="sliced-image" class="mb-5">
+          <h2>13. Imagem Fatiada (.img-sliced-vertical / .img-sliced-horizontal)</h2>
+          <p class="text-muted">Separação geométrica em tiras que se deslocam no hover criando um efeito editorial contemporâneo:</p>
+          <div class="row g-4 text-center">
+            
+            <div class="col-md-6">
+              <div class="doc-card">
+                <div class="img-sliced-vertical cursor-pointer mb-2" style="width: 240px; height: 160px; margin: 0 auto;">
+                  <div class="slice" style="flex: 1; background: #003171; border-right: 2px solid #fff;"></div>
+                  <div class="slice" style="flex: 1; background: #4682b4; border-right: 2px solid #fff;"></div>
+                  <div class="slice" style="flex: 1; background: #007e65; border-right: 2px solid #fff;"></div>
+                  <div class="slice" style="flex: 1; background: #501b85;"></div>
+                </div>
+                <code class="d-block mt-2">.img-sliced-vertical</code>
+                <small class="text-muted">Fatias verticais alternadas no hover</small>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="doc-card">
+                <div class="img-sliced-horizontal cursor-pointer mb-2" style="width: 240px; height: 160px; margin: 0 auto;">
+                  <div class="slice" style="flex: 1; background: #cf000f; border-bottom: 2px solid #fff;"></div>
+                  <div class="slice" style="flex: 1; background: #ff7f50; border-bottom: 2px solid #fff;"></div>
+                  <div class="slice" style="flex: 1; background: #546c00;"></div>
+                </div>
+                <code class="d-block mt-2">.img-sliced-horizontal</code>
+                <small class="text-muted">Fatias horizontais deslizantes no hover</small>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 14. Efeito Glitch & Lupa -->
+        <section id="glitch-magnify" class="mb-5">
+          <h2>14. Efeito Glitch e Lupa de Aumento</h2>
+          <div class="row g-4 text-center">
+            
+            <!-- Glitch -->
+            <div class="col-md-6">
+              <div class="doc-card">
+                <h5>Efeito Glitch Cibernético (RGB Split)</h5>
+                <div class="img-glitch img-glitch-hover cursor-pointer my-2" style="max-width: 280px; margin: 0 auto;">
+                  <svg class="rounded" style="width: 100%; height: 150px; background: #130f10;" xmlns="http://www.w3.org/2000/svg">
+                    <text x="50%" y="50%" fill="#00ffff" font-size="18" text-anchor="middle" font-family="monospace">CYBER_GLITCH</text>
+                  </svg>
+                </div>
+                <code>.img-glitch-hover</code>
+                <small class="text-muted d-block mt-1">Interferência RGB split ao passar o mouse</small>
+              </div>
+            </div>
+
+            <!-- Magnify Glass -->
+            <div class="col-md-6">
+              <div class="doc-card">
+                <h5>Lupa de Aumento (Magnifying Glass)</h5>
+                <div class="img-magnify-container cursor-pointer my-2" style="max-width: 280px; margin: 0 auto;" onmousemove="const lens = this.querySelector('.img-magnify-lens'); const rect = this.getBoundingClientRect(); lens.style.left = (event.clientX - rect.left) + 'px'; lens.style.top = (event.clientY - rect.top) + 'px';">
+                  <svg class="rounded" style="width: 100%; height: 150px; background: linear-gradient(135deg, #007e65, #003171);" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50%" cy="50%" r="35" fill="#7fffd4" />
+                    <text x="50%" y="50%" fill="#003171" font-size="14" text-anchor="middle">Zoom 1.6x</text>
+                  </svg>
+                  <div class="img-magnify-lens"></div>
+                </div>
+                <code>.img-magnify-container</code>
+                <small class="text-muted d-block mt-1">Lupa circular interativa com zoom</small>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 15. Giro 3D Flip Card -->
+        <section id="flip-card" class="mb-5">
+          <h2>15. Giro 3D Flip (.flip-card)</h2>
+          <p class="text-muted">Cartão reversível com rotação tridimensional realista no eixo Y ou X:</p>
+          <div class="row g-4 justify-content-center">
+            
+            <div class="col-md-6 col-lg-5">
+              <div class="doc-card text-center">
+                <div class="flip-card cursor-pointer" style="height: 220px; max-width: 300px; margin: 0 auto;">
+                  <div class="flip-card-inner">
+                    <div class="flip-card-front d-flex align-items-center justify-content-center bg-primary text-white p-3">
+                      <div>
+                        <h4 class="text-white mb-1">Frente do Card</h4>
+                        <p class="text-white-50 mb-0" style="font-size: 0.85rem;">Passe o mouse para girar em 3D</p>
+                      </div>
+                    </div>
+                    <div class="flip-card-back d-flex align-items-center justify-content-center bg-secondary text-white p-3">
+                      <div>
+                        <h4 class="text-white mb-1">Verso do Card!</h4>
+                        <p class="text-white-50 mb-0" style="font-size: 0.85rem;">Transição suave em 700ms ease-in-out</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <code class="d-block mt-2">.flip-card</code>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 16. Slider de Imagens (CSS Scroll-Snap) -->
+        <section id="slider" class="mb-5">
+          <h2>16. Slider de Imagens (.img-slider)</h2>
+          <p class="text-muted">Carrossel nativo baseado em CSS Scroll-Snap com suporte a rolagem suave por toque:</p>
+          <div class="doc-card">
+            <div class="img-slider img-slider-third">
+              
+              <div class="p-3 text-center text-white rounded" style="background: linear-gradient(135deg, #501b85, #4682b4); height: 160px; display: flex; align-items: center; justify-content: center;">
+                <h4>Slide 1</h4>
+              </div>
+
+              <div class="p-3 text-center text-white rounded" style="background: linear-gradient(135deg, #cf000f, #ff7f50); height: 160px; display: flex; align-items: center; justify-content: center;">
+                <h4>Slide 2</h4>
+              </div>
+
+              <div class="p-3 text-center text-white rounded" style="background: linear-gradient(135deg, #007e65, #7fffd4); height: 160px; display: flex; align-items: center; justify-content: center;">
+                <h4 style="color: #003171;">Slide 3</h4>
+              </div>
+
+              <div class="p-3 text-center text-white rounded" style="background: linear-gradient(135deg, #2c3e50, #130f10); height: 160px; display: flex; align-items: center; justify-content: center;">
+                <h4>Slide 4</h4>
+              </div>
+
+            </div>
+            <small class="text-muted d-block mt-2 text-center">Arraste horizontalmente ou use o scroll para navegar</small>
+          </div>
+        </section>
+
+        <!-- 17. Galeria de Gatinhos (Kitties Images) -->
+        <section id="kitties" class="mb-5">
+          <h2>17. Galeria de Gatinhos (Kitties Images) 🐱</h2>
+          <p class="text-muted">Demonstração lúdica com cartões de gatinhos aplicando vários dos efeitos do Dexter UI:</p>
+          <div class="row g-4 text-center">
+            
+            <!-- Gatinho 1: Polaroid com Tilt -->
+            <div class="col-md-4">
+              <div class="doc-card h-100 d-flex flex-column align-items-center justify-content-center">
+                <figure class="img-polaroid polaroid-tilt-start mb-0">
+                  <svg style="width: 190px; height: 150px; background: #ffeaa7;" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Gatinho Kawaii SVG -->
+                    <circle cx="50" cy="45" r="24" fill="#ff7675" />
+                    <!-- Orelhas -->
+                    <polygon points="32,28 26,10 44,22" fill="#ff7675" />
+                    <polygon points="68,28 74,10 56,22" fill="#ff7675" />
+                    <polygon points="33,26 29,14 41,22" fill="#ffeaa7" />
+                    <polygon points="67,26 71,14 59,22" fill="#ffeaa7" />
+                    <!-- Olhos -->
+                    <circle cx="42" cy="42" r="3" fill="#2d3436" />
+                    <circle cx="58" cy="42" r="3" fill="#2d3436" />
+                    <!-- Focinho e Bigodes -->
+                    <ellipse cx="50" cy="48" rx="2" ry="1.5" fill="#d63031" />
+                    <line x1="32" y1="47" x2="20" y2="45" stroke="#2d3436" stroke-width="1" />
+                    <line x1="32" y1="50" x2="20" y2="52" stroke="#2d3436" stroke-width="1" />
+                    <line x1="68" y1="47" x2="80" y2="45" stroke="#2d3436" stroke-width="1" />
+                    <line x1="68" y1="50" x2="80" y2="52" stroke="#2d3436" stroke-width="1" />
+                  </svg>
+                  <figcaption class="polaroid-caption">Miau Polaroid 🐾</figcaption>
+                </figure>
+              </div>
+            </div>
+
+            <!-- Gatinho 2: 2.5D com Lift -->
+            <div class="col-md-4">
+              <div class="doc-card h-100 d-flex flex-column align-items-center justify-content-center perspective-1000">
+                <div class="img-25d img-hover-lift cursor-pointer p-2 bg-white rounded">
+                  <svg style="width: 190px; height: 150px; background: #74b9ff;" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Gatinho Azul Kawaii -->
+                    <circle cx="50" cy="45" r="24" fill="#ffffff" />
+                    <polygon points="32,28 26,10 44,22" fill="#ffffff" />
+                    <polygon points="68,28 74,10 56,22" fill="#ffffff" />
+                    <!-- Olhos Felizes -->
+                    <path d="M 39 42 Q 43 38 47 42" stroke="#2d3436" stroke-width="2" fill="none" />
+                    <path d="M 53 42 Q 57 38 61 42" stroke="#2d3436" stroke-width="2" fill="none" />
+                    <ellipse cx="50" cy="48" rx="2" ry="1.5" fill="#ff7675" />
+                  </svg>
+                  <span class="d-block mt-2 fw-semibold text-primary">Gato 2.5D Lift</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gatinho 3: Visão Noturna NVG -->
+            <div class="col-md-4">
+              <div class="doc-card h-100 d-flex flex-column align-items-center justify-content-center">
+                <div class="night-vision rounded cursor-pointer">
+                  <svg style="width: 190px; height: 150px; background: #55efc4;" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="45" r="24" fill="#2d3436" />
+                    <polygon points="32,28 26,10 44,22" fill="#2d3436" />
+                    <polygon points="68,28 74,10 56,22" fill="#2d3436" />
+                    <!-- Olhos brilhantes de gato na noite -->
+                    <circle cx="42" cy="42" r="4" fill="#00ff00" />
+                    <circle cx="58" cy="42" r="4" fill="#00ff00" />
+                  </svg>
+                </div>
+                <span class="d-block mt-2 fw-semibold text-success">Gato Tático NVG</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Navegação Inferior -->
+        <div class="d-flex justify-content-between pt-4 border-top mt-5">
+          <a href="typography.html" class="doc-header-link text-primary fw-semibold">
+            &larr; Anterior: Tipografia
+          </a>
+          <a href="utilities.html" class="doc-header-link text-primary fw-semibold">
+            Próximo: Utilitários &rarr;
+          </a>
+        </div>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+</body>
+</html>

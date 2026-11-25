@@ -1,0 +1,157 @@
+<!--
+  =============================================================================
+  Dexter UI Framework
+  =============================================================================
+
+  @file        examples/index.html
+  @description [PT-BR] Portal de documentação e exemplos do Dexter UI no layout D4Sign / ReadMe.
+               [EN]    Dexter UI documentation and examples portal in D4Sign / ReadMe layout.
+
+  @author      Charles Corrêa
+  @contact     E-mail: charlescorreaweb@gmail.com
+  @website     https://charlescorrea.com.br
+  @github      https://github.com/CharlesCorreaDev
+
+  @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+  @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+  @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+  @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+  @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+
+  @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+  @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+               [EN]    MIT – see the LICENSE file at the repository root.
+  =============================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Introdução ao Dexter UI – Portal de Documentação</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+    <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <small class="text-muted">Documentação &gt; Começando &gt; <strong style="color: inherit;">Introdução ao Dexter UI</strong></small>
+        </nav>
+
+        <h1 class="mb-2">Introdução ao Dexter UI Framework</h1>
+        <p class="lead text-muted mb-4">Framework CSS/JS moderno, leve e altamente escalável para Web e E-mail, projetado com design tokens nativos, conformidade estrita WCAG 2.1 AA/AAA e arquitetura bilíngue.</p>
+        <hr class="my-4">
+
+        <!-- O que é o Dexter UI -->
+        <section id="sobre" class="mb-5">
+          <h2>Sobre o Projeto</h2>
+          <p>O <strong>Dexter UI</strong> foi concebido por <strong>Charles Corrêa</strong> para unificar o desenvolvimento frontend com rigor arquitetural, eliminando o inchaço de frameworks legados sem abrir mão da flexibilidade do Sass e das CSS Custom Properties modernas.</p>
+          <div class="row g-3 my-2">
+            <div class="col-sm-6">
+              <div class="doc-card h-100">
+                <h4 class="mb-1 text-primary">Grid de 14 Colunas</h4>
+                <p class="text-muted mb-0">Divisão flexível por 1, 2, 7 e 14 colunas, ideal para dashboards, layouts simétricos e grids complexos.</p>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="doc-card h-100">
+                <h4 class="mb-1 text-secondary">28 Famílias de Cores</h4>
+                <p class="text-muted mb-0">5 cores de tema + 23 cores estendidas, todas com escala tonal de 13 passos (025 a 975) geradas por algoritmo.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Instalação e Compilação -->
+        <section id="instalacao" class="mb-5">
+          <h2>Instalação e Compilação</h2>
+          <p>Clone o repositório e compile a distribuição CSS otimizada:</p>
+          <pre tabindex="0"><code># Clone o repositório
+git clone https://github.com/CharlesCorreaDev/Dexter-UI.git
+
+# Instale dependências
+npm install
+
+# Compilar CSS distribuído (PostCSS + Sass)
+npm run build</code></pre>
+          <p>Os arquivos prontos para produção são gerados em <code>Dexter-UI/dist/css/</code>:</p>
+          <ul>
+            <li><code>dexter.css</code> – Versão expandida com source maps e separadores de seção.</li>
+            <li><code>dexter.min.css</code> – Versão minificada e ultra leve para produção.</li>
+          </ul>
+        </section>
+
+        <!-- Estrutura dos Exemplos -->
+        <section id="exemplos" class="mb-5">
+          <h2>Módulos e Exemplos Práticos (5 Categorias)</h2>
+          <p>Explore as 29 páginas interativas de documentação do framework, todas zero-dependência e compatíveis com Modo Escuro:</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <a href="colors.html" class="doc-card card-hover d-block text-decoration-none h-100 mb-0">
+                <h4 class="mb-1" style="color: var(--dx-primary);">🎨 Design System &amp; Base</h4>
+                <p class="text-muted mb-0">28 famílias cromáticas, tipografia fluida, prose editorial, utilitários, elementos HTML5 e estilos de impressão.</p>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="ui-kit.html" class="doc-card card-hover d-block text-decoration-none h-100 mb-0">
+                <h4 class="mb-1" style="color: var(--dx-secondary);">🧩 Core UI Kit (Sveltestrap / BS5)</h4>
+                <p class="text-muted mb-0">Botões, grupos, alertas dispensáveis, cards, progress bars, breadcrumbs, offcanvas, tooltips e popovers.</p>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="sidebar.html" class="doc-card card-hover d-block text-decoration-none h-100 mb-0">
+                <h4 class="mb-1" style="color: var(--dx-indigo);">🗂️ Admin Sidebar &amp; Sumário TOC</h4>
+                <p class="text-muted mb-0">Sidebar colapsável (Next-sidebar) com menus multinível e gerador automático de sumário com ScrollSpy.</p>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="forms.html" class="doc-card card-hover d-block text-decoration-none h-100 mb-0">
+                <h4 class="mb-1" style="color: var(--dx-green);">📝 Formulários &amp; Entradas Avançadas</h4>
+                <p class="text-muted mb-0">Select Moderno, MultiSelect, Tags/Chips, Upload de Arquivos, Rating fracionado e Seletor Numérico.</p>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="calendar.html" class="doc-card card-hover d-block text-decoration-none h-100 mb-0">
+                <h4 class="mb-1" style="color: var(--dx-turquoise);">📅 Calendário de Eventos</h4>
+                <p class="text-muted mb-0">Agenda interativa (jquery-bs-calendar) localizada via Intl, com contadores, popover e lista dinâmica.</p>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <a href="wizard.html" class="doc-card card-hover d-block text-decoration-none h-100 mb-0">
+                <h4 class="mb-1" style="color: var(--dx-quinary);">✨ Interativos, Modais &amp; Wizard</h4>
+                <p class="text-muted mb-0">Acordeão, abas verticais/horizontais, modais dinâmicos async, carrossel multi-item e assistente multi-step.</p>
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+</body>
+</html>

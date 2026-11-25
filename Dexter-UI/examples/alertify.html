@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alertify (Alert, Confirm, Prompt, Notifier &amp; Factory) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <!-- Cabeçalho -->
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Componentes</span>
+          <span class="badge bg-indigo text-white">AlertifyJS Clone</span>
+          <span class="badge bg-purple text-white">Dialog Factory</span>
+          <span class="badge bg-teal text-white">28 Cores + Dark Mode</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">AlertifyJS para Dexter UI (Alert, Confirm, Prompt, Notifier &amp; Factory)</h1>
+        <p class="lead text-muted mb-0">
+          Suíte completa <strong>100% Vanilla JS</strong> inspirada e compatível <em>drop-in</em> com <code>alertifyjs.com</code>. Inclui diálogos arrastáveis, maximizáveis e redimensionáveis, tema padrão Dexter e modo <strong>Bootstrap 5/6</strong>, <strong>Notifier em 6 posições</strong> com suporte às 28 cores e <strong>Dialog Factory</strong> (<code>alertify.dialog()</code>) com herança e múltiplos botões.
+        </p>
+      </div>
+
+      <!-- Log ao vivo -->
+      <div class="alert alert-soft-primary d-flex flex-wrap align-items-center justify-content-between gap-2 mb-5" role="status">
+        <div>
+          <strong>Registro de Eventos (<code>alertify</code>):</strong>
+          <span id="ajsEventLog" class="ms-1">Clique em qualquer exemplo abaixo para testar callbacks e retornos.</span>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-primary" id="btnResetDefaults">Restaurar Padrões</button>
+      </div>
+
+      <!-- 1. Alert, Confirm, Prompt & Tema Bootstrap vs Dexter -->
+      <section id="ajs-core-dialogs" class="mb-5">
+        <h2>1. Alert, Confirm, Prompt &amp; Tema Bootstrap</h2>
+        <p class="text-muted">
+          Alterne entre o visual padrão do Dexter UI e o tema Bootstrap (<code>alertify.defaults.theme</code>), além da cor de destaque entre as 28 opções da paleta.
+        </p>
+
+        <div class="doc-card mb-4">
+          <div class="row g-3 align-items-end mb-4">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">Tema dos Diálogos</label>
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-sm btn-primary" id="btnThemeDexter">Tema Dexter Padrão</button>
+                <button type="button" class="btn btn-sm btn-outline-indigo" id="btnThemeBootstrap">Tema Bootstrap (btn / form-control)</button>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="selectAjsAccent" class="form-label fw-semibold">Cor de Destaque (28 Cores)</label>
+              <select id="selectAjsAccent" class="form-select form-select-sm">
+                <option value="primary" selected>primary (Azul Dexter)</option>
+                <option value="indigo">indigo</option>
+                <option value="teal">teal</option>
+                <option value="coral">coral</option>
+                <option value="purple">purple</option>
+                <option value="green">green</option>
+                <option value="red">red</option>
+                <option value="turquoise">turquoise</option>
+                <option value="fuchsia">fuchsia</option>
+                <option value="navy">navy</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-primary" id="btnDemoAlert">alertify.alert()</button>
+            <button type="button" class="btn btn-indigo" id="btnDemoConfirm">alertify.confirm()</button>
+            <button type="button" class="btn btn-teal" id="btnDemoPrompt">alertify.prompt()</button>
+            <button type="button" class="btn btn-outline-purple" id="btnDemoConfirmCustomLabels">Confirm (Botões Invertidos)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Recursos Avançados & Transições -->
+      <section id="ajs-features" class="mb-5">
+        <h2>2. Arrastar, Maximizar, Redimensionar, Frameless &amp; Transições</h2>
+        <p class="text-muted">
+          Todos os diálogos permitem arrastar pelo cabeçalho (<code>movable</code>), alternar tela cheia (<code>maximizable</code>) e usar as 4 animações nativas de entrada:
+        </p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-sm btn-outline-primary" id="btnTransPulse">Transição Pulse</button>
+            <button type="button" class="btn btn-sm btn-outline-indigo" id="btnTransZoom">Transição Zoom</button>
+            <button type="button" class="btn btn-sm btn-outline-teal" id="btnTransFade">Transição Fade</button>
+            <button type="button" class="btn btn-sm btn-outline-purple" id="btnTransSlide">Transição Slide</button>
+          </div>
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-sm btn-coral" id="btnDemoResizable">Redimensionável (Resizable)</button>
+            <button type="button" class="btn btn-sm btn-midnight" id="btnDemoMaximized">Iniciar Maximizado</button>
+            <button type="button" class="btn btn-sm btn-outline-danger" id="btnDemoLockedDimmer">Dimmer Bloqueado (Shake)</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="btnDemoBasic">Modo Basic (Sem Header/Footer)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Notifier (6 Posições & 28 Cores) -->
+      <section id="ajs-notifier" class="mb-5">
+        <h2>3. Notificador Flutuante (6 Posições &amp; 28 Cores)</h2>
+        <p class="text-muted">
+          Dispare notificações empilháveis em qualquer uma das 6 posições de tela com suporte a auto-ocultamento, botão fechar opcional e cores da paleta oficial:
+        </p>
+
+        <div class="doc-card mb-4">
+          <div class="row g-3 align-items-end mb-4">
+            <div class="col-md-6">
+              <label for="selectNotifierPos" class="form-label fw-semibold">Posição na Tela</label>
+              <select id="selectNotifierPos" class="form-select form-select-sm">
+                <option value="bottom-right" selected>bottom-right (Padrão)</option>
+                <option value="bottom-center">bottom-center</option>
+                <option value="bottom-left">bottom-left</option>
+                <option value="top-right">top-right</option>
+                <option value="top-center">top-center</option>
+                <option value="top-left">top-left</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <div class="form-check form-switch mb-1">
+                <input class="form-check-input" type="checkbox" id="toggleNotifierCloseBtn">
+                <label class="form-check-label" for="toggleNotifierCloseBtn">Exibir botão fechar (<code>closeButton: true</code>)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-sm btn-green" id="btnNotifSuccess">alertify.success()</button>
+            <button type="button" class="btn btn-sm btn-red" id="btnNotifError">alertify.error()</button>
+            <button type="button" class="btn btn-sm btn-warning text-dark" id="btnNotifWarning">alertify.warning()</button>
+            <button type="button" class="btn btn-sm btn-dark" id="btnNotifMessage">alertify.message()</button>
+            <button type="button" class="btn btn-sm btn-indigo" id="btnNotifIndigo">notify(..., 'indigo')</button>
+            <button type="button" class="btn btn-sm btn-teal" id="btnNotifTeal">notify(..., 'teal')</button>
+            <button type="button" class="btn btn-sm btn-outline-danger" id="btnNotifDismissAll">alertify.dismissAll()</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Dialog Factory (alertify.dialog()) -->
+      <section id="ajs-factory" class="mb-5">
+        <h2>4. Dialog Factory (<code>alertify.dialog()</code>)</h2>
+        <p class="text-muted">
+          Registre novos tipos de diálogo reutilizáveis do zero (<code>genericDialog</code>) ou estendendo um diálogo nativo como <code>'confirm'</code> (<code>multiActionConfirm</code> com 3 botões).
+        </p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-primary" id="btnFactoryGeneric">Abrir Generic Dialog (Frameless / Custom HTML)</button>
+            <button type="button" class="btn btn-purple" id="btnFactoryMultiConfirm">Abrir Multi-Action Confirm (3 Botões)</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Exemplos de Código -->
+      <section id="ajs-code" class="mb-5">
+        <h2>5. Exemplos de Uso (API JS)</h2>
+
+        <div class="code-window mb-4">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="dot-close"></span><span class="dot-minimize"></span><span class="dot-maximize"></span></div>
+            <div class="code-actions"><span class="code-badge">JS</span><button type="button" class="code-copy-btn">Copiar</button></div>
+          </div>
+          <pre><code class="language-js">// 1. Alert, Confirm & Prompt (Zero Dependências)
+alertify.alert('Aviso', 'Operação concluída com sucesso!', function () {
+  alertify.success('Confirmado pelo usuário');
+});
+
+alertify.confirm('Excluir Registro', 'Deseja realmente excluir este item?',
+  function () { alertify.success('Registro excluído!'); },
+  function () { alertify.error('Ação cancelada.'); }
+);
+
+alertify.prompt('Renomear Projeto', 'Informe o novo nome:', 'Dexter UI',
+  function (evt, value) { alertify.success('Novo nome: ' + value); },
+  function () { alertify.message('Cancelado'); }
+);
+
+// 2. Tema Bootstrap & Posicionamento do Notifier
+alertify.defaults.theme.ok = 'btn btn-primary';
+alertify.defaults.theme.cancel = 'btn btn-secondary';
+alertify.defaults.theme.input = 'form-control';
+alertify.set('notifier', 'position', 'top-right');
+
+// 3. Custom Dialog Factory (estendendo 'confirm')
+alertify.dialog('multiActionConfirm', function () {
+  return {
+    main: function (title, message, onChoice) {
+      this.setHeader(title);
+      this.setContent(message);
+      this.__onChoice = onChoice;
+    },
+    setup: function () {
+      return {
+        buttons: [
+          { text: 'Descartar', key: 68, className: 'btn btn-outline-danger', scope: 'auxiliary' },
+          { text: 'Cancelar', key: 27, themeKey: 'cancel' },
+          { text: 'Salvar', key: 13, themeKey: 'ok' }
+        ]
+      };
+    },
+    callback: function (closeEvent) {
+      if (this.__onChoice) this.__onChoice(closeEvent.button.text);
+    }
+  };
+});</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-alertify.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    (function () {
+      var logEl = document.getElementById('ajsEventLog');
+      function log(msg) {
+        logEl.textContent = msg;
+      }
+
+      // Tema & Accent
+      document.getElementById('btnThemeDexter').addEventListener('click', function () {
+        alertify.set('theme', { input: 'ajs-input', ok: 'ajs-ok', cancel: 'ajs-cancel' });
+        log('Tema ativo: Dexter Padrão (.ajs-ok / .ajs-cancel)');
+      });
+
+      document.getElementById('btnThemeBootstrap').addEventListener('click', function () {
+        alertify.set('theme', { input: 'form-control', ok: 'btn btn-primary', cancel: 'btn btn-secondary' });
+        log('Tema ativo: Bootstrap 5/6 (.btn.btn-primary / .form-control)');
+      });
+
+      document.getElementById('selectAjsAccent').addEventListener('change', function () {
+        alertify.defaults.accent = this.value;
+        log('Cor de destaque alterada para: ' + this.value);
+      });
+
+      document.getElementById('btnResetDefaults').addEventListener('click', function () {
+        alertify.set('theme', { input: 'ajs-input', ok: 'ajs-ok', cancel: 'ajs-cancel' });
+        alertify.defaults.accent = 'primary';
+        alertify.defaults.transition = 'pulse';
+        document.getElementById('selectAjsAccent').value = 'primary';
+        log('Configurações padrão restauradas.');
+      });
+
+      // 1. Core Dialogs
+      document.getElementById('btnDemoAlert').addEventListener('click', function () {
+        alertify.alert('Aviso do Sistema', 'Este é um diálogo <strong>alertify.alert()</strong> zero-dependências!', function () {
+          log('Callback Alert: OK clicado.');
+          alertify.success('Alert fechado com OK');
+        });
+      });
+
+      document.getElementById('btnDemoConfirm').addEventListener('click', function () {
+        alertify.confirm('Confirmar Ação', 'Deseja publicar a nova versão do Dexter UI em produção?',
+          function () {
+            log('Callback Confirm: Usuário confirmou (OK).');
+            alertify.success('Publicação confirmada!');
+          },
+          function () {
+            log('Callback Confirm: Usuário cancelou.');
+            alertify.error('Operação cancelada.');
+          }
+        );
+      });
+
+      document.getElementById('btnDemoPrompt').addEventListener('click', function () {
+        alertify.prompt('Identificação', 'Digite o nome do projeto:', 'Dexter UI',
+          function (evt, value) {
+            log('Callback Prompt OK: "' + value + '"');
+            alertify.success('Valor recebido: ' + value);
+          },
+          function () {
+            log('Callback Prompt: Cancelado.');
+            alertify.warning('Entrada cancelada.');
+          }
+        );
+      });
+
+      document.getElementById('btnDemoConfirmCustomLabels').addEventListener('click', function () {
+        alertify.confirm('Sair sem salvar?', 'Você possui alterações pendentes.',
+          function () { log('Confirm custom: Continuar sem salvar'); },
+          function () { log('Confirm custom: Permaneceu editando'); }
+        ).set({
+          labels: { ok: 'Sim, sair', cancel: 'Continuar editando' },
+          reverseButtons: true,
+          accent: 'coral'
+        });
+      });
+
+      // 2. Transições & Modificadores
+      ['Pulse', 'Zoom', 'Fade', 'Slide'].forEach(function (tr) {
+        document.getElementById('btnTrans' + tr).addEventListener('click', function () {
+          var key = tr.toLowerCase();
+          alertify.alert('Transição: ' + tr, 'Animação de abertura configurada para <code>' + key + '</code>.')
+            .set('transition', key);
+          log('Diálogo aberto com transição: ' + key);
+        });
+      });
+
+      document.getElementById('btnDemoResizable').addEventListener('click', function () {
+        alertify.alert('Diálogo Redimensionável', 'Arraste a alça no canto inferior direito para alterar largura e altura.')
+          .set({ resizable: true, accent: 'teal' });
+      });
+
+      document.getElementById('btnDemoMaximized').addEventListener('click', function () {
+        alertify.alert('Tela Cheia Inicial', 'Este diálogo iniciou já maximizado (<code>startMaximized: true</code>).')
+          .set('startMaximized', true);
+      });
+
+      document.getElementById('btnDemoLockedDimmer').addEventListener('click', function () {
+        alertify.confirm('Atenção Obrigatória', 'Clique no fundo escuro (dimmer): ele não fechará e vibrará em alerta.',
+          function () { log('Locked dimmer: OK'); },
+          function () { log('Locked dimmer: Cancel'); }
+        ).set({ closableByDimmer: false, accent: 'red' });
+      });
+
+      document.getElementById('btnDemoBasic').addEventListener('click', function () {
+        alertify.alert('Basic', '<div class="text-center py-2"><h5 class="fw-bold mb-2">Modo Basic</h5><p class="mb-3 text-muted">Sem cabeçalho e sem rodapé padrão. Clique no fundo ou pressione Esc para fechar.</p><button type="button" class="btn btn-sm btn-primary" onclick="alertify.closeAll()">Fechar Agora</button></div>')
+          .set({ basic: true });
+      });
+
+      // 3. Notifier
+      document.getElementById('selectNotifierPos').addEventListener('change', function () {
+        alertify.set('notifier', 'position', this.value);
+        log('Notifier posição: ' + this.value);
+      });
+
+      document.getElementById('toggleNotifierCloseBtn').addEventListener('change', function () {
+        alertify.set('notifier', 'closeButton', this.checked);
+        log('Notifier closeButton: ' + this.checked);
+      });
+
+      document.getElementById('btnNotifSuccess').addEventListener('click', function () {
+        alertify.success('Alterações salvas com sucesso!');
+      });
+      document.getElementById('btnNotifError').addEventListener('click', function () {
+        alertify.error('Falha ao conectar ao servidor.');
+      });
+      document.getElementById('btnNotifWarning').addEventListener('click', function () {
+        alertify.warning('Sua sessão expirará em 5 minutos.');
+      });
+      document.getElementById('btnNotifMessage').addEventListener('click', function () {
+        alertify.message('Mensagem neutra de acompanhamento.');
+      });
+      document.getElementById('btnNotifIndigo').addEventListener('click', function () {
+        alertify.notify('Notificação temática com cor oficial Indigo!', 'indigo', 4);
+      });
+      document.getElementById('btnNotifTeal').addEventListener('click', function () {
+        alertify.notify('Sincronização Teal finalizada!', 'teal', 4);
+      });
+      document.getElementById('btnNotifDismissAll').addEventListener('click', function () {
+        alertify.dismissAll();
+        log('Todas as notificações foram fechadas.');
+      });
+
+      // 4. Custom Dialog Factories
+      alertify.dialog('genericDialog', function () {
+        return {
+          main: function (content) {
+            this.setContent(content);
+          },
+          setup: function () {
+            return {
+              options: {
+                basic: true,
+                maximizable: false,
+                resizable: false,
+                padding: false,
+                frameless: true
+              }
+            };
+          }
+        };
+      });
+
+      alertify.dialog('multiActionConfirm', function () {
+        return {
+          main: function (title, message, onChoice) {
+            this.setHeader(title);
+            this.setContent(message);
+            this.__onChoice = onChoice;
+          },
+          setup: function () {
+            return {
+              buttons: [
+                { text: 'Descartar', key: 68, className: 'btn btn-sm btn-outline-danger', scope: 'auxiliary' },
+                { text: 'Cancelar', key: 27, themeKey: 'cancel' },
+                { text: 'Salvar', key: 13, themeKey: 'ok' }
+              ],
+              options: {
+                accent: 'purple'
+              }
+            };
+          },
+          callback: function (closeEvent) {
+            var chosen = (closeEvent.button && closeEvent.button.text) || 'Fechar';
+            if (typeof this.__onChoice === 'function') {
+              this.__onChoice(chosen);
+            }
+          }
+        };
+      });
+
+      document.getElementById('btnFactoryGeneric').addEventListener('click', function () {
+        var box = document.createElement('div');
+        box.className = 'p-4';
+        box.innerHTML =
+          '<div class="d-flex justify-content-between align-items-center mb-3">' +
+            '<h5 class="fw-bold mb-0">Custom Generic Dialog</h5>' +
+            '<button type="button" class="btn btn-sm btn-outline-secondary" id="closeGenericBtn">&times;</button>' +
+          '</div>' +
+          '<p class="text-muted small mb-3">Registrado via <code>alertify.dialog(\'genericDialog\', ...)</code> em modo <code>frameless: true</code>.</p>' +
+          '<button type="button" class="btn btn-primary w-100" id="confirmGenericBtn">Executar Ação Customizada</button>';
+        var dlg = alertify.genericDialog(box);
+        box.querySelector('#closeGenericBtn').addEventListener('click', function () { dlg.close(); });
+        box.querySelector('#confirmGenericBtn').addEventListener('click', function () {
+          dlg.close();
+          log('Custom Factory genericDialog: ação executada!');
+          alertify.success('genericDialog concluído');
+        });
+      });
+
+      document.getElementById('btnFactoryMultiConfirm').addEventListener('click', function () {
+        alertify.multiActionConfirm(
+          'Documento Modificado',
+          'Escolha entre salvar as alterações, descartá-las ou cancelar o fechamento.',
+          function (choice) {
+            log('Custom Factory multiActionConfirm: botão "' + choice + '" clicado.');
+            alertify.notify('Escolha: ' + choice, 'purple', 3);
+          }
+        );
+      });
+    })();
+  </script>
+</body>
+</html>

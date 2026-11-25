@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Badges &amp; Etiquetas (Bootstrap 6 &amp; Stylify CSS) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <!-- Cabeçalho -->
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Core UI</span>
+          <span class="badge theme-indigo">Bootstrap 6.0</span>
+          <span class="badge badge-pill theme-teal">Stylify CSS</span>
+          <span class="badge badge-subtle theme-purple">28 Cores + WCAG</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Badges, Pílulas &amp; Contadores (Bootstrap 6 &amp; Stylify CSS)</h1>
+        <p class="lead text-muted mb-0">
+          Sistema unificado de badges escaláveis em <code>em</code> (padrão <strong>Bootstrap 6.0</strong> com classes componíveis <code>theme-*</code>, <code>.badge-subtle</code>, <code>.badge-outline</code> e <code>.badge-ghost</code>) combinado aos padrões do <strong>Stylify CSS</strong> (ícones SVG, avatares, status pulsante, split badges, vidro fosco, remoção dinâmica e todas as 28 cores oficiais).
+        </p>
+      </div>
+
+      <!-- 1. Bootstrap 6: Escala em Cabeçalhos -->
+      <section id="badge-headings" class="mb-5">
+        <h2>1. Escala Proporcional em Cabeçalhos (Bootstrap 6.0)</h2>
+        <p class="text-muted">As badges utilizam <code>0.75em</code>, adaptando-se automaticamente ao tamanho tipográfico do título pai (com piso mínimo legível):</p>
+
+        <div class="doc-card mb-4" id="demoHeadingScale">
+          <h1 class="mb-2">Cabeçalho H1 <span class="badge theme-primary">Novo</span></h1>
+          <h2 class="mb-2">Cabeçalho H2 <span class="badge theme-indigo">Novo</span></h2>
+          <h3 class="mb-2">Cabeçalho H3 <span class="badge theme-teal">Novo</span></h3>
+          <h4 class="mb-2">Cabeçalho H4 <span class="badge theme-purple">Novo</span></h4>
+          <h5 class="mb-2">Cabeçalho H5 <span class="badge theme-coral">Novo</span></h5>
+          <h6 class="mb-0">Cabeçalho H6 <span class="badge theme-success">Novo</span></h6>
+        </div>
+      </section>
+
+      <!-- 2. Bootstrap 6: Variantes Componíveis -->
+      <section id="badge-variants" class="mb-5">
+        <h2>2. Variantes Componíveis (<code>Solid</code>, <code>Subtle</code>, <code>Outline</code> &amp; <code>Ghost</code>)</h2>
+        <p class="text-muted">Combine <code>.badge</code> com qualquer tema <code>theme-{cor}</code> e modificador visual sem duplicar classes:</p>
+
+        <div class="doc-card mb-4">
+          <div class="mb-3">
+            <div class="small fw-semibold text-muted mb-2">Solid (Padrão: <code>.badge.theme-{cor}</code>)</div>
+            <div class="badge-group" id="demoVariantsSolid">
+              <span class="badge theme-primary">Primary</span>
+              <span class="badge theme-success">Success</span>
+              <span class="badge theme-danger">Danger</span>
+              <span class="badge theme-warning">Warning</span>
+              <span class="badge theme-info">Info</span>
+              <span class="badge theme-indigo">Indigo</span>
+              <span class="badge theme-teal">Teal</span>
+              <span class="badge theme-coral">Coral</span>
+              <span class="badge theme-purple">Purple</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="small fw-semibold text-muted mb-2">Subtle / Soft (<code>.badge.badge-subtle.theme-{cor}</code>)</div>
+            <div class="badge-group" id="demoVariantsSubtle">
+              <span class="badge badge-subtle theme-primary">Primary</span>
+              <span class="badge badge-subtle theme-success">Success</span>
+              <span class="badge badge-subtle theme-danger">Danger</span>
+              <span class="badge badge-subtle theme-warning">Warning</span>
+              <span class="badge badge-subtle theme-info">Info</span>
+              <span class="badge badge-subtle theme-indigo">Indigo</span>
+              <span class="badge badge-subtle theme-teal">Teal</span>
+              <span class="badge badge-subtle theme-coral">Coral</span>
+              <span class="badge badge-subtle theme-purple">Purple</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <div class="small fw-semibold text-muted mb-2">Outline (<code>.badge.badge-outline.theme-{cor}</code>)</div>
+            <div class="badge-group" id="demoVariantsOutline">
+              <span class="badge badge-outline theme-primary">Primary</span>
+              <span class="badge badge-outline theme-success">Success</span>
+              <span class="badge badge-outline theme-danger">Danger</span>
+              <span class="badge badge-outline theme-warning">Warning</span>
+              <span class="badge badge-outline theme-info">Info</span>
+              <span class="badge badge-outline theme-indigo">Indigo</span>
+              <span class="badge badge-outline theme-teal">Teal</span>
+              <span class="badge badge-outline theme-coral">Coral</span>
+              <span class="badge badge-outline theme-purple">Purple</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="small fw-semibold text-muted mb-2">Ghost + Pílulas (<code>.badge.badge-ghost.badge-pill.theme-{cor}</code>)</div>
+            <div class="badge-group">
+              <span class="badge badge-ghost badge-pill theme-primary">Primary</span>
+              <span class="badge badge-ghost badge-pill theme-indigo">Indigo</span>
+              <span class="badge badge-ghost badge-pill theme-teal">Teal</span>
+              <span class="badge badge-ghost badge-pill theme-coral">Coral</span>
+              <span class="badge badge-ghost badge-pill theme-danger">Danger</span>
+              <span class="badge text-bg-success badge-pill">.text-bg-success</span>
+              <span class="badge text-bg-info badge-pill">.text-bg-info</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Botões, Contadores & Badges Posicionados -->
+      <section id="badge-positioned" class="mb-5">
+        <h2>3. Contadores em Botões &amp; Badges Posicionados</h2>
+        <p class="text-muted">Combine <code>.position-relative</code>, <code>.position-absolute</code> e <code>.translate-middle</code> com contexto acessível <code>.visually-hidden</code>:</p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap align-items-center gap-4">
+            <button type="button" class="btn btn-primary">
+              Notificações <span class="badge badge-counter badge-light ms-1">4</span>
+            </button>
+
+            <button type="button" class="btn btn-outline-indigo">
+              Atualizações <span class="badge badge-pill theme-danger ms-1">12</span>
+            </button>
+
+            <button type="button" class="btn btn-primary position-relative">
+              Caixa de Entrada
+              <span class="position-absolute top-0 start-100 translate-middle badge badge-counter rounded-pill theme-danger">
+                99+
+                <span class="visually-hidden">mensagens não lidas</span>
+              </span>
+            </button>
+
+            <button type="button" class="btn btn-indigo position-relative">
+              Perfil
+              <span class="position-absolute top-0 start-100 translate-middle badge badge-dot-only theme-success">
+                <span class="visually-hidden">status online</span>
+              </span>
+            </button>
+
+            <div class="position-relative d-inline-block">
+              <div class="rounded-circle bg-teal text-white d-inline-flex align-items-center justify-content-center fw-bold" style="width: 44px; height: 44px;">CC</div>
+              <span class="position-absolute bottom-0 end-0 badge badge-dot-only theme-success">
+                <span class="visually-hidden">disponível</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Padrões Stylify CSS -->
+      <section id="badge-stylify" class="mb-5">
+        <h2>4. Padrões Stylify CSS (Ícones, Avatares, Status Pulsante, Split &amp; Vidro)</h2>
+        <p class="text-muted">Snippets prontos inspirados no Stylify CSS sem dependências de fontes externas:</p>
+
+        <div class="doc-card mb-4">
+          <div class="mb-4">
+            <div class="small fw-semibold text-muted mb-2">Ícones SVG em Pílulas &amp; Links Interativos</div>
+            <div class="badge-group">
+              <span class="badge badge-pill theme-success">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>
+                Verificado
+              </span>
+              <span class="badge badge-pill badge-subtle theme-warning">
+                <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 7 7A7.01 7.01 0 0 0 8 1Zm0 10.75a.88.88 0 1 1 .88-.88.88.88 0 0 1-.88.88ZM8.75 8a.75.75 0 0 1-1.5 0V4.5a.75.75 0 0 1 1.5 0Z"/></svg>
+                Em Revisão
+              </span>
+              <a href="#badge-stylify" class="badge badge-pill theme-indigo">Link Interativo &rarr;</a>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <div class="small fw-semibold text-muted mb-2">Status Dots &amp; Indicador Pulsante (<code>.badge-dot.badge-dot-pulse</code>)</div>
+            <div class="badge-group">
+              <span class="badge badge-dot badge-subtle theme-success">Operacional</span>
+              <span class="badge badge-dot badge-dot-pulse badge-subtle theme-danger">Ao Vivo</span>
+              <span class="badge badge-dot badge-dot-pulse theme-teal">Sincronizando</span>
+              <span class="badge badge-dot badge-outline theme-indigo">Beta v1.0</span>
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <div class="small fw-semibold text-muted mb-2">Pílulas com Avatar (<code>.badge-avatar</code>), Split Badges &amp; Gradiente / Vidro</div>
+            <div class="badge-group">
+              <span class="badge badge-avatar badge-subtle theme-primary">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><rect width='32' height='32' rx='16' fill='%233b5998'/><text x='50%' y='62%' fill='white' font-family='sans-serif' font-size='13' font-weight='bold' text-anchor='middle'>CC</text></svg>" alt="Charles Corrêa">
+                Charles Corrêa
+              </span>
+
+              <span class="badge-split theme-success">
+                <span class="badge-split-label">build</span>
+                <span class="badge-split-value">passing</span>
+              </span>
+
+              <span class="badge-split theme-indigo">
+                <span class="badge-split-label">dexter-ui</span>
+                <span class="badge-split-value">v1.0.0</span>
+              </span>
+
+              <span class="badge-split theme-coral">
+                <span class="badge-split-label">deps</span>
+                <span class="badge-split-value">zero</span>
+              </span>
+
+              <span class="badge badge-pill badge-gradient-purple">Gradiente Purple</span>
+              <span class="badge badge-pill badge-glass">Glassmorphism</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Removíveis & 5 Tamanhos -->
+      <section id="badge-dismiss-sizes" class="mb-5">
+        <h2>5. Badges Removíveis (<code>DexterBadge</code>) &amp; 5 Tamanhos</h2>
+        <p class="text-muted">Clique no botão <code>&times;</code> para remover uma badge com transição suave e disparo do evento <code>dexter.badge.dismiss</code>:</p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+            <div class="badge-group" id="demoDismissibleBadges">
+              <span class="badge badge-pill theme-primary">HTML5 <button type="button" class="badge-close" aria-label="Remover HTML5">&times;</button></span>
+              <span class="badge badge-pill theme-indigo">Sass / SCSS <button type="button" class="badge-close" aria-label="Remover Sass">&times;</button></span>
+              <span class="badge badge-pill badge-subtle theme-teal">Vanilla JS <button type="button" class="badge-close" aria-label="Remover Vanilla JS">&times;</button></span>
+              <span class="badge badge-pill badge-outline theme-coral">Zero Deps <button type="button" class="badge-close" aria-label="Remover Zero Deps">&times;</button></span>
+            </div>
+            <button type="button" class="btn btn-sm btn-outline-primary" id="btnRestoreBadges">Restaurar Badges</button>
+          </div>
+          <div class="small text-muted mb-4" id="badgeDismissLog">4 badges ativas no grupo.</div>
+
+          <div class="small fw-semibold text-muted mb-2">Escalas de Tamanho (<code>.badge-xs</code> a <code>.badge-xl</code>)</div>
+          <div class="badge-group align-items-center">
+            <span class="badge badge-xs theme-primary">XS (.badge-xs)</span>
+            <span class="badge badge-sm theme-indigo">SM (.badge-sm)</span>
+            <span class="badge badge-md theme-teal">MD (.badge-md)</span>
+            <span class="badge badge-lg theme-coral">LG (.badge-lg)</span>
+            <span class="badge badge-xl theme-purple">XL (.badge-xl)</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Paleta Completa (28 Cores + Semânticas WCAG) -->
+      <section id="badge-palette" class="mb-5">
+        <h2>6. Paleta Completa (28 Cores Oficiais + Semânticas WCAG)</h2>
+        <p class="text-muted">Cores claras como <code>light</code>, <code>silver-light</code>, <code>beige</code>, <code>aquamarine</code>, <code>lime</code> e <code>warning</code> aplicam contraste escuro automático (<code>#130f10</code>):</p>
+
+        <div class="doc-card mb-4">
+          <div class="badge-group" id="demoFullPaletteBadges">
+            <span class="badge badge-primary">primary</span>
+            <span class="badge badge-secondary">secondary</span>
+            <span class="badge badge-tertiary">tertiary</span>
+            <span class="badge badge-quaternary">quaternary</span>
+            <span class="badge badge-quinary">quinary</span>
+            <span class="badge badge-purple">purple</span>
+            <span class="badge badge-red">red</span>
+            <span class="badge badge-navy">navy</span>
+            <span class="badge badge-brown">brown</span>
+            <span class="badge badge-green">green</span>
+            <span class="badge badge-midnight">midnight</span>
+            <span class="badge badge-silver-light">silver-light</span>
+            <span class="badge badge-silver">silver</span>
+            <span class="badge badge-light">light</span>
+            <span class="badge badge-turquoise">turquoise</span>
+            <span class="badge badge-cyan">cyan</span>
+            <span class="badge badge-dark">dark</span>
+            <span class="badge badge-black">black</span>
+            <span class="badge badge-beige">beige</span>
+            <span class="badge badge-olive">olive</span>
+            <span class="badge badge-steelblue">steelblue</span>
+            <span class="badge badge-aquamarine">aquamarine</span>
+            <span class="badge badge-coral">coral</span>
+            <span class="badge badge-lime">lime</span>
+            <span class="badge badge-teal">teal</span>
+            <span class="badge badge-indigo">indigo</span>
+            <span class="badge badge-gray">gray</span>
+            <span class="badge badge-fuchsia">fuchsia</span>
+            <span class="badge badge-success">success</span>
+            <span class="badge badge-danger">danger</span>
+            <span class="badge badge-warning">warning</span>
+            <span class="badge badge-info">info</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Código -->
+      <section id="badge-code" class="mb-5">
+        <h2>7. Exemplos de Código</h2>
+        <div class="code-window mb-4" data-dx-copy="true">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+            <div class="code-actions"><span class="code-badge">HTML</span><button type="button" class="code-copy-btn">Copiar</button></div>
+          </div>
+          <pre class="code-block"><code class="language-html">&lt;!-- 1. Bootstrap 6 Composable Themes --&gt;
+&lt;span class="badge theme-primary"&gt;Solid&lt;/span&gt;
+&lt;span class="badge badge-subtle theme-indigo"&gt;Subtle&lt;/span&gt;
+&lt;span class="badge badge-outline theme-teal"&gt;Outline&lt;/span&gt;
+
+&lt;!-- 2. Contador Posicionado com .visually-hidden --&gt;
+&lt;button type="button" class="btn btn-primary position-relative"&gt;
+  Inbox
+  &lt;span class="position-absolute top-0 start-100 translate-middle badge badge-counter rounded-pill theme-danger"&gt;
+    99+ &lt;span class="visually-hidden"&gt;mensagens não lidas&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- 3. Stylify Status Pulsante, Split Badge e Removível --&gt;
+&lt;span class="badge badge-dot badge-dot-pulse badge-subtle theme-danger"&gt;Ao Vivo&lt;/span&gt;
+&lt;span class="badge-split theme-success"&gt;
+  &lt;span class="badge-split-label"&gt;build&lt;/span&gt;
+  &lt;span class="badge-split-value"&gt;passing&lt;/span&gt;
+&lt;/span&gt;
+&lt;span class="badge badge-pill theme-primary"&gt;
+  Tag &lt;button type="button" class="badge-close" aria-label="Remover"&gt;&amp;times;&lt;/button&gt;
+&lt;/span&gt;</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    (function () {
+      var group = document.getElementById('demoDismissibleBadges');
+      var log = document.getElementById('badgeDismissLog');
+      var restoreBtn = document.getElementById('btnRestoreBadges');
+      if (!group || !log || !restoreBtn) return;
+
+      var initialMarkup = group.innerHTML;
+
+      function updateCount() {
+        var remaining = group.querySelectorAll('.badge:not(.badge-dismissing)').length;
+        log.textContent = remaining + ' badge(s) ativa(s) no grupo.';
+      }
+
+      group.addEventListener('dexter.badge.dismiss', function () {
+        setTimeout(updateCount, 180);
+      });
+
+      restoreBtn.addEventListener('click', function () {
+        group.innerHTML = initialMarkup;
+        updateCount();
+      });
+    })();
+  </script>
+</body>
+</html>

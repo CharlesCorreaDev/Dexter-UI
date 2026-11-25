@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seletor Numérico Stepper (Input Spinner) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+
+        <!-- Page Header -->
+        <div class="mb-5 border-bottom pb-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge badge-primary">Componentes</span>
+            <span class="badge badge-soft-blue">Zero Dependências</span>
+            <span class="badge badge-outline-cyan">WCAG 2.1 AA</span>
+          </div>
+          <h1 class="display-5 fw-bold mb-3">Seletor Numérico Stepper (Input Spinner)</h1>
+          <p class="lead text-muted">
+            Suíte completa de seletores numéricos com botões de incremento e decremento para o <strong>Dexter UI</strong>,
+            inspirada e aprimorada a partir do <code>bootstrap-input-spinner</code> (<code>github.com/shaack/bootstrap-input-spinner</code>).
+            Substitui os seletores numéricos inconsistentes dos navegadores por um componente moderno, responsivo e touch-friendly,
+            trazendo aceleração contínua por clique longo, formatação internacional, prefixos e sufixos monetários ou métricos,
+            layout empilhado vertical (.spinner-stacked), compatibilidade com as 28 cores oficiais e Dark Mode.
+          </p>
+        </div>
+
+        <!-- 1. Spinner Básico Horizontal -->
+        <section id="spinner-basic" class="mb-5">
+          <h2>1. Seletor Numérico Básico Horizontal</h2>
+          <p class="text-muted">
+            Transforma qualquer <code>&lt;input type="number"&gt;</code> em um grupo harmonioso com botões <kbd>-</kbd> e <kbd>+</kbd>.
+            Basta adicionar o atributo <code>data-dx-spinner</code>:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="row g-4 align-items-center">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold" for="demoSpinnerQty">Quantidade de Itens no Pedido</label>
+                <div>
+                  <input type="number" id="demoSpinnerQty" data-dx-spinner min="1" max="100" step="1" value="1" data-dx-color="primary">
+                </div>
+                <div class="form-text mt-1 text-muted">Pressione e segure o botão <kbd>+</kbd> para ver a aceleração contínua automática.</div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Degrau Decimal (Step 0.5)</label>
+                <div>
+                  <input type="number" data-dx-spinner min="0" max="10" step="0.5" value="2.5" data-dx-color="coral">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Input numérico nativo transformado em Input Spinner --&gt;
+&lt;input type="number" data-dx-spinner min="1" max="100" step="1" value="1" data-dx-color="primary"&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Prefixos e Sufixos (Moeda, Percentual e Unidades) -->
+        <section id="spinner-prefix" class="mb-5">
+          <h2>2. Prefixos e Sufixos Monetários e de Unidades</h2>
+          <p class="text-muted">
+            Adicione rótulos integrados ao campo através de <code>data-prefix</code> e <code>data-suffix</code>:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="row g-4">
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold">Preço em Reais (R$)</label>
+                <input type="number" data-dx-spinner data-prefix="R$" min="0" max="1000" step="0.5" value="49.90" data-dx-color="green">
+              </div>
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold">Peso da Carga (kg)</label>
+                <input type="number" data-dx-spinner data-suffix="kg" min="0" max="500" step="5" value="25" data-dx-color="blue">
+              </div>
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold">Taxa de Desconto (%)</label>
+                <input type="number" data-dx-spinner data-suffix="%" min="0" max="100" step="5" value="15" data-dx-color="purple">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Layout Vertical Empilhado (Stacked Stepper) -->
+        <section id="spinner-stacked" class="mb-5">
+          <h2>3. Layout Vertical Empilhado (.spinner-stacked)</h2>
+          <p class="text-muted">
+            Para formulários densos ou interfaces com espaço horizontal restrito, os botões podem ser empilhados à direita
+            com o atributo <code>data-stacked="true"</code>:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="row g-4">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Ano de Fabricação</label>
+                <input type="number" data-dx-spinner data-stacked="true" min="1990" max="2030" step="1" value="2026" data-dx-color="gold">
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Porta do Servidor</label>
+                <input type="number" data-dx-spinner data-stacked="true" min="1024" max="65535" step="1" value="8080" data-dx-color="cyan">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Variantes de Tamanho e Estados de Validação -->
+        <section id="spinner-sizes" class="mb-5">
+          <h2>4. Variantes de Tamanho e Validação</h2>
+          <p class="text-muted">
+            Tamanhos modulares compatíveis com os campos de formulário e suporte aos estados <code>.is-valid</code>, <code>.is-invalid</code> e <code>disabled</code>:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="row g-4">
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold">Tamanho Compacto (.input-spinner-sm)</label>
+                <input type="number" data-dx-spinner class="input-sm" min="0" max="50" value="10">
+              </div>
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold">Tamanho Padrão</label>
+                <input type="number" data-dx-spinner min="0" max="50" value="20">
+              </div>
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold">Tamanho Expandido (.input-spinner-lg)</label>
+                <input type="number" data-dx-spinner class="input-lg" min="0" max="50" value="30">
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Estado Válido (.is-valid)</label>
+                <input type="number" data-dx-spinner class="is-valid" min="1" max="10" value="5">
+                <div class="valid-feedback d-block mt-1">Estoque confirmado.</div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Desabilitado (disabled)</label>
+                <input type="number" data-dx-spinner min="0" max="10" value="0" disabled>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. API JavaScript & Compatibilidade InputSpinner -->
+        <section id="spinner-api" class="mb-5">
+          <h2>5. API JavaScript Programática &amp; Compatibilidade InputSpinner</h2>
+          <p class="text-muted">
+            Total compatibilidade drop-in para projetos que utilizam o <code>InputSpinner</code>:
+          </p>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Instanciação programática com DexterInputSpinner ou alias InputSpinner
+const spinner = new DexterInputSpinner(document.querySelector('#meuNumero'), {
+  min: 0,
+  max: 100,
+  step: 1,
+  prefix: 'R$ ',
+  color: 'primary',
+  onChange: (val) => console.log('Novo valor:', val)
+});
+
+// Métodos disponíveis
+spinner.stepUp();         // Incrementa valor
+spinner.stepDown();       // Decrementa valor
+spinner.setValue(50);     // Define valor específico
+spinner.getValue();       // Retorna valor numérico</code></pre>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-toast.js"></script>
+  <script src="../dist/js/dexter-fileinput.js"></script>
+  <script src="../dist/js/dexter-tags.js"></script>
+  <script src="../dist/js/dexter-rating.js"></script>
+  <script src="../dist/js/dexter-multiselect.js"></script>
+  <script src="../dist/js/dexter-input-spinner.js"></script>
+
+</body>
+</html>

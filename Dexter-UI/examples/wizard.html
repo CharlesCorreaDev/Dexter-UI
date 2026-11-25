@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistente de Passos (Step Wizard &amp; Multi-Step) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        <h1 class="display-6 fw-bold mb-3">Assistente de Passos (Step Wizard &amp; Multi-Step)</h1>
+        <p class="lead text-muted mb-4">
+          Suíte completa de formulários multi-etapas e fluxos passo a passo para Dexter UI inspirada no
+          <code>jqueryBootstrapWizard</code> e <code>step-wizard-ui-bootstrap</code>. Totalmente nativa e zero-dependency,
+          com círculos numerados, linha conectora com animação fluida de progresso, checkmarks ao concluir, validação
+          automática de formulários por etapa, layout horizontal e vertical (<code>.wizard-vertical</code>), 28 cores oficiais e Dark Mode.
+        </p>
+
+        <!-- 1. Wizard Básico Horizontal com Barra de Progresso -->
+        <section id="wizard-basic" class="mb-5">
+          <h2>1. Wizard Horizontal com Barra de Progresso (.wizard)</h2>
+          <p class="text-muted">
+            Layout horizontal padrão com círculos numerados e barra de progresso conectora que avança dinamicamente:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="wizard" id="demoWizardBasic" data-dx-wizard>
+              
+              <!-- Cabeçalho com Passos -->
+              <div class="wizard-header">
+                <div class="wizard-progress">
+                  <div class="wizard-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+
+                <ul class="wizard-steps">
+                  <li class="wizard-step active">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">1</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Conta</span>
+                        <span class="step-subtitle">Dados de Acesso</span>
+                      </div>
+                    </button>
+                  </li>
+                  <li class="wizard-step">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">2</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Perfil</span>
+                        <span class="step-subtitle">Informações Pessoais</span>
+                      </div>
+                    </button>
+                  </li>
+                  <li class="wizard-step">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">3</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Plano</span>
+                        <span class="step-subtitle">Escolha do Serviço</span>
+                      </div>
+                    </button>
+                  </li>
+                  <li class="wizard-step">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">4</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Conclusão</span>
+                        <span class="step-subtitle">Revisão &amp; Ativação</span>
+                      </div>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Painéis de Conteúdo -->
+              <div class="wizard-body p-3 border rounded bg-body">
+                <div class="wizard-pane active">
+                  <h5 class="fw-bold mb-3">Etapa 1: Criação de Conta</h5>
+                  <p class="text-muted">Configure o e-mail principal e a senha de segurança da sua organização.</p>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">E-mail Corporativo</label>
+                      <input type="email" class="form-control" placeholder="nome@empresa.com">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Senha de Acesso</label>
+                      <input type="password" class="form-control" placeholder="Mínimo 8 caracteres">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="wizard-pane">
+                  <h5 class="fw-bold mb-3">Etapa 2: Dados do Perfil</h5>
+                  <p class="text-muted">Preencha o nome do responsável técnico e telefone de contato.</p>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Nome Completo</label>
+                      <input type="text" class="form-control" value="Charles Corrêa">
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Telefone / WhatsApp</label>
+                      <input type="tel" class="form-control" placeholder="(51) 99999-9999">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="wizard-pane">
+                  <h5 class="fw-bold mb-3">Etapa 3: Selecione o Plano</h5>
+                  <p class="text-muted">Escolha a capacidade de recursos desejada para seu projeto.</p>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="card p-3 border border-primary h-100">
+                        <h6 class="fw-bold text-primary mb-1">Plano Profissional</h6>
+                        <div class="fs-4 fw-bold mb-2">R$ 99<small class="fs-6 text-muted">/mês</small></div>
+                        <p class="small text-muted mb-0">Usuários ilimitados e suporte técnico dedicado.</p>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="card p-3 border h-100">
+                        <h6 class="fw-bold mb-1">Plano Enterprise</h6>
+                        <div class="fs-4 fw-bold mb-2">R$ 249<small class="fs-6 text-muted">/mês</small></div>
+                        <p class="small text-muted mb-0">Clusters privados, SLA 99.99% e IP dedicado.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="wizard-pane">
+                  <div class="text-center py-4">
+                    <div class="fs-1 mb-2">🎉</div>
+                    <h5 class="fw-bold">Tudo Pronto para Começar!</h5>
+                    <p class="text-muted max-w-md mx-auto">Sua conta foi configurada com sucesso no Dexter UI. Clique no botão abaixo para concluir o fluxo.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Rodapé de Ações -->
+              <div class="wizard-footer">
+                <button type="button" class="btn btn-outline-secondary wizard-btn-prev">
+                  &larr; Anterior
+                </button>
+                <div class="wizard-actions-right">
+                  <button type="button" class="btn btn-primary wizard-btn-next">
+                    Próximo &rarr;
+                  </button>
+                  <button type="button" class="btn btn-green wizard-btn-finish" style="display: none;">
+                    ✓ Finalizar Cadastro
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Snippet de Código Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Estrutura do Assistente de Passos (.wizard) --&gt;
+&lt;div class="wizard" data-dx-wizard&gt;
+  &lt;!-- Barra de Progresso e Círculos --&gt;
+  &lt;div class="wizard-header"&gt;
+    &lt;div class="wizard-progress"&gt;
+      &lt;div class="wizard-progress-bar"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;ul class="wizard-steps"&gt;
+      &lt;li class="wizard-step active"&gt;
+        &lt;button type="button" class="step-trigger"&gt;
+          &lt;span class="step-circle"&gt;&lt;span class="step-number"&gt;1&lt;/span&gt;&lt;/span&gt;
+          &lt;div class="step-content"&gt;
+            &lt;span class="step-title"&gt;Conta&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/button&gt;
+      &lt;/li&gt;
+      &lt;li class="wizard-step"&gt;...&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Painéis de Conteúdo (.wizard-pane) --&gt;
+  &lt;div class="wizard-body"&gt;
+    &lt;div class="wizard-pane active"&gt;Etapa 1...&lt;/div&gt;
+    &lt;div class="wizard-pane"&gt;Etapa 2...&lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Botões de Navegação --&gt;
+  &lt;div class="wizard-footer"&gt;
+    &lt;button type="button" class="btn btn-outline-secondary wizard-btn-prev"&gt;Anterior&lt;/button&gt;
+    &lt;button type="button" class="btn btn-primary wizard-btn-next"&gt;Próximo&lt;/button&gt;
+    &lt;button type="button" class="btn btn-green wizard-btn-finish" style="display: none;"&gt;Finalizar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Formulário Multi-Step com Validação Real -->
+        <section id="wizard-validation" class="mb-5">
+          <h2>2. Formulário Multi-Step com Validação Obrigatória</h2>
+          <p class="text-muted">
+            Ao ativar <code>data-validate="true"</code>, o assistente valida automaticamente todos os campos com <code>required</code>
+            antes de permitir o avanço para a etapa seguinte. Teste clicando em "Próximo" sem preencher os campos:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="wizard wizard-coral" id="demoWizardValidation" data-dx-wizard data-validate="true">
+              <div class="wizard-header">
+                <div class="wizard-progress">
+                  <div class="wizard-progress-bar"></div>
+                </div>
+                <ul class="wizard-steps">
+                  <li class="wizard-step active">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">1</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Identificação</span>
+                      </div>
+                    </button>
+                  </li>
+                  <li class="wizard-step">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">2</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Contato</span>
+                      </div>
+                    </button>
+                  </li>
+                  <li class="wizard-step">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">3</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Confirmação</span>
+                      </div>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="wizard-body p-3 border rounded bg-body">
+                <div class="wizard-pane active">
+                  <h6 class="fw-bold mb-3">Dados Cadastrais (Obrigatórios)</h6>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Nome da Empresa <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" required placeholder="Digite a razão social">
+                      <div class="invalid-feedback">Por favor, preencha o nome da empresa.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">CNPJ ou Documento <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" required placeholder="00.000.000/0001-00">
+                      <div class="invalid-feedback">O documento é obrigatório.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="wizard-pane">
+                  <h6 class="fw-bold mb-3">Contato do Responsável (Obrigatórios)</h6>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">E-mail Oficial <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control" required placeholder="email@dominio.com">
+                      <div class="invalid-feedback">Forneça um e-mail válido.</div>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Cargo / Função <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" required placeholder="Ex: Diretor de Tecnologia">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="wizard-pane">
+                  <div class="alert alert-success d-flex align-items-center gap-2 mb-0">
+                    <span>✓</span>
+                    <div>Todos os campos foram validados com êxito! Pronto para emissão de contrato.</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="wizard-footer">
+                <button type="button" class="btn btn-outline-secondary wizard-btn-prev">Anterior</button>
+                <div class="wizard-actions-right">
+                  <button type="button" class="btn btn-coral wizard-btn-next">Próximo Etapa</button>
+                  <button type="button" class="btn btn-green wizard-btn-finish" style="display: none;">Concluir e Salvar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Wizard Vertical (.wizard-vertical) -->
+        <section id="wizard-vertical" class="mb-5">
+          <h2>3. Assistente Vertical (.wizard-vertical)</h2>
+          <p class="text-muted">
+            Posiciona os passos em coluna vertical à esquerda com linha conectora vertical contínua, ideal para formulários com telas amplas:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="wizard wizard-vertical wizard-indigo" id="demoWizardVertical" data-dx-wizard>
+              
+              <!-- Passos Verticais -->
+              <div class="wizard-header">
+                <div class="wizard-progress">
+                  <div class="wizard-progress-bar"></div>
+                </div>
+                <ul class="wizard-steps">
+                  <li class="wizard-step active">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">1</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Repositório</span>
+                        <span class="step-subtitle">Configurações Git</span>
+                      </div>
+                    </button>
+                  </li>
+                  <li class="wizard-step">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">2</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Ambiente</span>
+                        <span class="step-subtitle">Variáveis de Build</span>
+                      </div>
+                    </button>
+                  </li>
+                  <li class="wizard-step">
+                    <button type="button" class="step-trigger">
+                      <span class="step-circle"><span class="step-number">3</span></span>
+                      <div class="step-content">
+                        <span class="step-title">Deploy</span>
+                        <span class="step-subtitle">Publicação CDN</span>
+                      </div>
+                    </button>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Conteúdo & Ações -->
+              <div class="wizard-content">
+                <div class="wizard-body p-3 border rounded bg-body">
+                  <div class="wizard-pane active">
+                    <h5 class="fw-bold mb-2">Conectar Repositório</h5>
+                    <p class="text-muted">Selecione o branch padrão para disparo dos builds de CSS e scripts.</p>
+                    <input type="text" class="form-control" value="main" readonly>
+                  </div>
+                  <div class="wizard-pane">
+                    <h5 class="fw-bold mb-2">Variáveis de Ambiente</h5>
+                    <p class="text-muted">Configuração de prefixos Sass e minify automático de arquivos.</p>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" id="checkMinify" checked>
+                      <label class="form-check-label" for="checkMinify">Gerar versão minificada (.min.css)</label>
+                    </div>
+                  </div>
+                  <div class="wizard-pane">
+                    <h5 class="fw-bold mb-2">Pronto para Publicar</h5>
+                    <p class="text-muted">A infraestrutura compilará os arquivos para a pasta <code>dist/</code>.</p>
+                  </div>
+                </div>
+
+                <div class="wizard-footer">
+                  <button type="button" class="btn btn-outline-secondary wizard-btn-prev">Anterior</button>
+                  <div class="wizard-actions-right">
+                    <button type="button" class="btn btn-indigo wizard-btn-next">Próximo</button>
+                    <button type="button" class="btn btn-green wizard-btn-finish" style="display: none;">Iniciar Deploy</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Variações Cromáticas Oficiais (.wizard-{cor}) -->
+        <section id="wizard-colors" class="mb-5">
+          <h2>4. Variações Cromáticas Oficiais (.wizard-{cor})</h2>
+          <p class="text-muted">
+            Disponível em todas as <strong>28 cores oficiais</strong> do Dexter UI, como <code>.wizard-green</code>, <code>.wizard-coral</code> e <code>.wizard-indigo</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Variação Verde (.wizard-green)</h6>
+            <div class="wizard wizard-green" id="demoWizardGreen" data-dx-wizard>
+              <div class="wizard-header">
+                <div class="wizard-progress">
+                  <div class="wizard-progress-bar"></div>
+                </div>
+                <ul class="wizard-steps">
+                  <li class="wizard-step active"><button type="button" class="step-trigger"><span class="step-circle"><span class="step-number">1</span></span><span class="step-title">Início</span></button></li>
+                  <li class="wizard-step"><button type="button" class="step-trigger"><span class="step-circle"><span class="step-number">2</span></span><span class="step-title">Dados</span></button></li>
+                  <li class="wizard-step"><button type="button" class="step-trigger"><span class="step-circle"><span class="step-number">3</span></span><span class="step-title">Fim</span></button></li>
+                </ul>
+              </div>
+              <div class="wizard-body p-3 border rounded bg-body">
+                <div class="wizard-pane active">Demonstração da cor Verde oficial.</div>
+                <div class="wizard-pane">Etapa intermediária.</div>
+                <div class="wizard-pane">Etapa finalizada.</div>
+              </div>
+              <div class="wizard-footer">
+                <button type="button" class="btn btn-outline-secondary wizard-btn-prev">Anterior</button>
+                <div class="wizard-actions-right">
+                  <button type="button" class="btn btn-green wizard-btn-next">Próximo</button>
+                  <button type="button" class="btn btn-green wizard-btn-finish" style="display: none;">Finalizar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Bootstrap Form Wizard (xonipatino/bootstrap-form-wizard) -->
+        <section id="wizard-form-bfw" class="mb-5">
+          <h2>5. Bootstrap Form Wizard (xonipatino/bootstrap-form-wizard)</h2>
+          <p class="text-muted">
+            Compatibilidade nativa zero-dependência com a API de <code>BootstrapFormWizard</code> (pills com
+            <code>data-bs-toggle="step"</code>, painéis <code>role="steppanel"</code>, campos externos vinculados via
+            <code>form="..."</code> e <code>data-bfw-in-step="N"</code>, retorno à primeira etapa inválida e troca automática para botão de envio na última etapa):
+          </p>
+
+          <div class="doc-card mb-4">
+            <!-- Campo externo fora do <form>, vinculado ao passo 1 -->
+            <div class="mb-3 p-3 rounded border" style="background: var(--dx-code-bg, #f4f6fb);">
+              <label for="bfwExtField" class="form-label fw-bold mb-1">Código do Projeto (Campo Externo ao &lt;form&gt;, vinculado ao Passo 1 via <code>data-bfw-in-step="1"</code>) *</label>
+              <input id="bfwExtField" name="bfwExtField" type="text" class="form-control" placeholder="Ex.: DEXTER-2026" value="DEXTER-UI" required form="bfwDemoForm" data-bfw-in-step="1">
+            </div>
+
+            <form id="bfwDemoForm" novalidate>
+              <ul class="wizard-pills bfw-nav" role="tablist">
+                <li><a class="nav-link active" href="#bfwStep1" data-bs-toggle="step">1. Identificação</a></li>
+                <li><a class="nav-link" href="#bfwStep2" data-bs-toggle="step">2. Contato</a></li>
+                <li><a class="nav-link" href="#bfwStep3" data-bs-toggle="step">3. Confirmação</a></li>
+              </ul>
+
+              <div class="tab-content border rounded p-3 mb-3">
+                <div class="tab-pane active show" id="bfwStep1" role="steppanel">
+                  <div class="mb-3">
+                    <label for="bfwName" class="form-label fw-semibold">Nome Completo *</label>
+                    <input id="bfwName" name="bfwName" type="text" class="form-control" placeholder="Digite seu nome completo" required>
+                  </div>
+                </div>
+                <div class="tab-pane" id="bfwStep2" role="steppanel">
+                  <div class="mb-3">
+                    <label for="bfwEmail" class="form-label fw-semibold">E-mail Corporativo *</label>
+                    <input id="bfwEmail" name="bfwEmail" type="email" class="form-control" placeholder="voce@empresa.com" required>
+                  </div>
+                </div>
+                <div class="tab-pane" id="bfwStep3" role="steppanel">
+                  <div class="alert alert-success mb-0">
+                    Pronto! Todos os campos dos passos anteriores foram validados com sucesso.
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                <div class="d-flex gap-2">
+                  <button type="button" class="btn btn-outline-secondary" data-bfw-action="back">&lt; Voltar</button>
+                  <button type="button" class="btn btn-primary" data-bfw-action="next">Próximo &gt;</button>
+                </div>
+                <div class="d-flex flex-wrap gap-2">
+                  <button type="button" class="btn btn-sm btn-soft-info" id="btnBfwInspect">getCurrentStep()</button>
+                  <button type="button" class="btn btn-sm btn-outline-danger" id="btnBfwReset">reset()</button>
+                </div>
+              </div>
+            </form>
+            <div id="bfwStatusOut" class="mt-3 small font-monospace text-muted"></div>
+          </div>
+
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JS</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">const wizard = new BootstrapFormWizard('#bfwDemoForm', {
+  start: 1,
+  useBootstrapValidation: true,
+  lang: { backBtn: '&lt; Voltar', nextBtn: 'Próximo &gt;', nextBtnSubmit: 'Enviar' },
+  onNext: (step) =&gt; console.log('Avançou para passo', step)
+});
+const instancia = BootstrapFormWizard.forElement('#bfwDemoForm');
+console.log(instancia.getCurrentStep());</code></pre>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+<script>
+    
+// Demonstração BootstrapFormWizard (xonipatino/bootstrap-form-wizard)
+    document.addEventListener('DOMContentLoaded', () => {
+      const formEl = document.getElementById('bfwDemoForm');
+      const statusOut = document.getElementById('bfwStatusOut');
+      if (!formEl || typeof BootstrapFormWizard !== 'function') return;
+
+      const bfw = new BootstrapFormWizard(formEl, {
+        start: 1,
+        useBootstrapValidation: true,
+        submitForm: true,
+        lang: {
+          backBtn: '&lt; Voltar',
+          nextBtn: 'Próximo &gt;',
+          nextBtnSubmit: 'Enviar Cadastro ✓'
+        },
+        onNext: (step) => {
+          if (statusOut) statusOut.textContent = 'onNext -> passo atual: ' + step;
+        },
+        onBack: (step) => {
+          if (statusOut) statusOut.textContent = 'onBack -> passo atual: ' + step;
+        },
+        onSubmit: (e) => {
+          e.preventDefault();
+          if (statusOut) statusOut.textContent = 'Formulário validado e enviado no passo final!';
+        }
+      });
+
+      document.getElementById('btnBfwInspect')?.addEventListener('click', () => {
+        const cur = BootstrapFormWizard.forElement('#bfwDemoForm').getCurrentStep();
+        if (statusOut) {
+          statusOut.textContent = 'getCurrentStep(): { step: ' + cur.step + ', nav: "' + (cur.stepNav?.textContent || '').trim() + '", panel: #' + (cur.stepPanel?.id || '') + ' }';
+        }
+      });
+
+      document.getElementById('btnBfwReset')?.addEventListener('click', () => {
+        bfw.reset();
+        if (statusOut) statusOut.textContent = 'reset() executado — retornou ao passo 1.';
+      });
+    });
+  </script>
+</body>
+</html>

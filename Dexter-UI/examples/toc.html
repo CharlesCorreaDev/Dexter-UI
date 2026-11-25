@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sumário Automático (Table of Contents - TOC) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h1 class="display-6 fw-bold mb-1">Sumário Automático (Table of Contents - TOC)</h1>
+            <p class="text-muted mb-0">
+              Gerador nativo zero-dependência de índice e sumário navegável para páginas longas e documentações,
+              inspirado no clássico <strong>bootstrap-toc</strong> (Aidan Feldman), com rastreamento ScrollSpy em tempo real,
+              geração inteligente de âncoras/slugs, rolagem suave com compensação de cabeçalho, suporte hierárquico,
+              modo recolhível (collapsible) e integração perfeita às 28 cores oficiais e ao Modo Escuro.
+            </p>
+          </div>
+        </div>
+
+        <!-- 1. Introdução e Demonstração Rápida -->
+        <section id="toc-overview" class="mb-5">
+          <h2>1. Introdução e Inicialização Automática</h2>
+          <p class="text-muted">
+            Basta inserir um elemento <code>&lt;nav id="toc" data-toggle="toc"&gt;&lt;/nav&gt;</code> (ou <code>data-dx-toc</code>)
+            no seu layout para que o <strong>DexterToc</strong> faça uma varredura automática dos cabeçalhos da página,
+            crie a estrutura aninhada com links clicáveis e ative o rastreador ScrollSpy:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex align-items-center gap-3">
+              <div class="p-3 bg-light rounded text-center" style="min-width: 140px;">
+                <span class="fs-1">🧭</span>
+                <div class="small fw-bold text-primary mt-1">ScrollSpy Ativo</div>
+              </div>
+              <div>
+                <h5 class="fw-bold mb-1">Observe a barra lateral à direita!</h5>
+                <p class="text-muted mb-2">
+                  Conforme você rola esta página, o sumário na coluna direita destaca instantaneamente a seção visível
+                  e atualiza a âncora sem recarregar a tela.
+                </p>
+                <div class="d-flex gap-2 flex-wrap">
+                  <span class="badge bg-primary">Zero jQuery</span>
+                  <span class="badge bg-secondary">Zero Bootstrap JS</span>
+                  <span class="badge bg-success">Slugs em Português</span>
+                  <span class="badge bg-info">Rolagem Suave</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- 1. Posicione o sumário em uma coluna fixa ou sticky --&gt;
+&lt;nav id="toc" data-toggle="toc" class="toc-sticky" data-toc-title="Nesta página"&gt;&lt;/nav&gt;
+
+&lt;!-- 2. Inclua o script (ou deixe o autoInit gerenciar) --&gt;
+&lt;script src="../dist/js/dexter-toc.js"&gt;&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. ScrollSpy em Tempo Real -->
+        <section id="toc-scrollspy" class="mb-5">
+          <h2>2. Rastreamento ScrollSpy em Tempo Real</h2>
+          <p class="text-muted">
+            O motor de ScrollSpy do DexterToc calcula com alta precisão a linha de corte (offset) da área de leitura,
+            compensando automaticamente barras de topo e menus fixos:
+          </p>
+
+          <h3 id="scrollspy-offset">2.1 Compensação de Cabeçalho Sticky (Offset)</h3>
+          <p class="text-muted">
+            Por padrão, o DexterToc aplica uma margem de corte de <code>80px</code> para que o título nunca fique escondido
+            atrás de barras de navegação fixas. Você pode configurar essa distância via <code>data-toc-offset="100"</code>
+            ou pela opção JavaScript <code>{ offset: 100 }</code>.
+          </p>
+
+          <h3 id="scrollspy-smooth">2.2 Rolagem Suave com Histórico de Navegação</h3>
+          <p class="text-muted">
+            Ao clicar em qualquer item do sumário, a página desliza suavemente até a seção de destino e o hash da URL é
+            atualizado via <code>history.pushState()</code>, permitindo compartilhar links diretos e manter o histórico do navegador íntegro.
+          </p>
+
+          <h3 id="scrollspy-performance">2.3 Alta Performance com requestAnimationFrame</h3>
+          <p class="text-muted">
+            O rastreador de rolagem é otimizado com <code>requestAnimationFrame</code> e listeners passivos, garantindo taxa de
+            60 a 120 FPS mesmo em páginas com centenas de elementos e gráficos complexos.
+          </p>
+        </section>
+
+        <!-- 3. Modo Recolhível Hierárquico -->
+        <section id="toc-collapsible" class="mb-5">
+          <h2>3. Modo Recolhível Hierárquico (Collapsible)</h2>
+          <p class="text-muted">
+            Para documentações com muitos níveis e seções longas, adicione a classe <code>.toc-collapsible</code> (ou o atributo
+            <code>data-toc-collapsible="true"</code>). Com essa opção ativa, as subseções (H3, H4) ficam recolhidas e só se
+            expandem de forma animada quando o usuário rola até a seção pai correspondente:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h5 class="fw-bold mb-3">Prévia Interativa do Modo Recolhível</h5>
+            <div class="row g-4 align-items-center">
+              <div class="col-md-6">
+                <div class="p-3 border rounded bg-body">
+                  <div class="dx-toc toc-collapsible toc-primary" id="demoCollapsibleToc">
+                    <div class="toc-header">Estrutura Recolhível</div>
+                    <ul class="toc-list nav">
+                      <li class="toc-item toc-item-h2 has-active is-expanded">
+                        <a href="#toc-collapsible" class="toc-link nav-link active">Seção Ativa Expandida</a>
+                        <ul class="toc-sublist nav">
+                          <li class="toc-item toc-item-h3"><a href="#collapsible-h3-1" class="toc-link nav-link">Subseção 3.1 Revelada</a></li>
+                          <li class="toc-item toc-item-h3"><a href="#collapsible-h3-2" class="toc-link nav-link">Subseção 3.2 Revelada</a></li>
+                        </ul>
+                      </li>
+                      <li class="toc-item toc-item-h2">
+                        <a href="#toc-variants" class="toc-link nav-link">Próxima Seção (Recolhida)</a>
+                        <ul class="toc-sublist nav">
+                          <li class="toc-item toc-item-h3"><a href="#sub-hidden-1" class="toc-link nav-link">Oculto até ativar</a></li>
+                          <li class="toc-item toc-item-h3"><a href="#sub-hidden-2" class="toc-link nav-link">Oculto até ativar</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <p class="small text-muted mb-2">
+                  O modo recolhível limpa a poluição visual, mantendo o usuário focado no capítulo atual.
+                </p>
+                <button type="button" class="btn btn-outline-primary btn-sm" id="btnToggleCollapsibleLive">
+                  Alternar Modo Recolhível no Sumário Principal
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Geração Automática de Slugs em Português -->
+        <section id="toc-slugs" class="mb-5">
+          <h2>4. Geração Inteligente de Slugs e Normalização</h2>
+          <p class="text-muted">
+            Nem todos os cabeçalhos possuem um <code>id="..."</code> manual no HTML. Quando o DexterToc encontra uma tag
+            sem identificador, ele aplica um algoritmo avançado de normalização diacrítica NFD específico para idiomas como o português:
+          </p>
+
+          <div class="table-responsive mb-4">
+            <table class="table table-bordered table-striped table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>Texto do Cabeçalho</th>
+                  <th>ID / Âncora Gerada Automaticamente</th>
+                  <th>Tratamento Especial</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Configuração de Autenticação</code></td>
+                  <td><code>#configuracao-de-autenticacao</code></td>
+                  <td>Remove til (ã) e cedilha (ç)</td>
+                </tr>
+                <tr>
+                  <td><code>Preço &amp; Condições Especiais!</code></td>
+                  <td><code>#preco-condicoes-especiais</code></td>
+                  <td>Remove pontuações e símbolos comerciais</td>
+                </tr>
+                <tr>
+                  <td><code>Seção 1 (Repetida)</code></td>
+                  <td><code>#secao-1</code> e <code>#secao-1-1</code></td>
+                  <td>Adiciona sufixo numérico para evitar colisões</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 5. Filtragem de Títulos e Exclusões -->
+        <section id="toc-filters" class="mb-5">
+          <h2>5. Filtragem de Níveis e Ignorando Seções</h2>
+          <p class="text-muted">
+            Você pode definir exatamente quais tags devem compor o índice e excluir títulos indesejados (como títulos de modais ou cards):
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <h6 class="fw-bold">Especificar Níveis de Título</h6>
+                <p class="small text-muted mb-0">
+                  Use <code>data-toc-headings="h2, h3"</code> para incluir apenas seções e subseções principais, ou
+                  <code>data-toc-headings="h2, h3, h4"</code> para maior granularidade.
+                </p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="fw-bold">Ignorando Títulos Específicos</h6>
+                <p class="small text-muted mb-0">
+                  Adicione a classe <code>.no-toc</code> ou o atributo <code>data-toc-skip</code> a qualquer cabeçalho que
+                  não deva aparecer no sumário.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Variantes Visuais: Track, Pills e Dots -->
+        <section id="toc-variants" class="mb-5">
+          <h2>6. Variantes Visuais e Estilos de Indicador</h2>
+          <p class="text-muted">
+            O Dexter UI oferece diferentes variações cosméticas para o sumário, adaptando-se a blogs, wikis, dashboards e livros digitais:
+          </p>
+
+          <div class="row g-4 mb-4">
+            <!-- Padrão Track -->
+            <div class="col-md-4">
+              <div class="card h-100 p-3">
+                <h6 class="fw-bold mb-2">Trilha Lateral (Padrão)</h6>
+                <div class="dx-toc toc-primary">
+                  <ul class="toc-list nav">
+                    <li class="toc-item"><a href="#toc-variants" class="toc-link active">1. Introdução Geral</a></li>
+                    <li class="toc-item"><a href="#toc-variants" class="toc-link">2. Configurações</a></li>
+                    <li class="toc-item"><a href="#toc-variants" class="toc-link">3. Conclusão</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Variante Pills -->
+            <div class="col-md-4">
+              <div class="card h-100 p-3">
+                <h6 class="fw-bold mb-2">Modo Cápsula (.toc-pills)</h6>
+                <div class="dx-toc toc-pills toc-indigo">
+                  <ul class="toc-list nav">
+                    <li class="toc-item"><a href="#toc-variants" class="toc-link active">1. Introdução Geral</a></li>
+                    <li class="toc-item"><a href="#toc-variants" class="toc-link">2. Configurações</a></li>
+                    <li class="toc-item"><a href="#toc-variants" class="toc-link">3. Conclusão</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Variante Dots -->
+            <div class="col-md-4">
+              <div class="card h-100 p-3">
+                <h6 class="fw-bold mb-2">Com Marcador (.toc-dots)</h6>
+                <div class="dx-toc toc-dots toc-emerald">
+                  <ul class="toc-list nav">
+                    <li class="toc-item"><a href="#toc-variants" class="toc-link active">1. Introdução Geral</a></li>
+                    <li class="toc-item"><a href="#toc-variants" class="toc-link">2. Configurações</a></li>
+                    <li class="toc-item"><a href="#toc-variants" class="toc-link">3. Conclusão</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Paleta de Cores Oficiais -->
+        <section id="toc-colors" class="mb-5">
+          <h2>7. Suporte às 28 Cores Oficiais do Design System</h2>
+          <p class="text-muted">
+            Alterne o realce de cor do sumário simplesmente aplicando a classe temática desejada:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button type="button" class="btn btn-sm btn-primary" onclick="setTocTheme('primary')">Primary</button>
+              <button type="button" class="btn btn-sm btn-secondary" onclick="setTocTheme('secondary')">Secondary</button>
+              <button type="button" class="btn btn-sm btn-info" onclick="setTocTheme('info')">Info</button>
+              <button type="button" class="btn btn-sm btn-success" onclick="setTocTheme('success')">Success</button>
+              <button type="button" class="btn btn-sm btn-warning text-dark" onclick="setTocTheme('warning')">Warning</button>
+              <button type="button" class="btn btn-sm btn-danger" onclick="setTocTheme('danger')">Danger</button>
+            </div>
+            <p class="small text-muted mb-0">
+              Clique nos botões acima para ver o sumário lateral mudar dinamicamente de tom! Todas as classes
+              <code>.toc-indigo</code>, <code>.toc-emerald</code>, <code>.toc-ruby</code>, <code>.toc-amber</code>, <code>.toc-violet</code>,
+              etc. estão disponíveis nativamente.
+            </p>
+          </div>
+        </section>
+
+        <!-- 8. Barra de Ferramentas & API JavaScript -->
+        <section id="toc-playground" class="mb-5">
+          <h2>8. Barra de Ferramentas &amp; API JavaScript</h2>
+          <p class="text-muted">
+            O DexterToc expõe métodos programáticos para controle completo do fluxo de navegação:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button type="button" class="btn btn-primary btn-sm" id="btnScrollToTop">
+                ↑ Rolar para o Topo (Overview)
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btnScrollToColors">
+                ↓ Rolar para Seção 7 (Cores)
+              </button>
+              <button type="button" class="btn btn-outline-success btn-sm" id="btnAddDynamicHeading">
+                + Inserir Seção Dinâmica no Conteúdo
+              </button>
+              <button type="button" class="btn btn-outline-info btn-sm" id="btnRefreshToc">
+                🔄 Recarregar Sumário (toc.refresh())
+              </button>
+            </div>
+            <div id="dynamicContainer"></div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Obter ou instanciar programaticamente
+const toc = DexterToc.getOrCreateInstance('#toc', {
+  headings: 'h2, h3',
+  offset: 90,
+  collapsible: false,
+  smoothScroll: true
+});
+
+// Navegar para uma seção específica
+toc.scrollTo('toc-colors');
+
+// Atualizar o sumário após carregar novo conteúdo AJAX / SPA
+toc.refresh();
+
+// Destruir e desvincular listeners
+toc.destroy();</code></pre>
+          </div>
+        </section>
+
+        <!-- 9. Tabela de Opções e Eventos -->
+        <section id="toc-api-reference" class="mb-5">
+          <h2>9. Referência Completa de Opções e Eventos</h2>
+          <p class="text-muted">
+            Lista exaustiva de atributos HTML e parâmetros suportados:
+          </p>
+
+          <div class="table-responsive mb-4">
+            <table class="table table-bordered table-striped table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>Opção</th>
+                  <th>Atributo HTML</th>
+                  <th>Padrão</th>
+                  <th>Descrição</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>target</code></td>
+                  <td><code>data-toc-target</code></td>
+                  <td><code>null</code> (auto)</td>
+                  <td>Seletor do container a ser escaneado (busca <code>[data-toc-content]</code>, <code>main</code> ou <code>body</code>).</td>
+                </tr>
+                <tr>
+                  <td><code>headings</code></td>
+                  <td><code>data-toc-headings</code></td>
+                  <td><code>'h2, h3'</code></td>
+                  <td>Seletor de tags de cabeçalho a incluir na lista hierárquica.</td>
+                </tr>
+                <tr>
+                  <td><code>offset</code></td>
+                  <td><code>data-toc-offset</code></td>
+                  <td><code>80</code></td>
+                  <td>Distância em pixels do topo para acionamento do ScrollSpy e parada de rolagem.</td>
+                </tr>
+                <tr>
+                  <td><code>collapsible</code></td>
+                  <td><code>data-toc-collapsible</code></td>
+                  <td><code>false</code></td>
+                  <td>Quando <code>true</code>, sublistas aninhadas abrem e fecham automaticamente ao rolar.</td>
+                </tr>
+                <tr>
+                  <td><code>smoothScroll</code></td>
+                  <td><code>data-toc-smooth-scroll</code></td>
+                  <td><code>true</code></td>
+                  <td>Ativa deslizamento suave ao clicar nos links do sumário.</td>
+                </tr>
+                <tr>
+                  <td><code>title</code></td>
+                  <td><code>data-toc-title</code></td>
+                  <td><code>''</code></td>
+                  <td>Título exibido no topo do sumário (ex.: "Nesta página").</td>
+                </tr>
+                <tr>
+                  <td><code>autoIds</code></td>
+                  <td>—</td>
+                  <td><code>true</code></td>
+                  <td>Gera automaticamente slugs e âncoras para cabeçalhos sem ID.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+    <nav id="toc" data-toggle="toc" class="doc-toc" data-toc-title="Nesta página" data-toc-headings="h2, h3" aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+
+  <!-- Script Interativo da Página -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Instância do TOC principal
+      const tocEl = document.getElementById('toc');
+      let tocInstance = DexterToc.getInstance(tocEl);
+
+            
+// Ações dos Botões Interativos
+      document.getElementById('btnScrollToTop')?.addEventListener('click', () => {
+        tocInstance.scrollTo('toc-overview');
+      });
+
+      document.getElementById('btnScrollToColors')?.addEventListener('click', () => {
+        tocInstance.scrollTo('toc-colors');
+      });
+
+      // Alternar Modo Recolhível no Sumário Principal
+      document.getElementById('btnToggleCollapsibleLive')?.addEventListener('click', () => {
+        tocEl.classList.toggle('toc-collapsible');
+        tocInstance.refresh();
+      });
+
+      // Inserir Título Dinâmico
+      let dynamicCount = 1;
+      document.getElementById('btnAddDynamicHeading')?.addEventListener('click', () => {
+        const container = document.getElementById('dynamicContainer');
+        const newHeading = document.createElement('h3');
+        newHeading.id = 'secao-dinamica-' + dynamicCount;
+        newHeading.className = 'mt-3 text-primary';
+        newHeading.textContent = '8.' + dynamicCount + ' Seção Dinâmica Criada em Tempo de Execução';
+        
+        const newPara = document.createElement('p');
+        newPara.className = 'text-muted small';
+        newPara.textContent = 'Esta seção foi inserida no DOM via JavaScript. Clique em "Recarregar Sumário" para indexá-la no TOC!';
+
+        container.appendChild(newHeading);
+        container.appendChild(newPara);
+        dynamicCount++;
+      });
+
+      // Recarregar TOC
+      document.getElementById('btnRefreshToc')?.addEventListener('click', () => {
+        tocInstance.refresh();
+        alert('Sumário recarregado com sucesso! Seções dinâmicas indexadas.');
+      });
+    });
+
+        function setTocTheme(themeName) {
+      const tocEl = document.getElementById('toc');
+      // Remove classes anteriores
+      tocEl.className = tocEl.className.replace(/\btoc-[a-z]+\b/g, '');
+      tocEl.classList.add('toc-' + themeName);
+      tocEl.classList.add('col-xl-2', 'doc-toc', 'toc-sticky', 'd-none', 'd-xl-block');
+    }
+  </script>
+</body>
+</html>

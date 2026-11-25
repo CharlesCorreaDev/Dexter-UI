@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Collections (Listas Materialize) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <!-- Breadcrumbs -->
+      <nav aria-label="breadcrumb" class="mb-3">
+        <small class="text-muted">Documentação &gt; Core UI &gt; <strong style="color: inherit;">Collections (Listas Materialize)</strong></small>
+      </nav>
+
+      <h1 class="mb-2">Collections (Listas Materialize)</h1>
+      <p class="lead text-muted mb-4">Listas estruturadas no padrão Materialize CSS integradas ao ecossistema Dexter UI: itens básicos, links interativos com estado ativo, cabeçalhos (<code>.with-header</code>), ações secundárias (<code>.secondary-content</code>), cartões com avatar circular (<code>.avatar</code>), descarte por arrasto horizontal (<code>.dismissable</code>) e suporte completo às 28 cores oficiais e Dark Mode.</p>
+      <hr class="my-4">
+
+      <!-- 1. Coleção Básica -->
+      <section id="col-basic" class="mb-5">
+        <h2>1. Coleção Básica (Basic)</h2>
+        <p class="text-muted">A estrutura padrão utiliza <code>ul.collection</code> com itens <code>li.collection-item</code>. Não exige JavaScript e se adapta automaticamente ao tema claro ou escuro.</p>
+
+        <div class="doc-card">
+          <ul class="collection">
+            <li class="collection-item">Alvin — Revisão de Pull Request #148</li>
+            <li class="collection-item">Alvin — Integração Contínua (Pipeline Verde)</li>
+            <li class="collection-item">Alvin — Auditoria de Segurança SAST</li>
+            <li class="collection-item">Alvin — Publicação da Release v4.2</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 2. Links Selecionáveis -->
+      <section id="col-links" class="mb-5">
+        <h2>2. Links &amp; Seleção Ativa (Links)</h2>
+        <p class="text-muted">Use <code>&lt;div class="collection"&gt;</code> com <code>&lt;a class="collection-item"&gt;</code> para criar listas clicáveis. Adicione <code>data-dx-collection-selectable</code> para alternar automaticamente a classe <code>.active</code> ao clicar em qualquer item.</p>
+
+        <div class="doc-card">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+            <span class="small text-muted">Clique em qualquer item para alternar o destaque <code>.active</code>:</span>
+            <span id="colSelectStatus" class="badge bg-primary-subtle text-primary fw-semibold">Ativo: Visão Geral</span>
+          </div>
+
+          <div class="collection" data-dx-collection-selectable id="demoSelectableCollection">
+            <a href="#!" class="collection-item active" aria-current="true">Visão Geral do Sistema</a>
+            <a href="#!" class="collection-item">Relatórios &amp; Telemetria</a>
+            <a href="#!" class="collection-item">Gerenciamento de Equipes</a>
+            <a href="#!" class="collection-item">Logs &amp; Auditoria</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Headers & Secondary Content -->
+      <section id="col-header-secondary" class="mb-5">
+        <h2>3. Cabeçalhos (<code>.with-header</code>) &amp; Ações Secundárias</h2>
+        <p class="text-muted">Adicione <code>.with-header</code> à coleção com um primeiro item <code>li.collection-header</code> contendo um título (<code>&lt;h4&gt;</code>), e posicione ícones ou badges à direita com <code>.secondary-content</code>.</p>
+
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <ul class="collection with-header">
+                <li class="collection-header"><h4>Departamentos Ativos</h4></li>
+                <li class="collection-item">
+                  <div>
+                    <span>Engenharia de Plataforma</span>
+                    <a href="#!" class="secondary-content" aria-label="Abrir Engenharia">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </a>
+                  </div>
+                </li>
+                <li class="collection-item">
+                  <div>
+                    <span>Design System &amp; UX</span>
+                    <a href="#!" class="secondary-content" aria-label="Abrir Design System">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </a>
+                  </div>
+                </li>
+                <li class="collection-item">
+                  <div>
+                    <span>Qualidade &amp; Testes E2E</span>
+                    <a href="#!" class="secondary-content" aria-label="Abrir Qualidade">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <ul class="collection with-header">
+                <li class="collection-header"><h4>Filas de Processamento</h4></li>
+                <li class="collection-item">
+                  <div>
+                    <span>Notificações Push</span>
+                    <span class="secondary-content badge bg-success-subtle text-success">Online</span>
+                  </div>
+                </li>
+                <li class="collection-item">
+                  <div>
+                    <span>Indexação de Busca</span>
+                    <span class="secondary-content badge bg-warning-subtle text-warning">42 na fila</span>
+                  </div>
+                </li>
+                <li class="collection-item">
+                  <div>
+                    <span>Exportação PDF</span>
+                    <span class="secondary-content badge bg-info-subtle text-info">3 ativos</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Avatar Content -->
+      <section id="col-avatar" class="mb-5">
+        <h2>4. Conteúdo com Avatar (<code>.collection-item.avatar</code>)</h2>
+        <p class="text-muted">Combine <code>.collection-item.avatar</code> com um elemento <code>.circle</code> (imagem ou ícone circular de <code>42px &times; 42px</code>), título <code>.title</code>, descrição em <code>&lt;p&gt;</code> e ação secundária alinhada no topo direito.</p>
+
+        <div class="doc-card">
+          <ul class="collection">
+            <li class="collection-item avatar">
+              <img class="circle" alt="Avatar de Charles Corrêa" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='32' fill='%233b5998'/%3E%3Ccircle cx='32' cy='24' r='11' fill='%23e2e8f0'/%3E%3Cpath d='M14 56c3-11 12-16 18-16s15 5 18 16' fill='%23cbd5e1'/%3E%3C/svg%3E">
+              <span class="title">Charles Corrêa</span>
+              <p>Arquiteto de Design System<br>Último commit há 12 minutos</p>
+              <a href="#!" class="secondary-content" aria-label="Favoritar Charles Corrêa">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </a>
+            </li>
+            <li class="collection-item avatar">
+              <span class="circle bg-teal text-white" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+              </span>
+              <span class="title">Arquivos de Build CSS</span>
+              <p>Pacote distribuído em dist/css/dexter.css<br>Compressão gzip validada</p>
+              <a href="#!" class="secondary-content" aria-label="Favoritar Build CSS">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </a>
+            </li>
+            <li class="collection-item avatar">
+              <span class="circle bg-indigo text-white" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </span>
+              <span class="title">Sprint Review — Trimestre Q4</span>
+              <p>Documentação e acessibilidade WCAG AA<br>44 páginas interativas no portal</p>
+              <a href="#!" class="secondary-content" aria-label="Favoritar Sprint Review">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </a>
+            </li>
+            <li class="collection-item avatar">
+              <span class="circle bg-coral text-white" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </span>
+              <span class="title">Alerta de Latência</span>
+              <p>Gateway API Secundário<br>Tempo de resposta estabilizado em 42ms</p>
+              <a href="#!" class="secondary-content" aria-label="Favoritar Alerta de Latência">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5. Dismissible Content -->
+      <section id="col-dismissible" class="mb-5">
+        <h2>5. Itens Descartáveis (<code>.dismissable</code> / Swipe &amp; Botão)</h2>
+        <p class="text-muted">Adicione <code>.dismissable</code> (ou <code>.dismissible</code>) a qualquer <code>.collection-item</code> para permitir o descarte arrastando horizontalmente (&ge; 90px com Pointer Events) ou clicando no botão acessível <code>.collection-dismiss-btn</code>.</p>
+
+        <div class="doc-card">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+            <span id="colDismissStatus" class="small text-muted">4 itens visíveis — arraste horizontalmente ou clique no botão &times;</span>
+            <button type="button" id="btnRestoreCollection" class="btn btn-sm btn-outline-primary">Restaurar Itens</button>
+          </div>
+
+          <ul class="collection" id="demoDismissibleCollection">
+            <li class="collection-item dismissable">
+              <div>
+                <span>Notificação de Deploy #412 — Ambiente de Produção</span>
+                <button type="button" class="collection-dismiss-btn" aria-label="Remover notificação #412">&times;</button>
+              </div>
+            </li>
+            <li class="collection-item dismissable">
+              <div>
+                <span>Backup Concluído — Banco de Dados Principal</span>
+                <button type="button" class="collection-dismiss-btn" aria-label="Remover notificação de backup">&times;</button>
+              </div>
+            </li>
+            <li class="collection-item dismissable">
+              <div>
+                <span>Solicitação de Acesso: API Gateway Corporativa</span>
+                <button type="button" class="collection-dismiss-btn" aria-label="Remover solicitação de acesso">&times;</button>
+              </div>
+            </li>
+            <li class="collection-item dismissable">
+              <div>
+                <span>Atualização de Segurança Disponível (Dexter UI)</span>
+                <button type="button" class="collection-dismiss-btn" aria-label="Remover alerta de atualização">&times;</button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6. Cores Oficiais & Variantes -->
+      <section id="col-colors-variants" class="mb-5">
+        <h2>6. Cores Oficiais (<code>.collection-{cor}</code>) &amp; Variantes</h2>
+        <p class="text-muted">Aplique qualquer uma das 28 cores da paleta oficial Dexter UI via <code>.collection-{cor}</code> para personalizar o estado <code>.active</code>, links secundários e fundo de avatares. Combine ainda com <code>.collection-sm</code> (compacta) ou <code>.collection-flush</code> (sem bordas laterais).</p>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="doc-card h-100">
+              <div class="small fw-bold mb-2"><code>.collection-indigo</code></div>
+              <div class="collection collection-indigo collection-sm" data-dx-collection-selectable>
+                <a href="#!" class="collection-item active">Indigo Ativo</a>
+                <a href="#!" class="collection-item">Permissões</a>
+                <a href="#!" class="collection-item">Webhooks</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="doc-card h-100">
+              <div class="small fw-bold mb-2"><code>.collection-teal</code></div>
+              <div class="collection collection-teal collection-sm" data-dx-collection-selectable>
+                <a href="#!" class="collection-item active">Teal Ativo</a>
+                <a href="#!" class="collection-item">Faturamento</a>
+                <a href="#!" class="collection-item">Relatórios</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="doc-card h-100">
+              <div class="small fw-bold mb-2"><code>.collection-coral</code></div>
+              <div class="collection collection-coral collection-sm" data-dx-collection-selectable>
+                <a href="#!" class="collection-item active">Coral Ativo</a>
+                <a href="#!" class="collection-item">Alertas Críticos</a>
+                <a href="#!" class="collection-item">Diagnóstico</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-card mt-4">
+          <div class="small fw-bold mb-2">Variante sem bordas laterais (<code>.collection-flush</code>) dentro de painel</div>
+          <ul class="collection collection-flush collection-teal">
+            <li class="collection-item">
+              <div>
+                <span>Sincronização Automática</span>
+                <span class="secondary-content">Habilitada</span>
+              </div>
+            </li>
+            <li class="collection-item">
+              <div>
+                <span>Modo de Alto Contraste</span>
+                <span class="secondary-content">Padrão do Sistema</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 7. Código HTML & API JS -->
+      <section id="col-code" class="mb-5">
+        <h2>7. Exemplos de Código &amp; API JavaScript</h2>
+        <p class="text-muted">Estrutura HTML semântica compatível com o Materialize CSS e eventos customizados do módulo <code>DexterCollection</code>:</p>
+
+        <div class="code-window mb-4" data-dx-copy="true">
+          <div class="code-window-header">
+            <div class="code-dots">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+            <div class="code-actions">
+              <span class="code-badge">HTML</span>
+              <button type="button" class="code-copy-btn">Copiar</button>
+            </div>
+          </div>
+          <pre class="code-block"><code class="language-html">&lt;!-- Coleção com cabeçalho, avatar e ação secundária --&gt;
+&lt;ul class="collection with-header collection-teal"&gt;
+  &lt;li class="collection-header"&gt;&lt;h4&gt;Equipe&lt;/h4&gt;&lt;/li&gt;
+  &lt;li class="collection-item avatar"&gt;
+    &lt;img src="avatar.png" alt="Usuário" class="circle"&gt;
+    &lt;span class="title"&gt;Charles Corrêa&lt;/span&gt;
+    &lt;p&gt;Primeira linha&lt;br&gt;Segunda linha&lt;/p&gt;
+    &lt;a href="#!" class="secondary-content"&gt;Ver&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class="collection-item dismissable"&gt;
+    &lt;div&gt;
+      &lt;span&gt;Item descartável&lt;/span&gt;
+      &lt;button type="button" class="collection-dismiss-btn" aria-label="Remover"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </div>
+
+        <div class="code-window mb-0" data-dx-copy="true">
+          <div class="code-window-header">
+            <div class="code-dots">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+            <div class="code-actions">
+              <span class="code-badge">JAVASCRIPT</span>
+              <button type="button" class="code-copy-btn">Copiar</button>
+            </div>
+          </div>
+          <pre class="code-block"><code class="language-javascript">// Escutar eventos de seleção e descarte
+document.addEventListener('dexter.collection.select', (e) =&gt; {
+  console.log('Selecionado:', e.detail.item.textContent.trim());
+});
+
+document.addEventListener('dexter.collection.dismiss', (e) =&gt; {
+  console.log('Item removido na direção:', e.detail.direction);
+});
+
+// Descartar programaticamente um item específico
+const item = document.querySelector('#meu-item');
+DexterCollection.dismiss(item, 1);</code></pre>
+        </div>
+      </section>
+
+      <!-- Navegação Inferior -->
+      <div class="d-flex justify-content-between pt-4 border-top mt-5">
+        <a href="data-display.html" class="doc-header-link text-primary fw-semibold">
+          &larr; Anterior: Dados, Chat, Timeline &amp; Stats
+        </a>
+        <a href="footer.html" class="doc-header-link text-primary fw-semibold">
+          Próximo: Footer &amp; Sticky Footer (Materialize) &rarr;
+        </a>
+      </div>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-extras.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+
+  <script>
+    (function () {
+      // Atualiza status da lista selecionável
+      var selectable = document.getElementById('demoSelectableCollection');
+      var selectStatus = document.getElementById('colSelectStatus');
+      if (selectable && selectStatus) {
+        selectable.addEventListener('dexter.collection.select', function (e) {
+          selectStatus.textContent = 'Ativo: ' + e.detail.item.textContent.trim();
+        });
+      }
+
+      // Controle de restauração dos itens descartáveis
+      var dismissList = document.getElementById('demoDismissibleCollection');
+      var dismissStatus = document.getElementById('colDismissStatus');
+      var btnRestore = document.getElementById('btnRestoreCollection');
+
+      if (dismissList && dismissStatus && btnRestore) {
+        var initialMarkup = dismissList.innerHTML;
+
+        var updateDismissStatus = function () {
+          var count = dismissList.querySelectorAll('.collection-item').length;
+          dismissStatus.textContent = count === 0
+            ? 'Todos os itens foram removidos — clique em Restaurar Itens'
+            : count + (count === 1 ? ' item visível' : ' itens visíveis') + ' — arraste horizontalmente ou clique no botão ×';
+        };
+
+        dismissList.addEventListener('dexter.collection.dismiss', function () {
+          window.setTimeout(updateDismissStatus, 10);
+        });
+
+        btnRestore.addEventListener('click', function () {
+          dismissList.innerHTML = initialMarkup;
+          if (window.DexterCollection && typeof window.DexterCollection.init === 'function') {
+            window.DexterCollection.init(dismissList);
+          }
+          updateDismissStatus();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

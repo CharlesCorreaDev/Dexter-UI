@@ -1,0 +1,183 @@
+<!--
+  =============================================================================
+  Dexter UI Framework
+  =============================================================================
+
+  @file        examples/elements.html
+  @description [PT-BR] Página de teste dos elementos HTML nativos no layout portal D4Sign / ReadMe.
+               [EN]    Native HTML elements test page in D4Sign / ReadMe portal layout.
+
+  @author      Charles Corrêa
+  @contact     E-mail: charlescorreaweb@gmail.com
+  @website     https://charlescorrea.com.br
+  @github      https://github.com/CharlesCorreaDev
+
+  @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+  @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+  @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+  @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+  @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+
+  @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+  @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+               [EN]    MIT – see the LICENSE file at the repository root.
+  =============================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elementos HTML Nativos – Dexter UI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+    <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <small class="text-muted">Documentação &gt; Elementos Base &gt; <strong style="color: inherit;">Elementos HTML Nativos</strong></small>
+        </nav>
+
+        <h1 class="mb-2">Elementos HTML Nativos</h1>
+        <p class="lead text-muted mb-4">Estilos base limpos para elementos nativos do HTML5, garantindo acessibilidade e usabilidade sem necessidade de classes adicionais.</p>
+        <hr class="my-4">
+
+        <!-- Links -->
+        <section id="links" class="mb-5">
+          <h2>Links Acessíveis</h2>
+          <p>O sublinhado é mantido por padrão (WCAG 1.4.1: a cor sozinha não pode ser o único indicador visual de um link).</p>
+          <div class="doc-card">
+            <p>Um <a href="#links">link comum com transição suave</a> no hover.</p>
+            <p>Uma <a>âncora sem atributo href</a> é tratada apenas como texto.</p>
+            <p class="mb-0">Link envolvendo tag de código: <a href="#links"><code>npm run build</code></a>.</p>
+          </div>
+        </section>
+
+        <!-- Code Blocks -->
+        <section id="code" class="mb-5">
+          <h2>Blocos de Código e Teclas</h2>
+          <div class="doc-card">
+            <p>Código em linha: <code>&lt;header&gt;</code> e <code>&lt;main&gt;</code>.</p>
+            <p>Atalho de teclado: use <kbd>Ctrl + P</kbd> para imprimir, ou <kbd><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd></kbd>.</p>
+            <p>Saída de programa com tag samp: <samp>Compilation successful in 24ms.</samp></p>
+            <pre tabindex="0"><code>// Exemplo de código dentro de &lt;pre&gt; com scrollbar acessível
+function initDexter() {
+  console.log("Dexter UI Framework pronto!");
+}</code></pre>
+          </div>
+        </section>
+
+        <!-- Tables & Forms -->
+        <section id="tables" class="mb-5">
+          <h2>Tabelas e Formulários</h2>
+          <div class="doc-card">
+            <table>
+              <caption>Tabela com legenda na base (caption-side: bottom)</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Cor</th>
+                  <th scope="col">Hex</th>
+                  <th scope="col">Contraste</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Primary</td><td>#3b5998</td><td>6.84:1</td></tr>
+                <tr><td>Secondary</td><td>#14306b</td><td>12.61:1</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="doc-card">
+            <form>
+              <fieldset>
+                <legend>Campos de formulário nativos</legend>
+                <p>
+                  <label for="campo-nome">Nome:</label><br>
+                  <input type="text" id="campo-nome" placeholder="Digite seu nome">
+                </p>
+                <p>
+                  <label><input type="checkbox" checked> Opção marcada</label>&nbsp;&nbsp;
+                  <label><input type="radio" name="rd" checked> Escolha A</label>&nbsp;
+                  <label><input type="radio" name="rd"> Escolha B</label>
+                </p>
+                <p>
+                  <label for="campo-prog">Progresso nativo (&lt;progress&gt;):</label><br>
+                  <progress id="campo-prog" value="70" max="100">70%</progress>
+                </p>
+              </fieldset>
+            </form>
+          </div>
+        </section>
+
+        <!-- Dialog -->
+        <section id="dialog" class="mb-5">
+          <h2>Diálogos Nativos (&lt;dialog&gt;)</h2>
+          <p>O elemento HTML5 <code>&lt;dialog&gt;</code> conta com estilo base para backdrop escuro e cantos arredondados.</p>
+          <div class="doc-card">
+            <button type="button" class="btn border p-2 rounded" onclick="document.getElementById('demo-modal').showModal()">
+              Abrir diálogo nativo (&lt;dialog&gt;)
+            </button>
+
+            <dialog id="demo-modal">
+              <h3>Modal Nativo Dexter UI</h3>
+              <p class="text-muted">Este modal utiliza a API nativa do navegador via <code>dialog.showModal()</code>.</p>
+              <button type="button" class="btn border p-2 rounded mt-2" onclick="this.closest('dialog').close()">Fechar modal</button>
+            </dialog>
+          </div>
+        </section>
+
+        <!-- Summary & Details -->
+        <section id="details" class="mb-5">
+          <h2>Summary e Details</h2>
+          <div class="doc-card">
+            <details class="mb-2">
+              <summary>Clique para expandir informações</summary>
+              <p class="mt-2 mb-0 text-muted">O cursor do summary indica que é clicável e mantém o marcador nativo.</p>
+            </details>
+            <details open>
+              <summary>Detalhe aberto por padrão</summary>
+              <p class="mt-2 mb-0 text-muted">Conteúdo visível imediatamente.</p>
+            </details>
+          </div>
+        </section>
+
+        <!-- Navegação Inferior -->
+        <div class="d-flex justify-content-between pt-4 border-top mt-5">
+          <a href="utilities.html" class="doc-nav-link text-primary fw-semibold">
+            &larr; Anterior: Utilitários
+          </a>
+          <a href="index.html" class="doc-nav-link text-primary fw-semibold">
+            Início: Introdução &rarr;
+          </a>
+        </div>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Árvore Hierárquica (TreeView / bs5treeview) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-4">
+        <h1 class="display-6 fw-bold mb-2">Árvore Hierárquica (Tree View)</h1>
+        <p class="lead text-muted mb-0">
+          Visualizador em árvore zero-dependência inspirado no <strong>nhmvienna/bs5treeview</strong> (chniter/bstreeview),
+          livre de jQuery, Bootstrap JS e FontAwesome. Suporta estrutura multinível com links e ícones, busca instantânea
+          insensível a acentos NFD com abertura automática de caminhos, checkboxes tri-state em cascata, navegação
+          WAI-ARIA por teclado, 28 cores e Modo Escuro.
+        </p>
+      </div>
+
+      <!-- 1. Árvore Básica & Compatibilidade bs5treeview -->
+      <section id="tree-basic" class="mb-5">
+        <h2>1. Árvore Básica &amp; Controles de Expansão</h2>
+        <p class="text-muted">Clique nos nós pais para expandir/recolher ou use as setas do teclado (<kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd>):</p>
+
+        <div class="doc-card">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-sm btn-primary" id="btnTreeExpandAll">Expandir Tudo</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="btnTreeCollapseAll">Recolher Tudo</button>
+          </div>
+          <div id="demoTreeBasic" class="mb-3"></div>
+          <div id="treeSelectLog" class="small font-monospace text-muted">Nenhum nó selecionado ainda.</div>
+        </div>
+      </section>
+
+      <!-- 2. Busca em Tempo Real & Contadores -->
+      <section id="tree-search" class="mb-5">
+        <h2>2. Pesquisa em Tempo Real (Sem Acentos) &amp; Contadores</h2>
+        <p class="text-muted">
+          Digite no campo abaixo (ex.: <code>configuracao</code> ou <code>seguranca</code>). A árvore normaliza acentos e expande automaticamente os ramos correspondentes:
+        </p>
+
+        <div class="doc-card">
+          <div class="mb-3">
+            <input type="search" id="treeSearchInput" class="form-control" placeholder="Filtrar nós da árvore (ex.: configuracao, relatórios, api)...">
+          </div>
+          <div id="demoTreeSearch" class="treeview-indigo treeview-lines"></div>
+        </div>
+      </section>
+
+      <!-- 3. Checkboxes Tri-State em Cascata -->
+      <section id="tree-checkboxes" class="mb-5">
+        <h2>3. Checkboxes Tri-State em Cascata (:indeterminate)</h2>
+        <p class="text-muted">
+          Marcar ou desmarcar um nó pai propaga para todos os filhos; seleções parciais colocam os ancestrais em estado indeterminado:
+        </p>
+
+        <div class="doc-card">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-sm btn-success" id="btnTreeGetChecked">Obter Marcados (getChecked)</button>
+          </div>
+          <div id="demoTreeCheck" class="treeview-green mb-3"></div>
+          <div id="treeCheckLog" class="small font-monospace text-muted"></div>
+        </div>
+      </section>
+
+      <!-- 4. Variantes Visuais & API -->
+      <section id="tree-variants" class="mb-5">
+        <h2>4. Tamanhos, Cores Oficiais e API JavaScript</h2>
+        <div class="doc-card">
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <h6 class="fw-bold mb-2">Compacta + Coral (.treeview-sm.treeview-coral)</h6>
+              <div id="demoTreeSmall" class="treeview-sm treeview-coral"></div>
+            </div>
+            <div class="col-md-6">
+              <h6 class="fw-bold mb-2">Flush sem borda + Turquoise (.treeview-flush)</h6>
+              <div id="demoTreeFlush" class="treeview-flush treeview-turquoise"></div>
+            </div>
+          </div>
+
+          <div class="code-window" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <div class="code-actions"><span class="code-badge">JS</span><button type="button" class="code-copy-btn">Copiar</button></div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">const tree = new DexterTreeView('#minhaArvore', {
+  data: [
+    { text: 'Módulo Principal', icon: '📁', expanded: true, nodes: [
+      { id: 'cfg-gerais', text: 'Configurações Gerais', icon: '⚙️' },
+      { text: 'Documentação Externa', icon: '🔗', href: 'https://charlescorrea.com.br' }
+    ]}
+  ],
+  checkboxes: true,
+  showCounts: true,
+  searchInput: '#buscaArvore'
+});</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-treeview.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const sampleData = [
+        {
+          id: 'node-sistema',
+          text: 'Sistema & Plataforma',
+          icon: '🖥️',
+          expanded: true,
+          nodes: [
+            {
+              id: 'node-config',
+              text: 'Configurações Avançadas',
+              icon: '⚙️',
+              nodes: [
+                { id: 'cfg-seg', text: 'Segurança e Chaves API', icon: '🔐' },
+                { id: 'cfg-notif', text: 'Notificações e Alertas', icon: '🔔' }
+              ]
+            },
+            { id: 'node-relatorios', text: 'Relatórios Gerenciais', icon: '📊', badge: 'Novo' }
+          ]
+        },
+        {
+          id: 'node-docs',
+          text: 'Documentação Oficial',
+          icon: '📚',
+          nodes: [
+            { text: 'Portal Dexter UI', icon: '🌐', href: 'index.html' },
+            { text: 'Código Fonte (src)', icon: '📦' }
+          ]
+        }
+      ];
+
+      const basicTree = new DexterTreeView('#demoTreeBasic', { data: sampleData });
+      const selectLog = document.getElementById('treeSelectLog');
+      document.getElementById('demoTreeBasic').addEventListener('dx:tree:select', (e) => {
+        if (selectLog) selectLog.textContent = 'Selecionado: "' + e.detail.node.text + '" (id: ' + e.detail.id + ')';
+      });
+      document.getElementById('btnTreeExpandAll')?.addEventListener('click', () => basicTree.expandAll());
+      document.getElementById('btnTreeCollapseAll')?.addEventListener('click', () => basicTree.collapseAll());
+
+      new DexterTreeView('#demoTreeSearch', {
+        data: sampleData,
+        showCounts: true,
+        searchInput: '#treeSearchInput'
+      });
+
+      const checkTree = new DexterTreeView('#demoTreeCheck', {
+        data: [
+          {
+            id: 'perm-root',
+            text: 'Permissões de Acesso',
+            expanded: true,
+            nodes: [
+              { id: 'perm-read', text: 'Leitura de Registros', checked: true },
+              { id: 'perm-write', text: 'Edição e Criação' },
+              { id: 'perm-del', text: 'Exclusão Permanente' }
+            ]
+          },
+          { id: 'perm-audit', text: 'Auditoria e Logs' }
+        ],
+        checkboxes: true
+      });
+
+      document.getElementById('btnTreeGetChecked')?.addEventListener('click', () => {
+        const checked = checkTree.getChecked().map(n => n.text);
+        const out = document.getElementById('treeCheckLog');
+        if (out) out.textContent = 'Nós marcados (' + checked.length + '): ' + JSON.stringify(checked);
+      });
+
+      new DexterTreeView('#demoTreeSmall', {
+        data: [{ text: 'Pasta Raiz', expanded: true, nodes: [{ text: 'Arquivo A.scss' }, { text: 'Arquivo B.js' }] }]
+      });
+
+      new DexterTreeView('#demoTreeFlush', {
+        data: [{ text: 'Menu Lateral', expanded: true, nodes: [{ text: 'Visão Geral' }, { text: 'Preferências' }] }]
+      });
+    });
+  </script>
+</body>
+</html>

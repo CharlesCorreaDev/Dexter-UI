@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acordeão &amp; Colapso (Accordion) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h1 class="display-6 fw-bold mb-1">Acordeão &amp; Colapso (Accordion)</h1>
+            <p class="text-muted mb-0">
+              Suíte nativa zero-dependência para painéis expansíveis e sanfonas de conteúdo, inspirada no Bootstrap 5 e no 
+              <code>accordion-bs5</code> de Hilton Muccillo, com botões de abrir/fechar todos, modos flush, cartões separados, 
+              ícones à esquerda, alternador mais/menos e suporte completo às 28 cores oficiais do Dexter UI.
+            </p>
+          </div>
+        </div>
+
+        <!-- 1. Acordeão Clássico Mútuo -->
+        <section id="accordion-classic" class="mb-5">
+          <h2>1. Acordeão Clássico com Exclusão Mútua</h2>
+          <p class="text-muted">
+            Ao clicar em um item, o painel selecionado se expande suavemente com transição acelerada por hardware e 
+            <strong>todos os outros itens se fecham automaticamente</strong> através do atributo <code>data-dx-parent</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="accordion" id="accordionClassicExample">
+              <!-- Item 1 -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    O que é o Dexter UI Framework?
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-dx-parent="#accordionClassicExample">
+                  <div class="accordion-body">
+                    <strong>O Dexter UI</strong> é um framework de design system moderno, modular e acessível para web e e-mail. Construído sem nenhuma dependência de jQuery ou bibliotecas externas pesadas, ele oferece componentes Vanilla JS ultraleves e tokens nativos em variáveis CSS com tema escuro automático.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Como funciona a exclusão mútua de painéis?
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-dx-parent="#accordionClassicExample">
+                  <div class="accordion-body">
+                    Ao definir <code>data-dx-parent="#meuAcordeao"</code> nos containers <code>.accordion-collapse</code>, o controlador <code>DexterCollapse</code> monitora os itens ativos e executa a transição de recolhimento dos demais itens abertos de forma sincronizada.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    O componente é compatível com leitores de tela e WAI-ARIA?
+                  </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-dx-parent="#accordionClassicExample">
+                  <div class="accordion-body">
+                    Sim! O padrão WAI-ARIA Accordion é plenamente atendido com atualização automática de <code>aria-expanded="true/false"</code>, vínculos semânticos <code>aria-controls</code> e navegação por teclado completa via setas (<kbd>↑</kbd> e <kbd>↓</kbd>), <kbd>Home</kbd> e <kbd>End</kbd>.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;div class="accordion" id="accordionExemplo"&gt;
+  &lt;div class="accordion-item"&gt;
+    &lt;h2 class="accordion-header" id="heading1"&gt;
+      &lt;button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#item1" aria-expanded="true"&gt;
+        Título da Sanfona 1
+      &lt;/button&gt;
+    &lt;/h2&gt;
+    &lt;div id="item1" class="accordion-collapse collapse show" data-dx-parent="#accordionExemplo"&gt;
+      &lt;div class="accordion-body"&gt;Conteúdo do item 1...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Botões de Abrir/Fechar Todos -->
+        <section id="accordion-actions" class="mb-5">
+          <h2>2. Barra de Ações: Abrir Todos &amp; Fechar Todos</h2>
+          <p class="text-muted">
+            Inspirado no projeto <code>accordion-bs5</code> de Hilton Muccillo, o Dexter UI oferece suporte nativo e declarativo para botões de controle global através dos atributos <code>data-dx-accordion-action="open-all"</code> e <code>data-dx-accordion-action="close-all"</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <!-- Barra de Ações -->
+            <div class="accordion-actions mb-3">
+              <button type="button" class="btn btn-outline-primary btn-sm" data-dx-accordion-action="open-all" data-dx-target="#accordionActionsDemo">
+                <span class="me-1">📂</span> Abrir Todos
+              </button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" data-dx-accordion-action="close-all" data-dx-target="#accordionActionsDemo">
+                <span class="me-1">📁</span> Fechar Todos
+              </button>
+              <span class="text-muted small ms-2">Controle em lote instantâneo</span>
+            </div>
+
+            <div class="accordion" id="accordionActionsDemo" data-dx-always-open="true">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="actHead1">
+                  <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#actCollapse1" aria-expanded="true">
+                    1. Informações Cadastrais da Empresa
+                  </button>
+                </h2>
+                <div id="actCollapse1" class="accordion-collapse collapse show">
+                  <div class="accordion-body">
+                    Razão Social: Dexter Soluções Web Ltda.<br>
+                    CNPJ: 00.000.000/0001-00 — Porto Alegre, RS, Brasil.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="actHead2">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#actCollapse2" aria-expanded="false">
+                    2. Configurações de API &amp; Webhooks
+                  </button>
+                </h2>
+                <div id="actCollapse2" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    Endpoints HTTPS configurados com autenticação Bearer Token e criptografia TLS 1.3 de ponta a ponta.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="actHead3">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#actCollapse3" aria-expanded="false">
+                    3. Registro de Atividades e Logs de Auditoria
+                  </button>
+                </h2>
+                <div id="actCollapse3" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    Último acesso realizado hoje às 15:40 via IP corporativo seguro.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Botões de Ação Declarativos --&gt;
+&lt;button type="button" class="btn btn-primary btn-sm" data-dx-accordion-action="open-all" data-dx-target="#meuAcordeao"&gt;
+  Abrir Todos
+&lt;/button&gt;
+&lt;button type="button" class="btn btn-secondary btn-sm" data-dx-accordion-action="close-all" data-dx-target="#meuAcordeao"&gt;
+  Fechar Todos
+&lt;/button&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 3. Acordeão Separado em Cartões (.accordion-bordered / .accordion-separated) -->
+        <section id="accordion-bordered" class="mb-5">
+          <h2>3. Acordeão em Cartões Separados (.accordion-bordered)</h2>
+          <p class="text-muted">
+            Adicione <code>.accordion-bordered</code> (ou <code>.accordion-separated</code>) para transformar a lista contínua em cartões independentes com bordas arredondadas e sombras sutis:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="accordion accordion-bordered" id="accordionBorderedDemo">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#borderCol1" aria-expanded="true">
+                    💳 Métodos de Pagamento Aceitos
+                  </button>
+                </h2>
+                <div id="borderCol1" class="accordion-collapse collapse show" data-dx-parent="#accordionBorderedDemo">
+                  <div class="accordion-body">
+                    Aceitamos Cartão de Crédito, PIX com compensação instantânea e Boleto Bancário.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#borderCol2" aria-expanded="false">
+                    📦 Prazos de Entrega e Rastreamento
+                  </button>
+                </h2>
+                <div id="borderCol2" class="accordion-collapse collapse" data-dx-parent="#accordionBorderedDemo">
+                  <div class="accordion-body">
+                    Entregas nacionais via transportadora expressa em até 3 dias úteis com código de rastreamento enviado por SMS e e-mail.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#borderCol3" aria-expanded="false">
+                    🔒 Política de Reembolso e Garantia
+                  </button>
+                </h2>
+                <div id="borderCol3" class="accordion-collapse collapse" data-dx-parent="#accordionBorderedDemo">
+                  <div class="accordion-body">
+                    Garantia incondicional de 30 dias para devolução do valor integral sem burocracias.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Acordeão Nivelado (.accordion-flush) -->
+        <section id="accordion-flush" class="mb-5">
+          <h2>4. Acordeão Nivelado / Sem Bordas (.accordion-flush)</h2>
+          <p class="text-muted">
+            Com <code>.accordion-flush</code>, as bordas externas e cantos arredondados são suprimidos, deixando divisórias finas entre os itens, ideal para menus laterais, gavetas e offcanvas:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="accordion accordion-flush" id="accordionFlushDemo">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#flushCol1" aria-expanded="true">
+                    Pergunta Frequente #1: O que é o modo Flush?
+                  </button>
+                </h2>
+                <div id="flushCol1" class="accordion-collapse collapse show" data-dx-parent="#accordionFlushDemo">
+                  <div class="accordion-body">
+                    O modo flush remove as bordas laterais para permitir encaixe contínuo de ponta a ponta sem criar molduras duplicadas.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#flushCol2" aria-expanded="false">
+                    Pergunta Frequente #2: Posso aninhar outros componentes?
+                  </button>
+                </h2>
+                <div id="flushCol2" class="accordion-collapse collapse" data-dx-parent="#accordionFlushDemo">
+                  <div class="accordion-body">
+                    Sim! O corpo aceita formulários, tabelas, imagens, listas e botões de ação.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Ícone à Esquerda (.accordion-icon-start) -->
+        <section id="accordion-icon-start" class="mb-5">
+          <h2>5. Ícone Posicionado no Início / Esquerda (.accordion-icon-start)</h2>
+          <p class="text-muted">
+            Inspirado no visual adotado pelo <code>accordion-bs5</code>, a classe <code>.accordion-icon-start</code> move a seta para o início antes do título, proporcionando uma experiência estilo árvore de diretórios ou menu lateral:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="accordion accordion-icon-start" id="accordionIconStartDemo">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#startCol1" aria-expanded="true">
+                    Experiência Profissional &amp; Projetos
+                  </button>
+                </h2>
+                <div id="startCol1" class="accordion-collapse collapse show" data-dx-parent="#accordionIconStartDemo">
+                  <div class="accordion-body">
+                    Desenvolvimento de sistemas de alta performance com arquitetura limpa e testes automatizados.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#startCol2" aria-expanded="false">
+                    Conhecimentos Técnicos &amp; Stacks
+                  </button>
+                </h2>
+                <div id="startCol2" class="accordion-collapse collapse" data-dx-parent="#accordionIconStartDemo">
+                  <div class="accordion-body">
+                    HTML5, SCSS modular, JavaScript Vanilla moderno, PHP 8+, Node.js e Docker.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Alternador Mais / Menos (.accordion-plus-minus) -->
+        <section id="accordion-plus-minus" class="mb-5">
+          <h2>6. Alternador com Ícones de Mais / Menos (.accordion-plus-minus)</h2>
+          <p class="text-muted">
+            Substitui a seta giratória por um ícone de adição (<code>+</code>) quando recolhido e subtração (<code>−</code>) quando expandido:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="accordion accordion-plus-minus" id="accordionPlusMinusDemo">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#plusCol1" aria-expanded="true">
+                    Como cancelar minha assinatura a qualquer momento?
+                  </button>
+                </h2>
+                <div id="plusCol1" class="accordion-collapse collapse show" data-dx-parent="#accordionPlusMinusDemo">
+                  <div class="accordion-body">
+                    Basta acessar as configurações da conta e clicar em "Cancelar Assinatura". Seu acesso continuará ativo até o fim do período já pago.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#plusCol2" aria-expanded="false">
+                    Existe cobrança de taxas adicionais por usuário?
+                  </button>
+                </h2>
+                <div id="plusCol2" class="accordion-collapse collapse" data-dx-parent="#accordionPlusMinusDemo">
+                  <div class="accordion-body">
+                    Não, todos os planos empresariais contemplam usuários ilimitados sem nenhum custo por assento.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Cores Temáticas Oficiais (.accordion-{cor}) -->
+        <section id="accordion-colors" class="mb-5">
+          <h2>7. Variações Cromáticas Oficiais (.accordion-{cor})</h2>
+          <p class="text-muted">
+            Personalize instantaneamente o acordeão com qualquer uma das <strong>28 cores oficiais</strong> do Dexter UI, incluindo modo sólido com cabeçalho preenchido:
+          </p>
+
+          <div class="row g-4">
+            <!-- Coral -->
+            <div class="col-12 col-lg-6">
+              <h6 class="fw-bold mb-2">Variação Coral (.accordion-coral)</h6>
+              <div class="accordion accordion-coral" id="accCoralDemo">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#coralCol1" aria-expanded="true">
+                      Tema Coral Suave
+                    </button>
+                  </h2>
+                  <div id="coralCol1" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                      Fundo ativo em tom translúcido e seta colorida automaticamente com a cor oficial Coral.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Indigo -->
+            <div class="col-12 col-lg-6">
+              <h6 class="fw-bold mb-2">Variação Indigo (.accordion-indigo)</h6>
+              <div class="accordion accordion-indigo" id="accIndigoDemo">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#indigoCol1" aria-expanded="true">
+                      Tema Indigo Elegante
+                    </button>
+                  </h2>
+                  <div id="indigoCol1" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                      Destaque em Indigo vibrante para dashboards corporativos e interfaces de alta densidade.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emerald Solid -->
+            <div class="col-12 col-lg-6">
+              <h6 class="fw-bold mb-2">Variação Sólida Esmeralda (.accordion-emerald.accordion-solid)</h6>
+              <div class="accordion accordion-emerald accordion-solid" id="accEmeraldDemo">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#emeraldCol1" aria-expanded="true">
+                      Cabeçalho Totalmente Preenchido
+                    </button>
+                  </h2>
+                  <div id="emeraldCol1" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                      Com a classe <code>.accordion-solid</code>, o botão ativo recebe a cor temática sólida com texto e seta brancos em alto contraste.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Amber -->
+            <div class="col-12 col-lg-6">
+              <h6 class="fw-bold mb-2">Variação Âmbar (.accordion-amber)</h6>
+              <div class="accordion accordion-amber" id="accAmberDemo">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#amberCol1" aria-expanded="true">
+                      Tema de Atenção Âmbar
+                    </button>
+                  </h2>
+                  <div id="amberCol1" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                      Excelente para seções de avisos, observações importantes e requisitos prévios.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Colapso Standalone (.collapse) -->
+        <section id="accordion-standalone" class="mb-5">
+          <h2>8. Colapso Standalone (Sem Acordeão)</h2>
+          <p class="text-muted">
+            Você também pode utilizar a classe <code>.collapse</code> de forma avulsa para alternar a visibilidade de qualquer caixa de conteúdo:
+          </p>
+
+          <div class="doc-card mb-4">
+            <button class="btn btn-primary mb-3" type="button" data-dx-toggle="collapse" data-dx-target="#standaloneBox" aria-expanded="false" aria-controls="standaloneBox">
+              Alternar Visualização de Detalhes
+            </button>
+
+            <div class="collapse" id="standaloneBox">
+              <div class="p-3 bg-light rounded border">
+                <h6 class="fw-bold mb-1">Painel Expansível Sob Demanda</h6>
+                <p class="text-muted mb-0">Este conteúdo é animado de 0px até a altura real do conteúdo via transição fluida CSS.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. API JavaScript Programática -->
+        <section id="accordion-js" class="mb-5">
+          <h2>9. Controle Programático via JavaScript</h2>
+          <p class="text-muted">
+            Controle qualquer acordeão ou colapso programaticamente através da API global <code>dexter.Accordion</code> e <code>dexter.Collapse</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex gap-2 flex-wrap mb-3">
+              <button type="button" class="btn btn-sm btn-outline-primary" id="btnJsOpenAll">dexterAcc.openAll()</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="btnJsCloseAll">dexterAcc.closeAll()</button>
+              <button type="button" class="btn btn-sm btn-outline-success" id="btnJsToggle1">dexterAcc.toggle(0)</button>
+              <button type="button" class="btn btn-sm btn-outline-info" id="btnJsToggle2">dexterAcc.toggle(1)</button>
+            </div>
+
+            <div class="accordion" id="accordionJsTarget" data-dx-always-open="true">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-dx-toggle="collapse" data-dx-target="#jsCol1" aria-expanded="true">
+                    Primeiro Item JS (Índice 0)
+                  </button>
+                </h2>
+                <div id="jsCol1" class="accordion-collapse collapse show">
+                  <div class="accordion-body">Conteúdo controlado via chamadas programáticas em JavaScript.</div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-dx-toggle="collapse" data-dx-target="#jsCol2" aria-expanded="false">
+                    Segundo Item JS (Índice 1)
+                  </button>
+                </h2>
+                <div id="jsCol2" class="accordion-collapse collapse">
+                  <div class="accordion-body">Você pode alternar qualquer item individualmente pelo índice ou seletor.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-js">// Instancia o Acordeão
+const acc = new dexter.Accordion('#meuAcordeao');
+
+// Abrir e fechar todos
+acc.openAll();
+acc.closeAll();
+
+// Alternar item específico pelo índice
+acc.toggle(0);
+
+// Ou controlar um elemento .collapse individual
+const collapse = dexter.Collapse.getOrCreateInstance('#meuColapso');
+collapse.show();
+collapse.hide();
+collapse.toggle();</code></pre>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-toast.js"></script>
+  <script src="../dist/js/dexter-fileinput.js"></script>
+  <script src="../dist/js/dexter-tags.js"></script>
+  <script src="../dist/js/dexter-rating.js"></script>
+  <script src="../dist/js/dexter-multiselect.js"></script>
+  <script src="../dist/js/dexter-input-spinner.js"></script>
+
+  <!-- JavaScript interativo para a demonstração da API Programática -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const accTarget = document.getElementById('accordionJsTarget');
+      if (accTarget) {
+        const acc = new dexter.Accordion(accTarget);
+        document.getElementById('btnJsOpenAll')?.addEventListener('click', () => acc.openAll());
+        document.getElementById('btnJsCloseAll')?.addEventListener('click', () => acc.closeAll());
+        document.getElementById('btnJsToggle1')?.addEventListener('click', () => acc.toggle(0));
+        document.getElementById('btnJsToggle2')?.addEventListener('click', () => acc.toggle(1));
+      }
+
+            
+});
+  </script>
+</body>
+</html>

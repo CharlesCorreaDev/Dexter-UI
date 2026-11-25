@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendário de Eventos (Event Calendar) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-4">
+        <h1 class="display-6 fw-bold mb-2">Calendário de Eventos (Event Calendar)</h1>
+        <p class="lead text-muted mb-0">
+          Componente interativo zero-dependência inspirado no <strong>jquery-bs-calendar</strong>
+          (ThomasDev-de), com suporte a localização via <code>Intl.DateTimeFormat</code>, contadores de compromissos,
+          popover flutuante ao passar o cursor, painel externo de eventos, uso inline ou em dropdown/offcanvas e
+          todas as 28 cores oficiais com Modo Escuro nativo.
+        </p>
+      </div>
+
+      <!-- 1. Calendário Inline com Painel Externo -->
+      <section id="cal-inline" class="mb-5">
+        <h2>1. Calendário Inline com Painel Externo de Eventos</h2>
+        <p class="text-muted">
+          Clique em qualquer dia destacado com contador numérico ou passe o mouse para visualizar o popover resumido:
+        </p>
+
+        <div class="doc-card">
+          <div class="row g-4 align-items-start">
+            <div class="col-auto">
+              <div id="demoCalMain"></div>
+            </div>
+            <div class="col">
+              <h5 class="fw-bold mb-2">Compromissos do Dia Selecionado</h5>
+              <div id="demoCalEventsPanel" class="dx-cal-events mt-0 pt-0 border-0"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Calendário Embutido em Dropdown & Offcanvas -->
+      <section id="cal-embedded" class="mb-5">
+        <h2>2. Embutido em Dropdown e Offcanvas</h2>
+        <p class="text-muted">O calendário funciona dentro de qualquer container sem fechar acidentalmente menus suspensos:</p>
+
+        <div class="doc-card d-flex flex-wrap gap-3">
+          <div class="dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-dx-toggle="dropdown" aria-expanded="false">
+              📅 Agenda Rápida (Dropdown)
+            </button>
+            <div class="dropdown-menu p-2">
+              <div id="demoCalDropdown"></div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-outline-indigo" data-dx-toggle="offcanvas" data-dx-target="#calOffcanvas">
+            🗓️ Abrir Agenda no Offcanvas
+          </button>
+        </div>
+      </section>
+
+      <!-- 3. Idiomas, Cores e API -->
+      <section id="cal-api" class="mb-5">
+        <h2>3. Troca Dinâmica de Idioma, Cores e API Programática</h2>
+        <div class="doc-card">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-sm btn-outline-primary" id="btnLocalePt">Português (pt-BR)</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" id="btnLocaleEn">English (en-US)</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" id="btnLocaleDe">Deutsch (de-DE)</button>
+            <button type="button" class="btn btn-sm btn-indigo" id="btnAddLiveEvent">+ Adicionar Evento Hoje</button>
+            <button type="button" class="btn btn-sm btn-secondary" id="btnCalSetDate">Ir para Natal (25/12)</button>
+          </div>
+          <div id="calEventLog" class="small font-monospace text-muted">Aguardando interações no calendário...</div>
+        </div>
+
+        <div class="code-window" data-dx-copy="true">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+            <div class="code-actions"><span class="code-badge">JS</span><button type="button" class="code-copy-btn">Copiar</button></div>
+          </div>
+          <pre class="code-block"><code class="language-javascript">const cal = new DexterCalendar('#meuCalendario', {
+  locale: 'pt-BR',
+  eventListContainer: '#listaEventos',
+  events: [
+    { id: 1, title: 'Sprint Review', start: '2026-11-25 14:00:00', end: '2026-11-25 15:00:00', description: 'Alinhamento semanal' }
+  ]
+});
+cal.setDate('2026-12-25');</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <!-- Offcanvas Calendar -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="calOffcanvas" aria-labelledby="calOffcanvasLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="calOffcanvasLabel">Calendário Lateral</h5>
+      <button type="button" class="btn-close" data-dx-dismiss="offcanvas" aria-label="Fechar"></button>
+    </div>
+    <div class="offcanvas-body d-flex justify-content-center align-items-start">
+      <div id="demoCalOffcanvas" class="calendar-indigo"></div>
+    </div>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-calendar.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const today = new Date();
+      const pad = (n) => (n < 10 ? '0' + n : String(n));
+      const y = today.getFullYear();
+      const m = pad(today.getMonth() + 1);
+      const d = pad(today.getDate());
+      const dPlus2 = pad(Math.min(28, today.getDate() + 2));
+
+      const sampleEvents = [
+        { id: 1, title: 'Daily Scrum & Planejamento', description: 'Revisão das metas da sprint.', start: `${y}-${m}-${d} 09:30:00`, end: `${y}-${m}-${d} 10:15:00` },
+        { id: 2, title: 'Review Dexter UI v0.1', description: 'Validação de acessibilidade e Dark Mode.', start: `${y}-${m}-${d} 15:00:00`, end: `${y}-${m}-${d} 16:30:00` },
+        { id: 3, title: 'Deploy em Produção', description: 'Janela programada de atualização.', start: `${y}-${m}-${dPlus2} 18:00:00`, end: `${y}-${m}-${dPlus2} 19:00:00` },
+        { id: 4, title: 'Confraternização de Fim de Ano', description: 'Evento anual da equipe.', start: `${y}-12-25 12:00:00`, end: `${y}-12-25 18:00:00` }
+      ];
+
+      const calEl = document.getElementById('demoCalMain');
+      const logEl = document.getElementById('calEventLog');
+
+      const mainCal = new DexterCalendar(calEl, {
+        locale: 'pt-BR',
+        events: sampleEvents,
+        eventListContainer: '#demoCalEventsPanel'
+      });
+
+      new DexterCalendar('#demoCalDropdown', { locale: 'pt-BR', width: '280px', events: sampleEvents });
+      new DexterCalendar('#demoCalOffcanvas', { locale: 'pt-BR', events: sampleEvents });
+
+      calEl.addEventListener('change-day', (e) => {
+        if (logEl) logEl.textContent = `Evento "change-day": ${e.detail.date} (${e.detail.events.length} compromisso(s))`;
+      });
+
+      document.getElementById('btnLocalePt')?.addEventListener('click', () => mainCal.updateOptions({ locale: 'pt-BR' }));
+      document.getElementById('btnLocaleEn')?.addEventListener('click', () => mainCal.updateOptions({ locale: 'en-US' }));
+      document.getElementById('btnLocaleDe')?.addEventListener('click', () => mainCal.updateOptions({ locale: 'de-DE' }));
+
+      document.getElementById('btnAddLiveEvent')?.addEventListener('click', () => {
+        sampleEvents.push({
+          id: sampleEvents.length + 1,
+          title: 'Novo Lembrete #' + (sampleEvents.length + 1),
+          description: 'Adicionado dinamicamente via API.',
+          start: `${y}-${m}-${d} 17:00:00`,
+          end: `${y}-${m}-${d} 17:45:00`
+        });
+        mainCal.setEvents(sampleEvents);
+        if (logEl) logEl.textContent = 'Novo evento adicionado para hoje!';
+      });
+
+      document.getElementById('btnCalSetDate')?.addEventListener('click', () => {
+        mainCal.setDate(`${y}-12-25`);
+        if (logEl) logEl.textContent = `Calendário movido para ${y}-12-25`;
+      });
+    });
+  </script>
+</body>
+</html>

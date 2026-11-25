@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layouts, FAB, OTP, Diff &amp; Widgets Interativos - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Componentes</span>
+          <span class="badge bg-indigo text-white">Material / Bulma / Foundation</span>
+          <span class="badge bg-teal text-white">Zero Dependências</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Layouts, FAB, OTP, Diff &amp; Widgets Interativos</h1>
+        <p class="lead text-muted mb-0">
+          Síntese interativa unindo <strong>Hero Banners</strong>, <strong>Panel / Message / Callout</strong>, <strong>Material Ripple &amp; FAB Speed Dial</strong>, <strong>Comparador Diff Before/After</strong>, <strong>Entrada OTP PIN</strong>, <strong>Lightbox de Galeria</strong>, <strong>Filtro de Grid</strong>, <strong>Menu Drilldown</strong> e <strong>Feature Discovery Spotlight</strong>.
+        </p>
+      </div>
+
+      <!-- 1. Hero, Callout & Panel -->
+      <section id="lw-hero-callout" class="mb-5">
+        <h2>1. Hero Banner, Panel, Message &amp; Callouts</h2>
+        <div class="hero hero-sm hero-gradient-indigo mb-3">
+          <div class="hero-body">
+            <h3 class="fw-bold mb-1">Hero Banner Bulma + Dexter Gradient</h3>
+            <p class="mb-0" style="opacity: 0.9;">Estruture cabeçalhos de página responsivos com suporte a todas as 28 cores.</p>
+          </div>
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <div class="callout callout-teal h-100">
+              <strong class="d-block mb-1">Callout Foundation (.callout-teal)</strong>
+              <span class="small">Painel de destaque versátil com borda lateral cromática e suporte a Dark Mode.</span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="message message-purple h-100">
+              <div class="message-header">Message Header (.message-purple)</div>
+              <div class="message-body">Corpo estruturado no padrão Bulma integrado aos tokens do Dexter UI.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Ripple, FAB Speed Dial & Spotlight -->
+      <section id="lw-material-widgets" class="mb-5">
+        <h2>2. Material Ripple, FAB Speed Dial &amp; Spotlight</h2>
+        <div class="doc-card mb-4 d-flex flex-wrap align-items-center justify-content-between gap-4">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <button type="button" class="btn btn-primary waves-effect" id="demoRippleTarget">Botão com Ripple (.waves-effect)</button>
+            <button type="button" class="btn btn-outline-indigo" id="btnTriggerSpotlight" onclick="DexterSpotlight.show('#demoRippleTarget', { title: 'Feature Discovery', body: 'Este botão possui efeito ink ripple nativo sem jQuery.' })">
+              Iniciar Tour Spotlight
+            </button>
+          </div>
+
+          <div class="dx-fab" id="demoFab">
+            <button type="button" class="dx-fab-btn" id="demoFabBtn" aria-expanded="false" aria-label="Ações rápidas">+</button>
+            <div class="dx-fab-actions">
+              <button type="button" class="btn btn-sm btn-green rounded-pill">Novo</button>
+              <button type="button" class="btn btn-sm btn-coral rounded-pill">Exportar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. OTP Input, Diff Comparator & Lightbox -->
+      <section id="lw-otp-diff" class="mb-5">
+        <h2>3. Entrada OTP PIN, Comparador Diff &amp; Galeria Lightbox</h2>
+        <div class="row g-4 mb-4">
+          <div class="col-lg-5">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold mb-2">Código OTP (6 dígitos)</h5>
+              <p class="small text-muted">Digite ou cole um código de 6 dígitos (<code>123456</code>):</p>
+              <div class="dx-otp mb-2" id="demoOtpGroup">
+                <input type="text" class="dx-otp-field" inputmode="numeric" aria-label="Dígito 1">
+                <input type="text" class="dx-otp-field" inputmode="numeric" aria-label="Dígito 2">
+                <input type="text" class="dx-otp-field" inputmode="numeric" aria-label="Dígito 3">
+                <input type="text" class="dx-otp-field" inputmode="numeric" aria-label="Dígito 4">
+                <input type="text" class="dx-otp-field" inputmode="numeric" aria-label="Dígito 5">
+                <input type="text" class="dx-otp-field" inputmode="numeric" aria-label="Dígito 6">
+              </div>
+              <div class="small text-muted" id="otpStatusText">Aguardando 6 dígitos...</div>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold mb-2">Comparador Before / After (<code>.dx-diff</code>)</h5>
+              <div class="dx-diff" id="demoDiffBox" style="height: 150px;">
+                <div class="dx-diff-after d-flex align-items-center justify-content-center fw-bold text-white" style="background: #14306b;">DEPOIS (Dark / Produção)</div>
+                <div class="dx-diff-before d-flex align-items-center justify-content-center fw-bold text-dark" style="background: #e2e8f0;">ANTES (Light / Rascunho)</div>
+                <div class="dx-diff-handle"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-card mb-4">
+          <h5 class="fw-bold mb-2">Galeria Lightbox (<code>data-dx-lightbox</code> &amp; <code>data-modal="bs-lightbox"</code>)</h5>
+          <p class="small text-muted mb-3">
+            Compatível <em>drop-in</em> com <code>avalon-studio/Bootstrap-Lightbox</code> (<code>data-modal="bs-lightbox"</code> + <code>#LightboxCanvas</code>) e galerias agrupadas <code>DexterLightbox</code> com contador, zoom (<code>1x</code> &harr; <code>1.75x</code>) e atalhos de teclado (<code>Esc</code>, <code>&larr;</code>, <code>&rarr;</code>, <code>Z</code>).
+          </p>
+
+          <div class="d-grid grid-cols-1 grid-cols-sm-3 gap-3 mb-3" data-bs-lightbox-gallery>
+            <a href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'><defs><linearGradient id='g1' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%233b5998'/><stop offset='100%' stop-color='%231e3a8a'/></linearGradient></defs><rect width='900' height='540' fill='url(%23g1)'/><text x='50%' y='47%' fill='white' font-family='sans-serif' font-size='44' font-weight='bold' text-anchor='middle'>Dexter Analytics</text><text x='50%' y='58%' fill='%23cbd5e1' font-family='sans-serif' font-size='22' text-anchor='middle'>data-modal=&quot;bs-lightbox&quot; · Imagem 1</text></svg>"
+               data-modal="bs-lightbox"
+               data-caption="Tela 1 — Painel Analytics (bs-lightbox)"
+               id="demoBsLightbox1"
+               class="d-block border rounded overflow-hidden text-decoration-none">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'><rect width='400' height='220' fill='%233b5998'/><text x='50%' y='54%' fill='white' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>Analytics 1</text></svg>"
+                   alt="Tela 1 — Painel Analytics"
+                   class="w-100 d-block" style="height: 120px; object-fit: cover;">
+              <div class="p-2 small fw-semibold">Analytics (bs-lightbox)</div>
+            </a>
+
+            <a href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'><defs><linearGradient id='g2' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%234b0082'/><stop offset='100%' stop-color='%237c3aed'/></linearGradient></defs><rect width='900' height='540' fill='url(%23g2)'/><text x='50%' y='47%' fill='white' font-family='sans-serif' font-size='44' font-weight='bold' text-anchor='middle'>Dexter Indigo</text><text x='50%' y='58%' fill='%23e9d5ff' font-family='sans-serif' font-size='22' text-anchor='middle'>data-modal=&quot;bs-lightbox&quot; · Imagem 2</text></svg>"
+               data-modal="bs-lightbox"
+               data-caption="Tela 2 — Tema Indigo (bs-lightbox)"
+               id="demoBsLightbox2"
+               class="d-block border rounded overflow-hidden text-decoration-none">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'><rect width='400' height='220' fill='%234b0082'/><text x='50%' y='54%' fill='white' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>Indigo 2</text></svg>"
+                   alt="Tela 2 — Tema Indigo"
+                   class="w-100 d-block" style="height: 120px; object-fit: cover;">
+              <div class="p-2 small fw-semibold">Indigo (bs-lightbox)</div>
+            </a>
+
+            <a href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'><defs><linearGradient id='g3' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%230d9488'/><stop offset='100%' stop-color='%230f766e'/></linearGradient></defs><rect width='900' height='540' fill='url(%23g3)'/><text x='50%' y='47%' fill='white' font-family='sans-serif' font-size='44' font-weight='bold' text-anchor='middle'>Dexter Teal</text><text x='50%' y='58%' fill='%23ccfbf1' font-family='sans-serif' font-size='22' text-anchor='middle'>data-modal=&quot;bs-lightbox&quot; · Imagem 3</text></svg>"
+               data-modal="bs-lightbox"
+               data-caption="Tela 3 — Tema Teal (bs-lightbox)"
+               id="demoBsLightbox3"
+               class="d-block border rounded overflow-hidden text-decoration-none">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220' viewBox='0 0 400 220'><rect width='400' height='220' fill='%230d9488'/><text x='50%' y='54%' fill='white' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>Teal 3</text></svg>"
+                   alt="Tela 3 — Tema Teal"
+                   class="w-100 d-block" style="height: 120px; object-fit: cover;">
+              <div class="p-2 small fw-semibold">Teal (bs-lightbox)</div>
+            </a>
+          </div>
+
+          <div class="code-window mb-0">
+            <div class="code-window-header">
+              <div class="code-dots"><span class="dot-close"></span><span class="dot-minimize"></span><span class="dot-maximize"></span></div>
+              <div class="code-actions"><span class="code-badge">HTML</span><button type="button" class="code-copy-btn">Copiar</button></div>
+            </div>
+            <pre><code class="language-html">&lt;div data-bs-lightbox-gallery&gt;
+  &lt;a href="full-image.jpg" data-modal="bs-lightbox" data-caption="Imagem 1"&gt;
+    &lt;img src="thumb.jpg" alt="Imagem 1" class="img-fluid rounded"&gt;
+  &lt;/a&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Filter Grid & Drilldown Menu -->
+      <section id="lw-filter-drilldown" class="mb-5">
+        <h2>4. Filtro de Grid (<code>DexterFilter</code>) &amp; Menu Drilldown</h2>
+        <div class="row g-4 mb-4">
+          <div class="col-lg-7">
+            <div class="doc-card h-100" data-dx-filter-container>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <button type="button" class="btn btn-sm btn-outline-primary active" data-dx-filter="all" id="filterBtnAll">Todos</button>
+                <button type="button" class="btn btn-sm btn-outline-primary" data-dx-filter="ui" id="filterBtnUi">UI Core</button>
+                <button type="button" class="btn btn-sm btn-outline-primary" data-dx-filter="js" id="filterBtnJs">JS Vanilla</button>
+              </div>
+              <div class="d-grid grid-cols-1 grid-cols-sm-2 gap-2">
+                <div class="p-2 border rounded dx-filter-item" data-dx-filter-tags="ui">Buttons &amp; Alerts (.ui)</div>
+                <div class="p-2 border rounded dx-filter-item" data-dx-filter-tags="js">Waiting Dialog (.js)</div>
+                <div class="p-2 border rounded dx-filter-item" data-dx-filter-tags="ui js">Cookie Consent (.ui .js)</div>
+                <div class="p-2 border rounded dx-filter-item" data-dx-filter-tags="ui">Stats &amp; Cards (.ui)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="dx-drilldown" id="demoDrilldown">
+              <ul class="dx-drilldown-panel dx-drilldown-root is-active">
+                <li><button type="button" id="drillToProducts" data-dx-drill-target="#drillPanelProducts"><span>Produtos</span><span>&rsaquo;</span></button></li>
+                <li><button type="button" data-dx-drill-target="#drillPanelSettings"><span>Configurações</span><span>&rsaquo;</span></button></li>
+                <li><a href="#lw-filter-drilldown">Relatórios Gerais</a></li>
+              </ul>
+              <ul class="dx-drilldown-panel" id="drillPanelProducts">
+                <li><button type="button" class="dx-drilldown-back fw-bold text-primary" id="drillBackFromProducts" data-dx-drill-back=".dx-drilldown-root">&lsaquo; Voltar</button></li>
+                <li><a href="#lw-filter-drilldown">Dexter UI Core</a></li>
+                <li><a href="#lw-filter-drilldown">Dexter Email Engine</a></li>
+              </ul>
+              <ul class="dx-drilldown-panel" id="drillPanelSettings">
+                <li><button type="button" class="dx-drilldown-back fw-bold text-primary" data-dx-drill-back=".dx-drilldown-root">&lsaquo; Voltar</button></li>
+                <li><a href="#lw-filter-drilldown">Temas &amp; Cores</a></li>
+                <li><a href="#lw-filter-drilldown">Acessibilidade</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <button type="button" class="dx-totop" aria-label="Voltar ao topo">&#8593;</button>
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-extras.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    document.getElementById('demoOtpGroup').addEventListener('dx:otp:complete', function (e) {
+      document.getElementById('otpStatusText').textContent = 'OTP completo: ' + e.detail.value;
+    });
+  </script>
+</body>
+</html>

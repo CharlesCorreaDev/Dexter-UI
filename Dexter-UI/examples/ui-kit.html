@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Core UI Kit (Botões, Alertas, Cards, Offcanvas &amp; Popovers) - Dexter UI</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-4">
+        <h1 class="display-6 fw-bold mb-2">Core UI Kit (Sveltestrap / Bootstrap 5)</h1>
+        <p class="lead text-muted mb-0">
+          Conjunto completo de primitivas fundamentais inspiradas no <strong>bestguy/sveltestrap</strong> e Bootstrap 5,
+          com suporte a todas as <strong>28 cores oficiais</strong>, aliases semânticos, Modo Escuro nativo e controlador
+          <code>dexter-ui-kit.js</code> zero-dependência.
+        </p>
+      </div>
+
+      <!-- 1. Botões & Grupos -->
+      <section id="uikit-buttons" class="mb-5">
+        <h2>1. Botões, Variantes e Grupos (.btn, .btn-group)</h2>
+        <p class="text-muted">Variantes sólidas, contorno, suaves (<code>.btn-soft-*</code>), fantasma (<code>.btn-ghost-*</code>), pílula e tamanhos:</p>
+
+        <div class="doc-card">
+          <h6 class="fw-bold mb-2">Cores Semânticas &amp; Oficiais</h6>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-secondary">Secondary</button>
+            <button type="button" class="btn btn-success">Success</button>
+            <button type="button" class="btn btn-danger">Danger</button>
+            <button type="button" class="btn btn-warning">Warning</button>
+            <button type="button" class="btn btn-info">Info</button>
+            <button type="button" class="btn btn-indigo">Indigo</button>
+            <button type="button" class="btn btn-turquoise">Turquoise</button>
+            <button type="button" class="btn btn-coral">Coral</button>
+          </div>
+
+          <h6 class="fw-bold mb-2">Estilos Outline, Soft &amp; Ghost</h6>
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-outline-primary">Outline Primary</button>
+            <button type="button" class="btn btn-soft-primary">Soft Primary</button>
+            <button type="button" class="btn btn-ghost-primary">Ghost Primary</button>
+            <button type="button" class="btn btn-outline-danger btn-pill">Outline Danger Pill</button>
+            <button type="button" class="btn btn-soft-green btn-pill">Soft Green Pill</button>
+          </div>
+
+          <h6 class="fw-bold mb-2">Tamanhos &amp; Toolbar de Grupos</h6>
+          <div class="btn-toolbar align-items-center">
+            <div class="btn-group" role="group" aria-label="Grupo padrão">
+              <button type="button" class="btn btn-outline-primary active">Dia</button>
+              <button type="button" class="btn btn-outline-primary">Semana</button>
+              <button type="button" class="btn btn-outline-primary">Mês</button>
+            </div>
+            <button type="button" class="btn btn-primary btn-xs">XS</button>
+            <button type="button" class="btn btn-primary btn-sm">SM</button>
+            <button type="button" class="btn btn-primary">Normal</button>
+            <button type="button" class="btn btn-primary btn-lg">LG</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Alertas -->
+      <section id="uikit-alerts" class="mb-5">
+        <h2>2. Alertas Contextuais e Dispensáveis (.alert)</h2>
+        <div class="doc-card">
+          <div class="alert alert-primary">
+            <h5 class="alert-heading">Aviso Informativo</h5>
+            Use <code>.alert-{cor}</code> para mensagens contextuais suaves ou <code>.alert-accent-{cor}</code> com borda lateral destacada.
+          </div>
+          <div class="alert alert-accent-success">
+            <strong>Sucesso:</strong> Alterações gravadas com segurança no banco de dados. <a href="#uikit-alerts" class="alert-link">Ver detalhes</a>.
+          </div>
+          <div class="alert alert-solid-indigo alert-dismissible fade show mb-0" role="alert">
+            <strong>Alerta Dispensável!</strong> Clique no botão <code>&times;</code> para fechar com fade suave via <code>DexterAlert</code>.
+            <button type="button" class="btn-close btn-close-white" data-dx-dismiss="alert" aria-label="Fechar"></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Cards -->
+      <section id="uikit-cards" class="mb-5">
+        <h2>3. Cartões e Decks (.card, .card-deck)</h2>
+        <div class="card-deck mb-3">
+          <div class="card card-hover">
+            <div class="card-header">Plano Profissional</div>
+            <div class="card-body">
+              <h5 class="card-title">Dexter Enterprise</h5>
+              <p class="card-text text-muted">Cartão padrão com elevação suave ao passar o mouse (<code>.card-hover</code>).</p>
+              <button type="button" class="btn btn-primary btn-sm">Explorar</button>
+            </div>
+            <div class="card-footer small text-muted">Atualizado hoje</div>
+          </div>
+
+          <div class="card card-outline-indigo card-hover">
+            <div class="card-header card-header-indigo">Cabeçalho Cromático</div>
+            <div class="card-body">
+              <h5 class="card-title">Destaque Indigo</h5>
+              <p class="card-text text-muted">Combine <code>.card-outline-{cor}</code> e <code>.card-header-{cor}</code> com qualquer uma das 28 cores.</p>
+              <button type="button" class="btn btn-soft-indigo btn-sm">Configurar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Breadcrumbs & List Groups -->
+      <section id="uikit-lists" class="mb-5">
+        <h2>4. Breadcrumbs &amp; Grupos de Lista</h2>
+        <div class="doc-card">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Início</a></li>
+              <li class="breadcrumb-item"><a href="ui-kit.html">Core UI</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Componentes</li>
+            </ol>
+          </nav>
+
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="list-group">
+                <a href="#uikit-lists" class="list-group-item list-group-item-action active">Visão Geral do Sistema</a>
+                <a href="#uikit-lists" class="list-group-item list-group-item-action">Permissões e Funis</a>
+                <a href="#uikit-lists" class="list-group-item list-group-item-action list-group-item-success">Auditoria Verificada</a>
+                <span class="list-group-item disabled">Arquivo Arquivado (Desabilitado)</span>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Instalar tokens base</li>
+                <li class="list-group-item">Registrar componentes SCSS</li>
+                <li class="list-group-item">Ativar controladores Vanilla JS</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Progress Bars -->
+      <section id="uikit-progress" class="mb-5">
+        <h2>5. Barras de Progresso (.progress)</h2>
+        <div class="doc-card d-flex flex-column gap-3">
+          <div class="progress">
+            <div class="progress-bar" style="width: 45%;">45%</div>
+          </div>
+          <div class="progress progress-lg">
+            <div class="progress-bar progress-bar-green progress-bar-striped progress-bar-animated" style="width: 72%;">72% Processando</div>
+          </div>
+          <div class="progress progress-sm">
+            <div class="progress-bar progress-bar-coral" style="width: 85%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Offcanvas & Navbar -->
+      <section id="uikit-offcanvas" class="mb-5">
+        <h2>6. Gavetas Offcanvas &amp; Navbar</h2>
+        <div class="doc-card">
+          <p class="text-muted mb-3">Abra painéis laterais ou superiores com foco acessível e tecla <kbd>Escape</kbd>:</p>
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <button type="button" class="btn btn-primary" data-dx-toggle="offcanvas" data-dx-target="#demoOffcanvasEnd">Abrir Offcanvas Direita</button>
+            <button type="button" class="btn btn-outline-indigo" data-dx-toggle="offcanvas" data-dx-target="#demoOffcanvasStart">Abrir Offcanvas Esquerda</button>
+          </div>
+
+          <nav class="navbar navbar-expand-md navbar-dark bg-primary rounded">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#uikit-offcanvas">Dexter App</a>
+              <button class="navbar-toggler" type="button" data-dx-toggle="collapse" data-dx-target="#demoNavbarNav" aria-expanded="false" aria-label="Alternar menu">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="demoNavbarNav">
+                <ul class="navbar-nav ms-auto">
+                  <li class="nav-item"><a class="nav-link active" href="#uikit-offcanvas">Painel</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#uikit-offcanvas">Relatórios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#uikit-offcanvas">Ajustes</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </section>
+
+      <!-- 7. Tooltips & Popovers -->
+      <section id="uikit-floating" class="mb-5">
+        <h2>7. Tooltips &amp; Popovers Dinâmicos</h2>
+        <div class="doc-card">
+          <div class="d-flex flex-wrap gap-2 mb-4">
+            <button type="button" class="btn btn-secondary btn-sm" data-dx-toggle="tooltip" data-dx-placement="top" title="Tooltip acima do botão">Tooltip Topo</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-dx-toggle="tooltip" data-dx-placement="right" title="Tooltip à direita">Tooltip Direita</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-dx-toggle="tooltip" data-dx-placement="bottom" title="Tooltip abaixo">Tooltip Base</button>
+            <button type="button" class="btn btn-indigo btn-sm" id="demoPopoverTrigger" data-dx-toggle="popover" data-dx-placement="top" data-dx-title="Popover Dexter UI" data-dx-content="Conteúdo interativo posicionado automaticamente na viewport.">Clique para Popover</button>
+          </div>
+
+          <div class="code-window" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots"><span class="code-dot red"></span><span class="code-dot yellow"></span><span class="code-dot green"></span></div>
+              <div class="code-actions"><span class="code-badge">HTML</span><button type="button" class="code-copy-btn">Copiar</button></div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;button class="btn btn-primary" data-dx-toggle="offcanvas" data-dx-target="#meuPainel"&gt;Abrir&lt;/button&gt;
+&lt;button class="btn btn-secondary" data-dx-toggle="tooltip" title="Dica rápida"&gt;Hover&lt;/button&gt;
+&lt;button class="btn btn-indigo" data-dx-toggle="popover" data-dx-title="Título" data-dx-content="Corpo"&gt;Popover&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <!-- Offcanvas Demos -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="demoOffcanvasEnd" aria-labelledby="demoOffcanvasEndLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="demoOffcanvasEndLabel">Painel Lateral Direito</h5>
+      <button type="button" class="btn-close" data-dx-dismiss="offcanvas" aria-label="Fechar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <p class="text-muted">Gaveta deslizante controlada nativamente por <code>DexterOffcanvas</code> sem jQuery.</p>
+      <button type="button" class="btn btn-primary btn-sm" data-dx-dismiss="offcanvas">Concluir</button>
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="demoOffcanvasStart" aria-labelledby="demoOffcanvasStartLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="demoOffcanvasStartLabel">Navegação Offcanvas</h5>
+      <button type="button" class="btn-close" data-dx-dismiss="offcanvas" aria-label="Fechar"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="list-group list-group-flush">
+        <a href="#uikit-buttons" class="list-group-item list-group-item-action" data-dx-dismiss="offcanvas">Botões</a>
+        <a href="#uikit-alerts" class="list-group-item list-group-item-action" data-dx-dismiss="offcanvas">Alertas</a>
+        <a href="#uikit-cards" class="list-group-item list-group-item-action" data-dx-dismiss="offcanvas">Cards</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+</body>
+</html>

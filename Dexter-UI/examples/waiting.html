@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diálogo de Espera e Progresso (WaitingFor) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <!-- Cabeçalho da Página -->
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Componentes</span>
+          <span class="badge bg-indigo text-white">WaitingFor</span>
+          <span class="badge bg-purple text-white">28 Cores</span>
+          <span class="badge bg-teal text-white">Zero Dependências</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Diálogo de Espera e Progresso (WaitingFor)</h1>
+        <p class="lead text-muted mb-0">
+          Controlador modal nativo para operações assíncronas bloqueantes inspirado e compatível drop-in com <code>ehpc/bootstrap-waitingfor</code> (<code>waitingDialog</code>). Elimina jQuery e Bootstrap JS externos, oferecendo progresso determinado em tempo real, execução automática via <code>Promise.run()</code>, loaders integrados, botão de cancelamento opcional e suporte às 28 cores + Dark Mode.
+        </p>
+      </div>
+
+      <!-- 1. Demonstração Rápida (waitingDialog.show) -->
+      <section id="waiting-quick" class="mb-5">
+        <h2>1. Demonstração Rápida (<code>waitingDialog.show()</code>)</h2>
+        <p class="text-muted">
+          Todos os botões abaixo simulam operações rápidas e fecham automaticamente após 2 segundos (ou podem ser fechados imediatamente pelo usuário no modo cancelável):
+        </p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-primary" id="btnWaitSimple" onclick="demoWaitSimple()">
+              Diálogo Simples (2s)
+            </button>
+            <button type="button" class="btn btn-outline-primary" id="btnWaitHeader" onclick="demoWaitWithHeader()">
+              Cabeçalho + Descrição
+            </button>
+            <button type="button" class="btn btn-outline-secondary" id="btnWaitCompact" onclick="demoWaitCompact()">
+              Modo Compacto (Sem Cabeçalho)
+            </button>
+            <button type="button" class="btn btn-outline-indigo btn-sm" id="btnWaitSm" onclick="demoWaitSize('sm')">
+              Tamanho SM
+            </button>
+            <button type="button" class="btn btn-outline-indigo btn-sm" id="btnWaitLg" onclick="demoWaitSize('lg')">
+              Tamanho LG
+            </button>
+          </div>
+          <div class="small text-muted" id="waitingStatusBox">Status: aguardando acionamento.</div>
+        </div>
+      </section>
+
+      <!-- 2. Progresso Determinado, Promises & Cancelamento -->
+      <section id="waiting-progress" class="mb-5">
+        <h2>2. Progresso por Etapas, <code>run()</code> com Promise &amp; Cancelamento</h2>
+        <p class="text-muted">
+          Atualize o percentual e a mensagem em tempo real com <code>waitingDialog.progress(pct, msg)</code> ou envolva qualquer tarefa assíncrona com <code>waitingDialog.run(fn, msg, opts)</code>:
+        </p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-green" id="btnWaitSteps" onclick="demoWaitSteps()">
+              Simular Etapas (0% → 100%)
+            </button>
+            <button type="button" class="btn btn-indigo" id="btnWaitPromise" onclick="demoWaitPromise()">
+              Executar Promise via run()
+            </button>
+            <button type="button" class="btn btn-coral" id="btnWaitCancel" onclick="demoWaitCancellable()">
+              Modo Cancelável (cancellable: true)
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Cores Semânticas, 28 Cores & Loaders Integrados -->
+      <section id="waiting-colors-loaders" class="mb-5">
+        <h2>3. Cores Semânticas, Paleta Oficial &amp; Loaders</h2>
+        <p class="text-muted">
+          Utilize as variantes clássicas do Bootstrap (<code>success</code>, <code>danger</code>, <code>warning</code>, <code>info</code>), qualquer uma das 28 cores do Dexter UI ou combine um indicador animado de <code>_loaders.scss</code> no cabeçalho:
+        </p>
+
+        <div class="doc-card mb-4">
+          <div class="mb-4">
+            <h6 class="fw-bold mb-2">Variantes Semânticas &amp; Paleta</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-green" onclick="demoWaitColor('success', 'Validando registros fiscais...')">Success</button>
+              <button type="button" class="btn btn-sm btn-red" onclick="demoWaitColor('danger', 'Revertendo transação crítica...')">Danger</button>
+              <button type="button" class="btn btn-sm btn-coral" onclick="demoWaitColor('warning', 'Aguardando resposta do gateway...')">Warning</button>
+              <button type="button" class="btn btn-sm btn-cyan" onclick="demoWaitColor('info', 'Sincronizando índice de busca...')">Info</button>
+              <button type="button" class="btn btn-sm btn-purple" onclick="demoWaitColor('purple', 'Compilando ativos digitais...')">Purple</button>
+              <button type="button" class="btn btn-sm btn-teal" onclick="demoWaitColor('teal', 'Gerando backup criptografado...')">Teal</button>
+              <button type="button" class="btn btn-sm btn-midnight" onclick="demoWaitColor('midnight', 'Finalizando auditoria...')">Midnight</button>
+            </div>
+          </div>
+
+          <div>
+            <h6 class="fw-bold mb-2">Loaders CSS Integrados no Cabeçalho</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="demoWaitLoader('loader-ring', 'Anel Clássico')">Loader Ring</button>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="demoWaitLoader('loader-dual-ring', 'Meio Anel Duplo')">Loader Dual Ring</button>
+              <button type="button" class="btn btn-sm btn-outline-primary" onclick="demoWaitLoader('loader-dots', 'Pulso de Pontos')">Loader Dots</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Código de Uso & Compatibilidade Drop-in -->
+      <section id="waiting-code" class="mb-5">
+        <h2>4. Código de Uso &amp; Compatibilidade Drop-in</h2>
+
+        <pre data-lang="javascript" data-file="waitingfor-compat.js"><code>// Compatível drop-in com ehpc/bootstrap-waitingfor (sem jQuery)
+waitingDialog.show('Processando faturamento...', {
+  dialogSize: 'm',
+  progressType: 'success'
+});
+
+setTimeout(function () {
+  waitingDialog.hide(function () {
+    console.log('Diálogo encerrado');
+  });
+}, 1500);
+
+// API moderna DexterWaiting com progresso determinado e Promise
+await DexterWaiting.run(function (dialog) {
+  dialog.progress(30, 'Enviando arquivos...');
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      dialog.progress(100, 'Concluído!');
+      resolve('OK');
+    }, 800);
+  });
+}, 'Preparando envio...', {
+  progressType: 'indigo',
+  showPercent: true,
+  progress: 0,
+  loader: 'loader-ring'
+});</code></pre>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-waiting.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    function updateWaitStatus(text) {
+      var box = document.getElementById('waitingStatusBox');
+      if (box) box.textContent = 'Status: ' + text;
+    }
+
+    function demoWaitSimple() {
+      waitingDialog.show('Processando requisição no servidor...', {
+        onHide: function () { updateWaitStatus('diálogo simples concluído.'); }
+      });
+      setTimeout(function () { waitingDialog.hide(); }, 1800);
+    }
+
+    function demoWaitWithHeader() {
+      waitingDialog.show('Conectando ao serviço de integração fiscal e validando certificados digitais.', {
+        headerText: 'Sincronização em Andamento',
+        dialogSize: 'lg',
+        progressType: 'indigo',
+        loader: 'loader-ring',
+        onHide: function () { updateWaitStatus('cabeçalho + descrição fechado.'); }
+      });
+      setTimeout(function () { waitingDialog.hide(); }, 2000);
+    }
+
+    function demoWaitCompact() {
+      waitingDialog.show('Salvando alterações automaticamente...', {
+        headerText: false,
+        progressType: 'teal',
+        onHide: function () { updateWaitStatus('modo compacto concluído.'); }
+      });
+      setTimeout(function () { waitingDialog.hide(); }, 1800);
+    }
+
+    function demoWaitSize(size) {
+      waitingDialog.show('Diálogo no tamanho ' + size.toUpperCase(), {
+        dialogSize: size,
+        progressType: 'purple'
+      });
+      setTimeout(function () { waitingDialog.hide(); }, 1600);
+    }
+
+    function demoWaitSteps() {
+      var cancelled = false;
+      waitingDialog.show('Inicializando lote de exportação...', {
+        headerText: 'Exportação de Dados',
+        progressType: 'success',
+        progress: 10,
+        showPercent: true,
+        cancellable: true,
+        onCancel: function () {
+          cancelled = true;
+          updateWaitStatus('exportação cancelada pelo usuário.');
+        }
+      });
+
+      var steps = [
+        { delay: 450, pct: 40, msg: 'Consultando registros no banco de dados...' },
+        { delay: 950, pct: 75, msg: 'Gerando planilha compactada...' },
+        { delay: 1450, pct: 100, msg: 'Download pronto!' },
+        { delay: 1850, done: true }
+      ];
+
+      steps.forEach(function (step) {
+        setTimeout(function () {
+          if (cancelled || !waitingDialog.isVisible()) return;
+          if (step.done) {
+            waitingDialog.hide(function () {
+              updateWaitStatus('exportação por etapas concluída (100%).');
+            });
+          } else {
+            waitingDialog.progress(step.pct, step.msg);
+          }
+        }, step.delay);
+      });
+    }
+
+    function demoWaitPromise() {
+      DexterWaiting.run(function (dlg) {
+        dlg.progress(25);
+        return new Promise(function (resolve) {
+          setTimeout(function () {
+            dlg.progress(90, 'Validando assinatura...');
+          }, 600);
+          setTimeout(function () {
+            dlg.progress(100);
+            resolve('Relatório pronto');
+          }, 1200);
+        });
+      }, 'Gerando relatório assíncrono...', {
+        progressType: 'indigo',
+        showPercent: true,
+        progress: 10,
+        loader: 'loader-dual-ring'
+      }).then(function (result) {
+        updateWaitStatus('Promise finalizada: ' + result);
+      });
+    }
+
+    function demoWaitCancellable() {
+      waitingDialog.show('Aguardando confirmação externa. Você pode cancelar a qualquer momento.', {
+        headerText: 'Tarefa Longa Cancelável',
+        progressType: 'coral',
+        cancellable: true,
+        cancelText: 'Abortar Tarefa',
+        backdrop: true,
+        onCancel: function () {
+          updateWaitStatus('tarefa abortada pelo botão cancelar.');
+        }
+      });
+    }
+
+    function demoWaitColor(colorName, text) {
+      waitingDialog.show(text, {
+        progressType: colorName
+      });
+      setTimeout(function () { waitingDialog.hide(); }, 1600);
+    }
+
+    function demoWaitLoader(loaderClass, label) {
+      waitingDialog.show('Loader ativo: ' + label, {
+        loader: loaderClass,
+        progressType: 'primary'
+      });
+      setTimeout(function () { waitingDialog.hide(); }, 1800);
+    }
+  </script>
+</body>
+</html>

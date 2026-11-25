@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templates Web &amp; E-mail HTML - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Core UI</span>
+          <span class="badge bg-indigo text-white">Foundation Emails</span>
+          <span class="badge bg-teal text-white">Templates Prontos</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Templates Web &amp; Motor de E-mail HTML</h1>
+        <p class="lead text-muted mb-0">
+          Pacote completo de templates prontos baseados em <strong>Foundation for Emails</strong> e <strong>Project.md (§6 &amp; §11)</strong>: folha de estilos autônoma <code>dexter-email.css</code> (hexadecimais resolvidos sem <code>var()</code> para Outlook, Gmail e Apple Mail), 3 modelos de e-mail em tabelas de 600px e 3 templates Web completos (Starter, Landing e Parallax).
+        </p>
+      </div>
+
+      <!-- 1. Preview Interativo -->
+      <section id="tpl-preview" class="mb-5">
+        <h2>1. Preview Interativo (Web &amp; E-mail Responsivo)</h2>
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-primary tpl-btn" onclick="loadTplPreview('../templates/web/starter.html', 'Web: Starter')">Web: Starter</button>
+              <button type="button" class="btn btn-sm btn-outline-primary tpl-btn" onclick="loadTplPreview('../templates/web/landing.html', 'Web: Landing Page')">Web: Landing</button>
+              <button type="button" class="btn btn-sm btn-outline-primary tpl-btn" onclick="loadTplPreview('../templates/web/parallax.html', 'Web: Parallax')">Web: Parallax</button>
+              <button type="button" class="btn btn-sm btn-outline-indigo tpl-btn" id="btnPreviewEmailTx" onclick="loadTplPreview('../templates/email/transactional.html', 'E-mail: Transacional')">E-mail: Transacional</button>
+              <button type="button" class="btn btn-sm btn-outline-indigo tpl-btn" onclick="loadTplPreview('../templates/email/welcome.html', 'E-mail: Boas-vindas')">E-mail: Boas-vindas</button>
+              <button type="button" class="btn btn-sm btn-outline-indigo tpl-btn" onclick="loadTplPreview('../templates/email/newsletter.html', 'E-mail: Newsletter')">E-mail: Newsletter</button>
+            </div>
+            <div class="dx-segmented">
+              <button type="button" class="dx-segmented-item active" id="btnVpDesktop" onclick="setTplViewport('100%', this)">Desktop</button>
+              <button type="button" class="dx-segmented-item" id="btnVpMobile" onclick="setTplViewport('375px', this)">Mobile (375px)</button>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-between small text-muted mb-2">
+            <span>Ativo: <strong id="tplActiveName">Web: Starter</strong></span>
+            <a href="../templates/web/starter.html" target="_blank" rel="noopener" id="tplExternalLink">Abrir em nova aba ↗</a>
+          </div>
+
+          <div class="border rounded p-2 text-center" style="background: rgba(148, 163, 184, 0.12);">
+            <iframe id="tplPreviewFrame" title="Preview do template selecionado" src="../templates/web/starter.html" style="width: 100%; height: 480px; border: 1px solid rgba(15,23,42,0.12); border-radius: 0.5rem; background: #fff;"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Build CSS de E-mail -->
+      <section id="tpl-email-guide" class="mb-5">
+        <h2>2. Motor <code>dexter-email.css</code> &amp; Compatibilidade</h2>
+        <pre data-lang="html" data-file="email-skeleton.html"><code>&lt;!-- Compilado sem var() em dist/css/dexter-email.css e dexter-email.min.css --&gt;
+&lt;table role="presentation" width="600" cellpadding="0" cellspacing="0" class="email-container"&gt;
+  &lt;tr&gt;&lt;td class="email-header"&gt;Cabeçalho&lt;/td&gt;&lt;/tr&gt;
+  &lt;tr&gt;&lt;td class="email-body"&gt;
+    &lt;div class="email-callout"&gt;Resumo do pedido&lt;/div&gt;
+    &lt;a href="#" class="email-btn email-btn-indigo"&gt;Botão Bulletproof&lt;/a&gt;
+  &lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    function loadTplPreview(url, title) {
+      var frame = document.getElementById('tplPreviewFrame');
+      var link = document.getElementById('tplExternalLink');
+      var nameEl = document.getElementById('tplActiveName');
+      frame.src = url;
+      link.href = url;
+      nameEl.textContent = title;
+    }
+
+    function setTplViewport(width, btn) {
+      var frame = document.getElementById('tplPreviewFrame');
+      frame.style.width = width;
+      document.querySelectorAll('.dx-segmented-item').forEach(function (el) {
+        el.classList.toggle('active', el === btn);
+      });
+    }
+  </script>
+</body>
+</html>

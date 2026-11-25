@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exibição de Dados, Chat, Timeline &amp; Stats - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Core UI</span>
+          <span class="badge bg-indigo text-white">daisyUI / UIkit</span>
+          <span class="badge bg-purple text-white">28 Cores</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Exibição de Dados, Chat, Timeline &amp; Mockups</h1>
+        <p class="lead text-muted mb-0">
+          Componentes de alta densidade informacional unificados de daisyUI v5, UIkit 3 e Bulma: faixas <code>.stats</code>, <code>.timeline</code> vertical/compacta, balões <code>.chat</code>, medidores <code>.radial-progress</code> em CSS puro, <code>.countdown</code> regressivo ao vivo, <code>.status</code> dots animados, teclas <code>.kbd</code>, pilhas <code>.stack</code> e mockups de dispositivos.
+        </p>
+      </div>
+
+      <!-- 1. Stats KPI Strip -->
+      <section id="dd-stats" class="mb-5">
+        <h2>1. Faixa de Métricas (<code>.stats</code> &amp; <code>.stat</code>)</h2>
+        <div class="doc-card mb-4">
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-title">Receita Mensal</div>
+              <div class="stat-value">R$ 128,4K</div>
+              <div class="stat-desc text-green">↗ +22% este mês</div>
+            </div>
+            <div class="stat">
+              <div class="stat-title">Usuários Ativos</div>
+              <div class="stat-value">14.820</div>
+              <div class="stat-desc">98,4% retenção</div>
+            </div>
+            <div class="stat">
+              <div class="stat-title">Disponibilidade</div>
+              <div class="stat-value">99,99%</div>
+              <div class="stat-desc"><span class="status status-success status-ping me-1"></span> Operacional</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Radial Progress & Countdown Ao Vivo -->
+      <section id="dd-radial-countdown" class="mb-5">
+        <h2>2. Radial Progress &amp; Countdown Ao Vivo</h2>
+        <div class="doc-card mb-4 d-flex flex-wrap align-items-center justify-content-between gap-4">
+          <div class="d-flex flex-wrap gap-3 align-items-center">
+            <div class="radial-progress radial-progress-primary" style="--value: 78;"><span>78%</span></div>
+            <div class="radial-progress radial-progress-green" style="--value: 92;"><span>92%</span></div>
+            <div class="radial-progress radial-progress-coral" style="--value: 45; --size: 5rem;"><span>45%</span></div>
+          </div>
+
+          <div class="dx-countdown-group" data-dx-countdown="9240" id="demoCountdown">
+            <div class="dx-countdown-box">
+              <span class="countdown" data-unit="days">00</span>
+              <span class="dx-countdown-label">Dias</span>
+            </div>
+            <div class="dx-countdown-box">
+              <span class="countdown" data-unit="hours">02</span>
+              <span class="dx-countdown-label">Horas</span>
+            </div>
+            <div class="dx-countdown-box">
+              <span class="countdown" data-unit="minutes">34</span>
+              <span class="dx-countdown-label">Min</span>
+            </div>
+            <div class="dx-countdown-box">
+              <span class="countdown" data-unit="seconds">00</span>
+              <span class="dx-countdown-label">Seg</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Chat Bubbles & Timeline -->
+      <section id="dd-chat-timeline" class="mb-5">
+        <h2>3. Balões de Chat &amp; Linha do Tempo</h2>
+        <div class="row g-4 mb-4">
+          <div class="col-lg-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold mb-3">Conversa (<code>.chat</code>)</h5>
+              <div class="chat chat-start">
+                <div class="chat-header">Ana Silva <time>10:14</time></div>
+                <div class="chat-bubble chat-bubble-midnight">Os novos tokens do Dexter UI já estão em produção?</div>
+                <div class="chat-footer">Entregue</div>
+              </div>
+              <div class="chat chat-end">
+                <div class="chat-header">Charles Corrêa <time>10:15</time></div>
+                <div class="chat-bubble chat-bubble-primary">Sim! Compilados sem avisos e com suporte completo ao Dark Mode.</div>
+                <div class="chat-footer">Lido agora</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold mb-3">Timeline (<code>.timeline-vertical</code>)</h5>
+              <ul class="timeline timeline-vertical timeline-indigo">
+                <li class="timeline-item">
+                  <span class="timeline-marker"></span>
+                  <div class="timeline-time">09:00</div>
+                  <div class="timeline-content"><strong>Deploy v2.4:</strong> Pacote CSS publicado com 0 warnings.</div>
+                </li>
+                <li class="timeline-item">
+                  <span class="timeline-marker"></span>
+                  <div class="timeline-time">10:30</div>
+                  <div class="timeline-content"><strong>Auditoria WCAG:</strong> Contraste validado em todas as 28 cores.</div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Dividers, Indicators, Kbd, Stack & Mockups -->
+      <section id="dd-mockups" class="mb-5">
+        <h2>4. Dividers, Indicators, Kbd, Stack &amp; Device Mockups</h2>
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap align-items-center gap-4 mb-4">
+            <div class="indicator">
+              <span class="indicator-item badge bg-coral text-white">Novo</span>
+              <button type="button" class="btn btn-outline-primary">Caixa de Entrada</button>
+            </div>
+            <div>
+              Atalho: <kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">K</kbd>
+            </div>
+            <div>
+              Status: <span class="status status-success me-1"></span> Online &nbsp;
+              <span class="status status-danger status-bounce me-1"></span> Alerta
+            </div>
+          </div>
+
+          <div class="divider divider-primary">Prévia do Navegador</div>
+
+          <div class="row g-4 align-items-center">
+            <div class="col-lg-7">
+              <div class="mockup-browser">
+                <div class="mockup-browser-toolbar">
+                  <div class="mockup-dots"><span></span><span></span><span></span></div>
+                  <div class="mockup-url">https://dexterui.charlescorrea.com.br</div>
+                </div>
+                <div class="p-4 text-center">
+                  <h5 class="fw-bold mb-1">Dexter UI Browser Mockup</h5>
+                  <p class="small text-muted mb-0">Ideal para landing pages, changelogs e vitrines de produto.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="stack w-100">
+                <div class="p-3 rounded border bg-primary text-white text-center fw-bold">Notificação Prioritária #1</div>
+                <div class="p-3 rounded border bg-indigo text-white text-center">Notificação #2</div>
+                <div class="p-3 rounded border bg-purple text-white text-center">Notificação #3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <pre data-lang="html" data-file="data-display.html"><code>&lt;div class="radial-progress radial-progress-green" style="--value: 92;"&gt;&lt;span&gt;92%&lt;/span&gt;&lt;/div&gt;
+&lt;div class="chat chat-end"&gt;&lt;div class="chat-bubble chat-bubble-primary"&gt;Mensagem&lt;/div&gt;&lt;/div&gt;</code></pre>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-extras.js"></script>
+  <script src="docs-shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabelas (Tables) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <small class="text-muted">Documentação &gt; Componentes &gt; <strong style="color: inherit;">Tabelas (Tables)</strong></small>
+        </nav>
+
+        <h1 class="mb-2">Tabelas (Tables)</h1>
+        <p class="lead text-muted mb-4">Módulo de tabelas completo, moderno e acessível: variantes de cores da paleta, linhas e colunas listradas, hover suave com transição de 700ms ease-in-out, formato de cartões (SaaS table-card), divisores, cabeçalhos fixos, alinhamentos numéricos e transformação responsiva empilhada para mobile baseada no consagrado padrão de <code>data-cell</code> (AllThingsSmitty).</p>
+        <hr class="my-4">
+
+        <!-- 1. Tabela Base & Padrão -->
+        <section id="table-basic" class="mb-5">
+          <h2>1. Tabela Padrão (.table)</h2>
+          <p class="text-muted">A classe <code>.table</code> aplica espaçamento ótico equilibrado, bordas inferiores sutis, tipografia coerente e suporte semântico a acessibilidade com <code>th[scope="col"]</code> e <code>th[scope="row"]</code>.</p>
+          <div class="doc-card">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Nome Completo</th>
+                  <th scope="col">Cargo</th>
+                  <th scope="col">Cidade</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Charles Corrêa</td>
+                  <td>Lead Architect</td>
+                  <td>Porto Alegre / RS</td>
+                  <td><span class="badge bg-green-050 text-green border border-green-200">Ativo</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Mariana Souza</td>
+                  <td>Senior Frontend Engineer</td>
+                  <td>Florianópolis / SC</td>
+                  <td><span class="badge bg-green-050 text-green border border-green-200">Ativo</span></td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Rodrigo Mendes</td>
+                  <td>UX Researcher &amp; Accessibility</td>
+                  <td>Curitiba / PR</td>
+                  <td><span class="badge bg-navy-050 text-navy border border-navy-200">Em Análise</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 2. Dimensões: Pequena e Grande -->
+        <section id="table-sizes" class="mb-5">
+          <h2>2. Dimensões: Compacta (.table-sm) e Confortável (.table-lg)</h2>
+          <p class="text-muted">Reduza o padding com <code>.table-sm</code> para densidade alta em dashboards analíticos, ou aumente com <code>.table-lg</code> para leitura confortável em landing pages.</p>
+          <div class="row g-4">
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3 text-primary">Tabela Compacta (.table.table-sm)</h6>
+                <table class="table table-sm">
+                  <thead>
+                    <tr>
+                      <th>Código</th>
+                      <th>Ativo</th>
+                      <th>Variação</th>
+                      <th>Volume</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>DXT-01</td><td>Dexter Token</td><td class="text-green fw-semibold">+4.2%</td><td>1.450 k</td></tr>
+                    <tr><td>DXT-02</td><td>Grid System</td><td class="text-green fw-semibold">+1.8%</td><td>980 k</td></tr>
+                    <tr><td>DXT-03</td><td>Color Engine</td><td class="text-red fw-semibold">-0.5%</td><td>320 k</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3 text-primary">Tabela Confortável (.table.table-lg)</h6>
+                <table class="table table-lg">
+                  <thead>
+                    <tr>
+                      <th>Plano</th>
+                      <th>Preço</th>
+                      <th>Usuários</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Starter</td><td>R$ 49/mês</td><td>Até 5</td></tr>
+                    <tr><td>Pro</td><td>R$ 149/mês</td><td>Ilimitados</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Listras (Striped Rows & Columns) -->
+        <section id="table-striped" class="mb-5">
+          <h2>3. Listras (.table-striped &amp; .table-striped-columns)</h2>
+          <p class="text-muted">Aplique zebra zebrada em linhas com <code>.table-striped</code> ou colunas alternadas com <code>.table-striped-columns</code>:</p>
+          <div class="row g-4">
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3">Linhas Listradas (.table-striped)</h6>
+                <table class="table table-striped">
+                  <thead>
+                    <tr><th>Item</th><th>Categoria</th><th>Estoque</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Servidor Dell PowerEdge</td><td>Hardware</td><td>12 un</td></tr>
+                    <tr><td>Switch 48p Gigabit</td><td>Rede</td><td>8 un</td></tr>
+                    <tr><td>Roteador Balanceador</td><td>Rede</td><td>4 un</td></tr>
+                    <tr><td>Nobreak Senoidal 3kVA</td><td>Elétrica</td><td>6 un</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3">Colunas Listradas (.table-striped-columns)</h6>
+                <table class="table table-striped-columns">
+                  <thead>
+                    <tr><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>12.400</td><td>15.800</td><td>18.200</td><td>24.500</td></tr>
+                    <tr><td>8.900</td><td>9.400</td><td>11.000</td><td>14.200</td></tr>
+                    <tr><td>3.200</td><td>4.100</td><td>5.600</td><td>7.800</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Hover Suave com 700ms ease-in-out -->
+        <section id="table-hover" class="mb-5">
+          <h2>4. Hover Suave (.table-hover) com 700ms ease-in-out</h2>
+          <p class="text-muted">A classe <code>.table-hover</code> destaca linhas ao passar o ponteiro do mouse utilizando rigorosamente a transição padrão do Dexter UI (<strong>700ms ease-in-out</strong> em cor de fundo, cor de texto e borda):</p>
+          <div class="doc-card">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Transação</th>
+                  <th>Data</th>
+                  <th>Método</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#TRX-9482</td>
+                  <td>24/11/2026 10:14</td>
+                  <td>PIX Instantâneo</td>
+                  <td class="fw-semibold">R$ 1.450,00</td>
+                  <td><span class="badge bg-green-050 text-green border border-green-200">Aprovado</span></td>
+                </tr>
+                <tr>
+                  <td>#TRX-9483</td>
+                  <td>24/11/2026 09:40</td>
+                  <td>Cartão de Crédito</td>
+                  <td class="fw-semibold">R$ 820,50</td>
+                  <td><span class="badge bg-green-050 text-green border border-green-200">Aprovado</span></td>
+                </tr>
+                <tr>
+                  <td>#TRX-9484</td>
+                  <td>24/11/2026 08:15</td>
+                  <td>Boleto Bancário</td>
+                  <td class="fw-semibold">R$ 3.200,00</td>
+                  <td><span class="badge bg-amber-050 text-amber border border-amber-200">Aguardando</span></td>
+                </tr>
+                <tr>
+                  <td>#TRX-9485</td>
+                  <td>23/11/2026 21:05</td>
+                  <td>TED / Transferência</td>
+                  <td class="fw-semibold">R$ 540,00</td>
+                  <td><span class="badge bg-green-050 text-green border border-green-200">Aprovado</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 5. Linhas e Células Ativas -->
+        <section id="table-active" class="mb-5">
+          <h2>5. Linhas e Células Ativas (.table-active)</h2>
+          <p class="text-muted">Indique linhas selecionadas em listas interativas ou dê destaque a uma célula específica com <code>.table-active</code>:</p>
+          <div class="doc-card">
+            <table class="table">
+              <thead>
+                <tr><th>Ambiente</th><th>Versão</th><th>Instância</th><th>Uptime</th></tr>
+              </thead>
+              <tbody>
+                <tr class="table-active">
+                  <td><strong>Produção (Selecionado)</strong></td>
+                  <td>v2.4.0</td>
+                  <td>aws-cluster-prod-01</td>
+                  <td>99.98%</td>
+                </tr>
+                <tr>
+                  <td>Staging</td>
+                  <td class="table-active">v2.5.0-rc1 (Destaque)</td>
+                  <td>aws-cluster-stg-01</td>
+                  <td>99.50%</td>
+                </tr>
+                <tr>
+                  <td>Desenvolvimento</td>
+                  <td>v2.6.0-dev</td>
+                  <td>dev-local-01</td>
+                  <td>98.20%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 6. Bordas & Divisores -->
+        <section id="table-borders" class="mb-5">
+          <h2>6. Bordas (.table-bordered, .table-borderless, .table-border-{cor})</h2>
+          <p class="text-muted">Controle completo do contorno tabular. Use <code>.table-bordered</code> para grades fechadas, <code>.table-borderless</code> para visual moderno minimalista, ou personalize as cores de borda com <code>.table-border-{cor}</code>:</p>
+          <div class="row g-4">
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3">Tabela Bordada (.table-bordered)</h6>
+                <table class="table table-bordered">
+                  <thead><tr><th>Módulo</th><th>Status</th><th>Cobertura</th></tr></thead>
+                  <tbody>
+                    <tr><td>Auth Engine</td><td>Aprovado</td><td>100%</td></tr>
+                    <tr><td>Payment Gateway</td><td>Aprovado</td><td>98.5%</td></tr>
+                    <tr><td>Notifications</td><td>Em Testes</td><td>92.0%</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3">Tabela Sem Bordas (.table-borderless)</h6>
+                <table class="table table-borderless">
+                  <thead><tr><th>Usuário</th><th>Função</th><th>Equipe</th></tr></thead>
+                  <tbody>
+                    <tr><td>Charles Corrêa</td><td>Arquiteto</td><td>Core</td></tr>
+                    <tr><td>Renata Lima</td><td>Designer</td><td>Produto</td></tr>
+                    <tr><td>Felipe Gusmão</td><td>DevOps</td><td>Infra</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-card mt-4">
+            <h6 class="fw-bold mb-3">Borda Colorida da Paleta (.table-bordered.table-border-primary) com Divisor (.table-group-divider)</h6>
+            <table class="table table-bordered table-border-primary">
+              <thead><tr><th>Plataforma</th><th>Conexões</th><th>Latência</th></tr></thead>
+              <tbody class="table-group-divider">
+                <tr><td>São Paulo (GRU)</td><td>1.240 req/s</td><td>12 ms</td></tr>
+                <tr><td>Rio de Janeiro (GIG)</td><td>890 req/s</td><td>16 ms</td></tr>
+                <tr><td>Fortaleza (FOR)</td><td>540 req/s</td><td>28 ms</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 7. Tabela Cartão (Table Card) - SaaS Dashboard -->
+        <section id="table-card" class="mb-5">
+          <h2>7. Tabela Cartão (.table-card) - Estilo SaaS Dashboard</h2>
+          <p class="text-muted">A classe <code>.table-card</code> encapsula a tabela em um cartão moderno com cantos arredondados (<code>border-radius: var(--dx-radius-lg)</code>), sombra suave (<code>box-shadow: var(--dx-shadow-sm)</code>) e cabeçalho sutilmente destacado em cinza nobre:</p>
+          <div class="table-card">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Fatura</th>
+                  <th>Cliente</th>
+                  <th>Emissão</th>
+                  <th>Vencimento</th>
+                  <th>Valor Total</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><a href="#table-card" class="fw-semibold">#INV-2026-001</a></td>
+                  <td>SkyTeam Aviation Systems</td>
+                  <td>01/11/2026</td>
+                  <td>15/11/2026</td>
+                  <td class="fw-bold text-primary">R$ 14.800,00</td>
+                  <td><button class="btn btn-sm btn-outline-primary py-1 px-2">Baixar PDF</button></td>
+                </tr>
+                <tr>
+                  <td><a href="#table-card" class="fw-semibold">#INV-2026-002</a></td>
+                  <td>AlphaTech Inovações Digitais</td>
+                  <td>05/11/2026</td>
+                  <td>20/11/2026</td>
+                  <td class="fw-bold text-primary">R$ 8.350,00</td>
+                  <td><button class="btn btn-sm btn-outline-primary py-1 px-2">Baixar PDF</button></td>
+                </tr>
+                <tr>
+                  <td><a href="#table-card" class="fw-semibold">#INV-2026-003</a></td>
+                  <td>Nexus Cyber Security Corp</td>
+                  <td>12/11/2026</td>
+                  <td>27/11/2026</td>
+                  <td class="fw-bold text-primary">R$ 22.100,00</td>
+                  <td><button class="btn btn-sm btn-outline-primary py-1 px-2">Baixar PDF</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 8. Variantes de Cores da Paleta -->
+        <section id="table-colors" class="mb-5">
+          <h2>8. Variantes de Cores (.table-{cor}, .table-light, .table-dark)</h2>
+          <p class="text-muted">Todas as 28 cores da paleta geram variantes com contraste certificado WCAG AAA (fundo suave no tom <code>050</code> com texto legível no tom <code>950</code>):</p>
+          
+          <div class="row g-3">
+            <div class="col-12 col-md-7">
+              <table class="table table-primary mb-3">
+                <thead><tr><th>.table-primary</th><th>Status</th><th>Valor</th></tr></thead>
+                <tbody><tr><td>Tema Oficial 1</td><td>Ativo</td><td>R$ 100,00</td></tr></tbody>
+              </table>
+              <table class="table table-secondary mb-3">
+                <thead><tr><th>.table-secondary</th><th>Status</th><th>Valor</th></tr></thead>
+                <tbody><tr><td>Tema Oficial 2</td><td>Ativo</td><td>R$ 100,00</td></tr></tbody>
+              </table>
+              <table class="table table-green mb-3">
+                <thead><tr><th>.table-green</th><th>Status</th><th>Valor</th></tr></thead>
+                <tbody><tr><td>Sucesso / Aprovado</td><td>Concluído</td><td>R$ 250,00</td></tr></tbody>
+              </table>
+            </div>
+            <div class="col-12 col-md-7">
+              <table class="table table-red mb-3">
+                <thead><tr><th>.table-red</th><th>Status</th><th>Valor</th></tr></thead>
+                <tbody><tr><td>Perigo / Cancelado</td><td>Erro</td><td>R$ 0,00</td></tr></tbody>
+              </table>
+              <table class="table table-purple mb-3">
+                <thead><tr><th>.table-purple</th><th>Status</th><th>Valor</th></tr></thead>
+                <tbody><tr><td>Roxo Nobre</td><td>VIP</td><td>R$ 500,00</td></tr></tbody>
+              </table>
+              <table class="table table-midnight mb-3">
+                <thead><tr><th>.table-midnight</th><th>Status</th><th>Valor</th></tr></thead>
+                <tbody><tr><td>Midnight Blue</td><td>Auditoria</td><td>R$ 750,00</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="doc-card mt-3">
+            <h6 class="fw-bold mb-3">Cores Aplicadas a Linhas e Células Específicas</h6>
+            <table class="table table-hover">
+              <thead><tr><th>Tipo</th><th>Linha</th><th>Descrição</th></tr></thead>
+              <tbody>
+                <tr class="table-primary"><td>Primária</td><td>Linha com .table-primary</td><td>Destaque principal da marca</td></tr>
+                <tr class="table-green"><td>Sucesso</td><td>Linha com .table-green</td><td>Operação realizada com sucesso</td></tr>
+                <tr class="table-red"><td>Alerta</td><td>Linha com .table-red</td><td>Falha de integridade reportada</td></tr>
+                <tr>
+                  <td>Mista</td>
+                  <td class="table-purple">Célula com .table-purple</td>
+                  <td>Célula normal com fundo padrão</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row g-4 mt-1">
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-2">Tabela Clara (.table-light)</h6>
+                <table class="table table-light mb-0">
+                  <thead><tr><th>Item</th><th>Tipo</th><th>Status</th></tr></thead>
+                  <tbody><tr><td>Documento A</td><td>PDF</td><td>Assinado</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-2">Tabela Escura (.table-dark)</h6>
+                <table class="table table-dark mb-0">
+                  <thead><tr><th>Item</th><th>Tipo</th><th>Status</th></tr></thead>
+                  <tbody><tr><td>Documento B</td><td>XML</td><td>Processado</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Cabeçalhos, Rodapés e Sticky -->
+        <section id="table-headers" class="mb-5">
+          <h2>9. Cabeçalhos (.thead-light, .thead-dark), Rodapé (&lt;tfoot&gt;) e Rolagem Fixa</h2>
+          <p class="text-muted">Use <code>.thead-light</code> ou <code>.thead-dark</code> para contrastar o topo da tabela. O elemento <code>&lt;tfoot&gt;</code> ganha traço duplo de fechamento e texto destacado. A classe <code>.table-sticky-header</code> fixa o cabeçalho no topo durante rolagem:</p>
+          <div class="doc-card">
+            <table class="table">
+              <thead class="thead-dark">
+                <tr><th>Produto</th><th>Qtd</th><th>Preço Unitário</th><th class="numeric">Subtotal</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Licença Dexter Enterprise</td><td>2</td><td>R$ 1.200,00</td><td class="numeric">R$ 2.400,00</td></tr>
+                <tr><td>Suporte 24/7 Premium</td><td>1</td><td>R$ 800,00</td><td class="numeric">R$ 800,00</td></tr>
+                <tr><td>Consultoria de Acessibilidade</td><td>5h</td><td>R$ 180,00</td><td class="numeric">R$ 900,00</td></tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3">Total Geral</td>
+                  <td class="numeric">R$ 4.100,00</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </section>
+
+        <!-- 10. Legendas (Captions) -->
+        <section id="table-caption" class="mb-5">
+          <h2>10. Legendas (&lt;caption&gt;, .caption-top, .caption-bottom)</h2>
+          <p class="text-muted">O elemento <code>&lt;caption&gt;</code> descreve a finalidade da tabela para leitores de tela e usuários visuais. Por padrão fica embaixo, mas pode ser posicionado no topo com <code>.caption-top</code>:</p>
+          <div class="doc-card">
+            <table class="table caption-top">
+              <caption>Tabela 1.1 — Relatório Consolidado de Desempenho Operacional (2026)</caption>
+              <thead><tr><th>Trimestre</th><th>Meta</th><th>Realizado</th><th>Atingimento</th></tr></thead>
+              <tbody>
+                <tr><td>1º Trimestre</td><td>100.000</td><td>108.500</td><td class="text-green fw-bold">108.5%</td></tr>
+                <tr><td>2º Trimestre</td><td>120.000</td><td>129.200</td><td class="text-green fw-bold">107.6%</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 11. Colunas e Grupos (<col>, <colgroup>) -->
+        <section id="table-cols" class="mb-5">
+          <h2>11. Colunas e Destaque (&lt;col&gt;, &lt;colgroup&gt;, .col-highlight)</h2>
+          <p class="text-muted">Destaque colunas inteiras de forma semântica utilizando o elemento nativo <code>&lt;col class="col-highlight"&gt;</code> sem necessidade de aplicar classes em cada célula individualmente:</p>
+          <div class="doc-card">
+            <table class="table table-bordered">
+              <colgroup>
+                <col style="width: 25%;">
+                <col style="width: 25%;">
+                <col class="col-highlight" style="width: 25%;">
+                <col style="width: 25%;">
+              </colgroup>
+              <thead>
+                <tr><th>Básico</th><th>Padrão</th><th>Profissional (Destaque)</th><th>Enterprise</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>1 Projeto</td><td>5 Projetos</td><td>20 Projetos</td><td>Ilimitados</td></tr>
+                <tr><td>5 GB Armazenamento</td><td>25 GB Armazenamento</td><td>100 GB Armazenamento</td><td>1 TB Armazenamento</td></tr>
+                <tr><td>Suporte Comunitário</td><td>Suporte por E-mail</td><td>Suporte Prioritário</td><td>Gerente Dedicado</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 12. Alinhamentos e Colunas Numéricas -->
+        <section id="table-alignments" class="mb-5">
+          <h2>12. Alinhamentos Horizontais, Verticais e Colunas Numéricas (.table-numeric)</h2>
+          <p class="text-muted">A classe <code>.table-numeric</code> alinha à direita e ativa numerais tabulares (<code>font-variant-numeric: tabular-nums</code>), garantindo que cifras financeiras fiquem perfeitamente alinhadas verticalmente. As classes <code>.align-middle</code>, <code>.align-top</code> e <code>.align-bottom</code> cuidam do alinhamento vertical das células:</p>
+          <div class="doc-card">
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th>Item / Descrição</th>
+                  <th class="text-center">Alinhamento Central</th>
+                  <th class="table-numeric">Valores Numéricos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <strong>Serviço de Infraestrutura em Nuvem</strong><br>
+                    <small class="text-muted">Instâncias elásticas e redundância multi-região</small>
+                  </td>
+                  <td class="text-center"><span class="badge bg-green-050 text-green">Online</span></td>
+                  <td class="table-numeric">R$ 1.250,90</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Certificados SSL/TLS Wildcard</strong><br>
+                    <small class="text-muted">Renovação anual automatizada</small>
+                  </td>
+                  <td class="text-center"><span class="badge bg-green-050 text-green">Válido</span></td>
+                  <td class="table-numeric">R$ 380,00</td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong>Backup Frio e Snapshot Diário</strong><br>
+                    <small class="text-muted">Retenção de 90 dias com criptografia AES-256</small>
+                  </td>
+                  <td class="text-center"><span class="badge bg-green-050 text-green">Ativo</span></td>
+                  <td class="table-numeric">R$ 95,00</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 13. Tabelas Aninhadas -->
+        <section id="table-nested" class="mb-5">
+          <h2>13. Tabelas Aninhadas (.table-nested / .table .table)</h2>
+          <p class="text-muted">Tabelas aninhadas herdam transparência e ajustam automaticamente as margens para visual harmonioso em sub-relatórios e acordions:</p>
+          <div class="doc-card">
+            <table class="table table-bordered">
+              <thead><tr><th>Departamento</th><th>Detalhes dos Membros</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td class="align-middle"><strong>Engenharia de Software</strong></td>
+                  <td>
+                    <table class="table table-sm table-nested">
+                      <thead><tr><th>Nome</th><th>Especialidade</th></tr></thead>
+                      <tbody>
+                        <tr><td>Charles Corrêa</td><td>Sass &amp; CSS Architecture</td></tr>
+                        <tr><td>Bruno Silveira</td><td>Distributed Systems</td></tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 14. Tabelas com Rolagem Responsiva -->
+        <section id="table-responsive" class="mb-5">
+          <h2>14. Rolagem Responsiva (.table-responsive / .table-responsive-{bp})</h2>
+          <p class="text-muted">Envolva qualquer tabela com <code>.table-responsive</code> para habilitar barra de rolagem horizontal fluida em telas pequenas, preservando a integridade das colunas:</p>
+          <div class="doc-card">
+            <div class="table-responsive">
+              <table class="table table-bordered" style="min-width: 800px;">
+                <thead>
+                  <tr>
+                    <th>ID</th><th>Registro</th><th>Cliente</th><th>CPF/CNPJ</th><th>Cidade</th><th>UF</th><th>Vendedor</th><th>Total</th><th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#01</td><td>2026-11-24</td><td>Construtora Alfa SA</td><td>12.345.678/0001-90</td><td>Porto Alegre</td><td>RS</td><td>Charles</td><td>R$ 48.000,00</td><td>Concluído</td>
+                  </tr>
+                  <tr>
+                    <td>#02</td><td>2026-11-24</td><td>Beta Logística ME</td><td>98.765.432/0001-10</td><td>Caxias do Sul</td><td>RS</td><td>Mariana</td><td>R$ 15.400,00</td><td>Em Transporte</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 15. Tabelas Empilhadas Mobile com data-cell (AllThingsSmitty) -->
+        <section id="table-stacked" class="mb-5">
+          <h2>15. Tabelas Empilhadas Mobile com data-cell (.table-stacked)</h2>
+          <p class="text-muted">Implementação fiel do consagrado padrão de acessibilidade responsiva de <a href="https://codepen.io/AllThingsSmitty/pen/MyqmdM" target="_blank" rel="noopener">AllThingsSmitty</a>. Através do atributo <code>data-cell="..."</code> em cada <code>&lt;td&gt;</code>, as linhas se transformam em cartões limpos onde o rótulo do cabeçalho é inserido dinamicamente via pseudo-elemento <code>::before</code>. Experimente redimensionar a janela ou veja o exemplo abaixo (ativado permanentemente com <code>.table-stacked</code> ou em breakpoints específicos como <code>.table-stacked-md</code>):</p>
+
+          <div class="doc-card">
+            <table class="table table-stacked">
+              <caption>Clientes Cadastrados (Exemplo Empilhado Mobile com data-cell)</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">E-mail</th>
+                  <th scope="col">Telefone</th>
+                  <th scope="col">Cidade</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td data-cell="Nome">Charles Corrêa</td>
+                  <td data-cell="E-mail">charlescorreaweb@gmail.com</td>
+                  <td data-cell="Telefone">(51) 99999-0000</td>
+                  <td data-cell="Cidade">Porto Alegre / RS</td>
+                  <td data-cell="Status"><span class="badge bg-green-050 text-green border border-green-200">Verificado</span></td>
+                </tr>
+                <tr>
+                  <td data-cell="Nome">Mariana Souza</td>
+                  <td data-cell="E-mail">mariana.souza@exemplo.com</td>
+                  <td data-cell="Telefone">(48) 98888-1111</td>
+                  <td data-cell="Cidade">Florianópolis / SC</td>
+                  <td data-cell="Status"><span class="badge bg-green-050 text-green border border-green-200">Verificado</span></td>
+                </tr>
+                <tr>
+                  <td data-cell="Nome">Rodrigo Mendes</td>
+                  <td data-cell="E-mail">rodrigo.mendes@exemplo.com</td>
+                  <td data-cell="Telefone">(41) 97777-2222</td>
+                  <td data-cell="Cidade">Curitiba / PR</td>
+                  <td data-cell="Status"><span class="badge bg-amber-050 text-amber border border-amber-200">Pendente</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="doc-card mt-3 bg-silver-light-050">
+            <h6 class="fw-bold mb-2">Como Usar no seu HTML:</h6>
+            <pre class="m-0" style="font-size: 0.8125rem;"><code>&lt;table class="table table-stacked-md"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope="col"&gt;Nome&lt;/th&gt;
+      &lt;th scope="col"&gt;Cargo&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td data-cell="Nome"&gt;Charles Corrêa&lt;/td&gt;
+      &lt;td data-cell="Cargo"&gt;Arquiteto Sass/CSS&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 16. Suíte Bootstrap Table & Data Tables Interativas -->
+        <section id="table-bootstrap-suite" class="mb-5">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-primary text-white">Novo Módulo</span>
+            <span class="badge bg-green text-white">Bootstrap Table Compatible</span>
+            <span class="badge bg-secondary text-white">Zero Dependencies</span>
+          </div>
+          <h2>16. Suíte Bootstrap Table &amp; Data Tables (.bootstrap-table)</h2>
+          <p class="lead text-muted">
+            Integração completa e personalizada da suíte <a href="https://bootstrap-table.com" target="_blank" rel="noopener">Bootstrap Table</a> (<a href="https://examples.bootstrap-table.com" target="_blank" rel="noopener">examples.bootstrap-table.com</a>). Inclui ordenação clicável nos cabeçalhos (<em>sortable columns</em>), busca ao vivo (<em>live search</em>), paginação reativa, seleção por checkbox com destaque de linha, linhas expansíveis (<em>detail view</em>), visualização em cartões (<em>card view</em>), exportação para CSV e tela de carregamento com o spinner nativo do Dexter UI.
+          </p>
+
+          <!-- Tabela Interativa Completa -->
+          <div class="doc-card mb-4">
+            <div class="bootstrap-table" id="demoBootstrapTableWrapper">
+              
+              <!-- Toolbar Superior -->
+              <div class="fixed-table-toolbar">
+                <div class="bs-bars">
+                  <button type="button" class="btn btn-primary btn-sm" id="btnNewRecord">
+                    ➕ Novo Registro
+                  </button>
+                  <button type="button" class="btn btn-outline-danger btn-sm" id="btnDeleteSelected" title="Excluir itens marcados">
+                    🗑️ Excluir Selecionados (<span id="selectedCount">0</span>)
+                  </button>
+                </div>
+
+                <div class="columns">
+                  <button type="button" class="btn btn-outline-primary btn-sm" data-dx-action="toggle-view" title="Alternar modo Cartões / Tabela">
+                    🗂️ Alternar Card View
+                  </button>
+                  <button type="button" class="btn btn-outline-primary btn-sm" data-dx-action="export-csv" title="Exportar dados para CSV">
+                    📥 Exportar CSV
+                  </button>
+                  <button type="button" class="btn btn-outline-secondary btn-sm" data-dx-action="print" title="Imprimir Tabela">
+                    🖨️ Imprimir
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnSimulateLoading" title="Simular requisição AJAX">
+                    🔄 Atualizar (AJAX)
+                  </button>
+                </div>
+
+                <div class="search">
+                  <input type="text" class="form-control form-control-sm search-input" placeholder="Buscar por cliente, plano ou cidade..." aria-label="Buscar registros">
+                  <button type="button" class="search-clear" title="Limpar pesquisa">&times;</button>
+                </div>
+              </div>
+
+              <!-- Contêiner da Tabela -->
+              <div class="fixed-table-container">
+                
+                <!-- Cortina de Carregamento (Loading Overlay com Dexter Loader) -->
+                <div class="fixed-table-loading" id="tableLoadingOverlay">
+                  <span class="loader loader-ring loader-primary loader-md"></span>
+                  <div class="loading-text">Atualizando registros de contratos...</div>
+                </div>
+
+                <div class="fixed-table-body">
+                  <table class="table table-hover align-middle" id="demoBootstrapTable" data-toggle="table" data-pagination="true" data-page-size="5" data-search="true" data-detail-view="true">
+                    <thead>
+                      <tr>
+                        <th class="bs-checkbox" style="width: 44px;">
+                          <input type="checkbox" class="form-check-input" id="checkAllDemo" title="Selecionar Todos">
+                        </th>
+                        <th class="detail-view-th" style="width: 44px;" title="Detalhes"></th>
+                        <th data-sortable="true" style="width: 90px;">Código</th>
+                        <th data-sortable="true">Cliente / Razão Social</th>
+                        <th data-sortable="true">Plano Contratado</th>
+                        <th data-sortable="true" class="table-numeric">Valor Mensal</th>
+                        <th data-sortable="true">Data Início</th>
+                        <th data-sortable="true" class="text-center">Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Linha 1 -->
+                      <tr>
+                        <td class="bs-checkbox">
+                          <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td class="text-center">
+                          <button type="button" class="detail-icon" title="Expandir detalhes">+</button>
+                        </td>
+                        <td><strong>#DX-1001</strong></td>
+                        <td>
+                          <strong>TechCorp Soluções Digitais</strong><br>
+                          <small class="text-muted">CNPJ: 14.892.341/0001-90 &bull; São Paulo / SP</small>
+                        </td>
+                        <td><span class="badge bg-primary text-white">Enterprise Cloud</span></td>
+                        <td class="table-numeric fw-bold">R$ 14.850,00</td>
+                        <td>12/01/2026</td>
+                        <td class="text-center"><span class="badge bg-green-050 text-green border border-green-200">Ativo</span></td>
+                      </tr>
+                      <tr class="detail-view" style="display: none;">
+                        <td colspan="8">
+                          <div class="detail-view-card">
+                            <div class="row g-3">
+                              <div class="col-12 col-md-4">
+                                <h6 class="fw-bold text-primary mb-1">Contato Principal</h6>
+                                <div>Carlos Alberto Silveira</div>
+                                <small class="text-muted">carlos@techcorp.com.br &bull; (11) 98822-1100</small>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                <h6 class="fw-bold text-primary mb-1">SLA &amp; Infraestrutura</h6>
+                                <div>Garantia 99.98% uptime 24/7</div>
+                                <small class="text-muted">Cluster Kubernetes dedicado (Região SP)</small>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                <h6 class="fw-bold text-primary mb-1">Próxima Fatura</h6>
+                                <div>Vencimento: 10/03/2026</div>
+                                <small class="text-muted">Débito automático bancário autorizado</small>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Linha 2 -->
+                      <tr>
+                        <td class="bs-checkbox">
+                          <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td class="text-center">
+                          <button type="button" class="detail-icon" title="Expandir detalhes">+</button>
+                        </td>
+                        <td><strong>#DX-1002</strong></td>
+                        <td>
+                          <strong>Agência Criativa Vanguarda</strong><br>
+                          <small class="text-muted">CNPJ: 22.109.852/0001-14 &bull; Curitiba / PR</small>
+                        </td>
+                        <td><span class="badge bg-secondary text-white">Pro Team</span></td>
+                        <td class="table-numeric fw-bold">R$ 4.290,00</td>
+                        <td>18/01/2026</td>
+                        <td class="text-center"><span class="badge bg-green-050 text-green border border-green-200">Ativo</span></td>
+                      </tr>
+                      <tr class="detail-view" style="display: none;">
+                        <td colspan="8">
+                          <div class="detail-view-card">
+                            <div class="row g-3">
+                              <div class="col-12 col-md-4">
+                                <h6 class="fw-bold text-primary mb-1">Contato Principal</h6>
+                                <div>Juliana Peixoto</div>
+                                <small class="text-muted">juliana@vanguarda.art.br &bull; (41) 99182-3344</small>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                <h6 class="fw-bold text-primary mb-1">Armazenamento em Nuvem</h6>
+                                <div>500 GB SSD de alta velocidade</div>
+                                <small class="text-muted">Backups diários retidos por 30 dias</small>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                <h6 class="fw-bold text-primary mb-1">Contrato</h6>
+                                <div>Fidelidade anual com 15% de desconto</div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Linha 3 -->
+                      <tr>
+                        <td class="bs-checkbox">
+                          <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td class="text-center">
+                          <button type="button" class="detail-icon" title="Expandir detalhes">+</button>
+                        </td>
+                        <td><strong>#DX-1003</strong></td>
+                        <td>
+                          <strong>Logística Brasil Express</strong><br>
+                          <small class="text-muted">CNPJ: 08.431.119/0001-44 &bull; Porto Alegre / RS</small>
+                        </td>
+                        <td><span class="badge bg-tertiary text-dark">Business Plus</span></td>
+                        <td class="table-numeric fw-bold">R$ 8.900,00</td>
+                        <td>25/01/2026</td>
+                        <td class="text-center"><span class="badge bg-coral-050 text-coral border border-coral-200">Pendente</span></td>
+                      </tr>
+                      <tr class="detail-view" style="display: none;">
+                        <td colspan="8">
+                          <div class="detail-view-card">
+                            <div class="row g-3">
+                              <div class="col-12 col-md-6">
+                                <h6 class="fw-bold text-primary mb-1">Motivo da Pendência</h6>
+                                <div>Aguardando assinatura digital do contrato aditivo via Docusign.</div>
+                              </div>
+                              <div class="col-12 col-md-6">
+                                <h6 class="fw-bold text-primary mb-1">Gerente de Conta</h6>
+                                <div>Charles Corrêa (charles@dexter.com.br)</div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Linha 4 -->
+                      <tr>
+                        <td class="bs-checkbox">
+                          <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td class="text-center">
+                          <button type="button" class="detail-icon" title="Expandir detalhes">+</button>
+                        </td>
+                        <td><strong>#DX-1004</strong></td>
+                        <td>
+                          <strong>Fintech Inovação Financeira</strong><br>
+                          <small class="text-muted">CNPJ: 33.784.092/0001-77 &bull; Belo Horizonte / MG</small>
+                        </td>
+                        <td><span class="badge bg-purple text-white">Security Dedicated</span></td>
+                        <td class="table-numeric fw-bold">R$ 22.500,00</td>
+                        <td>02/02/2026</td>
+                        <td class="text-center"><span class="badge bg-green-050 text-green border border-green-200">Ativo</span></td>
+                      </tr>
+                      <tr class="detail-view" style="display: none;">
+                        <td colspan="8">
+                          <div class="detail-view-card">
+                            <div class="row g-3">
+                              <div class="col-12 col-md-6">
+                                <h6 class="fw-bold text-primary mb-1">Auditoria de Segurança</h6>
+                                <div>Conformidade estrita com PCI-DSS e LGPD com chaves HSM.</div>
+                              </div>
+                              <div class="col-12 col-md-6">
+                                <h6 class="fw-bold text-primary mb-1">Suporte VIP</h6>
+                                <div>Atendimento prioritário com tempo de resposta de 15 minutos.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Linha 5 -->
+                      <tr>
+                        <td class="bs-checkbox">
+                          <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td class="text-center">
+                          <button type="button" class="detail-icon" title="Expandir detalhes">+</button>
+                        </td>
+                        <td><strong>#DX-1005</strong></td>
+                        <td>
+                          <strong>Rede Hospitalar Santa Cecília</strong><br>
+                          <small class="text-muted">CNPJ: 01.329.840/0001-02 &bull; Rio de Janeiro / RJ</small>
+                        </td>
+                        <td><span class="badge bg-primary text-white">Enterprise Health</span></td>
+                        <td class="table-numeric fw-bold">R$ 18.200,00</td>
+                        <td>05/02/2026</td>
+                        <td class="text-center"><span class="badge bg-green-050 text-green border border-green-200">Ativo</span></td>
+                      </tr>
+                      <tr class="detail-view" style="display: none;">
+                        <td colspan="8">
+                          <div class="detail-view-card">
+                            <div class="row g-3">
+                              <div class="col-12 col-md-6">
+                                <h6 class="fw-bold text-primary mb-1">Unidades Atendidas</h6>
+                                <div>14 hospitais e 32 clínicas integradas em tempo real.</div>
+                              </div>
+                              <div class="col-12 col-md-6">
+                                <h6 class="fw-bold text-primary mb-1">Volume de Dados</h6>
+                                <div>Mais de 2.4 TB de imagens médicas DICOM sob custódia criptografada.</div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Linha 6 -->
+                      <tr>
+                        <td class="bs-checkbox">
+                          <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td class="text-center">
+                          <button type="button" class="detail-icon" title="Expandir detalhes">+</button>
+                        </td>
+                        <td><strong>#DX-1006</strong></td>
+                        <td>
+                          <strong>Varejo Global Magazine</strong><br>
+                          <small class="text-muted">CNPJ: 10.456.789/0001-23 &bull; Campinas / SP</small>
+                        </td>
+                        <td><span class="badge bg-secondary text-white">E-commerce Pro</span></td>
+                        <td class="table-numeric fw-bold">R$ 6.750,00</td>
+                        <td>10/02/2026</td>
+                        <td class="text-center"><span class="badge bg-navy-050 text-navy border border-navy-200">Em Análise</span></td>
+                      </tr>
+                      <tr class="detail-view" style="display: none;">
+                        <td colspan="8">
+                          <div class="detail-view-card">
+                            <div>Avaliação técnica de migração de catálogo com 120 mil SKUs.</div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Linha 7 -->
+                      <tr>
+                        <td class="bs-checkbox">
+                          <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td class="text-center">
+                          <button type="button" class="detail-icon" title="Expandir detalhes">+</button>
+                        </td>
+                        <td><strong>#DX-1007</strong></td>
+                        <td>
+                          <strong>Startup IA Alpha Brain</strong><br>
+                          <small class="text-muted">CNPJ: 45.123.890/0001-66 &bull; Florianópolis / SC</small>
+                        </td>
+                        <td><span class="badge bg-purple text-white">GPU Cluster LLM</span></td>
+                        <td class="table-numeric fw-bold">R$ 31.400,00</td>
+                        <td>14/02/2026</td>
+                        <td class="text-center"><span class="badge bg-green-050 text-green border border-green-200">Ativo</span></td>
+                      </tr>
+                      <tr class="detail-view" style="display: none;">
+                        <td colspan="8">
+                          <div class="detail-view-card">
+                            <div>Alocação de 8x instâncias NVIDIA H100 para fine-tuning contínuo.</div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <!-- Linha 8 -->
+                      <tr>
+                        <td class="bs-checkbox">
+                          <input type="checkbox" class="form-check-input">
+                        </td>
+                        <td class="text-center">
+                          <button type="button" class="detail-icon" title="Expandir detalhes">+</button>
+                        </td>
+                        <td><strong>#DX-1008</strong></td>
+                        <td>
+                          <strong>Instituto Educacional Futuro</strong><br>
+                          <small class="text-muted">CNPJ: 05.882.110/0001-33 &bull; Brasília / DF</small>
+                        </td>
+                        <td><span class="badge bg-cyan text-white">Campus Edu</span></td>
+                        <td class="table-numeric fw-bold">R$ 3.850,00</td>
+                        <td>20/02/2026</td>
+                        <td class="text-center"><span class="badge bg-red-050 text-red border border-red-200">Cancelado</span></td>
+                      </tr>
+                      <tr class="detail-view" style="display: none;">
+                        <td colspan="8">
+                          <div class="detail-view-card">
+                            <div>Contrato encerrado a pedido do cliente por fusão com rede parceira.</div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+              <!-- Paginação Inferior (Gerada Dinamicamente pelo DexterTable) -->
+              <div class="fixed-table-pagination"></div>
+
+            </div>
+          </div>
+
+          <!-- Código de Exemplo -->
+          <div class="doc-card bg-midnight-950 p-3 mb-4">
+            <pre class="m-0 text-silver-100"><code>&lt;!-- Inicialização Declarativa em HTML5 --&gt;
+&lt;div class="bootstrap-table"&gt;
+  &lt;div class="fixed-table-toolbar"&gt;
+    &lt;div class="search"&gt;
+      &lt;input type="text" class="form-control form-control-sm search-input" placeholder="Buscar..."&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div class="fixed-table-container"&gt;
+    &lt;table class="table table-hover" data-toggle="table" data-pagination="true" data-page-size="10" data-search="true"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th class="bs-checkbox"&gt;&lt;input type="checkbox" class="form-check-input"&gt;&lt;/th&gt;
+          &lt;th data-sortable="true"&gt;Código&lt;/th&gt;
+          &lt;th data-sortable="true"&gt;Cliente&lt;/th&gt;
+          &lt;th data-sortable="true" class="table-numeric"&gt;Valor&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td class="bs-checkbox"&gt;&lt;input type="checkbox" class="form-check-input"&gt;&lt;/td&gt;
+          &lt;td&gt;#DX-1001&lt;/td&gt;
+          &lt;td&gt;TechCorp&lt;/td&gt;
+          &lt;td class="table-numeric"&gt;R$ 14.850,00&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Script nativo com zero dependências (ou use com o plugin jQuery oficial de bootstrap-table) --&gt;
+&lt;script src="../dist/js/dexter-table.js"&gt;&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 17. Variantes de Cores para Data Tables -->
+        <section id="table-bootstrap-colors" class="mb-5">
+          <h2>17. Variantes de Cores para o Data Table (.bootstrap-table-{cor})</h2>
+          <p class="text-muted">
+            Aplique qualquer uma das 28 famílias de cores do Dexter UI ao invólucro <code>.bootstrap-table-{cor}</code>. A cor personalizada será herdada automaticamente pelo halo de seleção, setas de ordenação ativas, botão de expansão e paginação:
+          </p>
+
+          <div class="row g-4">
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-2 text-green">Tema Verde (.bootstrap-table-green)</h6>
+                <div class="bootstrap-table bootstrap-table-green">
+                  <div class="fixed-table-container">
+                    <table class="table table-hover table-sm">
+                      <thead>
+                        <tr>
+                          <th class="sortable asc">Nome</th>
+                          <th>Status</th>
+                          <th class="table-numeric">Meta</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="selected table-active">
+                          <td><strong>Projeto Sustentável A</strong></td>
+                          <td><span class="badge bg-green text-white">Concluído</span></td>
+                          <td class="table-numeric fw-bold text-green">100%</td>
+                        </tr>
+                        <tr>
+                          <td>Projeto Eficiência B</td>
+                          <td><span class="badge bg-green-050 text-green border border-green-200">Em Andamento</span></td>
+                          <td class="table-numeric">78%</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-2 text-purple">Tema Roxo (.bootstrap-table-purple)</h6>
+                <div class="bootstrap-table bootstrap-table-purple">
+                  <div class="fixed-table-container">
+                    <table class="table table-hover table-sm">
+                      <thead>
+                        <tr>
+                          <th class="sortable desc">Serviço</th>
+                          <th>Ambiente</th>
+                          <th class="table-numeric">Nodes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr class="selected table-active">
+                          <td><strong>Pipeline Machine Learning</strong></td>
+                          <td><span class="badge bg-purple text-white">Produção</span></td>
+                          <td class="table-numeric fw-bold text-purple">64 nós</td>
+                        </tr>
+                        <tr>
+                          <td>Treinamento de Redes</td>
+                          <td><span class="badge bg-purple-050 text-purple border border-purple-200">Staging</span></td>
+                          <td class="table-numeric">16 nós</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Navegação Inferior -->
+        <div class="d-flex justify-content-between pt-4 border-top mt-5">
+          <a href="images.html" class="doc-header-link text-primary fw-semibold">
+            &larr; Anterior: Imagens &amp; Efeitos
+          </a>
+          <a href="forms.html" class="doc-header-link text-primary fw-semibold">
+            Próximo: Formulários (Forms) &rarr;
+          </a>
+        </div>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-table.js"></script>
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const dt = DexterTable.init("#demoBootstrapTable");
+      const btnLoad = document.getElementById("btnSimulateLoading");
+      if (btnLoad && dt) {
+        btnLoad.addEventListener("click", () => {
+          dt.showLoading();
+          setTimeout(() => dt.hideLoading(), 1500);
+        });
+      }
+    });
+
+    
+</script>
+</body>
+</html>

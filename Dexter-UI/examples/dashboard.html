@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Skeleton (Painel Admin) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <!-- Cabeçalho da Página -->
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Core UI</span>
+          <span class="badge bg-indigo text-white">Compostrap Skeleton</span>
+          <span class="badge bg-teal text-white">28 Cores</span>
+          <span class="badge bg-purple text-white">Zero Dependências</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Dashboard Skeleton (Painel Admin)</h1>
+        <p class="lead text-muted mb-0">
+          Esqueleto administrativo completo baseado em <code>compostrap/dashboard-skeleton</code>: superfícies em camadas (<code>--dx-ds-body-bg</code> / <code>--dx-ds-surface-bg</code>), barra superior com breadcrumbs SVG (<code>.navbar-nav-breadcrumb</code>), barra de progresso superior (<code>DexterNanobar</code>), alternância de tema escopada (<code>DexterThemeSwitcher</code>), menu lateral retrátil com cantos arredondados e integração total com <code>SidebarMenuApp</code>.
+        </p>
+      </div>
+
+      <!-- 1. Preview Interativo Completo -->
+      <section id="dashboard-preview" class="mb-5">
+        <h2>1. Preview Interativo Completo</h2>
+        <p class="text-muted">
+          Interaja diretamente com o painel abaixo: retraia ou expanda a sidebar, alterne o Dark Mode interno do painel sem afetar a documentação, dispare a barra de progresso <code>Nanobar</code> e navegue pelos submenus Compostrap ou dropdown de perfil.
+        </p>
+
+        <div class="dx-dashboard dx-dashboard-contained dashboard-primary" id="demoDashboard" data-dx-dashboard>
+          <div class="nanobar" data-ds-nanobar aria-hidden="true">
+            <div class="bar"></div>
+          </div>
+
+          <!-- Barra Superior -->
+          <header class="ds-navbar">
+            <div class="ds-navbar-start">
+              <button
+                type="button"
+                class="ds-sidebar-toggler"
+                data-ds-toggle="sidebar"
+                aria-label="Alternar barra lateral"
+                aria-expanded="true"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+              </button>
+
+              <nav aria-label="Breadcrumb do Painel">
+                <ol class="navbar-nav-breadcrumb">
+                  <li class="nav-item"><a href="#dashboard-preview">Início</a></li>
+                  <li class="nav-item"><a href="#dashboard-preview">Painel</a></li>
+                  <li class="nav-item active" aria-current="page">Visão Geral</li>
+                </ol>
+              </nav>
+            </div>
+
+            <div class="ds-navbar-end">
+              <button
+                type="button"
+                class="ds-theme-btn"
+                id="demoDsThemeBtn"
+                data-theme-switcher
+                data-theme-target="#demoDashboard"
+                aria-label="Alternar tema do painel"
+              >
+                <span data-theme-icon="dark">🌙 Escuro</span>
+                <span data-theme-icon="light">☀️ Claro</span>
+              </button>
+
+              <div class="dropdown custom-dropdown">
+                <button
+                  class="dropdown-toggle"
+                  type="button"
+                  id="demoDsUserDropdown"
+                  data-dx-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span class="badge bg-primary text-white rounded-pill">CC</span>
+                  <span>Charles Corrêa</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="demoDsUserDropdown">
+                  <li><h6 class="dropdown-header">Conta Administrativa</h6></li>
+                  <li><a class="dropdown-item" href="#dashboard-preview">Meu Perfil</a></li>
+                  <li><a class="dropdown-item" href="#dashboard-preview">Preferências</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item text-danger" href="#dashboard-preview">Encerrar Sessão</a></li>
+                </ul>
+              </div>
+            </div>
+          </header>
+
+          <!-- Wrapper: Sidebar + Conteúdo -->
+          <div class="wrapper">
+            <aside class="ds-sidebar sidebar-rounded-top-right" aria-label="Menu do Painel">
+              <div class="ds-sidebar-section-label">Operações</div>
+              <ul class="sidebar-menu">
+                <li class="list-item">
+                  <a href="#dashboard-preview" class="list-link link-current" aria-current="page">
+                    <span class="list-icon" aria-hidden="true">📊</span>
+                    <span>Visão Geral</span>
+                  </a>
+                </li>
+                <li class="list-item">
+                  <a href="#" class="list-link link-arrow" aria-expanded="true">
+                    <span class="list-icon" aria-hidden="true">📦</span>
+                    <span>Pedidos &amp; Vendas</span>
+                    <span class="badge bg-primary text-white">12</span>
+                  </a>
+                  <ul class="list-hidden" style="display: block;">
+                    <li class="list-item"><a href="#dashboard-preview" class="list-link">Faturamento Mensal</a></li>
+                    <li class="list-item"><a href="#dashboard-preview" class="list-link">Notas Fiscais</a></li>
+                    <li class="list-item"><a href="#dashboard-preview" class="list-link">Reembolsos</a></li>
+                  </ul>
+                </li>
+                <li class="list-item">
+                  <a href="#" class="list-link link-arrow" aria-expanded="false">
+                    <span class="list-icon bell" aria-hidden="true">🔔</span>
+                    <span>Notificações</span>
+                  </a>
+                  <ul class="list-hidden">
+                    <li class="list-item"><a href="#dashboard-preview" class="list-link">Alertas Críticos</a></li>
+                    <li class="list-item"><a href="#dashboard-preview" class="list-link">Auditoria de Acesso</a></li>
+                  </ul>
+                </li>
+                <li class="list-item">
+                  <a href="#dashboard-controls" class="list-link">
+                    <span class="list-icon" aria-hidden="true">⚙️</span>
+                    <span>Configurações</span>
+                  </a>
+                </li>
+              </ul>
+            </aside>
+
+            <div class="ds-content">
+              <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+                <div>
+                  <h3 class="h5 fw-bold mb-1">Resumo Operacional</h3>
+                  <p class="small mb-0" style="color: var(--dx-ds-muted-color);">Superfícies em camadas adaptadas ao tema selecionado.</p>
+                </div>
+                <span class="ds-accent-badge">Ambiente Produção</span>
+              </div>
+
+              <!-- Grid KPI -->
+              <div class="row g-3 mb-3">
+                <div class="col-sm-6 col-xl-3">
+                  <div class="content-box content-box-kpi">
+                    <div class="kpi-top">
+                      <span class="kpi-label">Receita</span>
+                      <span class="kpi-icon" aria-hidden="true">💰</span>
+                    </div>
+                    <div class="kpi-value">R$ 84.920</div>
+                    <div class="kpi-meta">+14,2% vs mês anterior</div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                  <div class="content-box content-box-kpi">
+                    <div class="kpi-top">
+                      <span class="kpi-label">Usuários Ativos</span>
+                      <span class="kpi-icon" aria-hidden="true">👥</span>
+                    </div>
+                    <div class="kpi-value">3.418</div>
+                    <div class="kpi-meta">+210 novos esta semana</div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                  <div class="content-box content-box-kpi">
+                    <div class="kpi-top">
+                      <span class="kpi-label">Conversão</span>
+                      <span class="kpi-icon" aria-hidden="true">📈</span>
+                    </div>
+                    <div class="kpi-value">4,85%</div>
+                    <div class="kpi-meta">Meta: 4,50% superada</div>
+                  </div>
+                </div>
+                <div class="col-sm-6 col-xl-3">
+                  <div class="content-box content-box-kpi">
+                    <div class="kpi-top">
+                      <span class="kpi-label">Latência API</span>
+                      <span class="kpi-icon" aria-hidden="true">⚡</span>
+                    </div>
+                    <div class="kpi-value">42 ms</div>
+                    <div class="kpi-meta">99,98% uptime mensal</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Painéis inferiores -->
+              <div class="row g-3">
+                <div class="col-lg-7">
+                  <div class="content-box h-100">
+                    <div class="content-box-header">
+                      <div>
+                        <h4 class="content-box-title">Atividade Recente</h4>
+                        <p class="content-box-subtitle">Últimas sincronizações registradas</p>
+                      </div>
+                      <button type="button" class="btn btn-sm btn-outline-primary" onclick="triggerNanobarDemo(100)">Sincronizar</button>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table table-sm mb-0">
+                        <thead>
+                          <tr>
+                            <th>Serviço</th>
+                            <th>Status</th>
+                            <th>Tempo</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Faturamento NF-e</td>
+                            <td><span class="badge bg-success text-white">Online</span></td>
+                            <td>18 ms</td>
+                          </tr>
+                          <tr>
+                            <td>Gateway Pagamentos</td>
+                            <td><span class="badge bg-success text-white">Online</span></td>
+                            <td>31 ms</td>
+                          </tr>
+                          <tr>
+                            <td>Indexador Relatórios</td>
+                            <td><span class="badge bg-coral text-white">Em fila</span></td>
+                            <td>94 ms</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="content-box h-100">
+                    <div class="content-box-header">
+                      <div>
+                        <h4 class="content-box-title">Capacidade do Cluster</h4>
+                        <p class="content-box-subtitle">Uso atual de recursos</p>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between small mb-1"><span>CPU Workers</span><span>64%</span></div>
+                      <div class="progress progress-sm"><div class="progress-bar" style="width: 64%;"></div></div>
+                    </div>
+                    <div class="mb-3">
+                      <div class="d-flex justify-content-between small mb-1"><span>Memória Cache</span><span>48%</span></div>
+                      <div class="progress progress-sm"><div class="progress-bar progress-bar-green" style="width: 48%;"></div></div>
+                    </div>
+                    <div>
+                      <div class="d-flex justify-content-between small mb-1"><span>Armazenamento S3</span><span>79%</span></div>
+                      <div class="progress progress-sm"><div class="progress-bar progress-bar-coral" style="width: 79%;"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Controles de Demonstração -->
+      <section id="dashboard-controls" class="mb-5">
+        <h2>2. Controles: Nanobar, Sidebar, Tema &amp; 28 Cores</h2>
+        <p class="text-muted">
+          Acione programaticamente a API de <code>DexterDashboard</code>, teste estágios da <code>DexterNanobar</code> ou troque a cor de destaque entre todas as 28 cores da paleta oficial:
+        </p>
+
+        <div class="doc-card mb-4">
+          <div class="mb-4">
+            <h6 class="fw-bold mb-2">Barra de Progresso Superior (Nanobar)</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-outline-primary" id="btnNano35" onclick="triggerNanobarDemo(35)">Nanobar 35%</button>
+              <button type="button" class="btn btn-sm btn-outline-primary" id="btnNano75" onclick="triggerNanobarDemo(75)">Nanobar 75%</button>
+              <button type="button" class="btn btn-sm btn-primary" id="btnNano100" onclick="triggerNanobarDemo(100)">Concluir (100%)</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="btnToggleDsSidebar" onclick="toggleDsSidebarDemo()">Alternar Sidebar</button>
+              <button type="button" class="btn btn-sm btn-outline-indigo" id="btnToggleDsTheme" onclick="toggleDsThemeDemo()">Alternar Tema Painel</button>
+            </div>
+          </div>
+
+          <div>
+            <h6 class="fw-bold mb-2">Paleta Cromática (.dashboard-{cor})</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-primary" onclick="setDashboardAccent('primary')">Primary</button>
+              <button type="button" class="btn btn-sm btn-indigo" onclick="setDashboardAccent('indigo')">Indigo</button>
+              <button type="button" class="btn btn-sm btn-purple" onclick="setDashboardAccent('purple')">Purple</button>
+              <button type="button" class="btn btn-sm btn-coral" onclick="setDashboardAccent('coral')">Coral</button>
+              <button type="button" class="btn btn-sm btn-green" onclick="setDashboardAccent('green')">Green</button>
+              <button type="button" class="btn btn-sm btn-teal" onclick="setDashboardAccent('teal')">Teal</button>
+              <button type="button" class="btn btn-sm btn-cyan" onclick="setDashboardAccent('cyan')">Cyan</button>
+              <button type="button" class="btn btn-sm btn-midnight" onclick="setDashboardAccent('midnight')">Midnight</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Peças Estruturais Individuais -->
+      <section id="dashboard-parts" class="mb-5">
+        <h2>3. Componentes Estruturais</h2>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold">.navbar-nav-breadcrumb</h5>
+              <p class="small text-muted">Lista horizontal sem dependência de fontes de ícones: chevrons gerados em CSS puro com <code>mask-image</code> adaptado automaticamente ao tema claro e escuro.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold">.content-box &amp; .content-box-kpi</h5>
+              <p class="small text-muted">Cards limpos em superfície elevada (<code>--dx-ds-surface-bg</code>) contrastando com o fundo em camada (<code>--dx-ds-body-bg</code>) sem sombras pesadas.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold">.sidebar-rounded-top-right</h5>
+              <p class="small text-muted">Aplica raio superior direito elegante à barra lateral administrativa sobre o fundo em camadas, combinando perfeitamente com <code>.sidebar-menu</code>.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold">DexterNanobar &amp; DexterThemeSwitcher</h5>
+              <p class="small text-muted">Controladores UMD compatíveis com aliases <code>Nanobar</code> e <code>ThemeSwitcher</code>, com suporte a escopo isolado via <code>data-theme-target</code>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Exemplos de Uso & API JS -->
+      <section id="dashboard-code" class="mb-5">
+        <h2>4. Código de Uso &amp; API JavaScript</h2>
+
+        <pre data-lang="html" data-file="dashboard-skeleton.html"><code>&lt;div class="dx-dashboard dashboard-indigo" data-dx-dashboard&gt;
+  &lt;div class="nanobar" data-ds-nanobar&gt;&lt;div class="bar"&gt;&lt;/div&gt;&lt;/div&gt;
+
+  &lt;header class="ds-navbar"&gt;
+    &lt;div class="ds-navbar-start"&gt;
+      &lt;button class="ds-sidebar-toggler" data-ds-toggle="sidebar"&gt;Menu&lt;/button&gt;
+      &lt;ol class="navbar-nav-breadcrumb"&gt;
+        &lt;li class="nav-item"&gt;&lt;a href="#"&gt;Início&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="nav-item active" aria-current="page"&gt;Dashboard&lt;/li&gt;
+      &lt;/ol&gt;
+    &lt;/div&gt;
+    &lt;div class="ds-navbar-end"&gt;
+      &lt;button class="ds-theme-btn" data-theme-switcher data-theme-storage="app-theme"&gt;Tema&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/header&gt;
+
+  &lt;div class="wrapper"&gt;
+    &lt;aside class="ds-sidebar sidebar-rounded-top-right"&gt;
+      &lt;ul class="sidebar-menu"&gt;...&lt;/ul&gt;
+    &lt;/aside&gt;
+    &lt;main class="ds-content"&gt;
+      &lt;div class="content-box"&gt;Conteúdo principal&lt;/div&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <pre data-lang="javascript" data-file="dashboard-init.js"><code>// Recupera ou inicializa a instância do Dashboard
+var dash = DexterDashboard.getOrCreateInstance('#demoDashboard');
+
+// Dispara barra de carregamento superior
+dash.goProgress(45);
+setTimeout(function () {
+  dash.goProgress(100);
+}, 400);
+
+// Alterna cor da paleta oficial (28 cores) e sidebar
+dash.setColor('coral');
+dash.toggleSidebar();
+
+// Ou utilize Nanobar / ThemeSwitcher diretamente
+var loader = new Nanobar({ target: '#demoDashboard' });
+loader.go(100);</code></pre>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-sidebar.js"></script>
+  <script src="../dist/js/dexter-dashboard.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    function triggerNanobarDemo(percent) {
+      var dash = DexterDashboard.getOrCreateInstance('#demoDashboard');
+      if (dash) dash.goProgress(percent);
+    }
+
+    function toggleDsSidebarDemo() {
+      var dash = DexterDashboard.getOrCreateInstance('#demoDashboard');
+      if (dash) dash.toggleSidebar();
+    }
+
+    function toggleDsThemeDemo() {
+      var dash = DexterDashboard.getOrCreateInstance('#demoDashboard');
+      if (!dash) return;
+      var current = dash.el.getAttribute('data-ds-theme') || document.documentElement.getAttribute('data-dx-theme') || 'light';
+      dash.setTheme(current === 'dark' ? 'light' : 'dark');
+    }
+
+    function setDashboardAccent(colorName) {
+      var dash = DexterDashboard.getOrCreateInstance('#demoDashboard');
+      if (dash) {
+        dash.setColor(colorName);
+        dash.goProgress(100);
+      }
+    }
+  </script>
+</body>
+</html>

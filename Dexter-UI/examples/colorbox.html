@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colorbox &amp; Example 5 (Lightbox &amp; Modal Multimídia) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Componentes</span>
+          <span class="badge bg-indigo text-white">Colorbox Example 5</span>
+          <span class="badge bg-purple text-white">Inline / Iframe / Slideshow</span>
+          <span class="badge bg-teal text-white">28 Cores + Dark Mode</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Colorbox (Lightbox &amp; Modal Multimídia — Padrão Example 5)</h1>
+        <p class="lead text-muted mb-0">
+          Implementação <strong>100% Vanilla JS</strong> compatível <em>drop-in</em> com <code>jacklmoore.com/colorbox</code> e o tema translúcido <strong>Example 5</strong> (sem sprites PNG nem jQuery). Suporta galerias agrupadas por <code>rel</code>, <em>slideshow</em> automático, conteúdo <strong>inline</strong> com preservação do DOM, HTML direto, iframe, AJAX e as 28 cores oficiais.
+        </p>
+      </div>
+
+      <!-- Log ao vivo -->
+      <div class="alert alert-soft-primary d-flex flex-wrap align-items-center justify-content-between gap-2 mb-5" role="status">
+        <div>
+          <strong>Eventos Colorbox:</strong>
+          <span id="cboxEventLog" class="ms-1">Abra qualquer galeria, slideshow, modal inline ou iframe abaixo.</span>
+        </div>
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+          <select id="selectCboxTheme" class="form-select form-select-sm" style="width: auto;">
+            <option value="example5" selected>Tema: Example 5 (Moldura Translúcida)</option>
+            <option value="modern">Tema: Modern (Sem Moldura Externa)</option>
+          </select>
+          <select id="selectCboxAccent" class="form-select form-select-sm" style="width: auto;">
+            <option value="primary" selected>Cor: primary</option>
+            <option value="indigo">indigo</option>
+            <option value="teal">teal</option>
+            <option value="coral">coral</option>
+            <option value="purple">purple</option>
+            <option value="green">green</option>
+            <option value="red">red</option>
+            <option value="turquoise">turquoise</option>
+            <option value="fuchsia">fuchsia</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 1. Galeria Example 5 & Transições -->
+      <section id="cb-gallery-transitions" class="mb-5">
+        <h2>1. Galeria Agrupada (Example 5) &amp; Transições (<code>elastic</code>, <code>fade</code>, <code>none</code>)</h2>
+        <p class="text-muted">Clique nas miniaturas para navegar entre imagens com os atalhos de teclado (<code>&larr;</code>, <code>&rarr;</code>, <code>Esc</code>) ou clique na foto ampliada para avançar.</p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="small fw-semibold text-muted align-self-center me-1">Transição da Galeria 1:</span>
+            <button type="button" class="btn btn-sm btn-primary cbox-open-elastic" id="btnCboxOpenElastic">Abrir Elastic (Grupo 1)</button>
+            <button type="button" class="btn btn-sm btn-outline-indigo" id="btnCboxOpenFade">Abrir Fade</button>
+            <button type="button" class="btn btn-sm btn-outline-teal" id="btnCboxOpenNone">Abrir Sem Transição (none)</button>
+          </div>
+
+          <div class="d-grid grid-cols-1 grid-cols-sm-3 gap-3">
+            <a href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'><defs><linearGradient id='g1' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%231e3a8a'/><stop offset='100%' stop-color='%233b5998'/></linearGradient></defs><rect width='900' height='540' fill='url(%23g1)'/><circle cx='720' cy='140' r='110' fill='rgba(255,255,255,0.08)'/><text x='50%' y='47%' fill='white' font-family='sans-serif' font-size='44' font-weight='bold' text-anchor='middle'>Paisagem Urbana</text><text x='50%' y='58%' fill='%23cbd5e1' font-family='sans-serif' font-size='22' text-anchor='middle'>Colorbox Example 5 · Imagem 1 de 3</text></svg>"
+               class="gallery1 d-block border rounded overflow-hidden text-decoration-none"
+               rel="gallery1"
+               id="cbThumb1"
+               data-cbox
+               data-cbox-transition="elastic"
+               title="Ohoho! Oh, Paisagem Urbana (1/3)">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220'><rect width='400' height='220' fill='%233b5998'/><text x='50%' y='54%' fill='white' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>Foto 1 — Elastic</text></svg>"
+                   alt="Paisagem Urbana" class="w-100 d-block" style="height: 120px; object-fit: cover;">
+              <div class="p-2 small fw-semibold">Galeria Foto 1 (Elastic)</div>
+            </a>
+
+            <a href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'><defs><linearGradient id='g2' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%234b0082'/><stop offset='100%' stop-color='%237c3aed'/></linearGradient></defs><rect width='900' height='540' fill='url(%23g2)'/><text x='50%' y='47%' fill='white' font-family='sans-serif' font-size='44' font-weight='bold' text-anchor='middle'>Arquitetura Indigo</text><text x='50%' y='58%' fill='%23e9d5ff' font-family='sans-serif' font-size='22' text-anchor='middle'>Colorbox Example 5 · Imagem 2 de 3</text></svg>"
+               class="gallery1 d-block border rounded overflow-hidden text-decoration-none"
+               rel="gallery1"
+               id="cbThumb2"
+               data-cbox
+               data-cbox-transition="fade"
+               title="Arquitetura Indigo (2/3)">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220'><rect width='400' height='220' fill='%234b0082'/><text x='50%' y='54%' fill='white' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>Foto 2 — Fade</text></svg>"
+                   alt="Arquitetura Indigo" class="w-100 d-block" style="height: 120px; object-fit: cover;">
+              <div class="p-2 small fw-semibold">Galeria Foto 2 (Fade)</div>
+            </a>
+
+            <a href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='540' viewBox='0 0 900 540'><defs><linearGradient id='g3' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%230d9488'/><stop offset='100%' stop-color='%230f766e'/></linearGradient></defs><rect width='900' height='540' fill='url(%23g3)'/><text x='50%' y='47%' fill='white' font-family='sans-serif' font-size='44' font-weight='bold' text-anchor='middle'>Estúdio Teal</text><text x='50%' y='58%' fill='%23ccfbf1' font-family='sans-serif' font-size='22' text-anchor='middle'>Colorbox Example 5 · Imagem 3 de 3</text></svg>"
+               class="gallery1 d-block border rounded overflow-hidden text-decoration-none"
+               rel="gallery1"
+               id="cbThumb3"
+               data-cbox
+               data-cbox-transition="none"
+               title="Estúdio Teal (3/3)">
+              <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='220'><rect width='400' height='220' fill='%230d9488'/><text x='50%' y='54%' fill='white' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>Foto 3 — None</text></svg>"
+                   alt="Estúdio Teal" class="w-100 d-block" style="height: 120px; object-fit: cover;">
+              <div class="p-2 small fw-semibold">Galeria Foto 3 (None)</div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Slideshow Automático & Outros Tipos de Conteúdo -->
+      <section id="cb-content-types" class="mb-5">
+        <h2>2. Slideshow, Conteúdo Inline (DOM Preserved), HTML Direto &amp; Iframe</h2>
+        <p class="text-muted">Reproduz fielmente os demais exemplos do Colorbox: reprodução contínua com botão Play/Pause e captura/restauração automática de nós inline.</p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <a href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='500'><rect width='900' height='500' fill='%23be123c'/><text x='50%' y='52%' fill='white' font-family='sans-serif' font-size='40' font-weight='bold' text-anchor='middle'>Slideshow 1 de 2</text></svg>"
+               class="btn btn-coral"
+               rel="group-slide"
+               data-cbox
+               data-cbox-slideshow="true"
+               id="btnCboxSlideshow"
+               title="Slide 1 (Slideshow Automático)">Slideshow Automático (Iniciar)</a>
+
+            <a href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='500'><rect width='900' height='500' fill='%230f766e'/><text x='50%' y='52%' fill='white' font-family='sans-serif' font-size='40' font-weight='bold' text-anchor='middle'>Slideshow 2 de 2</text></svg>"
+               class="d-none"
+               rel="group-slide"
+               data-cbox
+               data-cbox-slideshow="true"
+               title="Slide 2 (Slideshow Automático)">Slide 2</a>
+
+            <a href="#cboxInlineDemo"
+               class="btn btn-outline-primary"
+               data-cbox
+               data-cbox-inline="true"
+               data-cbox-width="500px"
+               id="btnCboxInline"
+               title="Conteúdo Inline da Página">Conteúdo Inline (#cboxInlineDemo)</a>
+
+            <button type="button" class="btn btn-outline-indigo" id="btnCboxDirectHtml">HTML Direto (Direct HTML)</button>
+
+            <a href="waiting.html"
+               class="btn btn-outline-teal"
+               data-cbox
+               data-cbox-iframe="true"
+               data-cbox-width="820px"
+               data-cbox-height="460px"
+               id="btnCboxIframe"
+               title="Iframe Integrado — Página WaitingFor">Iframe Externo (waiting.html)</a>
+          </div>
+
+          <div id="cboxInlineHost" class="p-3 border rounded bg-body-tertiary">
+            <div class="small text-muted mb-2">Container de origem do bloco Inline (<code>#cboxInlineHost</code> — preservado automaticamente ao fechar):</div>
+            <div id="cboxInlineDemo" class="p-3 border rounded bg-body">
+              <h5 class="fw-bold mb-1">Conteúdo HTML Inline no Colorbox</h5>
+              <p class="small text-muted mb-2">Este elemento é movido temporariamente para dentro do <code>#cboxLoadedContent</code> e devolvido intacto para <code>#cboxInlineHost</code> após fechar o modal.</p>
+              <button type="button" class="btn btn-sm btn-primary" onclick="colorbox.close()">Fechar via colorbox.close()</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Código -->
+      <section id="cb-code" class="mb-5">
+        <h2>3. Exemplos de Código (API Vanilla JS &amp; Declarativa)</h2>
+
+        <div class="code-window mb-4">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="dot-close"></span><span class="dot-minimize"></span><span class="dot-maximize"></span></div>
+            <div class="code-actions"><span class="code-badge">JS</span><button type="button" class="code-copy-btn">Copiar</button></div>
+          </div>
+          <pre><code class="language-js">// 1. Ativação por seletor (compatível com Jack Moore Colorbox)
+colorbox('a.gallery1', { rel: 'gallery1', transition: 'elastic', theme: 'example5' });
+
+// 2. Slideshow automático
+colorbox('.slideshow', { rel: 'group', slideshow: true, slideshowSpeed: 2500 });
+
+// 3. Conteúdo Inline & HTML direto
+colorbox({ inline: true, href: '#meuBloco', width: '500px' });
+colorbox({ html: '&lt;h4&gt;HTML Direto&lt;/h4&gt;&lt;p&gt;Renderizado sem dependências!&lt;/p&gt;' });
+
+// 4. Iframe e Callbacks
+colorbox({
+  iframe: true,
+  href: 'https://example.com',
+  width: '80%',
+  height: '80%',
+  onComplete: function () { console.log('Colorbox carregado!'); }
+});</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-colorbox.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    (function () {
+      var logEl = document.getElementById('cboxEventLog');
+      function log(msg) { logEl.textContent = msg; }
+
+      document.getElementById('selectCboxTheme').addEventListener('change', function () {
+        colorbox.settings.theme = this.value;
+        log('Tema Colorbox alterado para: ' + this.value);
+      });
+
+      document.getElementById('selectCboxAccent').addEventListener('change', function () {
+        colorbox.settings.accent = this.value;
+        log('Cor de destaque Colorbox: ' + this.value);
+      });
+
+      document.getElementById('btnCboxOpenElastic').addEventListener('click', function () {
+        colorbox.settings.transition = 'elastic';
+        document.getElementById('cbThumb1').click();
+      });
+
+      document.getElementById('btnCboxOpenFade').addEventListener('click', function () {
+        document.getElementById('cbThumb2').click();
+      });
+
+      document.getElementById('btnCboxOpenNone').addEventListener('click', function () {
+        document.getElementById('cbThumb3').click();
+      });
+
+      document.getElementById('btnCboxDirectHtml').addEventListener('click', function () {
+        colorbox({
+          title: 'HTML Direto no Colorbox',
+          width: '460px',
+          html: '<div class="py-2"><h5 class="fw-bold mb-2">Modal Multimídia Zero-Dependências</h5><p class="text-muted small mb-3">Aberto programaticamente via <code>colorbox({ html: ... })</code> mantendo os controles do Example 5.</p><button type="button" class="btn btn-sm btn-primary" onclick="colorbox.close()">Fechar</button></div>'
+        });
+      });
+
+      ['cbox_open', 'cbox_complete', 'cbox_closed'].forEach(function (evtName) {
+        document.addEventListener(evtName, function () {
+          log('Evento disparado: ' + evtName);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

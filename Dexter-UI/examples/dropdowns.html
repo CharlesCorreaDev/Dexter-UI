@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menus Suspensos Multiníveis (Dropdowns) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+
+        <!-- Page Header -->
+        <div class="mb-5 border-bottom pb-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-primary text-white">Componente</span>
+            <span class="badge bg-coral text-white">Multinível Infinito</span>
+            <span class="badge bg-purple text-white">28 Cores</span>
+          </div>
+          <h1 class="font-title fw-bold mb-2">Menus Suspensos Multiníveis (Multi-Level Dropdowns)</h1>
+          <p class="lead text-muted mb-0">
+            Suíte completa de menus suspensos multiníveis baseada na arquitetura de <code>dallaslu/bootstrap-5-multi-level-dropdown</code>, com suporte a aninhamento infinito de submenus laterais (<code>.dropend</code> e <code>.dropstart</code>), acionamento por clique ou hover suave (<code>.dropdown-hover</code>), integração com todas as 28 cores oficiais da paleta e suporte nativo ao Dark Mode.
+          </p>
+        </div>
+
+        <!-- 1. Dropdown Multinível Padrão (Dallas Lu Architecture) -->
+        <section id="dropdown-dallaslu" class="mb-5">
+          <h2>1. Dropdown Multinível (Padrão Dallas Lu)</h2>
+          <p class="text-muted">
+            Permite aninhar submenus em múltiplos níveis (Nível 1, 2, 3...) utilizando classes canônicas do Bootstrap (<code>.dropend</code> dentro de <code>&lt;li&gt;</code>) com setas indicadoras automáticas:
+          </p>
+
+          <div class="doc-card mb-4" style="min-height: 280px;">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="demoDropdownMulti" data-bs-toggle="dropdown" aria-expanded="false">
+                Menu Multinível (Clique aqui)
+              </button>
+
+              <ul class="dropdown-menu" aria-labelledby="demoDropdownMulti">
+                <li><h6 class="dropdown-header">Gestão Empresarial</h6></li>
+                <li><a class="dropdown-item" href="#">Dashboard Geral</a></li>
+                <li><a class="dropdown-item" href="#">Relatórios Financeiros</a></li>
+                <li><hr class="dropdown-divider"></li>
+
+                <!-- Nível 2 Submenu -->
+                <li>
+                  <div class="dropdown dropend">
+                    <a class="dropdown-item dropdown-toggle" href="#" id="dropNivel2" data-bs-toggle="dropdown" aria-expanded="false">
+                      Módulos do Sistema
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropNivel2">
+                      <li><a class="dropdown-item" href="#">Vendas &amp; CRM</a></li>
+                      <li><a class="dropdown-item" href="#">Faturamento &amp; NF-e</a></li>
+                      <li><hr class="dropdown-divider"></li>
+
+                      <!-- Nível 3 Submenu -->
+                      <li>
+                        <div class="dropdown dropend">
+                          <a class="dropdown-item dropdown-toggle" href="#" id="dropNivel3" data-bs-toggle="dropdown" aria-expanded="false">
+                            Configurações Avançadas
+                          </a>
+                          <ul class="dropdown-menu" aria-labelledby="dropNivel3">
+                            <li><a class="dropdown-item" href="#">Webhooks &amp; API</a></li>
+                            <li><a class="dropdown-item" href="#">Integração SMTP</a></li>
+                            <li><a class="dropdown-item" href="#">Backups em Nuvem</a></li>
+                          </ul>
+                        </div>
+                      </li>
+                      <!-- /Nível 3 -->
+
+                      <li><a class="dropdown-item" href="#">Controle de Estoque</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <!-- /Nível 2 -->
+
+                <li><a class="dropdown-item" href="#">Segurança &amp; Auditoria</a></li>
+                <li><a class="dropdown-item disabled" href="#">Módulo Legado (Desativado)</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <pre data-lang="html" data-file="dropdown-multilevel.html"><code>&lt;!-- Dropdown Multinível no padrão Dallas Lu --&gt;
+&lt;div class="dropdown"&gt;
+  &lt;button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"&gt;
+    Menu Multinível
+  &lt;/button&gt;
+  &lt;ul class="dropdown-menu"&gt;
+    &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Ação 1&lt;/a&gt;&lt;/li&gt;
+
+    &lt;!-- Nível 2 (Submenu lateral à direita) --&gt;
+    &lt;li&gt;
+      &lt;div class="dropdown dropend"&gt;
+        &lt;a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown"&gt;Mais Opções&lt;/a&gt;
+        &lt;ul class="dropdown-menu"&gt;
+          &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Sub-item 2.1&lt;/a&gt;&lt;/li&gt;
+
+          &lt;!-- Nível 3 (Aninhamento infinito) --&gt;
+          &lt;li&gt;
+            &lt;div class="dropdown dropend"&gt;
+              &lt;a class="dropdown-item dropdown-toggle" href="#" data-bs-toggle="dropdown"&gt;Nível 3&lt;/a&gt;
+              &lt;ul class="dropdown-menu"&gt;
+                &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Sub-item 3.1&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;
+            &lt;/div&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+
+        <!-- 2. Abertura por Hover Suave (.dropdown-hover) -->
+        <section id="dropdown-hover" class="mb-5">
+          <h2>2. Abertura por Hover Suave (.dropdown-hover)</h2>
+          <p class="text-muted">
+            Adicione a classe <code>.dropdown-hover</code> para abrir o menu e os submenus automaticamente ao passar o cursor do mouse, com delay inteligente que previne fechamentos indesejados:
+          </p>
+
+          <div class="doc-card mb-4" style="min-height: 280px;">
+            <div class="dropdown dropdown-hover d-inline-block">
+              <button class="btn btn-secondary dropdown-toggle" type="button">
+                Menu por Hover (.dropdown-hover)
+              </button>
+
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Serviços em Nuvem</a></li>
+                <li>
+                  <div class="dropdown dropend">
+                    <a class="dropdown-item dropdown-toggle" href="#">Bancos de Dados</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">PostgreSQL Gerenciado</a></li>
+                      <li><a class="dropdown-item" href="#">Redis Cache Cluster</a></li>
+                      <li><a class="dropdown-item" href="#">ClickHouse Analytics</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><a class="dropdown-item" href="#">Monitoramento Datadog</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <pre data-lang="html" data-file="dropdown-hover.html"><code>&lt;!-- Dropdown acionado por Hover --&gt;
+&lt;div class="dropdown dropdown-hover"&gt;
+  &lt;button class="btn btn-secondary dropdown-toggle" type="button"&gt;
+    Passe o mouse
+  &lt;/button&gt;
+  &lt;ul class="dropdown-menu"&gt;
+    &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Item 1&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;
+      &lt;div class="dropdown dropend"&gt;
+        &lt;a class="dropdown-item dropdown-toggle" href="#"&gt;Submenu Hover&lt;/a&gt;
+        &lt;ul class="dropdown-menu"&gt;
+          &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Item 2.1&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+        </section>
+
+        <!-- 3. Submenu à Esquerda (.dropstart) -->
+        <section id="dropdown-dropstart" class="mb-5">
+          <h2>3. Submenu à Esquerda (.dropstart)</h2>
+          <p class="text-muted">
+            Para layouts com menus posicionados no lado direito da tela, use <code>.dropstart</code> para que os submenus se expandam para o lado esquerdo:
+          </p>
+
+          <div class="doc-card mb-4 text-end" style="min-height: 260px;">
+            <div class="dropdown d-inline-block">
+              <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropStartDemo" data-bs-toggle="dropdown">
+                Menu à Esquerda (.dropstart)
+              </button>
+
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropStartDemo">
+                <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
+                <li>
+                  <div class="dropdown dropstart">
+                    <a class="dropdown-item dropdown-toggle" href="#">Preferências</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Notificações</a></li>
+                      <li><a class="dropdown-item" href="#">Privacidade</a></li>
+                      <li><a class="dropdown-item" href="#">Chaves de API</a></li>
+                    </ul>
+                  </div>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger" href="#">Sair da Conta</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <pre data-lang="html" data-file="dropstart.html"><code>&lt;!-- Submenu expandindo para a esquerda com .dropstart --&gt;
+&lt;ul class="dropdown-menu dropdown-menu-end"&gt;
+  &lt;li&gt;
+    &lt;div class="dropdown dropstart"&gt;
+      &lt;a class="dropdown-item dropdown-toggle" href="#"&gt;Preferências&lt;/a&gt;
+      &lt;ul class="dropdown-menu"&gt;
+        &lt;li&gt;&lt;a class="dropdown-item" href="#"&gt;Sub-item à Esquerda&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+        </section>
+
+        <!-- 4. Suporte a Todas as 28 Cores da Paleta (.dropdown-menu-{cor}) -->
+        <section id="dropdown-colors" class="mb-5">
+          <h2>4. Paleta Oficial em Dropdowns (.dropdown-menu-{cor})</h2>
+          <p class="text-muted">
+            Personalize instantaneamente o menu aplicando a classe de cor da paleta do Dexter UI. Cada variante tonal estiliza a borda superior de 3px, divisores, cabeçalhos, efeitos de hover e estados ativos:
+          </p>
+
+          <div class="doc-card mb-4" style="min-height: 280px;">
+            <div class="d-flex flex-wrap gap-3 py-3">
+              <!-- Dropdown Coral -->
+              <div class="dropdown">
+                <button class="btn btn-coral dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  Coral (.dropdown-menu-coral)
+                </button>
+                <ul class="dropdown-menu dropdown-menu-coral">
+                  <li><h6 class="dropdown-header">Tema Coral</h6></li>
+                  <li><a class="dropdown-item active" href="#">Item Ativo</a></li>
+                  <li><a class="dropdown-item" href="#">Hover com Tom Coral</a></li>
+                  <li>
+                    <div class="dropdown dropend">
+                      <a class="dropdown-item dropdown-toggle" href="#">Submenu Coral</a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Sub-item Coral</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Dropdown Verde -->
+              <div class="dropdown">
+                <button class="btn btn-green dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  Verde (.dropdown-menu-green)
+                </button>
+                <ul class="dropdown-menu dropdown-menu-green">
+                  <li><h6 class="dropdown-header">Tema Verde</h6></li>
+                  <li><a class="dropdown-item active" href="#">Aprovado</a></li>
+                  <li><a class="dropdown-item" href="#">Exportar Planilha</a></li>
+                  <li>
+                    <div class="dropdown dropend">
+                      <a class="dropdown-item dropdown-toggle" href="#">Relatórios</a>
+                      <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Relatório Mensal</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Dropdown Roxo -->
+              <div class="dropdown">
+                <button class="btn btn-purple dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  Roxo (.dropdown-menu-purple)
+                </button>
+                <ul class="dropdown-menu dropdown-menu-purple">
+                  <li><h6 class="dropdown-header">Tema Roxo</h6></li>
+                  <li><a class="dropdown-item" href="#">Analytics</a></li>
+                  <li><a class="dropdown-item" href="#">Faturamento</a></li>
+                </ul>
+              </div>
+
+              <!-- Dropdown Midnight -->
+              <div class="dropdown">
+                <button class="btn btn-midnight dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  Midnight (.dropdown-menu-midnight)
+                </button>
+                <ul class="dropdown-menu dropdown-menu-midnight">
+                  <li><h6 class="dropdown-header">Tema Midnight</h6></li>
+                  <li><a class="dropdown-item" href="#">Logs de Segurança</a></li>
+                  <li><a class="dropdown-item" href="#">Tokens OAuth</a></li>
+                </ul>
+              </div>
+
+              <!-- Dropdown Sólido Preenchido -->
+              <div class="dropdown">
+                <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                  Sólido (.dropdown-menu-solid-primary)
+                </button>
+                <ul class="dropdown-menu dropdown-menu-solid-primary">
+                  <li><h6 class="dropdown-header">Menu Sólido</h6></li>
+                  <li><a class="dropdown-item" href="#">Fundo Colorido</a></li>
+                  <li><a class="dropdown-item" href="#">Hover Translúcido</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <pre data-lang="html" data-file="dropdown-cores.html"><code>&lt;!-- Menus com bordas e destaques tonais da paleta --&gt;
+&lt;ul class="dropdown-menu dropdown-menu-coral"&gt;...&lt;/ul&gt;
+&lt;ul class="dropdown-menu dropdown-menu-green"&gt;...&lt;/ul&gt;
+&lt;ul class="dropdown-menu dropdown-menu-purple"&gt;...&lt;/ul&gt;
+&lt;ul class="dropdown-menu dropdown-menu-midnight"&gt;...&lt;/ul&gt;
+
+&lt;!-- Menus totalmente preenchidos em cor sólida --&gt;
+&lt;ul class="dropdown-menu dropdown-menu-solid-primary"&gt;...&lt;/ul&gt;
+&lt;ul class="dropdown-menu dropdown-menu-solid-secondary"&gt;...&lt;/ul&gt;</code></pre>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+
+</body>
+</html>

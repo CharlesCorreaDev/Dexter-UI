@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seleção &amp; Upload de Arquivos (FileInput) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+
+        <!-- Page Header -->
+        <div class="mb-5 border-bottom pb-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-primary text-white">Componentes</span>
+            <span class="badge bg-success text-white">Zero Dependências</span>
+            <span class="badge bg-secondary text-white">WCAG 2.1 AA</span>
+          </div>
+          <h1 class="display-5 fw-bold mb-3">Upload &amp; Pré-visualização de Arquivos</h1>
+          <p class="lead text-muted">
+            Suíte completa de seleção, pré-visualização visual e upload de arquivos para o <strong>Dexter UI</strong>,
+            inspirada e aprimorada a partir do <code>Krajee Bootstrap FileInput</code> (<code>plugins.krajee.com/file-input</code>).
+            Elimina a dependência de jQuery com o controlador nativo <code>DexterFileInput</code>, trazendo área drag-and-drop responsiva,
+            miniaturas com aspect ratio para imagens, PDFs e documentos, modal de zoom (lightbox), barra de progresso,
+            modo compacto horizontal, modo avatar e integração com as 28 cores oficiais do sistema.
+          </p>
+        </div>
+
+        <!-- 1. Drag & Drop Dropzone Completo -->
+        <section id="file-dropzone" class="mb-5">
+          <h2>1. Área Drag-and-Drop Completa com Galeria de Miniaturas</h2>
+          <p class="text-muted">
+            Área de soltura interativa com suporte a seleção múltipla, arrastar e soltar (drag-and-drop),
+            pré-visualização em tempo real de imagens e documentos, botão de exclusão individual, zoom em lightbox e barra de ações globais:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Arraste ou Selecione Múltiplos Arquivos</h6>
+            <input type="file" id="demoFileInput" class="file-input" multiple data-dx-fileinput data-dx-color="primary">
+          </div>
+
+          <!-- Code Snippet Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML / JS</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Dropzone Completo com Inicialização Automática --&gt;
+&lt;input type="file" class="file-input" multiple data-dx-fileinput&gt;
+
+&lt;!-- Ou Inicialização Programática via JavaScript --&gt;
+&lt;script&gt;
+  const uploader = new DexterFileInput(document.querySelector('#meuInput'), {
+    maxFileSize: 10 * 1024 * 1024, // 10 MB
+    maxFileCount: 5,
+    onFileSelect: (files) =&gt; console.log('Arquivos selecionados:', files),
+    onUploadSuccess: (res) =&gt; dxToast.success('Upload Concluído', 'Arquivos enviados!')
+  });
+&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Modo Compacto Horizontal -->
+        <section id="file-compact" class="mb-5">
+          <h2>2. Modo Compacto Horizontal (Simple File Picker)</h2>
+          <p class="text-muted">
+            Ideal para formulários compactos ou barras de anexos, onde o espaço vertical é limitado.
+            Exibe botão de navegação, nome do arquivo selecionado e botão de limpar:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Seletor Compacto em Linha</h6>
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Comprovante de Residência (PDF ou Imagem)</label>
+                <input type="file" id="demoCompactInput" data-dx-fileinput data-dx-mode="compact">
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Currículo / Portfólio (DOCX ou PDF)</label>
+                <input type="file" id="demoCompactInput2" data-dx-fileinput data-dx-mode="compact" data-dx-color="coral">
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Seletor Compacto via data-dx-mode="compact" --&gt;
+&lt;input type="file" data-dx-fileinput data-dx-mode="compact"&gt;
+
+&lt;!-- Com cor temática oficial (ex: Coral) --&gt;
+&lt;input type="file" data-dx-fileinput data-dx-mode="compact" data-dx-color="coral"&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 3. Modo Avatar / Foto de Perfil -->
+        <section id="file-avatar" class="mb-5">
+          <h2>3. Modo Avatar / Foto de Perfil Circular</h2>
+          <p class="text-muted">
+            Dropzone circular projetado especificamente para seleção de fotos de usuário, com overlay suave de câmera no hover e atualização instantânea da miniatura:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex align-items-center gap-4">
+              <input type="file" id="demoAvatarInput" accept="image/*" data-dx-fileinput data-dx-mode="avatar">
+              <div>
+                <h6 class="fw-bold mb-1">Foto de Perfil do Usuário</h6>
+                <p class="small text-muted mb-2">Clique sobre a foto ou arraste uma nova imagem para atualizar seu avatar.</p>
+                <span class="badge bg-primary text-white">JPG, PNG ou WebP</span>
+                <span class="badge bg-secondary text-white">Até 5MB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Modo Avatar Circular com Preview Instantâneo --&gt;
+&lt;input type="file" accept="image/*" data-dx-fileinput data-dx-mode="avatar"&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 4. Variações Temáticas das 28 Cores -->
+        <section id="file-colors" class="mb-5">
+          <h2>4. Cores Oficiais da Paleta Dexter UI</h2>
+          <p class="text-muted">
+            O componente integra-se diretamente às 28 famílias de cores do sistema, adaptando bordas de arraste, ícones, botões de ação e barras de progresso:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-4">
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Variação Coral (.file-input-coral)</h6>
+                <input type="file" data-dx-fileinput data-dx-color="coral">
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Variação Verde (.file-input-green)</h6>
+                <input type="file" data-dx-fileinput data-dx-color="green">
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-toast.js"></script>
+  <script src="../dist/js/dexter-fileinput.js"></script>
+  <script src="../dist/js/dexter-tags.js"></script>
+  <script src="../dist/js/dexter-rating.js"></script>
+  <script src="../dist/js/dexter-multiselect.js"></script>
+  <script src="../dist/js/dexter-input-spinner.js"></script>
+
+</body>
+</html>

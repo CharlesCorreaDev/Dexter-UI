@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conteúdo Tipográfico (Prose) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <small class="text-muted">Documentação &gt; Componentes &gt; <strong style="color: inherit;">Conteúdo Tipográfico (Prose)</strong></small>
+        </nav>
+
+        <h1 class="mb-2">Conteúdo Tipográfico (Prose)</h1>
+        <p class="lead text-muted mb-4">Inspirado na mais recente especificação do <strong>Bootstrap 6.0 Content Prose</strong> e no ecossistema moderno de design, a classe <code>.prose</code> estiliza belamente textos longos, artigos de blog, saídas de Markdown/CMS e documentações técnicas sem precisar adicionar classes utilitárias a cada elemento HTML nativo.</p>
+        <hr class="my-4">
+
+        <!-- 1. Exemplo Completo de Artigo Prose -->
+        <section id="prose-demo" class="mb-5">
+          <h2>1. Exemplo Completo (.prose)</h2>
+          <p class="text-muted">Basta envolver o seu texto gerado dinamicamente em <code>&lt;article class="prose"&gt;</code>. Todos os elementos nativos (<code>&lt;p&gt;</code>, <code>&lt;h1&gt;-&lt;h6&gt;</code>, <code>&lt;blockquote&gt;</code>, <code>&lt;ul&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;pre&gt;</code>, <code>&lt;table&gt;</code>, <code>&lt;img&gt;</code>) recebem ritmo vertical impecável, largura ótima de leitura de <strong>65 caracteres</strong> (<code>65ch</code>) e tipografia agradável:</p>
+
+          <div class="doc-card">
+            <article class="prose">
+              <h1>Arquitetura Moderna de Sistemas e Design Systems Fluidos</h1>
+              <p class="lead">A evolução dos frameworks modernos de CSS exige o equilíbrio perfeito entre flexibilidade visual, acessibilidade cognitiva WCAG 2.1 AAA e desempenho extremo sem dependências pesadas de JavaScript.</p>
+              
+              <p>Ao construir interfaces ricas, o desenvolvedor frequentemente se depara com conteúdos gerados dinamicamente — como artigos redigidos em Markdown, posts de blog oriundos de um headless CMS ou saídas de editores ricos (WYSIWYG). Aplicar classes utilitárias manualmente em cada parágrafo torna-se impraticável.</p>
+              
+              <h2>Princípios Fundamentais de Leitura e Ergonomia</h2>
+              <p>O comprimento da linha de texto (chamado de <em>measure</em> na tipografia editorial clássica) exerce impacto direto na fadiga ocular do leitor. Linhas que ultrapassam 80 caracteres forçam o olho a percorrer uma trajetória excessiva, aumentando as chances de o usuário perder o início da próxima linha.</p>
+              
+              <blockquote>
+                <p>A tipografia não existe apenas para exibir palavras na tela; ela existe para conduzir o pensamento do leitor sem fricção cognitiva.</p>
+                <cite>Charles Corrêa, Lead Architect</cite>
+              </blockquote>
+
+              <h3>Recursos Nativos Suportados</h3>
+              <p>Veja a seguir a estilização automática aplicada a elementos comuns:</p>
+
+              <ul>
+                <li><strong>Hierarquia visual clara:</strong> Títulos calibrados com espaçamento proporcional superior e inferior.</li>
+                <li><strong>Links com transição suave:</strong> <a href="#prose-demo">Hyperlinks destacados</a> com a transição canônica de 700ms ease-in-out do Dexter UI.</li>
+                <li><strong>Marcadores temáticos:</strong> Marcadores estilizados automaticamente com a paleta oficial.</li>
+                <li><strong>Entrada de teclado:</strong> Pressione <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> para abrir a paleta de comandos.</li>
+              </ul>
+
+              <p>Também há suporte total a listas ordenadas sequenciais:</p>
+              <ol>
+                <li>Defina os tokens no arquivo <code>_config.scss</code>.</li>
+                <li>Compile o pacote com <code>npm run build</code>.</li>
+                <li>Inspecione os resultados no navegador com o tema desejado.</li>
+              </ol>
+
+              <h3>Código Inline e Blocos &lt;pre&gt;</h3>
+              <p>O código inline é demarcado através de <code>const engine = new DexterEngine();</code> com fundo contrastante sutil. Já blocos de código com múltiplos comandos utilizam preenchimento generoso e barra de rolagem horizontal automática:</p>
+
+              <pre><code>// Exemplo de integração nativa com Dexter UI Prose
+import { initProseEnhancer } from "@dexter-ui/core";
+
+const article = document.querySelector(".prose");
+if (article) {
+  console.log("Tipografia fluida ativada com 65ch de largura máxima.");
+}</code></pre>
+
+              <h3>Tabelas em Documentos Técnicos</h3>
+              <p>Tabelas incorporadas no fluxo do texto recebem alinhamento e bordas equilibradas sem necessidade da classe <code>.table</code>:</p>
+
+              <table>
+                <thead>
+                  <tr>
+                    <th>Breakpoint</th>
+                    <th>Largura Mínima</th>
+                    <th>Colunas no Grid</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Mobile (sm)</td>
+                    <td>576px</td>
+                    <td>14 colunas fluidas</td>
+                  </tr>
+                  <tr>
+                    <td>Tablet (md)</td>
+                    <td>768px</td>
+                    <td>14 colunas com gutters adaptativos</td>
+                  </tr>
+                  <tr>
+                    <td>Desktop (xl)</td>
+                    <td>1200px</td>
+                    <td>14 colunas com navegação fixa</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <h3>Elementos Retráteis (&lt;details&gt;)</h3>
+              <details>
+                <summary>Clique para visualizar notas técnicas de compatibilidade</summary>
+                <p>O seletor <code>:where(...)</code> garante que os estilos aplicados pelo <code>.prose</code> tenham especificidade zero (0), permitindo que você sobrescreva qualquer propriedade pontual utilizando classes utilitárias sem recorrer a <code>!important</code>.</p>
+              </details>
+
+            </article>
+          </div>
+        </section>
+
+        <!-- 2. Modificadores de Tamanho -->
+        <section id="prose-sizes" class="mb-5">
+          <h2>2. Modificadores de Escala (.prose-sm a .prose-2xl)</h2>
+          <p class="text-muted">Ajuste a escala tipográfica para se adequar a diferentes contextos (como comentários e notas de rodapé com <code>.prose-sm</code>, ou introduções editoriais marcantes com <code>.prose-xl</code>):</p>
+
+          <div class="row g-4">
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3 text-primary">Tamanho Pequeno (.prose.prose-sm)</h6>
+                <article class="prose prose-sm">
+                  <p><strong>Nota de rodapé ou comentário:</strong> Este bloco utiliza a escala reduzida (14px base), ideal para áreas secundárias, documentações laterais e caixas de anotação rápida.</p>
+                  <p>Código inline: <code>npm i dexter-ui</code> com bordas refinadas.</p>
+                </article>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3 text-primary">Tamanho Confortável (.prose.prose-lg)</h6>
+                <article class="prose prose-lg">
+                  <p><strong>Artigo Editorial (18px base):</strong> Leitura agradável e imersiva para posts longos, newsletters e artigos de opinião com respiro visual expandido.</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Controle de Largura de Leitura -->
+        <section id="prose-widths" class="mb-5">
+          <h2>3. Controle de Largura de Leitura (.prose-narrow, .prose-wide, .prose-full)</h2>
+          <p class="text-muted">Controle o <em>measure</em> (limite de caracteres por linha) para atender a diferentes objetivos de design e requisitos de acessibilidade cognitiva:</p>
+
+          <div class="doc-card mb-3">
+            <span class="badge bg-purple-050 text-purple border border-purple-200 mb-2">Ergonomia Cognitiva &amp; TDAH (45ch)</span>
+            <h6 class="fw-bold">Leitura Concentrada (.prose.prose-narrow)</h6>
+            <article class="prose prose-narrow">
+              <p>A classe <code>.prose-narrow</code> restringe a linha a <strong>45 caracteres</strong>. Estudos ergonômicos e a matriz de acessibilidade cognitiva comprovam que colunas mais estreitas reduzem drasticamente a distração e a dispersão em leitores com TDAH ou fadiga visual.</p>
+            </article>
+          </div>
+
+          <div class="doc-card mb-3">
+            <span class="badge bg-primary-050 text-primary border border-primary-200 mb-2">Padrão Otimizado (65ch)</span>
+            <h6 class="fw-bold">Largura Padrão (.prose)</h6>
+            <article class="prose">
+              <p>O valor canônico de <strong>65 caracteres</strong> proporciona o equilíbrio ideal entre aproveitamento de espaço e facilidade de localização do início da linha pelo olho humano.</p>
+            </article>
+          </div>
+
+          <div class="doc-card">
+            <span class="badge bg-midnight-050 text-midnight border border-midnight-200 mb-2">Largura Expandida / Completa (.prose.prose-full)</span>
+            <h6 class="fw-bold">Largura Total (.prose.prose-full)</h6>
+            <article class="prose prose-full">
+              <p>Remove a restrição de largura máxima (<code>max-width: none</code>), permitindo que o texto preencha 100% da largura do contêiner pai no grid de 14 colunas.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 4. Escape de Estilização (.not-prose) -->
+        <section id="not-prose" class="mb-5">
+          <h2>4. Escape de Estilização com .not-prose (Bootstrap 6.0 Pattern)</h2>
+          <p class="text-muted">Seguindo rigorosamente o padrão do <strong>Bootstrap 6.0 Content Prose</strong>, quando você precisa embutir um componente interativo nativo (como um cartão de checkout, um formulário de feedback ou uma demonstração interativa) dentro do fluxo do artigo, basta envolvê-lo em <code>.not-prose</code>:</p>
+
+          <div class="doc-card">
+            <article class="prose">
+              <p>Abaixo temos um exemplo de parágrafo estilizado normalmente pela prosa do artigo. Logo em seguida, inserimos um formulário completo isolado com a classe <code>.not-prose</code>:</p>
+
+              <!-- Widget Isolado com .not-prose -->
+              <div class="not-prose my-4 p-4 border rounded bg-silver-light-025">
+                <h5 class="fw-bold mb-2 text-primary">Receba Atualizações Técnicas</h5>
+                <p class="text-muted small mb-3">Cadastre-se para receber novos lançamentos e notas de versão do Dexter UI Framework.</p>
+                <div class="d-flex gap-2">
+                  <input type="email" class="form-control" placeholder="seu-email@dominio.com" style="max-width: 320px;">
+                  <button type="button" class="btn btn-primary">Inscrever-se</button>
+                </div>
+              </div>
+
+              <p>E este parágrafo subsequente volta a receber todas as regras tipográficas, espaçamentos e fontes fluidas do <code>.prose</code> automaticamente sem qualquer interferência.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 5. Temas da Paleta de Cores -->
+        <section id="prose-colors" class="mb-5">
+          <h2>5. Temas da Paleta (.prose-{cor})</h2>
+          <p class="text-muted">Personalize os acentos visuais do artigo (cores de links, marcadores de lista e bordas de citação) utilizando as 28 cores da paleta oficial:</p>
+
+          <div class="row g-4">
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3 text-green">Tema Verde (.prose.prose-green)</h6>
+                <article class="prose prose-green">
+                  <p>Um tema focado em sustentabilidade, sucesso ou finanças. Os <a href="#prose-colors">links desta seção</a> e marcadores de lista utilizam a cor verde:</p>
+                  <ul>
+                    <li>Transações aprovadas com sucesso.</li>
+                    <li>Sistemas com 100% de integridade operacional.</li>
+                  </ul>
+                  <blockquote>
+                    <p>Qualidade de código é sustentabilidade digital a longo prazo.</p>
+                  </blockquote>
+                </article>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3 text-purple">Tema Roxo (.prose.prose-purple)</h6>
+                <article class="prose prose-purple">
+                  <p>Acentos luxuosos para marcas criativas e blogs de tecnologia avançada. <a href="#prose-colors">Navegue pelos detalhes</a> com estilo:</p>
+                  <ul>
+                    <li>Design generativo e interfaces futuristas.</li>
+                    <li>Ergonomia cognitiva refinada.</li>
+                  </ul>
+                  <blockquote>
+                    <p>A imaginação é a fundação da inovação de software.</p>
+                  </blockquote>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Inversão e Modo Escuro (.prose-invert) -->
+        <section id="prose-invert" class="mb-5">
+          <h2>6. Modo Escuro e Inversão (.prose-invert)</h2>
+          <p class="text-muted">Quando o tema escuro estiver ativo (<code>data-dx-theme="dark"</code>), o <code>.prose</code> ajusta automaticamente seus tons. Você também pode forçar o modo escuro manualmente em um contêiner escuro aplicando <code>.prose-invert</code>:</p>
+
+          <div class="p-4 rounded-3" style="background-color: #1a1d20; color: #ffffff;">
+            <article class="prose prose-invert">
+              <h3 style="color: #ffffff;">Artigo com Inversão Forçada (.prose-invert)</h3>
+              <p>Este painel possui fundo escuro permanente. A classe <code>.prose-invert</code> recalcula as variáveis de cor para garantir contraste de alto nível (WCAG AAA) contra o fundo preto ou chumbo.</p>
+              <blockquote>
+                <p>O contraste correto em modo escuro previne a fadiga visual noturna.</p>
+              </blockquote>
+              <p>Código inline adaptado: <code>theme: "dark"</code> com destaque em tom coral.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- Navegação Inferior -->
+        <div class="d-flex justify-content-between pt-4 border-top mt-5">
+          <a href="typography.html" class="doc-header-link text-primary fw-semibold">
+            &larr; Anterior: Tipografia
+          </a>
+          <a href="images.html" class="doc-header-link text-primary fw-semibold">
+            Próximo: Imagens, Formas &amp; Efeitos &rarr;
+          </a>
+        </div>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+</body>
+</html>

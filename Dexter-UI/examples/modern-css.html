@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Moderno &amp; Primitivas HTML5 (Tailwind v4 / Bootstrap 6) - Dexter UI</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Design System</span>
+          <span class="badge bg-indigo text-white">Tailwind v4 / UnoCSS</span>
+          <span class="badge bg-purple text-white">Bootstrap 6 / daisyUI</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">CSS Moderno &amp; Primitivas Nativas HTML5</h1>
+        <p class="lead text-muted mb-0">
+          Utilitários modernos de CSS Grid (<code>.grid-cols-*</code>), Container Queries (<code>.dx-cq-grid</code>), Rings, Gradientes, Presets Adaptativos de Design System (<code>[data-dx-preset]</code>), diálogos nativos <code>&lt;dialog class="dx-dialog"&gt;</code>, acordeões zero-JS <code>&lt;details class="dx-details"&gt;</code>, Popover API nativa, <code>.swap</code> e <code>.dx-aura</code>.
+        </p>
+      </div>
+
+      <!-- 1. Presets Adaptativos -->
+      <section id="modern-presets" class="mb-5">
+        <h2>1. Presets Adaptativos (<code>[data-dx-preset]</code>)</h2>
+        <p class="text-muted">Alterne tokens de borda, raio e elevação sem recompilar CSS (Skeleton, Material, Bulma e UIkit):</p>
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-sm btn-outline-primary" data-preset-btn="default" onclick="applyDemoPreset('')">Dexter Padrão</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-preset-btn="skeleton" onclick="applyDemoPreset('skeleton')">Skeleton</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-preset-btn="material" onclick="applyDemoPreset('material')">Material</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-preset-btn="bulma" onclick="applyDemoPreset('bulma')">Bulma</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-preset-btn="uikit" onclick="applyDemoPreset('uikit')">UIkit</button>
+          </div>
+          <div id="presetDemoStage" class="p-3 border rounded">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Cartão Adaptativo (<span id="presetLabel">Dexter Padrão</span>)</h5>
+                <p class="card-text text-muted small">Observe o arredondamento do card e dos botões mudarem em tempo real conforme o preset selecionado.</p>
+                <button type="button" class="btn btn-primary btn-sm">Ação Primária</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Bootstrap 6 & daisyUI Nativos -->
+      <section id="modern-b6" class="mb-5">
+        <h2>2. Primitivas HTML5 Nativas (<code>&lt;dialog&gt;</code>, <code>&lt;details&gt;</code>, Popover, Swap &amp; Aura)</h2>
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap align-items-center gap-3 mb-4">
+            <button type="button" class="btn btn-primary" id="btnOpenNativeDialog" onclick="document.getElementById('demoNativeDialog').showModal()">
+              Abrir &lt;dialog&gt; Nativo
+            </button>
+            <button type="button" class="btn btn-outline-indigo" popovertarget="demoNativePopover">
+              Abrir [popover] Nativo
+            </button>
+
+            <label class="swap swap-rotate border rounded px-3 py-2" id="demoSwapLabel">
+              <input type="checkbox" id="demoSwapInput">
+              <span class="swap-on fw-bold text-green">☀️ Ativo (.swap-on)</span>
+              <span class="swap-off fw-bold text-muted">🌙 Inativo (.swap-off)</span>
+            </label>
+
+            <div class="dx-aura">
+              <div class="dx-aura-inner px-3 py-2 small fw-bold">.dx-aura Cônica</div>
+            </div>
+          </div>
+
+          <dialog class="dx-dialog" id="demoNativeDialog" aria-labelledby="nativeDlgTitle">
+            <div class="dx-dialog-header">
+              <h5 class="dx-dialog-title" id="nativeDlgTitle">Diálogo HTML5 Nativo (Bootstrap 6 style)</h5>
+              <button type="button" class="btn-close" aria-label="Fechar" onclick="document.getElementById('demoNativeDialog').close()"></button>
+            </div>
+            <div class="dx-dialog-body">
+              <p class="mb-0">Renderizado nativamente na Top Layer do navegador via <code>showModal()</code>, com <code>::backdrop</code> desfocado e transição CSS <code>@starting-style</code>.</p>
+            </div>
+            <div class="dx-dialog-footer">
+              <button type="button" class="btn btn-sm btn-secondary" id="btnCloseNativeDialog" onclick="document.getElementById('demoNativeDialog').close()">Fechar</button>
+            </div>
+          </dialog>
+
+          <div popover="auto" id="demoNativePopover" class="dx-popover-native">
+            <strong class="d-block mb-1">HTML5 Popover API</strong>
+            <span class="small text-muted">Exibido sem JavaScript com suporte nativo a Light Dismiss e tecla Escape.</span>
+          </div>
+
+          <h6 class="fw-bold mb-2">Acordeão Exclusivo HTML5 (<code>&lt;details name="b6-acc"&gt;</code>)</h6>
+          <div class="dx-details-group">
+            <details class="dx-details" name="b6-acc" open>
+              <summary class="dx-details-summary">Item 1 — Zero JavaScript</summary>
+              <div class="dx-details-body">Navegadores modernos agrupam elementos <code>&lt;details&gt;</code> com o mesmo atributo <code>name</code> automaticamente.</div>
+            </details>
+            <details class="dx-details" name="b6-acc" id="demoDetails2">
+              <summary class="dx-details-summary">Item 2 — Chevron SVG CSS Puro</summary>
+              <div class="dx-details-body">O indicador lateral gira automaticamente em CSS puro quando o atributo <code>[open]</code> é ativado.</div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. CSS Grid v4 & Container Queries -->
+      <section id="modern-grid-cq" class="mb-5">
+        <h2>3. Utilitários Grid CSS 1..12, Container Queries &amp; Rings</h2>
+        <div class="doc-card mb-4">
+          <div class="d-grid grid-cols-1 grid-cols-md-3 gap-3 mb-4">
+            <div class="p-3 border rounded ring ring-primary">
+              <strong class="d-block text-gradient-primary">Gradiente &amp; Ring</strong>
+              <span class="small text-muted"><code>.d-grid .grid-cols-md-3 .ring-primary</code></span>
+            </div>
+            <div class="p-3 border rounded ring ring-indigo">
+              <strong class="d-block text-gradient-indigo">Coluna Responsiva</strong>
+              <span class="small text-muted">1 coluna no mobile, 3 colunas a partir de <code>md</code>.</span>
+            </div>
+            <div class="p-3 border rounded ring ring-coral">
+              <strong class="d-block line-clamp-2">Truncamento Line Clamp em 2 linhas</strong>
+              <span class="small text-muted">Suporte nativo a <code>.line-clamp-1</code> até <code>.line-clamp-6</code>.</span>
+            </div>
+          </div>
+
+          <h6 class="fw-bold mb-2">Container Query Grid (<code>.dx-cq &gt; .dx-cq-grid</code>)</h6>
+          <div class="dx-cq p-3 border rounded">
+            <div class="dx-cq-grid">
+              <div class="p-3 border rounded bg-body">Bloco CQ 1</div>
+              <div class="p-3 border rounded bg-body">Bloco CQ 2</div>
+              <div class="p-3 border rounded bg-body">Bloco CQ 3</div>
+            </div>
+          </div>
+        </div>
+
+        <pre data-lang="html" data-file="modern-css.html"><code>&lt;div class="d-grid grid-cols-1 grid-cols-md-3 gap-3"&gt;
+  &lt;div class="p-3 border rounded ring ring-indigo"&gt;Card com Ring&lt;/div&gt;
+&lt;/div&gt;
+&lt;details class="dx-details" name="grupo"&gt;
+  &lt;summary&gt;Título Nativo&lt;/summary&gt;
+  &lt;div class="dx-details-body"&gt;Conteúdo sem JS&lt;/div&gt;
+&lt;/details&gt;</code></pre>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-extras.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    function applyDemoPreset(name) {
+      var stage = document.getElementById('presetDemoStage');
+      var label = document.getElementById('presetLabel');
+      if (name) {
+        stage.setAttribute('data-dx-preset', name);
+        label.textContent = name.toUpperCase();
+      } else {
+        stage.removeAttribute('data-dx-preset');
+        label.textContent = 'Dexter Padrão';
+      }
+    }
+  </script>
+</body>
+</html>

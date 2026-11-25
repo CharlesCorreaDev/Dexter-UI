@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrossel &amp; Slider Multi-Item (Carousel Multi) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        <h1 class="display-6 fw-bold mb-3">Carrossel &amp; Slider Multi-Item (Carousel Multi)</h1>
+        <p class="lead text-muted mb-4">
+          Suíte nativa e completa de carrossel multi-itens e slider de cartões inspirada em <code>bootstrap5-carousel-multi</code>.
+          Diferente dos carrosséis padrão que saltam telas inteiras de forma rígida, o Dexter Carousel desliza suavemente <strong>1 cartão por vez</strong>,
+          oferece suporte completo a gestos touch swipe em dispositivos móveis, transições CSS fluidas, autoplay com pausa no hover,
+          controles externos e integração total com as 28 cores oficiais do Dexter UI e Dark Mode.
+        </p>
+
+        <!-- 1. Carrossel Multi-Item Básico (1 em 1 cartão) -->
+        <section id="carousel-basic" class="mb-5">
+          <h2>1. Multi-Item Card Slider (Deslizamento Suave 1 a 1)</h2>
+          <p class="text-muted">
+            Exibe múltiplos cartões por tela de forma responsiva (1 no celular, 2 em tablets, 3 em telas médias e 4 em desktops).
+            Ao clicar nas setas ou arrastar no touch, avança 1 cartão de cada vez com transição fluida:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="carousel carousel-multi" id="demoMultiCarousel" data-dx-carousel>
+              <div class="carousel-inner">
+                <div class="carousel-track">
+                  
+                  <!-- Card 1 -->
+                  <div class="carousel-item">
+                    <div class="card h-100 shadow-sm border">
+                      <div class="card-body text-center p-4">
+                        <div class="fs-1 mb-2">🚀</div>
+                        <h5 class="fw-bold">Alta Performance</h5>
+                        <p class="text-muted small mb-0">Zero dependências externas, CSS transform 3D acelerado por hardware e leveza incomparável.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Card 2 -->
+                  <div class="carousel-item">
+                    <div class="card h-100 shadow-sm border">
+                      <div class="card-body text-center p-4">
+                        <div class="fs-1 mb-2">🎨</div>
+                        <h5 class="fw-bold">28 Cores Oficiais</h5>
+                        <p class="text-muted small mb-0">Total sintonia com o design system do Dexter UI, incluindo escala tonal e Dark Mode nativo.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Card 3 -->
+                  <div class="carousel-item">
+                    <div class="card h-100 shadow-sm border">
+                      <div class="card-body text-center p-4">
+                        <div class="fs-1 mb-2">📱</div>
+                        <h5 class="fw-bold">Touch &amp; Mobile</h5>
+                        <p class="text-muted small mb-0">Suporte nativo a gestos de arrasto e swipe em celulares, tablets e telas touch.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Card 4 -->
+                  <div class="carousel-item">
+                    <div class="card h-100 shadow-sm border">
+                      <div class="card-body text-center p-4">
+                        <div class="fs-1 mb-2">⚡</div>
+                        <h5 class="fw-bold">1 a 1 Fluido</h5>
+                        <p class="text-muted small mb-0">Elimina o salto brusco de páginas inteiras: cada clique avança exatamente um elemento.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Card 5 -->
+                  <div class="carousel-item">
+                    <div class="card h-100 shadow-sm border">
+                      <div class="card-body text-center p-4">
+                        <div class="fs-1 mb-2">🛡️</div>
+                        <h5 class="fw-bold">Acessibilidade WCAG</h5>
+                        <p class="text-muted small mb-0">Controles com aria-label, navegação por setas do teclado e suporte a leitores de tela.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Card 6 -->
+                  <div class="carousel-item">
+                    <div class="card h-100 shadow-sm border">
+                      <div class="card-body text-center p-4">
+                        <div class="fs-1 mb-2">🔄</div>
+                        <h5 class="fw-bold">Autoplay &amp; Pause</h5>
+                        <p class="text-muted small mb-0">Transição automática inteligente com pausa instantânea ao passar o cursor do mouse.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Controles de Navegação -->
+              <button class="carousel-control-prev" type="button" aria-label="Cartão Anterior">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
+              </button>
+              <button class="carousel-control-next" type="button" aria-label="Próximo Cartão">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+              </button>
+
+              <!-- Indicadores de Posição -->
+              <div class="carousel-indicators"></div>
+            </div>
+          </div>
+
+          <!-- Snippet de Código Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Carrossel Multi-Item responsivo com transição de 1 em 1 cartão --&gt;
+&lt;div class="carousel carousel-multi" data-dx-carousel&gt;
+  &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-track"&gt;
+      &lt;div class="carousel-item"&gt;...&lt;/div&gt;
+      &lt;div class="carousel-item"&gt;...&lt;/div&gt;
+      &lt;div class="carousel-item"&gt;...&lt;/div&gt;
+      &lt;div class="carousel-item"&gt;...&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Controles Circulares com Sombra Suave --&gt;
+  &lt;button class="carousel-control-prev" type="button" aria-label="Anterior"&gt;...&lt;/button&gt;
+  &lt;button class="carousel-control-next" type="button" aria-label="Próximo"&gt;...&lt;/button&gt;
+
+  &lt;!-- Indicadores de Posição (opcional) --&gt;
+  &lt;div class="carousel-indicators"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Autoplay Contínuo (Sem Pausa no Hover) -->
+        <section id="carousel-autoplay-continuous" class="mb-5">
+          <h2>2. Autoplay Contínuo (Sem Pausa no Hover)</h2>
+          <p class="text-muted">
+            Avança automaticamente a cada <code>2000ms</code> sem interromper quando o cursor passa sobre os cartões (<code>data-autoplay="true" data-interval="2000" data-pause="false"</code>). Ideal para vitrines e painéis informativos:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+              <span class="badge bg-indigo text-white" id="statusAutoplayContinuous">▶ Autoplay contínuo ativo · Slide 1</span>
+              <button type="button" class="btn btn-sm btn-outline-indigo" id="btnToggleContinuous">Pausar manualmente</button>
+            </div>
+
+            <div class="carousel carousel-multi carousel-indigo" id="demoAutoplayContinuous" data-dx-carousel data-autoplay="true" data-interval="2000" data-pause="false">
+              <div class="carousel-inner">
+                <div class="carousel-track">
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-indigo text-white mb-2">Slide 1</span>
+                        <h6 class="fw-bold mb-1">Fluxo Contínuo</h6>
+                        <p class="small text-muted mb-0">Continua girando mesmo com o cursor posicionado em cima.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-primary text-white mb-2">Slide 2</span>
+                        <h6 class="fw-bold mb-1">Deslize Suave</h6>
+                        <p class="small text-muted mb-0">Avança 1 cartão a cada intervalo configurado em ms.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-purple text-white mb-2">Slide 3</span>
+                        <h6 class="fw-bold mb-1">Loop Infinito</h6>
+                        <p class="small text-muted mb-0">Retorna suavemente ao início ao alcançar o último cartão.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-teal text-white mb-2">Slide 4</span>
+                        <h6 class="fw-bold mb-1">Zero JQuery</h6>
+                        <p class="small text-muted mb-0">Motor 100% Vanilla JS com hardware acceleration 3D.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-coral text-white mb-2">Slide 5</span>
+                        <h6 class="fw-bold mb-1">Controle via API</h6>
+                        <p class="small text-muted mb-0">Use <code>.pause()</code> e <code>.play()</code> quando precisar intervir.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-green text-white mb-2">Slide 6</span>
+                        <h6 class="fw-bold mb-1">Responsivo</h6>
+                        <p class="small text-muted mb-0">Recalcula largura e indicadores ao redimensionar a janela.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="carousel-control-prev" type="button" aria-label="Anterior"></button>
+              <button class="carousel-control-next" type="button" aria-label="Próximo"></button>
+              <div class="carousel-indicators"></div>
+            </div>
+          </div>
+
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Autoplay contínuo a cada 2s sem pausar no hover --&gt;
+&lt;div class="carousel carousel-multi carousel-indigo"
+     data-dx-carousel
+     data-autoplay="true"
+     data-interval="2000"
+     data-pause="false"&gt;
+  &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-track"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="carousel-indicators"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 3. Autoplay com Pausa no Hover -->
+        <section id="carousel-autoplay-hover" class="mb-5">
+          <h2>3. Autoplay com Pausa Automática no Hover (<code>data-pause="hover"</code>)</h2>
+          <p class="text-muted">
+            Reproduz automaticamente a cada <code>2000ms</code>, mas <strong>pausa instantaneamente ao passar o cursor do mouse</strong> e retoma ao retirar o mouse (<code>data-autoplay="true" data-interval="2000" data-pause="hover"</code>):
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+              <span class="badge bg-teal text-white" id="statusAutoplayHover">▶ Reproduzindo — passe o mouse sobre os cartões para pausar</span>
+              <small class="text-muted">Eventos nativos: <code>dexter.carousel.pause</code> &amp; <code>dexter.carousel.play</code></small>
+            </div>
+
+            <div class="carousel carousel-multi carousel-teal" id="demoAutoplayHover" data-dx-carousel data-autoplay="true" data-interval="2000" data-pause="hover">
+              <div class="carousel-inner">
+                <div class="carousel-track">
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-teal text-white mb-2">Oferta 1</span>
+                        <h6 class="fw-bold mb-1">Leitura Confortável</h6>
+                        <p class="small text-muted mb-0">Passe o mouse aqui para congelar a rotação e ler com calma.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-turquoise text-white mb-2">Oferta 2</span>
+                        <h6 class="fw-bold mb-1">Retomada Suave</h6>
+                        <p class="small text-muted mb-0">Ao sair com o cursor, o contador de 2s reinicia do zero.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-cyan text-white mb-2">Oferta 3</span>
+                        <h6 class="fw-bold mb-1">Acessível</h6>
+                        <p class="small text-muted mb-0">Ideal para cartões com botões, links e descrições.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-steelblue text-white mb-2">Oferta 4</span>
+                        <h6 class="fw-bold mb-1">Compatível BS5/6</h6>
+                        <p class="small text-muted mb-0">Aceita <code>data-pause="hover"</code> ou <code>data-bs-pause</code>.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-primary text-white mb-2">Oferta 5</span>
+                        <h6 class="fw-bold mb-1">28 Cores Oficiais</h6>
+                        <p class="small text-muted mb-0">Aplicação rápida via classe temática <code>.carousel-teal</code>.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="card h-100 border shadow-sm">
+                      <div class="card-body text-center p-4">
+                        <span class="badge bg-midnight text-white mb-2">Oferta 6</span>
+                        <h6 class="fw-bold mb-1">Dark Mode Nativo</h6>
+                        <p class="small text-muted mb-0">Contraste preservado tanto no tema claro quanto no escuro.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button class="carousel-control-prev" type="button" aria-label="Anterior"></button>
+              <button class="carousel-control-next" type="button" aria-label="Próximo"></button>
+              <div class="carousel-indicators"></div>
+            </div>
+          </div>
+
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Autoplay com pausa automática ao passar o mouse (hover) --&gt;
+&lt;div class="carousel carousel-multi carousel-teal"
+     data-dx-carousel
+     data-autoplay="true"
+     data-interval="2000"
+     data-pause="hover"&gt;
+  &lt;div class="carousel-inner"&gt;
+    &lt;div class="carousel-track"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="carousel-indicators"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 4. Controles Externos (.carousel-controls-outside) -->
+        <section id="carousel-outside" class="mb-5">
+          <h2>4. Controles Externos (.carousel-controls-outside)</h2>
+          <p class="text-muted">
+            Adicione a classe <code>.carousel-controls-outside</code> para posicionar as setas de navegação fora da área visível dos cartões, evitando que fiquem sobrepostas ao conteúdo:
+          </p>
+
+          <div class="doc-card mb-4 px-md-5">
+            <div class="carousel carousel-multi carousel-controls-outside" id="demoOutsideCarousel" data-dx-carousel>
+              <div class="carousel-inner">
+                <div class="carousel-track">
+                  
+                  <div class="carousel-item">
+                    <div class="card h-100 border p-3 text-center">
+                      <div class="badge bg-primary text-white w-auto mx-auto mb-2">Plano Básico</div>
+                      <h4 class="fw-bold my-2">R$ 29<small class="fs-6 text-muted">/mês</small></h4>
+                      <p class="small text-muted mb-3">Ideal para pequenos projetos e landing pages.</p>
+                      <button class="btn btn-outline-primary btn-sm w-100">Contratar</button>
+                    </div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <div class="card h-100 border p-3 text-center border-primary shadow-sm">
+                      <div class="badge bg-coral text-white w-auto mx-auto mb-2">Mais Popular</div>
+                      <h4 class="fw-bold my-2">R$ 59<small class="fs-6 text-muted">/mês</small></h4>
+                      <p class="small text-muted mb-3">Para negócios em crescimento e e-commerces.</p>
+                      <button class="btn btn-primary btn-sm w-100">Contratar</button>
+                    </div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <div class="card h-100 border p-3 text-center">
+                      <div class="badge bg-green text-white w-auto mx-auto mb-2">Profissional</div>
+                      <h4 class="fw-bold my-2">R$ 99<small class="fs-6 text-muted">/mês</small></h4>
+                      <p class="small text-muted mb-3">Recursos avançados para agências e equipes.</p>
+                      <button class="btn btn-outline-primary btn-sm w-100">Contratar</button>
+                    </div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <div class="card h-100 border p-3 text-center">
+                      <div class="badge bg-indigo text-white w-auto mx-auto mb-2">Empresarial</div>
+                      <h4 class="fw-bold my-2">R$ 199<small class="fs-6 text-muted">/mês</small></h4>
+                      <p class="small text-muted mb-3">SLA garantido, suporte prioritário 24/7 e IP dedicado.</p>
+                      <button class="btn btn-outline-primary btn-sm w-100">Contratar</button>
+                    </div>
+                  </div>
+
+                  <div class="carousel-item">
+                    <div class="card h-100 border p-3 text-center">
+                      <div class="badge bg-warning text-dark w-auto mx-auto mb-2">Customizado</div>
+                      <h4 class="fw-bold my-2">Sob Medida</h4>
+                      <p class="small text-muted mb-3">Projetos de grande porte com clusters dedicados.</p>
+                      <button class="btn btn-outline-secondary btn-sm w-100">Falar com Consultor</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <button class="carousel-control-prev" type="button" aria-label="Anterior">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
+              </button>
+              <button class="carousel-control-next" type="button" aria-label="Próximo">
+                <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Cores Oficiais e Variações Temáticas -->
+        <section id="carousel-colors" class="mb-5">
+          <h2>5. Variações Cromáticas Oficiais (.carousel-{cor})</h2>
+          <p class="text-muted">
+            Integre com facilidade qualquer uma das <strong>28 cores oficiais</strong> do Dexter UI aplicando classes como <code>.carousel-coral</code>, <code>.carousel-indigo</code> ou <code>.carousel-green</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Variação Coral (.carousel-coral)</h6>
+            <div class="carousel carousel-multi carousel-coral" id="demoCoralCarousel" data-dx-carousel>
+              <div class="carousel-inner">
+                <div class="carousel-track">
+                  <div class="carousel-item"><div class="p-3 bg-coral-subtle rounded text-center fw-bold">Item Coral 1</div></div>
+                  <div class="carousel-item"><div class="p-3 bg-coral-subtle rounded text-center fw-bold">Item Coral 2</div></div>
+                  <div class="carousel-item"><div class="p-3 bg-coral-subtle rounded text-center fw-bold">Item Coral 3</div></div>
+                  <div class="carousel-item"><div class="p-3 bg-coral-subtle rounded text-center fw-bold">Item Coral 4</div></div>
+                  <div class="carousel-item"><div class="p-3 bg-coral-subtle rounded text-center fw-bold">Item Coral 5</div></div>
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" aria-label="Anterior"><svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg></button>
+              <button class="carousel-control-next" type="button" aria-label="Próximo"><svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg></button>
+              <div class="carousel-indicators"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. API JavaScript & Inicialização Programática -->
+        <section id="carousel-api" class="mb-5">
+          <h2>6. API JavaScript &amp; Inicialização Programática</h2>
+          <p class="text-muted">
+            O Dexter Carousel suporta inicialização automática via <code>data-dx-carousel</code> ou via código JavaScript com a classe <code>DexterCarousel</code>:
+          </p>
+
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Inicialização programática via JavaScript
+const carousel = new DexterCarousel('#meuCarrossel', {
+  itemsToScroll: 1,      // Quantos itens avançar a cada clique
+  gap: 16,               // Espaçamento entre os cartões em px
+  autoplay: true,        // Ativa transição automática
+  interval: 5000,        // Intervalo do autoplay em milissegundos
+  pauseOnHover: true,    // Pausa no hover do mouse
+  touch: true            // Habilita gestos de arrasto e touch swipe
+});
+
+// Métodos de controle
+carousel.next();         // Avança 1 cartão
+carousel.prev();         // Volta 1 cartão
+carousel.slideTo(2);     // Vai para o índice desejado
+carousel.pause();        // Pausa autoplay
+carousel.cycle();        // Retoma autoplay</code></pre>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+
+  <script>
+    (function () {
+      var contEl = document.getElementById('demoAutoplayContinuous');
+      var contBadge = document.getElementById('statusAutoplayContinuous');
+      var contBtn = document.getElementById('btnToggleContinuous');
+
+      if (contEl && contBadge && contBtn) {
+        function syncContUI(playing, idx) {
+          var slideNum = (typeof idx === 'number' ? idx : 0) + 1;
+          if (playing) {
+            contBadge.className = 'badge bg-indigo text-white';
+            contBadge.textContent = '▶ Autoplay contínuo ativo · Slide ' + slideNum;
+            contBtn.textContent = 'Pausar manualmente';
+          } else {
+            contBadge.className = 'badge bg-warning text-dark';
+            contBadge.textContent = '⏸ Autoplay pausado · Slide ' + slideNum;
+            contBtn.textContent = 'Retomar autoplay';
+          }
+        }
+
+        contEl.addEventListener('dexter.carousel.slide', function (e) {
+          var inst = contEl._dexterCarouselInstance;
+          syncContUI(inst ? inst.isPlaying() : true, e.detail.index);
+        });
+        contEl.addEventListener('dexter.carousel.pause', function (e) {
+          syncContUI(false, e.detail.index);
+        });
+        contEl.addEventListener('dexter.carousel.play', function (e) {
+          syncContUI(true, e.detail.index);
+        });
+
+        contBtn.addEventListener('click', function () {
+          var inst = contEl._dexterCarouselInstance;
+          if (!inst) return;
+          if (inst.isPlaying()) inst.pause('manual');
+          else inst.play('manual');
+        });
+      }
+
+      var hoverEl = document.getElementById('demoAutoplayHover');
+      var hoverBadge = document.getElementById('statusAutoplayHover');
+      if (hoverEl && hoverBadge) {
+        hoverEl.addEventListener('dexter.carousel.pause', function (e) {
+          hoverBadge.className = 'badge bg-warning text-dark';
+          hoverBadge.textContent = '⏸ Pausado no hover! · Slide ' + (e.detail.index + 1);
+        });
+        hoverEl.addEventListener('dexter.carousel.play', function (e) {
+          hoverBadge.className = 'badge bg-teal text-white';
+          hoverBadge.textContent = '▶ Reproduzindo (passe o mouse para pausar) · Slide ' + (e.detail.index + 1);
+        });
+        hoverEl.addEventListener('dexter.carousel.slide', function (e) {
+          var inst = hoverEl._dexterCarouselInstance;
+          if (inst && inst.isPlaying()) {
+            hoverBadge.className = 'badge bg-teal text-white';
+            hoverBadge.textContent = '▶ Reproduzindo (passe o mouse para pausar) · Slide ' + (e.detail.index + 1);
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

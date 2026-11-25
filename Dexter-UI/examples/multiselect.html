@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seleção Múltipla com Dropdown (MultiSelect) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+
+        <!-- Page Header -->
+        <div class="mb-5 border-bottom pb-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge badge-primary">Componentes</span>
+            <span class="badge badge-soft-blue">Zero Dependências</span>
+            <span class="badge badge-outline-cyan">WCAG 2.1 AA</span>
+          </div>
+          <h1 class="display-5 fw-bold mb-3">Seleção Múltipla com Dropdown &amp; Checkboxes</h1>
+          <p class="lead text-muted">
+            Suíte completa de seleção múltipla em menu suspenso para o <strong>Dexter UI</strong>, inspirada e aprimorada a partir do
+            <code>BsMultiSelect</code> (<code>github.com/DashboardCode/BsMultiSelect</code>).
+            Substitui menus de seleção convencionais por uma experiência corporativa rica com caixas de seleção integradas,
+            agrupamento com <code>&lt;optgroup&gt;</code>, barra de ações (Selecionar Todos / Limpar), busca em tempo real com realce de texto,
+            modo de resumo condensado (<em>collapse</em>), badges com botão de remoção, compatibilidade às 28 cores e Dark Mode.
+          </p>
+        </div>
+
+        <!-- 1. MultiSelect Básico com Checkboxes -->
+        <section id="ms-basic" class="mb-5">
+          <h2>1. MultiSelect Básico com Dropdown &amp; Checkboxes</h2>
+          <p class="text-muted">
+            Converte nativamente qualquer <code>&lt;select multiple&gt;</code> em um campo de seleção múltipla com chips interativos no gatilho
+            e caixas de seleção no menu suspenso:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <label class="form-label fw-bold" for="demoMsBasic">Frameworks &amp; Bibliotecas Front-end</label>
+            <select id="demoMsBasic" multiple data-dx-multiselect data-dx-color="primary" placeholder="Escolha suas tecnologias...">
+              <option value="react" selected>React</option>
+              <option value="vue" selected>Vue.js</option>
+              <option value="angular">Angular</option>
+              <option value="svelte" selected>Svelte</option>
+              <option value="solid">SolidJS</option>
+              <option value="qwik">Qwik</option>
+              <option value="alpine">Alpine.js</option>
+            </select>
+            <div class="form-text mt-2 text-muted">Clique para abrir o dropdown, marque as caixas de seleção ou remova badges com <kbd>×</kbd>.</div>
+          </div>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Select Múltiplo nativo com auto-inicialização data-dx-multiselect --&gt;
+&lt;select multiple data-dx-multiselect data-dx-color="primary" placeholder="Selecione as opções..."&gt;
+  &lt;option value="react" selected&gt;React&lt;/option&gt;
+  &lt;option value="vue" selected&gt;Vue.js&lt;/option&gt;
+  &lt;option value="svelte"&gt;Svelte&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Suporte a Grupos Hierárquicos (optgroup) -->
+        <section id="ms-optgroup" class="mb-5">
+          <h2>2. Suporte a Grupos Hierárquicos (&lt;optgroup&gt;)</h2>
+          <p class="text-muted">
+            Organize opções em categorias lógicas. O componente renderiza cabeçalhos estilizados de grupo com tipografia refinada:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <label class="form-label fw-bold" for="demoMsOptgroup">Stack de Desenvolvimento por Camadas</label>
+            <select id="demoMsOptgroup" multiple data-dx-multiselect data-dx-color="purple" placeholder="Selecione itens da stack...">
+              <optgroup label="Frontend">
+                <option value="html" selected>HTML5 &amp; Web Components</option>
+                <option value="css" selected>CSS Moderno &amp; Sass</option>
+                <option value="ts">TypeScript</option>
+              </optgroup>
+              <optgroup label="Backend &amp; APIs">
+                <option value="php" selected>PHP 8.4+</option>
+                <option value="node">Node.js 22+</option>
+                <option value="python">Python 3.12+</option>
+              </optgroup>
+              <optgroup label="Infraestrutura &amp; DevOps">
+                <option value="docker">Docker &amp; Kiri</option>
+                <option value="k8s">Kubernetes</option>
+                <option value="github">GitHub Actions</option>
+              </optgroup>
+            </select>
+          </div>
+        </section>
+
+        <!-- 3. Modo Resumo Condensado (Collapse After N) -->
+        <section id="ms-collapse" class="mb-5">
+          <h2>3. Modo Resumo Condensado (data-collapse-after="N")</h2>
+          <p class="text-muted">
+            Quando muitos itens são marcados, o modo condensado substitui a aglomeração de chips por uma badge limpa e elegante
+            indicando o total selecionado (ex: <code>4 selecionados</code> ou <code>Todos selecionados</code>):
+          </p>
+
+          <div class="card p-4 mb-4">
+            <label class="form-label fw-bold" for="demoMsCollapse">Módulos do Sistema Ativos (Condensa após 2 itens)</label>
+            <select id="demoMsCollapse" multiple data-dx-multiselect data-collapse-after="2" data-dx-color="coral" placeholder="Selecione módulos...">
+              <option value="auth" selected>Autenticação SSO</option>
+              <option value="billing" selected>Faturamento &amp; Assinaturas</option>
+              <option value="reports" selected>Relatórios Financeiros</option>
+              <option value="notifications" selected>Notificações Push</option>
+              <option value="audit">Logs de Auditoria</option>
+              <option value="api">API Gateway</option>
+            </select>
+            <div class="form-text mt-2 text-muted">Como há 4 itens selecionados e o limite configurado é 2, o gatilho exibe o contador condensado.</div>
+          </div>
+        </section>
+
+        <!-- 4. Variações de Cores e Estilos -->
+        <section id="ms-colors" class="mb-5">
+          <h2>4. Paleta de Cores &amp; Estilos das Badges</h2>
+          <p class="text-muted">
+            Total flexibilidade visual com suporte às 28 cores oficiais do sistema em formato suave (soft), sólido ou contorno (outline):
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="row g-4">
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Variação Verde (.multiselect-green)</h6>
+                <select multiple data-dx-multiselect data-dx-color="green">
+                  <option value="g1" selected>Disponível</option>
+                  <option value="g2" selected>Aprovado</option>
+                  <option value="g3">Sincronizado</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Variação Ciano (.multiselect-cyan)</h6>
+                <select multiple data-dx-multiselect data-dx-color="cyan">
+                  <option value="c1" selected>Design Tokens</option>
+                  <option value="c2" selected>Tipografia</option>
+                  <option value="c3">Cores</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Tamanho Compacto (.multiselect-sm)</h6>
+                <select multiple data-dx-multiselect class="form-select-sm" data-dx-color="gold">
+                  <option value="s1" selected>Compacto 1</option>
+                  <option value="s2" selected>Compacto 2</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Tamanho Expandido (.multiselect-lg)</h6>
+                <select multiple data-dx-multiselect class="form-select-lg" data-dx-color="blue">
+                  <option value="l1" selected>Expandido A</option>
+                  <option value="l2" selected>Expandido B</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. API JavaScript & Compatibilidade BsMultiSelect -->
+        <section id="ms-api" class="mb-5">
+          <h2>5. API JavaScript Programática &amp; Compatibilidade BsMultiSelect</h2>
+          <p class="text-muted">
+            Total compatibilidade drop-in para projetos que utilizam o <code>BsMultiSelect</code>:
+          </p>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Instanciação com DexterMultiSelect ou alias BsMultiSelect
+const ms = new DexterMultiSelect(document.querySelector('#meuSelect'), {
+  color: 'primary',
+  collapseAfter: 3,
+  showSearch: true,
+  showSelectAll: true,
+  placeholder: 'Selecione as opções...',
+  onChange: (values) => console.log('Valores selecionados:', values)
+});
+
+// Métodos disponíveis
+ms.selectAll();             // Marca todas as opções
+ms.deselectAll();           // Desmarca todas as opções
+ms.getSelectedValues();     // ['react', 'vue', ...]
+ms.openMenu();              // Abre o menu suspenso
+ms.closeMenu();             // Fecha o menu suspenso</code></pre>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-toast.js"></script>
+  <script src="../dist/js/dexter-fileinput.js"></script>
+  <script src="../dist/js/dexter-tags.js"></script>
+  <script src="../dist/js/dexter-rating.js"></script>
+  <script src="../dist/js/dexter-multiselect.js"></script>
+  <script src="../dist/js/dexter-input-spinner.js"></script>
+
+</body>
+</html>

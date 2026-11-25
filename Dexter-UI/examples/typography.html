@@ -1,0 +1,319 @@
+<!--
+  =============================================================================
+  Dexter UI Framework
+  =============================================================================
+
+  @file        examples/typography.html
+  @description [PT-BR] Página de teste da tipografia no layout portal D4Sign / ReadMe.
+               [EN]    Typography test page in D4Sign / ReadMe portal layout.
+
+  @author      Charles Corrêa
+  @contact     E-mail: charlescorreaweb@gmail.com
+  @website     https://charlescorrea.com.br
+  @github      https://github.com/CharlesCorreaDev
+
+  @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+  @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+  @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+  @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+  @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+
+  @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+  @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+               [EN]    MIT – see the LICENSE file at the repository root.
+  =============================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tipografia e Display – Dexter UI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+    <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <small class="text-muted">Documentação &gt; Design Tokens &gt; <strong style="color: inherit;">Tipografia e Display</strong></small>
+        </nav>
+
+        <h1 class="mb-2">Tipografia e Display</h1>
+        <p class="lead text-muted mb-4">Hierarquia tipográfica com títulos fluidos via clamp(), display para destaque, parágrafos com text-wrap: pretty, e alinhamento responsivo.</p>
+        <hr class="my-4">
+
+        <!-- Headings -->
+        <section id="headings" class="mb-5">
+          <h2>Títulos / Headings</h2>
+          <p class="text-muted">Títulos de <code>h1</code> a <code>h6</code> (e classes <code>.h1</code> a <code>.h6</code>). Os títulos de 1 a 3 crescem de forma fluida entre 576px e 1536px.</p>
+          <div class="doc-card">
+            <h1>h1. Título de página</h1>
+            <h2>h2. Título de seção</h2>
+            <h3>h3. Título de subseção</h3>
+            <h4>h4. Título menor</h4>
+            <h5>h5. Título pequeno</h5>
+            <h6>h6. Título mínimo</h6>
+          </div>
+          <p class="text-muted">Semântica de <code>h3</code> com a aparência de <code>h1</code>:</p>
+          <div class="doc-card">
+            <h3 class="h1 mb-0">h3 com classe .h1</h3>
+          </div>
+        </section>
+
+        <!-- Display -->
+        <section id="display" class="mb-5">
+          <h2>Display</h2>
+          <p class="text-muted">Títulos maiores e de destaque para cabeçalhos de impacto.</p>
+          <div class="doc-card">
+            <p class="display-1 mb-2">Display 1</p>
+            <p class="display-2 mb-2">Display 2</p>
+            <p class="display-3 mb-2">Display 3</p>
+            <p class="display-4 mb-2">Display 4</p>
+            <p class="display-5 mb-2">Display 5</p>
+            <p class="display-6 mb-0">Display 6</p>
+          </div>
+        </section>
+
+        <!-- Lead + Line height -->
+        <section id="line-height" class="mb-5">
+          <h2>1. Altura de Linha / Line Height</h2>
+          <p class="lead">Parágrafo de destaque com a classe <code>.lead</code>.</p>
+          <div class="doc-card">
+            <p class="lh-1 mb-2"><code>.lh-1</code>: Altura de linha mínima (1.0) para títulos curtos e badges.</p>
+            <p class="lh-sm mb-2"><code>.lh-sm</code> / <code>.lh-tight</code>: Altura de linha compacta (1.25).</p>
+            <p class="lh-base mb-2"><code>.lh-base</code>: Altura de linha padrão (1.5) recomendada para leitura contínua.</p>
+            <p class="lh-lg mb-2"><code>.lh-lg</code> / <code>.lh-loose</code>: Altura de linha expandida (1.75).</p>
+          </div>
+        </section>
+
+        <!-- Font Family -->
+        <section id="font-family" class="mb-5">
+          <h2>2. Famílias de Fonte / Font Family</h2>
+          <p class="text-muted">Tokens semânticos e categorias genéricas padronizadas:</p>
+          <div class="doc-card">
+            <p class="font-body mb-2"><code>.font-body</code> / <code>.font-sans</code>: Inter (ou sans-serif do sistema) para texto corrido.</p>
+            <p class="font-title mb-2"><code>.font-title</code>: Poppins (ou sans-serif geométrica) para títulos e destaques.</p>
+            <p class="font-code mb-2"><code>.font-code</code> / <code>.font-monospace</code>: JetBrains Mono (ou monospace) para códigos e dados técnicos.</p>
+            <p class="font-serif mb-0"><code>.font-serif</code>: Georgia, Cambria, Times New Roman para tipografia serifada clássica.</p>
+          </div>
+        </section>
+
+        <!-- Font Size -->
+        <section id="font-size" class="mb-5">
+          <h2>3. Tamanho de Fonte / Font Size</h2>
+          <p class="text-muted">Escala de <code>.fs-1</code> a <code>.fs-6</code> com suporte a variantes responsivas (ex: <code>.fs-5 .fs-lg-2</code>):</p>
+          <div class="doc-card">
+            <p class="fs-1 mb-2">.fs-1: Texto de tamanho 1 (2.5rem fluida)</p>
+            <p class="fs-2 mb-2">.fs-2: Texto de tamanho 2 (2rem fluida)</p>
+            <p class="fs-3 mb-2">.fs-3: Texto de tamanho 3 (1.75rem fluida)</p>
+            <p class="fs-4 mb-2">.fs-4: Texto de tamanho 4 (1.5rem)</p>
+            <p class="fs-5 mb-2">.fs-5: Texto de tamanho 5 (1.25rem)</p>
+            <p class="fs-6 mb-2">.fs-6: Texto de tamanho 6 (1rem)</p>
+            <p class="small mb-0">.small / &lt;small&gt;: Texto reduzido (0.875em)</p>
+          </div>
+        </section>
+
+        <!-- Font Style -->
+        <section id="font-style" class="mb-5">
+          <h2>4. Estilo de Fonte / Font Style</h2>
+          <p class="text-muted">Variações de inclinação tipográfica:</p>
+          <div class="doc-card">
+            <p class="fst-italic mb-2"><code>.fst-italic</code>: Texto em itálico com glifos cursivos desenhados.</p>
+            <p class="fst-normal mb-2"><code>.fst-normal</code>: Texto normal sem inclinação (útil para anular itálicos de &lt;em&gt; ou &lt;i&gt;).</p>
+            <p class="fst-oblique mb-0"><code>.fst-oblique</code>: Texto oblíquo inclinado artificialmente.</p>
+          </div>
+        </section>
+
+        <!-- Font Weight -->
+        <section id="font-weight" class="mb-5">
+          <h2>5. Peso de Fonte / Font Weight</h2>
+          <p class="text-muted">Suporte a nomes semânticos e valores numéricos exatos (100 a 900):</p>
+          <div class="doc-card">
+            <div class="row g-2">
+              <div class="col-md-6">
+                <p class="fw-light mb-1"><code>.fw-light</code> / <code>.fw-300</code>: Peso Light (300)</p>
+                <p class="fw-normal mb-1"><code>.fw-normal</code> / <code>.fw-400</code>: Peso Normal (400)</p>
+                <p class="fw-medium mb-1"><code>.fw-medium</code> / <code>.fw-500</code>: Peso Médio (500)</p>
+                <p class="fw-semibold mb-1"><code>.fw-semibold</code> / <code>.fw-600</code>: Peso Semibold (600)</p>
+              </div>
+              <div class="col-md-6">
+                <p class="fw-bold mb-1"><code>.fw-bold</code> / <code>.fw-700</code>: Peso Bold (700)</p>
+                <p class="fw-extrabold mb-1"><code>.fw-extrabold</code> / <code>.fw-800</code>: Peso Extrabold (800)</p>
+                <p class="fw-bolder mb-1"><code>.fw-bolder</code>: Relativamente mais espesso</p>
+                <p class="fw-lighter mb-1"><code>.fw-lighter</code>: Relativamente mais leve</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Text Alignment -->
+        <section id="text-alignment" class="mb-5">
+          <h2>6. Alinhamento de Texto / Text Alignment</h2>
+          <p class="text-muted">Alinhamentos lógicos com suporte a variantes responsivas (ex: <code>.text-center .text-md-start</code>):</p>
+          <div class="doc-card">
+            <p class="text-start mb-2 p-2 border rounded"><code>.text-start</code>: Alinhado no início (esquerda em LTR, direita em RTL).</p>
+            <p class="text-center mb-2 p-2 border rounded"><code>.text-center</code>: Alinhado no centro.</p>
+            <p class="text-end mb-2 p-2 border rounded"><code>.text-end</code>: Alinhado no fim (direita em LTR, esquerda em RTL).</p>
+            <p class="text-justify mb-0 p-2 border rounded"><code>.text-justify</code>: Alinhamento justificado distribuindo o espaço entre as palavras ao longo de toda a linha.</p>
+          </div>
+        </section>
+
+        <!-- Text Transform & Decoration -->
+        <section id="text-transform-decoration" class="mb-5">
+          <h2>7. Transformação e Decoração / Text Transform &amp; Decoration</h2>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="doc-card h-100">
+                <h5 class="fs-6">Transformação (Transform)</h5>
+                <p class="text-lowercase mb-1"><code>.text-lowercase</code>: TEXTO EM MINÚSCULAS</p>
+                <p class="text-uppercase mb-1"><code>.text-uppercase</code>: texto em maiúsculas</p>
+                <p class="text-capitalize mb-1"><code>.text-capitalize</code>: texto com iniciais maiúsculas</p>
+                <p class="text-none mb-0"><code>.text-none</code>: anula transformações herdadas</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="doc-card h-100">
+                <h5 class="fs-6">Decoração (Decoration)</h5>
+                <p class="text-decoration-underline mb-1"><code>.text-decoration-underline</code>: Sublinhado</p>
+                <p class="text-decoration-line-through mb-1"><code>.text-decoration-line-through</code>: Riscado</p>
+                <p class="text-decoration-overline mb-1"><code>.text-decoration-overline</code>: Linha superior</p>
+                <p class="text-decoration-none mb-0"><code>.text-decoration-none</code>: Sem decoração</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Text Wrapping & Overflow -->
+        <section id="text-wrapping" class="mb-5">
+          <h2>8. Quebra e Distribuição de Linhas / Text Wrapping</h2>
+          <div class="doc-card">
+            <p class="mb-2"><strong>.text-pretty (CSS Moderno):</strong></p>
+            <p class="text-pretty border p-2 rounded mb-3">Evita palavras órfãs isoladas na última linha de parágrafos extensos através de cálculo balanceado inteligente do motor de renderização.</p>
+
+            <p class="mb-2"><strong>.text-balance (Títulos equilibrados):</strong></p>
+            <h4 class="text-balance border p-2 rounded mb-3">Distribui o comprimento das linhas harmoniosamente em títulos e chamadas</h4>
+
+            <p class="mb-2"><strong>.text-truncate (Truncamento com reticências em 1 linha):</strong></p>
+            <div class="text-truncate border p-2 rounded mb-3" style="max-width: 320px;">
+              Este é um texto muito longo que será truncado automaticamente com reticências (...) sem quebrar a linha.
+            </div>
+
+            <p class="mb-2"><strong>.text-nowrap (Sem quebra de linha):</strong></p>
+            <div class="border p-2 rounded overflow-auto mb-3">
+              <span class="text-nowrap">Texto forçado a permanecer estritamente em uma única linha horizontal contínua sem quebras.</span>
+            </div>
+
+            <p class="mb-2"><strong>.text-break (Quebra de palavras longas):</strong></p>
+            <p class="text-break border p-2 rounded mb-0" style="max-width: 250px;">
+              supercalifragilisticexpialidocious_texto_sem_espacos_que_quebra_em_qualquer_ponto
+            </p>
+          </div>
+        </section>
+
+        <!-- Vertical Alignment -->
+        <section id="vertical-alignment" class="mb-5">
+          <h2>9. Alinhamento Vertical / Vertical Alignment</h2>
+          <p class="text-muted">Alinhamento vertical de elementos inline, inline-block e células de tabela:</p>
+          <div class="doc-card">
+            <div class="border p-3 rounded" style="line-height: 2.5;">
+              <span class="align-baseline border p-1 rounded bg-light">.align-baseline</span>
+              <span class="align-top border p-1 rounded bg-light">.align-top</span>
+              <span class="align-middle border p-1 rounded bg-light">.align-middle</span>
+              <span class="align-bottom border p-1 rounded bg-light">.align-bottom</span>
+              <span class="align-text-top border p-1 rounded bg-light">.align-text-top</span>
+              <span class="align-text-bottom border p-1 rounded bg-light">.align-text-bottom</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Inline text -->
+        <section id="inline" class="mb-5">
+          <h2>10. Texto em Linha / Inline Text</h2>
+          <div class="doc-card">
+            <p>Você pode usar a tag <code>mark</code> para <mark>destacar</mark> um trecho.</p>
+            <p><del>Esta linha é tratada como texto excluído.</del></p>
+            <p><s>Esta linha não é mais precisa.</s></p>
+            <p><ins>Esta linha é tratada como uma adição ao documento.</ins></p>
+            <p><u>Esta linha é sublinhada.</u></p>
+            <p><small>Esta linha é texto menor (<code>small</code>).</small></p>
+            <p><strong>Esta linha está em negrito com strong.</strong></p>
+            <p><b>Esta linha está em negrito com a tag b.</b></p>
+            <p><em>Esta linha está em itálico.</em></p>
+            <p class="mb-0">Fórmula química: H<sub>2</sub>O e matemática: E = mc<sup>2</sup> (as tags <code>sub</code> e <code>sup</code> mantêm a altura de linha perfeitamente uniforme sem desalinhamento).</p>
+          </div>
+        </section>
+
+        <!-- Blockquotes -->
+        <section id="quotes" class="mb-5">
+          <h2>11. Citações / Blockquotes</h2>
+          <div class="doc-card">
+            <figure class="mb-0">
+              <blockquote class="blockquote">
+                <p>Uma boa tipografia é invisível: o leitor enxerga a ideia, não a letra.</p>
+              </blockquote>
+              <figcaption class="blockquote-footer mb-0">
+                Alguém famoso em <cite title="Título da fonte">Título da fonte</cite>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <!-- Lists -->
+        <section id="lists" class="mb-5">
+          <h2>12. Listas / Lists</h2>
+          <div class="doc-card">
+            <h3>Lista em linha / Inline list</h3>
+            <ul class="list-inline mb-4">
+              <li class="list-inline-item">Item 1</li>
+              <li class="list-inline-item">Item 2</li>
+              <li class="list-inline-item">Item 3</li>
+            </ul>
+
+            <h3>Lista sem estilo / Unstyled list</h3>
+            <ul class="list-unstyled mb-0">
+              <li>Item sem marcador e sem recuo</li>
+              <li>Outro item limpo</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Navegação Inferior -->
+        <div class="d-flex justify-content-between pt-4 border-top mt-5">
+          <a href="colors.html" class="doc-header-link text-primary fw-semibold">
+            &larr; Anterior: Paleta de Cores
+          </a>
+          <a href="utilities.html" class="doc-header-link text-primary fw-semibold">
+            Próximo: Utilitários &rarr;
+          </a>
+        </div>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+</body>
+</html>

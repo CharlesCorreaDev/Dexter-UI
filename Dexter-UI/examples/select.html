@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Moderno (SelectPicker) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <div>
+            <h1 class="display-6 fw-bold mb-1">Select Moderno (SelectPicker)</h1>
+            <p class="text-muted mb-0">
+              Transformação nativa zero-dependência para elementos <code>&lt;select&gt;</code>, inspirada no clássico 
+              <strong>bootstrap-select</strong> (SnapAppointments), oferecendo busca em tempo real, seleção múltipla com 
+              contagem personalizada, caixa de ações rápidas, subtextos descritivos, ícones, limites de escolha e 28 cores oficiais.
+            </p>
+          </div>
+        </div>
+
+        <!-- 1. Select Básico -->
+        <section id="select-basic" class="mb-5">
+          <h2>1. Select Básico com Estilização Moderna</h2>
+          <p class="text-muted">
+            Basta adicionar a classe <code>.selectpicker</code> (ou o atributo <code>data-dx-select</code>) a qualquer 
+            <code>&lt;select&gt;</code> nativo para convertê-lo instantaneamente em um controle elegante com opções zebradas:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Idioma Padrão do Sistema</label>
+                <select class="selectpicker" title="Escolha um idioma...">
+                  <option value="pt-br" selected>Português (Brasil)</option>
+                  <option value="en-us">Inglês (Estados Unidos)</option>
+                  <option value="es-es">Espanhol (Espanha)</option>
+                  <option value="fr-fr">Francês (França)</option>
+                  <option value="de-de">Alemão (Alemanha)</option>
+                  <option value="it-it">Italiano (Itália)</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Frequência de Relatórios (Com Desativado)</label>
+                <select class="selectpicker" title="Selecione a frequência...">
+                  <option value="daily">Diário</option>
+                  <option value="weekly" selected>Semanal (Recomendado)</option>
+                  <option value="monthly">Mensal</option>
+                  <option value="realtime" disabled>Tempo Real (Apenas Plano Enterprise)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Select Básico via classe .selectpicker --&gt;
+&lt;select class="selectpicker" title="Escolha um idioma..."&gt;
+  &lt;option value="pt-br" selected&gt;Português (Brasil)&lt;/option&gt;
+  &lt;option value="en-us"&gt;Inglês (Estados Unidos)&lt;/option&gt;
+  &lt;option value="es-es"&gt;Espanhol (Espanha)&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Busca em Tempo Real (Live Search) -->
+        <section id="select-live-search" class="mb-5">
+          <h2>2. Busca em Tempo Real (Live Search)</h2>
+          <p class="text-muted">
+            Adicione <code>data-live-search="true"</code> para incluir um campo de pesquisa instantâneo com filtragem 
+            flexível insensível a maiúsculas e acentos, e mensagem de resultado não encontrado:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Selecionar País de Destino</label>
+                <select class="selectpicker" data-live-search="true" data-live-search-placeholder="Filtrar país..." title="Escolha o país de envio...">
+                  <option value="BR">Brasil</option>
+                  <option value="AR">Argentina</option>
+                  <option value="CL">Chile</option>
+                  <option value="CO">Colômbia</option>
+                  <option value="UY">Uruguai</option>
+                  <option value="US">Estados Unidos</option>
+                  <option value="CA">Canadá</option>
+                  <option value="PT">Portugal</option>
+                  <option value="ES">Espanha</option>
+                  <option value="DE">Alemanha</option>
+                  <option value="JP">Japão</option>
+                  <option value="AU">Austrália</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Fuso Horário Corporativo</label>
+                <select class="selectpicker" data-live-search="true" data-header="Selecione o fuso de referência">
+                  <option value="gmt-3" selected>Brasília (GMT-3)</option>
+                  <option value="gmt-4">Manaus (GMT-4)</option>
+                  <option value="gmt-5">Rio Branco (GMT-5)</option>
+                  <option value="utc">Londres / UTC (GMT+0)</option>
+                  <option value="est">Nova York (EST / GMT-5)</option>
+                  <option value="pst">São Francisco (PST / GMT-8)</option>
+                  <option value="cet">Berlim / Paris (CET / GMT+1)</option>
+                  <option value="jst">Tóquio (JST / GMT+9)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;select class="selectpicker" data-live-search="true" data-live-search-placeholder="Filtrar país..."&gt;
+  &lt;option value="BR"&gt;Brasil&lt;/option&gt;
+  &lt;option value="PT"&gt;Portugal&lt;/option&gt;
+  &lt;option value="JP"&gt;Japão&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 3. Seleção Múltipla & Formatos de Contagem -->
+        <section id="select-multiple" class="mb-5">
+          <h2>3. Seleção Múltipla &amp; Formatos de Contagem</h2>
+          <p class="text-muted">
+            Transforme <code>&lt;select multiple&gt;</code> em uma interface rica com checkmarks de seleção e formatação 
+            inteligente de texto via <code>data-selected-text-format="count > 2"</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Valores Normais (Separados por Vírgula)</label>
+                <select class="selectpicker" multiple title="Selecione as tecnologias...">
+                  <option value="html" selected>HTML5</option>
+                  <option value="css" selected>CSS3 / SCSS</option>
+                  <option value="js" selected>JavaScript ES2024</option>
+                  <option value="php">PHP 8.4</option>
+                  <option value="docker">Docker</option>
+                  <option value="mysql">MySQL / MariaDB</option>
+                </select>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Formato Contagem (Exibe contagem se &gt; 2)</label>
+                <select class="selectpicker" multiple data-selected-text-format="count > 2" data-count-selected-text="{0} de {1} itens marcados" title="Escolha os módulos...">
+                  <option value="auth" selected>Autenticação 2FA</option>
+                  <option value="audit" selected>Logs de Auditoria</option>
+                  <option value="billing" selected>Módulo Financeiro</option>
+                  <option value="reports">Relatórios em PDF</option>
+                  <option value="backup">Backup Automatizado</option>
+                  <option value="api">Webhooks &amp; API</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Se mais de 2 itens forem marcados, exibe "3 de 6 itens marcados" --&gt;
+&lt;select class="selectpicker" multiple data-selected-text-format="count &gt; 2" data-count-selected-text="{0} de {1} itens marcados"&gt;
+  &lt;option value="auth" selected&gt;Autenticação 2FA&lt;/option&gt;
+  &lt;option value="audit" selected&gt;Logs de Auditoria&lt;/option&gt;
+  &lt;option value="billing" selected&gt;Módulo Financeiro&lt;/option&gt;
+  &lt;option value="reports"&gt;Relatórios em PDF&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 4. Caixa de Ações (Selecionar Todos / Desmarcar Todos) -->
+        <section id="select-actions-box" class="mb-5">
+          <h2>4. Caixa de Ações em Lote (data-actions-box="true")</h2>
+          <p class="text-muted">
+            Adiciona botões de atalho rápido no topo do menu para <strong>Selecionar Todos</strong> e <strong>Desmarcar Todos</strong> 
+            com um único clique:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Permissões de Acesso de Equipe</label>
+                <select class="selectpicker" multiple data-actions-box="true" data-live-search="true" title="Definir permissões...">
+                  <option value="view_users">Visualizar Usuários</option>
+                  <option value="create_users">Criar Novos Usuários</option>
+                  <option value="edit_users">Editar Perfis</option>
+                  <option value="delete_users">Excluir Usuários</option>
+                  <option value="view_reports">Acessar Relatórios Financeiros</option>
+                  <option value="export_data">Exportar Dados para CSV</option>
+                  <option value="manage_billing">Gerenciar Assinatura e Planos</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Canais de Notificação Ativos</label>
+                <select class="selectpicker" multiple data-actions-box="true" data-selected-text-format="count > 2" title="Selecione os canais...">
+                  <option value="email" selected>E-mail Transacional</option>
+                  <option value="sms" selected>SMS Corporativo</option>
+                  <option value="whatsapp">WhatsApp Business</option>
+                  <option value="slack">Slack Webhook</option>
+                  <option value="telegram">Bot do Telegram</option>
+                  <option value="discord">Canal do Discord</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;select class="selectpicker" multiple data-actions-box="true" data-select-all-text="Selecionar Todos" data-deselect-all-text="Desmarcar Todos"&gt;
+  &lt;option value="1"&gt;Opção 1&lt;/option&gt;
+  &lt;option value="2"&gt;Opção 2&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 5. Subtextos Descritivos (data-subtext) -->
+        <section id="select-subtext" class="mb-5">
+          <h2>5. Subtextos e Informações Adicionais (data-subtext)</h2>
+          <p class="text-muted">
+            Adicione <code>data-subtext="..."</code> em qualquer <code>&lt;option&gt;</code> para exibir detalhes complementares 
+            (como fabricantes, descrições breves ou preços) sem poluir o título principal:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Planos de Hospedagem em Nuvem</label>
+                <select class="selectpicker" data-live-search="true" title="Escolha um plano...">
+                  <option value="starter" data-subtext="R$ 29/mês • 1 CPU, 2 GB RAM">Plano Starter</option>
+                  <option value="pro" data-subtext="R$ 89/mês • 2 vCPUs, 8 GB RAM" selected>Plano Profissional</option>
+                  <option value="enterprise" data-subtext="R$ 299/mês • 8 vCPUs, 32 GB RAM">Plano Enterprise</option>
+                  <option value="dedicated" data-subtext="Sob Consulta • Bare Metal Dedicado">Servidor Dedicado</option>
+                </select>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Condimento Favorito (Exemplo do bootstrap-select)</label>
+                <select class="selectpicker" title="Escolha um condimento...">
+                  <option data-subtext="Heinz">Ketchup</option>
+                  <option data-subtext="Hellmann's" selected>Maionese</option>
+                  <option data-subtext="French's">Mostarda Amarela</option>
+                  <option data-subtext="Dijon Artesanal">Mostarda Dijon</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;select class="selectpicker"&gt;
+  &lt;option data-subtext="Heinz"&gt;Ketchup&lt;/option&gt;
+  &lt;option data-subtext="Hellmann's"&gt;Maionese&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 6. Ícones & Emojis (data-icon) -->
+        <section id="select-icons" class="mb-5">
+          <h2>6. Ícones, Emojis e Símbolos (data-icon)</h2>
+          <p class="text-muted">
+            Utilize <code>data-icon="..."</code> para injetar emojis ou ícones antes do texto da opção, enriquecendo a 
+            leitura visual de listas:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Ambiente de Execução</label>
+                <select class="selectpicker" title="Selecione o ambiente...">
+                  <option value="prod" data-icon="🚀" selected>Produção (Cluster AWS)</option>
+                  <option value="stage" data-icon="🧪">Staging / Homologação</option>
+                  <option value="dev" data-icon="💻">Desenvolvimento Local</option>
+                  <option value="qa" data-icon="🛡️">Ambiente de QA e Testes</option>
+                </select>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Status de Atendimento</label>
+                <select class="selectpicker" title="Defina o status...">
+                  <option value="open" data-icon="🟢" selected>Aberto / Em Andamento</option>
+                  <option value="pending" data-icon="🟡">Pendente / Aguardando Cliente</option>
+                  <option value="urgent" data-icon="🔴">Crítico / Alta Prioridade</option>
+                  <option value="resolved" data-icon="✅">Resolvido e Finalizado</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Grupos de Opções & Divisores -->
+        <section id="select-groups-dividers" class="mb-5">
+          <h2>7. Grupos de Opções (&lt;optgroup&gt;) &amp; Divisores (data-divider)</h2>
+          <p class="text-muted">
+            Organize categorias complexas com tags <code>&lt;optgroup&gt;</code> e linhas divisórias 
+            <code>&lt;option data-divider="true"&gt;</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Módulos Corporativos Agrupados</label>
+                <select class="selectpicker" data-live-search="true" title="Escolha um módulo...">
+                  <optgroup label="Infraestrutura &amp; DevOps">
+                    <option value="docker" data-icon="🐳">Docker &amp; Containers</option>
+                    <option value="k8s" data-icon="☸️">Kubernetes Cluster</option>
+                    <option value="ci" data-icon="⚙️">CI/CD Pipelines</option>
+                  </optgroup>
+                  <option data-divider="true"></option>
+                  <optgroup label="Bancos de Dados">
+                    <option value="pg" data-icon="🐘">PostgreSQL 16</option>
+                    <option value="redis" data-icon="⚡">Redis Cache</option>
+                    <option value="mysql" data-icon="🐬">MySQL Server</option>
+                  </optgroup>
+                  <option data-divider="true"></option>
+                  <optgroup label="Segurança &amp; Identidade">
+                    <option value="oauth" data-icon="🔑">OAuth 2.0 / OpenID</option>
+                    <option value="vault" data-icon="🔒">HashiCorp Vault</option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Categorias com Itens Especiais</label>
+                <select class="selectpicker" title="Selecione um item...">
+                  <option value="all">Todas as Categorias</option>
+                  <option data-divider="true"></option>
+                  <option value="elec">Eletrônicos &amp; Hardware</option>
+                  <option value="soft">Softwares &amp; Licenças</option>
+                  <option value="book">Livros &amp; Manuais Técnicos</option>
+                  <option data-divider="true"></option>
+                  <option value="custom" data-subtext="Sob demanda">Item Customizado</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Limite Máximo de Opções (data-max-options) -->
+        <section id="select-max-options" class="mb-5">
+          <h2>8. Limite Máximo de Opções (data-max-options="2")</h2>
+          <p class="text-muted">
+            Defina <code>data-max-options="2"</code> para impedir que o usuário marque mais escolhas do que o permitido, 
+            desabilitando automaticamente as opções restantes com banner de aviso:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-8">
+                <label class="form-label fw-bold">Escolha até no máximo 2 linguagens de preferência:</label>
+                <select class="selectpicker" multiple data-max-options="2" title="Escolha no máximo 2 opções...">
+                  <option value="php" selected>PHP 8.4</option>
+                  <option value="ts" selected>TypeScript 5.5</option>
+                  <option value="python">Python 3.12</option>
+                  <option value="rust">Rust 2024</option>
+                  <option value="go">Go 1.23</option>
+                </select>
+                <div class="form-text mt-1 text-muted">
+                  Tente clicar em uma terceira opção para testar a contenção do limite.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Variantes de Tamanho (.select-sm & .select-lg) -->
+        <section id="select-sizes" class="mb-5">
+          <h2>9. Variantes de Tamanho (.select-sm &amp; .select-lg)</h2>
+          <p class="text-muted">
+            Integre perfeitamente com formulários compactos ou de destaque através das classes <code>.select-sm</code> 
+            e <code>.select-lg</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3 align-items-center">
+              <div class="col-12 col-md-4">
+                <label class="form-label small fw-bold">Tamanho Pequeno (.select-sm)</label>
+                <select class="selectpicker select-sm" title="Compacto...">
+                  <option value="1">Opção Compacta 1</option>
+                  <option value="2">Opção Compacta 2</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold">Tamanho Normal (Padrão)</label>
+                <select class="selectpicker" title="Normal...">
+                  <option value="1">Opção Normal 1</option>
+                  <option value="2">Opção Normal 2</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-4">
+                <label class="form-label fs-5 fw-bold">Tamanho Grande (.select-lg)</label>
+                <select class="selectpicker select-lg" title="Amplo...">
+                  <option value="1">Opção Ampla 1</option>
+                  <option value="2">Opção Ampla 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. Variações Cromáticas Oficiais (28 Cores) -->
+        <section id="select-colors" class="mb-5">
+          <h2>10. Variações Cromáticas Oficiais (28 Cores)</h2>
+          <p class="text-muted">
+            Aplique classes temáticas como <code>.select-coral</code>, <code>.select-indigo</code>, <code>.select-emerald</code> 
+            e os estilos <code>.select-solid</code> ou <code>.select-outline</code>:
+          </p>
+
+          <div class="row g-3">
+            <div class="col-12 col-md-6 col-lg-3">
+              <label class="form-label fw-bold text-coral">Coral Oficial (.select-coral)</label>
+              <select class="selectpicker select-coral" title="Tema Coral...">
+                <option selected>Destaque Coral</option>
+                <option>Opção Secundária</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+              <label class="form-label fw-bold text-indigo">Indigo Oficial (.select-indigo)</label>
+              <select class="selectpicker select-indigo" title="Tema Indigo...">
+                <option selected>Destaque Indigo</option>
+                <option>Opção Corporativa</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+              <label class="form-label fw-bold text-emerald">Esmeralda Sólido (.select-emerald.select-solid)</label>
+              <select class="selectpicker select-emerald select-solid" title="Botão Sólido...">
+                <option selected>Cabeçalho Esmeralda</option>
+                <option>Opção de Confirmação</option>
+              </select>
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-3">
+              <label class="form-label fw-bold text-amber">Âmbar Contorno (.select-amber.select-outline)</label>
+              <select class="selectpicker select-amber select-outline" title="Botão Contorno...">
+                <option selected>Contorno Âmbar</option>
+                <option>Opção de Aviso</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11. Controle Programático via JavaScript -->
+        <section id="select-js" class="mb-5">
+          <h2>11. Controle Programático via JavaScript</h2>
+          <p class="text-muted">
+            Acesse a instância com <code>select.dexterSelect</code> ou <code>DexterSelect.getInstance(select)</code> 
+            para alterar valores, selecionar todos ou atualizar opções dinamicamente:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex gap-2 flex-wrap mb-3">
+              <button type="button" class="btn btn-sm btn-outline-primary" id="btnJsSelectAll">sel.selectAll()</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="btnJsDeselectAll">sel.deselectAll()</button>
+              <button type="button" class="btn btn-sm btn-outline-success" id="btnJsSetVal">sel.val(['prod', 'stage'])</button>
+              <button type="button" class="btn btn-sm btn-outline-info" id="btnJsGetVal">alert(sel.val())</button>
+            </div>
+
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <select id="targetJsSelect" class="selectpicker" multiple data-actions-box="true" title="Alvo dos testes JS...">
+                  <option value="dev">Ambiente de Desenvolvimento</option>
+                  <option value="stage">Ambiente de Homologação (Staging)</option>
+                  <option value="prod">Ambiente de Produção (AWS)</option>
+                  <option value="dr">Ambiente de Disaster Recovery</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-js">// Instanciar ou obter instância
+const selectEl = document.querySelector('#meuSelect');
+const ds = DexterSelect.getOrCreateInstance(selectEl);
+
+// Selecionar ou desmarcar todos
+ds.selectAll();
+ds.deselectAll();
+
+// Definir e obter valores (compatível com jQuery .val())
+ds.val(['prod', 'stage']);
+console.log(ds.val());
+
+// Re-renderizar após adicionar novas &lt;option&gt; dinamicamente
+ds.refresh();</code></pre>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+
+  <!-- Script Interativo para os Botões JS da Página -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const targetSelect = document.getElementById('targetJsSelect');
+      const ds = DexterSelect.getInstance(targetSelect);
+
+      document.getElementById('btnJsSelectAll')?.addEventListener('click', () => ds.selectAll());
+      document.getElementById('btnJsDeselectAll')?.addEventListener('click', () => ds.deselectAll());
+      document.getElementById('btnJsSetVal')?.addEventListener('click', () => ds.val(['prod', 'stage']));
+      document.getElementById('btnJsGetVal')?.addEventListener('click', () => {
+        alert('Valores selecionados: ' + JSON.stringify(ds.val()));
+      });
+
+            
+});
+  </script>
+</body>
+</html>

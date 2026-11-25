@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Footer &amp; Sticky Footer (Materialize) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <!-- Breadcrumbs -->
+      <nav aria-label="breadcrumb" class="mb-3">
+        <small class="text-muted">Documentação &gt; Core UI &gt; <strong style="color: inherit;">Footer &amp; Sticky Footer (Materialize)</strong></small>
+      </nav>
+
+      <h1 class="mb-2">Footer &amp; Sticky Footer (Materialize CSS)</h1>
+      <p class="lead text-muted mb-4">Rodapé institucional no padrão Materialize CSS (<code>.page-footer</code> + <code>.footer-copyright</code>), adaptado ao grid de 14 colunas do Dexter UI, paleta completa de 28 cores + semânticas com contraste WCAG automático, variante neutra para modo claro/escuro e helpers de Sticky Footer em Flexbox (<code>.dx-sticky-footer-layout</code> / <code>body.dx-sticky-footer</code>).</p>
+      <hr class="my-4">
+
+      <!-- 1. Footer Clássico Materialize -->
+      <section id="footer-basic" class="mb-5">
+        <h2>1. Estrutura Clássica (<code>.page-footer</code>)</h2>
+        <p class="text-muted">Combine <code>footer.page-footer</code> com o grid do Dexter UI (<code>.container</code> / <code>.row</code> / <code>.col-*</code>) para colunas de conteúdo e links, finalizando com <code>.footer-copyright</code> na faixa inferior.</p>
+
+        <div class="doc-card p-0 overflow-hidden">
+          <footer class="page-footer">
+            <div class="container">
+              <div class="row g-4">
+                <div class="col-md-7">
+                  <h5>Dexter UI Framework</h5>
+                  <p class="mb-0">Organize facilmente conteúdo editorial, redes sociais, documentação e mapas de navegação em múltiplas colunas responsivas no rodapé.</p>
+                </div>
+                <div class="col-md-4 offset-md-1">
+                  <h5>Links Rápidos</h5>
+                  <ul>
+                    <li><a href="colors.html">Paleta de Cores (28)</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                    <li><a href="badges.html">Badges BS6 &amp; Stylify</a></li>
+                    <li><a href="ribbons.html">Ribbons CSS (57)</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="footer-copyright">
+              <div class="container">
+                <span>&copy; 2026 Charles Corrêa &mdash; Dexter UI</span>
+                <a class="right" href="#footer-sticky">Ir para Sticky Footer</a>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <!-- 2. Seletor Interativo de Cores Oficiais -->
+      <section id="footer-colors" class="mb-5">
+        <h2>2. Paleta Oficial (<code>.page-footer-{cor}</code>) &amp; Contraste WCAG</h2>
+        <p class="text-muted">Qualquer cor oficial ou semântica ajusta automaticamente cor de fundo, título, parágrafos, links e barra de copyright (incluindo texto escuro de alto contraste em tons claros como <code>lime</code>, <code>warning</code>, <code>aquamarine</code> e <code>beige</code>).</p>
+
+        <div class="doc-card">
+          <div class="d-flex flex-wrap gap-2 mb-4" id="footerColorControls">
+            <button type="button" class="btn btn-sm btn-primary" data-footer-color="page-footer-primary">primary</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-footer-color="page-footer-teal">teal</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-footer-color="page-footer-indigo">indigo</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-footer-color="page-footer-coral">coral</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-footer-color="page-footer-midnight">midnight</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-footer-color="page-footer-purple">purple</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-footer-color="page-footer-lime">lime (clara)</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-footer-color="page-footer-warning">warning (clara)</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-footer-color="page-footer-soft">soft (Claro/Escuro)</button>
+          </div>
+
+          <div class="rounded overflow-hidden border">
+            <footer id="demoColoredFooter" class="page-footer page-footer-primary">
+              <div class="container">
+                <div class="row g-3">
+                  <div class="col-md-8">
+                    <h5>Tema Ativo: <span id="footerActiveColorLabel">page-footer-primary</span></h5>
+                    <p class="mb-0">Os tokens CSS <code>--dx-footer-bg</code>, <code>--dx-footer-fg</code> e <code>--dx-footer-copyright-bg</code> mantêm contraste legível em toda a extensão do rodapé.</p>
+                  </div>
+                  <div class="col-md-4">
+                    <h5>Suporte</h5>
+                    <ul>
+                      <li><a href="#!">Documentação Oficial</a></li>
+                      <li><a href="#!">Changelog Beta</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="footer-copyright">
+                <div class="container">
+                  <span>Licença MIT &bull; Charles Corrêa</span>
+                  <a class="right" href="#!">Versão 0.1.0-beta.1</a>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Sticky Footer (Flexbox) -->
+      <section id="footer-sticky" class="mb-5">
+        <h2>3. Sticky Footer (<code>.dx-sticky-footer-layout</code> &amp; <code>body.dx-sticky-footer</code>)</h2>
+        <p class="text-muted">O Sticky Footer permanece ancorado na base da viewport quando a página tem pouco conteúdo e acompanha o fluxo natural abaixo da dobra quando o conteúdo excede a altura disponível. Teste abaixo alternando entre conteúdo curto e longo em um container contido:</p>
+
+        <div class="doc-card">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+            <span class="small text-muted">Altura simulada de viewport: <code>320px</code> com <code>.dx-sticky-footer-layout</code></span>
+            <button type="button" id="btnToggleStickyContent" class="btn btn-sm btn-outline-primary">Alternar: Conteúdo Longo</button>
+          </div>
+
+          <div class="border rounded overflow-auto" style="height: 320px;">
+            <div class="dx-sticky-footer-layout" style="min-height: 100%;">
+              <header class="px-3 py-2 bg-dark text-white small fw-semibold">
+                Barra de Navegação da Aplicação
+              </header>
+              <main class="dx-sticky-main p-3">
+                <h5 class="mb-2">Área Principal (<code>&lt;main class="dx-sticky-main"&gt;</code>)</h5>
+                <p id="stickyShortText" class="text-muted mb-0">Com pouco conteúdo, <code>flex: 1 0 auto</code> empurra o rodapé exatamente para a borda inferior do container.</p>
+                <div id="stickyExtraText" class="d-none mt-3 text-muted small">
+                  <p>Bloco extra 1: Quando o conteúdo ultrapassa os 320px da área visível, o rodapé não fica sobreposto nem fixo na tela — ele acompanha normalmente a rolagem abaixo do conteúdo principal.</p>
+                  <p>Bloco extra 2: Estrutura semântica compatível com leitores de tela e zero JavaScript necessário em produção.</p>
+                  <p class="mb-0">Bloco extra 3: Funciona tanto no <code>&lt;body class="dx-sticky-footer"&gt;</code> quanto em containers encapsulados com <code>.dx-sticky-footer-layout</code>.</p>
+                </div>
+              </main>
+              <footer class="page-footer page-footer-teal footer-sm">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                      <strong>Rodapé Ancorado (Sticky Footer)</strong>
+                    </div>
+                  </div>
+                </div>
+                <div class="footer-copyright">
+                  <div class="container">
+                    <span>&copy; 2026 Dexter UI</span>
+                    <a class="right" href="#!">Política de Privacidade</a>
+                  </div>
+                </div>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Variante Compacta -->
+      <section id="footer-compact" class="mb-5">
+        <h2>4. Variante Compacta (<code>.footer-sm</code>)</h2>
+        <p class="text-muted">Ideal para painéis internos e micro-apps: utilize <code>.footer-sm</code> em conjunto com qualquer classe de cor oficial.</p>
+
+        <div class="doc-card p-0 overflow-hidden">
+          <footer class="page-footer page-footer-indigo footer-sm">
+            <div class="container">
+              <div class="row g-3 align-items-center">
+                <div class="col-md-8">
+                  <p class="mb-0">Ambiente Corporativo Dexter UI &bull; Monitoramento em Tempo Real</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                  <a href="#!">Status dos Serviços</a>
+                </div>
+              </div>
+            </div>
+            <div class="footer-copyright">
+              <div class="container">
+                <span>&copy; 2026 Charles Corrêa</span>
+                <span class="right">Build CSS Modular</span>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <!-- 5. Código HTML -->
+      <section id="footer-code" class="mb-5">
+        <h2>5. Exemplos de Código HTML &amp; CSS</h2>
+        <p class="text-muted">Markup canônico Materialize CSS pronto para copiar e usar em páginas com ou sem Sticky Footer:</p>
+
+        <div class="code-window mb-0" data-dx-copy="true">
+          <div class="code-window-header">
+            <div class="code-dots">
+              <span class="code-dot red"></span>
+              <span class="code-dot yellow"></span>
+              <span class="code-dot green"></span>
+            </div>
+            <div class="code-actions">
+              <span class="code-badge">HTML</span>
+              <button type="button" class="code-copy-btn">Copiar</button>
+            </div>
+          </div>
+          <pre class="code-block"><code class="language-html">&lt;!-- Ative Sticky Footer adicionando .dx-sticky-footer ao &lt;body&gt; --&gt;
+&lt;body class="dx-sticky-footer"&gt;
+  &lt;header&gt;...&lt;/header&gt;
+
+  &lt;main class="dx-sticky-main"&gt;
+    &lt;!-- Conteúdo principal --&gt;
+  &lt;/main&gt;
+
+  &lt;footer class="page-footer page-footer-teal"&gt;
+    &lt;div class="container"&gt;
+      &lt;div class="row"&gt;
+        &lt;div class="col-md-7"&gt;
+          &lt;h5&gt;Conteúdo do Rodapé&lt;/h5&gt;
+          &lt;p&gt;Descrição institucional organizada em colunas responsivas.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class="col-md-4 offset-md-1"&gt;
+          &lt;h5&gt;Links&lt;/h5&gt;
+          &lt;ul&gt;
+            &lt;li&gt;&lt;a href="#!"&gt;Documentação&lt;/a&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;a href="#!"&gt;Componentes&lt;/a&gt;&lt;/li&gt;
+          &lt;/ul&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="footer-copyright"&gt;
+      &lt;div class="container"&gt;
+        &lt;span&gt;&amp;copy; 2026 Charles Corrêa&lt;/span&gt;
+        &lt;a class="right" href="#!"&gt;Mais Links&lt;/a&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- Navegação Inferior -->
+      <div class="d-flex justify-content-between pt-4 border-top mt-5">
+        <a href="collections.html" class="doc-header-link text-primary fw-semibold">
+          &larr; Anterior: Collections (Listas Materialize)
+        </a>
+        <a href="templates-email.html" class="doc-header-link text-primary fw-semibold">
+          Próximo: Templates Web &amp; E-mail HTML &rarr;
+        </a>
+      </div>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+
+  <script>
+    (function () {
+      var footer = document.getElementById('demoColoredFooter');
+      var label = document.getElementById('footerActiveColorLabel');
+      var controls = document.getElementById('footerColorControls');
+
+      if (footer && label && controls) {
+        controls.addEventListener('click', function (e) {
+          var btn = e.target.closest('[data-footer-color]');
+          if (!btn) return;
+          var cls = btn.getAttribute('data-footer-color');
+          footer.className = 'page-footer ' + cls;
+          label.textContent = cls;
+
+          controls.querySelectorAll('[data-footer-color]').forEach(function (b) {
+            b.classList.remove('btn-primary');
+            b.classList.add('btn-outline-primary');
+          });
+          btn.classList.remove('btn-outline-primary');
+          btn.classList.add('btn-primary');
+        });
+      }
+
+      var toggleSticky = document.getElementById('btnToggleStickyContent');
+      var extraText = document.getElementById('stickyExtraText');
+      if (toggleSticky && extraText) {
+        toggleSticky.addEventListener('click', function () {
+          var hidden = extraText.classList.toggle('d-none');
+          toggleSticky.textContent = hidden ? 'Alternar: Conteúdo Longo' : 'Alternar: Conteúdo Curto';
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

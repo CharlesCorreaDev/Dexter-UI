@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notificações &amp; Toasts - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+
+        <!-- Page Header -->
+        <div class="mb-5 border-bottom pb-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-primary text-white">Componentes</span>
+            <span class="badge bg-success text-white">Zero Dependências</span>
+            <span class="badge bg-secondary text-white">WCAG 2.1 AA</span>
+          </div>
+          <h1 class="display-5 fw-bold mb-3">Notificações Toast &amp; Snackbars</h1>
+          <p class="lead text-muted">
+            Suíte completa de notificações reativas e não invasivas para o <strong>Dexter UI</strong>,
+            inspirada e aprimorada a partir do <code>chrisgo/bootstrap5-toast</code> e <code>Script47/Toast</code>.
+            Elimina a dependência de jQuery com o controlador nativo <code>DexterToast</code>, trazendo grid de 9 quadrantes,
+            barra de progresso temporal animada (countdown), pausa ao passar o mouse, avatares/ícones SVG integrados,
+            botões de ação com callbacks, snacks compactos em pílula, suporte a todas as 28 cores e Dark Mode.
+          </p>
+        </div>
+
+        <!-- 1. Grid de 9 Posições -->
+        <section id="toast-positions" class="mb-5">
+          <h2>1. Grid de Posicionamento em 9 Quadrantes</h2>
+          <p class="text-muted">
+            Dispare notificações em qualquer ponto da tela através do atributo <code>position</code>.
+            O contêiner é criado e gerenciado automaticamente pelo <code>DexterToast</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Teste Interativo dos 9 Quadrantes</h6>
+            <div class="d-flex flex-column align-items-center gap-3 py-3" style="background-color: var(--dx-gray-100, #f8fafc); border-radius: 0.5rem;">
+              <!-- Linha Superior -->
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="testPosition('top-left')">↖ Top-Left</button>
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="testPosition('top-center')">↑ Top-Center</button>
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="testPosition('top-right')">↗ Top-Right</button>
+              </div>
+              <!-- Linha Central -->
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="testPosition('middle-left')">← Middle-Left</button>
+                <button type="button" class="btn btn-sm btn-primary" onclick="testPosition('middle-center')">⊙ Middle-Center</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="testPosition('middle-right')">→ Middle-Right</button>
+              </div>
+              <!-- Linha Inferior -->
+              <div class="d-flex gap-2">
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="testPosition('bottom-left')">↙ Bottom-Left</button>
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="testPosition('bottom-center')">↓ Bottom-Center</button>
+                <button type="button" class="btn btn-sm btn-outline-primary" onclick="testPosition('bottom-right')">↘ Bottom-Right</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Snippet Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Disparo em qualquer uma das 9 posições
+DexterToast.show({
+  title: 'Alerta de Sistema',
+  content: 'Sincronização em segundo plano concluída com sucesso.',
+  position: 'top-right', // 'top-left' | 'top-center' | 'top-right' | 'middle-center' | 'bottom-right' ...
+  duration: 4000
+});</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Tipos Semânticos & Barra de Countdown -->
+        <section id="toast-types" class="mb-5">
+          <h2>2. Tipos Semânticos &amp; Barra de Countdown Animada</h2>
+          <p class="text-muted">
+            Atalhos dedicados com ícones SVG integrados, cores temáticas oficiais e barra de progresso temporal com pausa automática ao passar o mouse:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Disparo Rápido por Tipo Semântico</h6>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button type="button" class="btn btn-success" onclick="testSuccess()">
+                ✓ Sucesso (success)
+              </button>
+              <button type="button" class="btn btn-danger" onclick="testError()">
+                ✕ Erro / Perigo (error)
+              </button>
+              <button type="button" class="btn btn-warning text-dark" onclick="testWarning()">
+                ⚠ Alerta (warning)
+              </button>
+              <button type="button" class="btn btn-info" onclick="testInfo()">
+                ℹ Informação (info)
+              </button>
+            </div>
+            <p class="small text-muted mb-0">
+              * Passe o mouse sobre a notificação para pausar a contagem regressiva da barra de progresso.
+            </p>
+          </div>
+
+          <!-- Code Snippet Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Métodos de atalho com ícone e cores pré-configuradas
+DexterToast.success('Operação Concluída', 'Seus dados foram salvos na nuvem.');
+DexterToast.error('Falha de Conexão', 'Não foi possível contatar o servidor.');
+DexterToast.warning('Espaço em Disco', 'Seu limite de armazenamento está em 92%.');
+DexterToast.info('Atualização Disponível', 'Uma nova versão do Dexter UI foi lançada.');</code></pre>
+          </div>
+        </section>
+
+        <!-- 3. Variantes Soft Tonal & Vidro Fosco (Glassmorphism) -->
+        <section id="toast-themes" class="mb-5">
+          <h2>3. Variantes Soft Tonal &amp; Vidro Fosco (Glassmorphism)</h2>
+          <p class="text-muted">
+            Estilos modernos com fundos suaves, borda lateral tonal e efeito de vidro fosco translúcido (Glassmorphism):
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Temas Visuais Avançados</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-outline-primary" onclick="testSoft('primary')">
+                Soft Primário
+              </button>
+              <button type="button" class="btn btn-outline-danger" onclick="testSoft('coral')">
+                Soft Coral
+              </button>
+              <button type="button" class="btn btn-outline-success" onclick="testSoft('green')">
+                Soft Verde
+              </button>
+              <button type="button" class="btn btn-outline-dark" onclick="testGlass()">
+                ✨ Vidro Fosco (.toast-glass)
+              </button>
+            </div>
+          </div>
+
+          <!-- Code Snippet Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Tema Soft com destaque lateral na paleta oficial
+DexterToast.show({
+  theme: 'soft',
+  color: 'coral',
+  title: 'Campanha Ativa',
+  content: 'Os novos cupons foram gerados com sucesso.'
+});
+
+// Vidro Fosco translúcido com backdrop-filter blur
+DexterToast.show({
+  theme: 'glass',
+  title: 'Glassmorphism Toast',
+  content: 'Efeito visual refinado com desfoque de fundo.'
+});</code></pre>
+          </div>
+        </section>
+
+        <!-- 4. Snackbars Compactos -->
+        <section id="toast-snacks" class="mb-5">
+          <h2>4. Snackbars Compactos em Formato Pílula (.toast-snack)</h2>
+          <p class="text-muted">
+            Notificações rápidas e discretas em formato arredondado de linha única, ideais para confirmações de ações:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Snackbars Rápidos</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-dark" onclick="testSnack('Link copiado para a área de transferência!', 'success')">
+                🔗 Link Copiado
+              </button>
+              <button type="button" class="btn btn-dark" onclick="testSnack('Item arquivado com sucesso.', 'info')">
+                📦 Item Arquivado
+              </button>
+              <button type="button" class="btn btn-dark" onclick="testSnack('Falha ao processar arquivo.', 'danger')">
+                ✕ Erro ao Processar
+              </button>
+            </div>
+          </div>
+
+          <!-- Code Snippet Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Snackbar compacto em formato pílula
+DexterToast.snack('Link copiado para a área de transferência!', {
+  type: 'success',
+  position: 'bottom-center'
+});</code></pre>
+          </div>
+        </section>
+
+        <!-- 5. Toasts com Botões de Ação -->
+        <section id="toast-actions" class="mb-5">
+          <h2>5. Toasts Interativos com Botões de Ação</h2>
+          <p class="text-muted">
+            Incorpore botões clicáveis com manipuladores de evento diretamente no corpo do Toast (ex: "Desfazer", "Visualizar", "Reconectar"):
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Ação de Desfazer (Undo)</h6>
+            <button type="button" class="btn btn-primary" onclick="testActionToast()">
+              Excluir Mensagem (com Desfazer)
+            </button>
+          </div>
+
+          <!-- Code Snippet Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">DexterToast.show({
+  title: 'Item Removido',
+  content: 'A conversa foi movida para a lixeira.',
+  duration: 8000,
+  actions: [
+    {
+      text: 'Desfazer',
+      class: 'btn btn-sm btn-primary',
+      onClick: function(toastEl) {
+        DexterToast.hide(toastEl);
+        DexterToast.snack('Ação desfeita com sucesso!', { type: 'success' });
+      }
+    },
+    {
+      text: 'Ver Lixeira',
+      class: 'btn btn-sm btn-outline-secondary',
+      onClick: function() {
+        console.log('Navegar para lixeira...');
+      }
+    }
+  ]
+});</code></pre>
+          </div>
+        </section>
+
+        <!-- 6. Paleta Oficial das 28 Cores -->
+        <section id="toast-colors" class="mb-5">
+          <h2>6. Paleta Oficial das 28 Cores do Dexter UI</h2>
+          <p class="text-muted">
+            Todas as 28 cores oficiais do sistema geram classes sólidas <code>.toast-{cor}</code> e tonais <code>.toast-soft-{cor}</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Selecione uma cor para disparar o Toast:</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm" style="background-color: #3b5998; color: #fff;" onclick="testColor('primary')">Primary</button>
+              <button type="button" class="btn btn-sm" style="background-color: #ff7f50; color: #fff;" onclick="testColor('coral')">Coral</button>
+              <button type="button" class="btn btn-sm" style="background-color: #1b7021; color: #fff;" onclick="testColor('green')">Green</button>
+              <button type="button" class="btn btn-sm" style="background-color: #501b85; color: #fff;" onclick="testColor('purple')">Purple</button>
+              <button type="button" class="btn btn-sm" style="background-color: #0099a7; color: #fff;" onclick="testColor('cyan')">Cyan</button>
+              <button type="button" class="btn btn-sm" style="background-color: #4b0082; color: #fff;" onclick="testColor('indigo')">Indigo</button>
+              <button type="button" class="btn btn-sm" style="background-color: #ff00ff; color: #fff;" onclick="testColor('fuchsia')">Fuchsia</button>
+              <button type="button" class="btn btn-sm" style="background-color: #008080; color: #fff;" onclick="testColor('teal')">Teal</button>
+              <button type="button" class="btn btn-sm" style="background-color: #4682b4; color: #fff;" onclick="testColor('steelblue')">SteelBlue</button>
+              <button type="button" class="btn btn-sm" style="background-color: #2c3e50; color: #fff;" onclick="testColor('midnight')">Midnight</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-toast.js"></script>
+
+  <!-- Scripts Interativos da Página de Documentação -->
+  <script>
+        
+// Funções de Demonstração
+    function testPosition(pos) {
+      DexterToast.show({
+        position: pos,
+        title: 'Posição: ' + pos,
+        content: 'Notificação fixada no quadrante ' + pos + ' da tela.',
+        duration: 4000
+      });
+    }
+
+    function testSuccess() {
+      DexterToast.success('Pagamento Aprovado', 'O comprovante foi enviado para o seu e-mail de cadastro.', {
+        subtitle: 'agora mesmo'
+      });
+    }
+
+    function testError() {
+      DexterToast.error('Erro de Autenticação', 'Credenciais inválidas ou token expirado. Tente novamente.', {
+        subtitle: 'código 401'
+      });
+    }
+
+    function testWarning() {
+      DexterToast.warning('Atenção: Manutenção', 'O sistema passará por manutenção programada às 23:00.', {
+        duration: 6000
+      });
+    }
+
+    function testInfo() {
+      DexterToast.info('Backup Automático', 'Sincronização diária de dados em andamento.');
+    }
+
+    function testSoft(color) {
+      DexterToast.show({
+        theme: 'soft',
+        color: color,
+        title: 'Tema Soft: ' + color,
+        content: 'Estilo tonal moderno com destaque lateral na paleta oficial do Dexter UI.',
+        duration: 5000
+      });
+    }
+
+    function testGlass() {
+      DexterToast.show({
+        theme: 'glass',
+        title: 'Glassmorphism Toast',
+        content: 'Efeito translúcido com backdrop-filter blur de 16px e sombra suave.',
+        duration: 5000
+      });
+    }
+
+    function testSnack(msg, type) {
+      DexterToast.snack(msg, {
+        type: type,
+        position: 'bottom-center'
+      });
+    }
+
+    function testActionToast() {
+      DexterToast.show({
+        title: 'Conversa Excluída',
+        content: 'A mensagem foi movida para a lixeira.',
+        duration: 8000,
+        actions: [
+          {
+            text: 'Desfazer',
+            class: 'btn btn-sm btn-primary',
+            onClick: function(toastEl) {
+              DexterToast.hide(toastEl);
+              DexterToast.snack('Ação desfeita com sucesso!', { type: 'success' });
+            }
+          }
+        ]
+      });
+    }
+
+    function testColor(color) {
+      DexterToast.show({
+        color: color,
+        theme: 'solid',
+        title: 'Cor: ' + color,
+        content: 'Notificação sólida utilizando a cor oficial ' + color + ' da paleta Dexter.',
+        duration: 4000
+      });
+    }
+  </script>
+</body>
+</html>

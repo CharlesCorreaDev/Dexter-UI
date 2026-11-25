@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulários &amp; Controles - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+
+        <!-- Header da Página -->
+        <div class="mb-5 border-bottom pb-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge bg-primary text-white">Componentes</span>
+            <span class="badge bg-secondary text-white">WCAG 2.1 AA</span>
+            <span class="badge bg-green text-white">Bootstrap 3.4 Inspired</span>
+          </div>
+          <h1 class="font-title display-5 fw-bold mb-3">Formulários &amp; Controles de Entrada</h1>
+          <p class="lead text-muted">
+            Estilização moderna de formulários, inputs, textareas, selects, checkboxes, switches e grupos de entrada. Inspirado na ergonomia visual e na consagrada mecânica de foco e sombra interna do <strong>Bootstrap 3.4/3.5</strong>, combinado organicamente com os <strong>28 temas de cores e design tokens do Dexter UI</strong>.
+          </p>
+        </div>
+
+        <!-- 1. Inputs Básicos & Foco / Hover -->
+        <section id="inputs-basic" class="mb-5">
+          <h2>1. Inputs Básicos (.form-control)</h2>
+          <p class="text-muted">
+            A classe <code>.form-control</code> estiliza campos de texto com cantos suavemente arredondados, altura confortável, padding ergonômico e a clássica sombra interna (<em>inset box-shadow</em>) do Bootstrap 3.4. Ao receber foco, projeta um halo brilhante com a cor primária do tema:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label required" for="demoEmail">Endereço de E-mail</label>
+                  <input type="email" class="form-control" id="demoEmail" placeholder="nome@exemplo.com.br">
+                  <span class="form-text">Nunca compartilharemos seu e-mail com terceiros.</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label required" for="demoPassword">Senha de Acesso</label>
+                  <input type="password" class="form-control" id="demoPassword" placeholder="Digite sua senha">
+                  <span class="form-text">Use no mínimo 8 caracteres com letras e números.</span>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="demoDisabled">Campo Desativado</label>
+                  <input type="text" class="form-control" id="demoDisabled" placeholder="Não editável..." disabled>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6">
+                <div class="form-group mb-3">
+                  <label class="form-label" for="demoReadonly">Somente Leitura (Readonly)</label>
+                  <input type="text" class="form-control" id="demoReadonly" value="DX-TOKEN-89472-SEC" readonly>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-card bg-midnight-950 p-3">
+            <pre class="m-0 text-silver-100"><code>&lt;!-- Campo de entrada padrão com label obrigatório --&gt;
+&lt;div class="form-group"&gt;
+  &lt;label class="form-label required" for="email"&gt;Endereço de E-mail&lt;/label&gt;
+  &lt;input type="email" class="form-control" id="email" placeholder="nome@exemplo.com.br"&gt;
+  &lt;span class="form-text"&gt;Texto de instrução ou ajuda auxiliar.&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Modificadores de Tamanho -->
+        <section id="sizes" class="mb-5">
+          <h2>2. Modificadores de Tamanho (.form-control-sm &amp; .form-control-lg)</h2>
+          <p class="text-muted">
+            Ajuste o tamanho do campo para se adequar a barras compactas, modais densos ou telas de destaque. Compatível tanto com a convenção Dexter (<code>.form-control-sm</code>, <code>.form-control-lg</code>) quanto com a nomenclatura clássica (<code>.input-sm</code>, <code>.input-lg</code>):
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-column gap-3">
+              <div>
+                <label class="form-label small fw-bold">Pequeno (.form-control-sm / .input-sm)</label>
+                <input type="text" class="form-control form-control-sm" placeholder="Tamanho pequeno (30px)">
+              </div>
+              <div>
+                <label class="form-label small fw-bold">Padrão (.form-control)</label>
+                <input type="text" class="form-control" placeholder="Tamanho padrão (38px)">
+              </div>
+              <div>
+                <label class="form-label small fw-bold">Grande (.form-control-lg / .input-lg)</label>
+                <input type="text" class="form-control form-control-lg" placeholder="Tamanho grande (48px)">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Selects, Textareas, Cores e Arquivos -->
+        <section id="selects-textareas" class="mb-5">
+          <h2>3. Menus Suspensos (.form-select &amp; DexterSelect), Textareas e Arquivos</h2>
+          <p class="text-muted">
+            O Dexter UI oferece suporte completo a <strong>Opções Zebradas</strong> (listas alternadas em tom suave para máxima legibilidade conforme ergonomia cognitiva e TDAH), busca instantânea, agrupamento com <code>optgroup</code> e compatibilidade com todos os navegadores modernos e sistemas operacionais via <code>DexterSelect</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Menus Suspensos com Opções Zebradas (.form-select-striped)</h6>
+            <div class="row g-4">
+              <!-- Select Zebrado Padrão -->
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold" for="demoSelect">Plano de Assinatura (Zebrado Padrão)</label>
+                <select class="form-select form-select-striped" id="demoSelect">
+                  <option selected>Selecione um plano...</option>
+                  <option value="1">Dexter Starter (Gratuito para Comunidade)</option>
+                  <option value="2">Dexter Pro Individual (R$ 49/mês)</option>
+                  <option value="3">Dexter Equipes &amp; Startups (R$ 149/mês)</option>
+                  <option value="4">Dexter Enterprise (Suporte Dedicado 24/7)</option>
+                  <option value="5">Dexter Educacional (Instituições de Ensino)</option>
+                </select>
+                <div class="form-text">Linhas pares recebem <code>#edf2fa</code> no claro e <code>#273549</code> no escuro.</div>
+              </div>
+
+              <!-- Select com Busca Integrada -->
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold" for="demoSelectSearch">Linguagens &amp; Frameworks (Com Busca)</label>
+                <select class="form-select form-select-striped" id="demoSelectSearch" data-dx-search="true" data-dx-placeholder="Filtrar tecnologia...">
+                  <option selected>Selecione a tecnologia principal...</option>
+                  <optgroup label="Backend &amp; APIs">
+                    <option value="php">PHP 8.4+ / FlightPHP / Laravel</option>
+                    <option value="python">Python 3.12+ / FastAPI / Django</option>
+                    <option value="node">Node.js 22+ / Express / NestJS</option>
+                    <option value="rust">Rust 2021+ / Axum / Actix</option>
+                    <option value="go">Go 1.22+ / Fiber / Gin</option>
+                  </optgroup>
+                  <optgroup label="Frontend &amp; UI">
+                    <option value="dexter">Dexter UI Framework (Sass Puro)</option>
+                    <option value="react">React 19 / Next.js</option>
+                    <option value="vue">Vue 3 / Nuxt</option>
+                    <option value="tailwind">Tailwind CSS v4</option>
+                  </optgroup>
+                </select>
+                <div class="form-text">Ativação instantânea via atributo <code>data-dx-search="true"</code>.</div>
+              </div>
+
+              <!-- Select Temático (Cores do Dexter) -->
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold" for="demoSelectCoral">Variação Temática (.form-select-coral)</label>
+                <select class="form-select form-select-striped form-select-coral" id="demoSelectCoral">
+                  <option selected>Escolha o nível de prioridade...</option>
+                  <option value="baixa">Prioridade Baixa (Rotina normal)</option>
+                  <option value="media">Prioridade Média (Sprint corrente)</option>
+                  <option value="alta">Prioridade Alta (Release blocker)</option>
+                  <option value="urgente">Prioridade Crítica (Incidente P0)</option>
+                </select>
+                <div class="form-text">Suporta todas as 28 cores oficiais da paleta Dexter UI.</div>
+              </div>
+
+              <!-- Upload de Arquivo -->
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold" for="demoFile">Upload de Arquivo (.form-control-file)</label>
+                <input type="file" class="form-control form-control-file" id="demoFile">
+              </div>
+
+              <!-- Seletor de Cor -->
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold" for="demoColor">Seletor de Cor (.form-control-color)</label>
+                <div class="d-flex align-items-center gap-2">
+                  <input type="color" class="form-control form-control-color" id="demoColor" value="#3b5998" title="Escolha uma cor">
+                  <span class="small text-muted">Cor Primária do Tema (#3b5998)</span>
+                </div>
+              </div>
+
+              <!-- Textarea -->
+              <div class="col-12">
+                <label class="form-label fw-bold" for="demoTextarea">Área de Mensagem (Textarea)</label>
+                <textarea class="form-control" id="demoTextarea" rows="3" placeholder="Escreva suas observações detalhadas aqui..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloco de Código Monokai do Select Zebrado -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML / SCSS / JS</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Select com Opções Zebradas (.form-select-striped) --&gt;
+&lt;select class="form-select form-select-striped"&gt;
+  &lt;option selected&gt;Selecione uma opção...&lt;/option&gt;
+  &lt;option value="1"&gt;Opção Ímpar (Fundo Branco #ffffff)&lt;/option&gt;
+  &lt;option value="2"&gt;Opção Par (Fundo Zebrado #edf2fa)&lt;/option&gt;
+  &lt;option value="3"&gt;Opção Ímpar (Fundo Branco #ffffff)&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- Select com Busca Integrada e Cores da Paleta --&gt;
+&lt;select class="form-select form-select-striped form-select-coral" data-dx-search="true"&gt;
+  ...
+&lt;/select&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 4. Checkboxes, Radios e Switches -->
+        <section id="checks-radios" class="mb-5">
+          <h2>4. Checkboxes, Radios, Switches, iCheck &amp; Awesome Checkbox</h2>
+          <p class="text-muted">
+            Suíte completa de caixas de seleção, botões de rádio e interruptores reativos inspirados no <strong>Awesome Bootstrap Checkbox</strong> e <strong>iCheck Bootstrap</strong>, com suporte a formato circular, tamanhos, estados desativados e todas as 28 cores oficiais do Dexter UI via CSS puro:
+          </p>
+
+          <div class="doc-card mb-4">
+            <!-- 4.1 Padrão e Variações Modernas -->
+            <h6 class="fw-bold mb-3">1. Controles Padrão do Sistema (.form-check)</h6>
+            <div class="row g-4 mb-4">
+              <!-- Checkboxes -->
+              <div class="col-12 col-md-4">
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" value="" id="check1" checked>
+                  <label class="form-check-label" for="check1">Notificações por E-mail</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="checkbox" value="" id="check2">
+                  <label class="form-check-label" for="check2">Alertas via SMS</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="check3" disabled>
+                  <label class="form-check-label" for="check3">Recurso desativado</label>
+                </div>
+              </div>
+
+              <!-- Radios -->
+              <div class="col-12 col-md-4">
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="radio" name="radioOptions" id="radio1" value="opt1" checked>
+                  <label class="form-check-label" for="radio1">Faturamento Mensal</label>
+                </div>
+                <div class="form-check mb-2">
+                  <input class="form-check-input" type="radio" name="radioOptions" id="radio2" value="opt2">
+                  <label class="form-check-label" for="radio2">Faturamento Anual (-20%)</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="radioOptions" id="radio3" value="opt3" disabled>
+                  <label class="form-check-label" for="radio3">Faturamento Trimestral</label>
+                </div>
+              </div>
+
+              <!-- Switches -->
+              <div class="col-12 col-md-4">
+                <div class="form-check form-switch mb-2">
+                  <input class="form-check-input" type="checkbox" role="switch" id="switch1" checked>
+                  <label class="form-check-label" for="switch1">Autenticação em 2 Etapas</label>
+                </div>
+                <div class="form-check form-switch mb-2">
+                  <input class="form-check-input" type="checkbox" role="switch" id="switch2">
+                  <label class="form-check-label" for="switch2">Modo Privativo</label>
+                </div>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="switch3" disabled>
+                  <label class="form-check-label" for="switch3">Backup Automático</label>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- 4.2 Awesome Bootstrap Checkbox & Circle -->
+            <h6 class="fw-bold mb-3">2. Awesome Bootstrap Checkbox &amp; Formato Circular (.checkbox-circle)</h6>
+            <div class="row g-4 mb-4">
+              <div class="col-12 col-md-4">
+                <div class="checkbox checkbox-primary mb-2">
+                  <input id="abc1" type="checkbox" checked>
+                  <label for="abc1">Awesome Checkbox Primário</label>
+                </div>
+                <div class="checkbox checkbox-coral mb-2">
+                  <input id="abc2" type="checkbox" checked>
+                  <label for="abc2">Awesome Checkbox Coral</label>
+                </div>
+                <div class="checkbox checkbox-circle checkbox-green mb-2">
+                  <input id="abc3" type="checkbox" checked>
+                  <label for="abc3">Checkbox Circular Verde</label>
+                </div>
+                <div class="checkbox checkbox-circle checkbox-purple">
+                  <input id="abc4" type="checkbox">
+                  <label for="abc4">Checkbox Circular Roxo</label>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <div class="radio radio-primary mb-2">
+                  <input type="radio" name="radioAbc" id="rAbc1" value="1" checked>
+                  <label for="rAbc1">Radio Awesome Primário</label>
+                </div>
+                <div class="radio radio-amber mb-2">
+                  <input type="radio" name="radioAbc" id="rAbc2" value="2">
+                  <label for="rAbc2">Radio Awesome Âmbar</label>
+                </div>
+                <div class="radio radio-teal mb-2">
+                  <input type="radio" name="radioAbc" id="rAbc3" value="3">
+                  <label for="rAbc3">Radio Awesome Teal</label>
+                </div>
+                <div class="radio radio-danger">
+                  <input type="radio" name="radioAbc" id="rAbc4" value="4" disabled>
+                  <label for="rAbc4">Radio Desativado</label>
+                </div>
+              </div>
+
+              <!-- Switches com Cores & Tamanhos -->
+              <div class="col-12 col-md-4">
+                <div class="form-check form-switch form-switch-coral form-switch-lg mb-3">
+                  <input class="form-check-input" type="checkbox" role="switch" id="swCoral" checked>
+                  <label class="form-check-label fw-bold" for="swCoral">Switch Grande Coral (.form-switch-lg)</label>
+                </div>
+                <div class="form-check form-switch form-switch-green mb-3">
+                  <input class="form-check-input" type="checkbox" role="switch" id="swGreen" checked>
+                  <label class="form-check-label" for="swGreen">Switch Médio Verde (.form-switch-green)</label>
+                </div>
+                <div class="form-check form-switch form-switch-purple form-switch-sm">
+                  <input class="form-check-input" type="checkbox" role="switch" id="swPurple" checked>
+                  <label class="form-check-label small" for="swPurple">Switch Pequeno Roxo (.form-switch-sm)</label>
+                </div>
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- 4.3 iCheck Bootstrap Suite -->
+            <h6 class="fw-bold mb-3">3. iCheck Bootstrap Suite (.icheck-{cor} &amp; .icheck-circle)</h6>
+            <div class="row g-4">
+              <div class="col-12 col-md-4">
+                <div class="icheck-primary mb-2">
+                  <input type="checkbox" id="ic1" checked />
+                  <label for="ic1">iCheck Primário (.icheck-primary)</label>
+                </div>
+                <div class="icheck-success mb-2">
+                  <input type="checkbox" id="ic2" checked />
+                  <label for="ic2">iCheck Sucesso (.icheck-success)</label>
+                </div>
+                <div class="icheck-danger mb-2">
+                  <input type="checkbox" id="ic3" checked />
+                  <label for="ic3">iCheck Perigo (.icheck-danger)</label>
+                </div>
+                <div class="icheck-warning">
+                  <input type="checkbox" id="ic4" checked />
+                  <label for="ic4">iCheck Alerta (.icheck-warning)</label>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <div class="icheck-coral icheck-circle mb-2">
+                  <input type="checkbox" id="icc1" checked />
+                  <label for="icc1">iCheck Circular Coral (.icheck-coral)</label>
+                </div>
+                <div class="icheck-purple icheck-circle mb-2">
+                  <input type="checkbox" id="icc2" checked />
+                  <label for="icc2">iCheck Circular Roxo (.icheck-purple)</label>
+                </div>
+                <div class="icheck-cyan icheck-circle mb-2">
+                  <input type="checkbox" id="icc3" checked />
+                  <label for="icc3">iCheck Circular Ciano (.icheck-cyan)</label>
+                </div>
+                <div class="icheck-silver icheck-circle">
+                  <input type="checkbox" id="icc4" disabled />
+                  <label for="icc4">iCheck Desativado</label>
+                </div>
+              </div>
+
+              <!-- Checkboxes Standalone (Sem Label - para Tabelas) -->
+              <div class="col-12 col-md-4">
+                <label class="form-label fw-bold d-block">Seleção Isolada / Tabelas (.checkbox-single)</label>
+                <div class="d-flex align-items-center gap-3">
+                  <div class="checkbox checkbox-primary checkbox-single">
+                    <input type="checkbox" id="single1" checked aria-label="Selecionar linha 1">
+                    <label for="single1"></label>
+                  </div>
+                  <div class="checkbox checkbox-circle checkbox-coral checkbox-single">
+                    <input type="checkbox" id="single2" checked aria-label="Selecionar linha 2">
+                    <label for="single2"></label>
+                  </div>
+                  <div class="icheck-green icheck-circle checkbox-single">
+                    <input type="checkbox" id="single3" checked aria-label="Selecionar linha 3">
+                    <label for="single3"></label>
+                  </div>
+                  <div class="form-check form-switch form-switch-green m-0">
+                    <input class="form-check-input" type="checkbox" role="switch" id="singleSw" checked aria-label="Ativar linha">
+                  </div>
+                </div>
+                <div class="form-text mt-2">Ideais para cabeçalhos e linhas de tabelas de dados.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bloco de Código Monokai para Checks & Radios -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML / SCSS</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Awesome Bootstrap Checkbox Circular --&gt;
+&lt;div class="checkbox checkbox-circle checkbox-coral"&gt;
+  &lt;input id="c1" type="checkbox" checked&gt;
+  &lt;label for="c1"&gt;Opção Circular Coral&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;!-- iCheck Bootstrap com Cores Oficiais --&gt;
+&lt;div class="icheck-primary"&gt;
+  &lt;input type="checkbox" id="ic1" checked /&gt;
+  &lt;label for="ic1"&gt;iCheck Primário&lt;/label&gt;
+&lt;/div&gt;
+
+&lt;!-- Switch Temático Grande --&gt;
+&lt;div class="form-check form-switch form-switch-coral form-switch-lg"&gt;
+  &lt;input class="form-check-input" type="checkbox" role="switch" id="sw1" checked&gt;
+  &lt;label class="form-check-label" for="sw1"&gt;Ativado&lt;/label&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 5. Grupos de Entrada -->
+        <section id="input-groups" class="mb-5">
+          <h2>5. Grupos de Entrada (.input-group)</h2>
+          <p class="text-muted">
+            Acople ícones, moedas, domínios, botões ou seleções antes (prefix) ou depois (suffix) de qualquer campo de entrada:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-column gap-3">
+              <!-- Moeda BRL -->
+              <div class="input-group">
+                <span class="input-group-text">R$</span>
+                <input type="text" class="form-control" placeholder="0,00" aria-label="Quantia em reais">
+                <span class="input-group-text">,00</span>
+              </div>
+
+              <!-- Domínio de E-mail -->
+              <div class="input-group">
+                <span class="input-group-text">@</span>
+                <input type="text" class="form-control" placeholder="usuario" aria-label="Usuário">
+                <span class="input-group-text">@empresa.com.br</span>
+              </div>
+
+              <!-- Botão de Ação Anexado -->
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Código de Cupom de Desconto">
+                <button class="btn btn-primary" type="button">Aplicar Desconto</button>
+              </div>
+
+              <!-- Grupo com Tamanho Pequeno -->
+              <div class="input-group input-group-sm">
+                <span class="input-group-text">🔍</span>
+                <input type="search" class="form-control" placeholder="Buscar registros...">
+                <button class="btn btn-secondary" type="button">Filtrar</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Estados de Validação -->
+        <section id="validation" class="mb-5">
+          <h2>6. Estados de Validação (.is-valid, .is-invalid &amp; .has-warning)</h2>
+          <p class="text-muted">
+            Forneça feedback claro e acessível ao usuário com halos coloridos e mensagens de validação (<code>.valid-feedback</code>, <code>.invalid-feedback</code>):
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-md-4">
+                <div class="form-group">
+                  <label class="form-label" for="valSuccess">Campo Válido (.is-valid)</label>
+                  <input type="text" class="form-control is-valid" id="valSuccess" value="usuario_valido">
+                  <div class="valid-feedback">Excelente! Nome de usuário disponível.</div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <div class="form-group">
+                  <label class="form-label" for="valError">Campo Inválido (.is-invalid)</label>
+                  <input type="text" class="form-control is-invalid" id="valError" value="e-mail_incorreto@">
+                  <div class="invalid-feedback">Por favor, insira um endereço de e-mail válido.</div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4">
+                <div class="form-group has-warning">
+                  <label class="form-label" for="valWarning">Alerta de Atenção (.has-warning)</label>
+                  <input type="text" class="form-control" id="valWarning" value="Senha Fraca">
+                  <div class="form-text" style="color: var(--dx-coral-700);">Recomendamos adicionar caracteres especiais.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Cores Temáticas de Foco -->
+        <section id="color-focus" class="mb-5">
+          <h2>7. Cores Temáticas de Foco (.form-control-{cor})</h2>
+          <p class="text-muted">
+            Personalize a cor da borda de hover e o halo de foco usando qualquer uma das <strong>28 famílias de cores</strong> do Dexter UI:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="row g-3">
+              <div class="col-12 col-sm-6 col-md-4">
+                <label class="form-label small fw-bold">Primary (Padrão)</label>
+                <input type="text" class="form-control form-control-primary" placeholder="Foco Primary (#3b5998)">
+              </div>
+              <div class="col-12 col-sm-6 col-md-4">
+                <label class="form-label small fw-bold">Verde (.form-control-green)</label>
+                <input type="text" class="form-control form-control-green" placeholder="Foco Verde (#1b7021)">
+              </div>
+              <div class="col-12 col-sm-6 col-md-4">
+                <label class="form-label small fw-bold">Roxo (.form-control-purple)</label>
+                <input type="text" class="form-control form-control-purple" placeholder="Foco Roxo (#501b85)">
+              </div>
+              <div class="col-12 col-sm-6 col-md-4">
+                <label class="form-label small fw-bold">Coral (.form-control-coral)</label>
+                <input type="text" class="form-control form-control-coral" placeholder="Foco Coral (#ff7f50)">
+              </div>
+              <div class="col-12 col-sm-6 col-md-4">
+                <label class="form-label small fw-bold">Ciano (.form-control-cyan)</label>
+                <input type="text" class="form-control form-control-cyan" placeholder="Foco Ciano (#0099a7)">
+              </div>
+              <div class="col-12 col-sm-6 col-md-4">
+                <label class="form-label small fw-bold">Turquesa (.form-control-turquoise)</label>
+                <input type="text" class="form-control form-control-turquoise" placeholder="Foco Turquesa (#007e65)">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Formulário Completo de Cadastro -->
+        <section id="full-example" class="mb-5">
+          <h2>8. Exemplo Completo de Formulário de Cadastro</h2>
+          <p class="text-muted">
+            Demonstração integrada com grid de 14 colunas, agrupamentos lógicos, seleções e botões de ação:
+          </p>
+
+          <div class="doc-card p-4">
+            <form onsubmit="event.preventDefault();">
+              <div class="row g-3">
+                <div class="col-12 col-md-7">
+                  <div class="form-group">
+                    <label class="form-label required" for="cadNome">Nome Completo</label>
+                    <input type="text" class="form-control" id="cadNome" placeholder="Ex.: Charles Corrêa" required>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-7">
+                  <div class="form-group">
+                    <label class="form-label required" for="cadEmail">E-mail Profissional</label>
+                    <input type="email" class="form-control" id="cadEmail" placeholder="charles@exemplo.com.br" required>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-5">
+                  <div class="form-group">
+                    <label class="form-label" for="cadCargo">Cargo / Função</label>
+                    <select class="form-select form-select-striped" id="cadCargo">
+                      <option selected>Selecione...</option>
+                      <option value="dev">Engenheiro de Software</option>
+                      <option value="design">Designer UX/UI</option>
+                      <option value="pm">Gerente de Produtos</option>
+                      <option value="qa">Analista de Qualidade / QA</option>
+                      <option value="devops">Engenheiro DevOps / SRE</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-5">
+                  <div class="form-group">
+                    <label class="form-label" for="cadDoc">Documento (CPF/CNPJ)</label>
+                    <input type="text" class="form-control" id="cadDoc" placeholder="000.000.000-00">
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-4">
+                  <div class="form-group">
+                    <label class="form-label" for="cadCidade">Cidade</label>
+                    <input type="text" class="form-control" id="cadCidade" placeholder="Porto Alegre">
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="cadTermos" required>
+                    <label class="form-check-label" for="cadTermos">
+                      Declaro que li e concordo com os Termos de Serviço e Política de Privacidade.
+                    </label>
+                  </div>
+                </div>
+
+                <div class="col-12 mt-4 pt-3 border-top d-flex gap-3">
+                  <button type="submit" class="btn btn-primary">Concluir Cadastro</button>
+                  <button type="reset" class="btn btn-secondary">Limpar Campos</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+<script>
+    // Inicializa todos os Selects Zebrados
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.DexterSelect) {
+        DexterSelect.initAll('select.form-select-striped, select[data-dx-select]');
+      }
+    });
+
+    
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!--
+  =============================================================================
+  Dexter UI Framework
+  =============================================================================
+
+  @file        examples/print.html
+  @description [PT-BR] Página de demonstração e teste do CSS de Impressão (@media print):
+                       utilitários de quebra de página, visibilidade (print-only / no-print),
+                       expansão de URLs em links, repetição de cabeçalhos de tabela
+                       e preservação exata de cores.
+               [EN]    Showcase and test page for Print CSS (@media print): page break
+                       utilities, visibility (print-only / no-print), link URL expansion,
+                       table header repetition, and exact color preservation.
+
+  @author      Charles Corrêa
+  @contact     E-mail: charlescorreaweb@gmail.com
+  @website     https://charlescorrea.com.br
+  @github      https://github.com/CharlesCorreaDev
+
+  @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+  @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+  @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+  @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+  @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+
+  @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+  @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+               [EN]    MIT – see the LICENSE file at the repository root.
+  =============================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CSS de Impressão (@media print) – Dexter UI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <small class="text-muted">Documentação &gt; Mídia &amp; Impressão &gt; <strong style="color: inherit;">CSS de Impressão (@media print)</strong></small>
+        </nav>
+
+        <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2">
+          <h1 class="mb-0">CSS de Impressão (@media print)</h1>
+          <button type="button" class="theme-toggle-btn no-print" onclick="window.print()" style="font-weight: 600; background-color: var(--dx-primary-050); color: var(--dx-primary);">
+            🖨️ Testar Impressão (Ctrl + P)
+          </button>
+        </div>
+        <p class="lead text-muted mb-4">Folha de estilos e utilitários projetados para gerar relatórios, faturas e páginas impressas impecáveis, economizando tinta e organizando a quebra de páginas.</p>
+        <hr class="my-4">
+
+        <!-- Banner exclusivo de impressão -->
+        <div class="print-only border p-3 mb-4" style="background-color: #f8f9fa;">
+          <strong>Documento Impresso via Dexter UI Framework</strong><br>
+          <small>Gerado em: <span id="printDate"></span> &middot; Autor: Charles Corrêa</small>
+        </div>
+
+        <!-- 1. Como Usar -->
+        <section id="como-usar" class="mb-5">
+          <h2>1. Como Usar</h2>
+          <p>O CSS de impressão do Dexter UI está disponível de duas maneiras:</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="doc-card h-100">
+                <h3 class="fs-5">Incluso no Pacote Geral</h3>
+                <p class="text-muted" style="font-size: 0.875rem;">Já embutido dentro de <code>dexter.css</code> e <code>dexter.min.css</code> via <code>@media print</code>. Não requer nenhum arquivo adicional.</p>
+                <pre class="m-0 p-2 border rounded" style="background: rgba(0,0,0,0.03); font-size: 0.8rem;"><code>&lt;link rel="stylesheet" href="dexter.min.css"&gt;</code></pre>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="doc-card h-100">
+                <h3 class="fs-5">Arquivo Autônomo (Standalone)</h3>
+                <p class="text-muted" style="font-size: 0.875rem;">Disponível em <code>dist/css/dexter-print.min.css</code> para quem prefere carregar o CSS condicionalmente apenas ao imprimir.</p>
+                <pre class="m-0 p-2 border rounded" style="background: rgba(0,0,0,0.03); font-size: 0.8rem;"><code>&lt;link rel="stylesheet" href="dexter-print.min.css" media="print"&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Economia de Tinta e Alto Contraste -->
+        <section id="tinta-contraste" class="mb-5">
+          <h2>2. Economia de Tinta e Alto Contraste</h2>
+          <p>Por padrão, todo o conteúdo impresso tem sombras e cores de fundo puramente decorativas removidas, forçando texto em preto absoluto sobre papel branco com tipografia em <code>11pt</code> (tamanho padrão de leitura em papel):</p>
+          <div class="doc-card">
+            <ul class="mb-0">
+              <li><strong>Zero desperdício de tinta</strong>: fundos coloridos viram transparentes e sombras são removidas.</li>
+              <li><strong>Margens padronizadas</strong>: <code>@page { margin: 15mm 20mm; }</code> otimizado para papel A4 e Carta.</li>
+              <li><strong>Linhas órfãs e viúvas protegidas</strong>: parágrafos e citações mantêm um mínimo de 3 linhas no início e final da página (<code>orphans: 3; widows: 3;</code>).</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 3. Controle de Visibilidade -->
+        <section id="visibilidade" class="mb-5">
+          <h2>3. Controle de Visibilidade na Impressão</h2>
+          <p>Oculte elementos de navegação na impressão ou exiba informações exclusivas para o papel:</p>
+          <div class="doc-card">
+            <table class="table table-bordered mb-0">
+              <thead>
+                <tr>
+                  <th style="width: 30%;">Classe</th>
+                  <th>Efeito na Tela</th>
+                  <th>Efeito no Papel (@media print)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.no-print</code> ou <code>.d-print-none</code></td>
+                  <td>Visível normalmente</td>
+                  <td><strong>Oculto</strong> (display: none)</td>
+                </tr>
+                <tr>
+                  <td><code>.print-only</code> ou <code>.d-print-only</code></td>
+                  <td><strong>Oculto</strong> (display: none)</td>
+                  <td>Visível (display: block)</td>
+                </tr>
+                <tr>
+                  <td><code>.d-print-inline</code></td>
+                  <td>Mantém estilo de tela</td>
+                  <td>Exibe como inline</td>
+                </tr>
+                <tr>
+                  <td><code>.d-print-flex</code></td>
+                  <td>Mantém estilo de tela</td>
+                  <td>Exibe como flexbox</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row g-3 mt-1">
+            <div class="col-md-6">
+              <div class="p-3 border rounded text-center no-print" style="background-color: var(--dx-danger-050); border-color: var(--dx-danger-200) !important;">
+                <strong>Elemento com <code>.no-print</code></strong><br>
+                <small class="text-muted">Aparece na tela, mas desaparece completamente ao imprimir!</small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-3 border rounded text-center print-only" style="background-color: #f0fdf4; border-color: #86efac !important;">
+                <strong>Elemento com <code>.print-only</code></strong><br>
+                <small>Visível apenas no papel / pré-visualização de impressão!</small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Links e URLs Automáticas -->
+        <section id="links" class="mb-5">
+          <h2>4. Destino de Links no Papel</h2>
+          <p>Como no papel não é possível clicar em hyperlinks, o Dexter UI imprime automaticamente a URL de destino de links externos entre parênteses:</p>
+          <div class="doc-card">
+            <p>Visite o repositório oficial no <a href="https://github.com/CharlesCorreaDev/Dexter-UI">GitHub do Dexter UI</a> para acompanhar o código-fonte.</p>
+            <p>Se você tem um link que não deve mostrar a URL no papel, adicione a classe <code>.no-print-url</code>: <a href="https://charlescorrea.com.br" class="no-print-url">Website Charles Corrêa (sem URL impressa)</a>.</p>
+            <p>Abreviações mostram o significado: <abbr title="World Wide Web Consortium">W3C</abbr> e <abbr title="Cascading Style Sheets">CSS</abbr>.</p>
+          </div>
+        </section>
+
+        <!-- 5. Quebras de Página (Page Breaks) -->
+        <section id="quebras" class="mb-5">
+          <h2>5. Controle de Quebras de Página</h2>
+          <p>Use classes atômicas para forçar ou evitar quebras de página em relatórios extensos:</p>
+          <div class="doc-card">
+            <table class="table table-bordered mb-0">
+              <thead>
+                <tr>
+                  <th style="width: 35%;">Classe Utilitária</th>
+                  <th>Propriedade CSS Paged Media</th>
+                  <th>Uso Típico</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.break-before-page</code><br><small class="text-muted">alias .page-break-before</small></td>
+                  <td><code>break-before: page;</code></td>
+                  <td>Força o início do elemento em uma nova folha impressa (ex: novos capítulos ou seções de contrato).</td>
+                </tr>
+                <tr>
+                  <td><code>.break-after-page</code><br><small class="text-muted">alias .page-break-after</small></td>
+                  <td><code>break-after: page;</code></td>
+                  <td>Força que o próximo elemento vá para a folha seguinte.</td>
+                </tr>
+                <tr>
+                  <td><code>.break-inside-avoid</code><br><small class="text-muted">alias .page-break-avoid</small></td>
+                  <td><code>break-inside: avoid;</code></td>
+                  <td>Evita que o bloco seja cortado no meio por uma virada de página (tabelas, cards, assinaturas).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 6. Tabelas Multipáginas -->
+        <section id="tabelas" class="mb-5">
+          <h2>6. Tabelas em Documentos Extensos</h2>
+          <p>O cabeçalho <code>&lt;thead&gt;</code> repete-se automaticamente no topo de cada folha impressa (<code>display: table-header-group</code>), e as linhas não quebram no meio (<code>tr { break-inside: avoid; }</code>):</p>
+          <div class="doc-card">
+            <table class="table table-bordered mb-0">
+              <thead>
+                <tr>
+                  <th>Item / Fatura</th>
+                  <th>Descrição</th>
+                  <th>Quantidade</th>
+                  <th>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>DX-001</td>
+                  <td>Licença Comercial Dexter UI Framework</td>
+                  <td>1</td>
+                  <td>R$ 0,00 (MIT)</td>
+                </tr>
+                <tr>
+                  <td>DX-002</td>
+                  <td>Suporte a Grid Fluido de 14 Colunas</td>
+                  <td>1</td>
+                  <td>Incluso</td>
+                </tr>
+                <tr>
+                  <td>DX-003</td>
+                  <td>Paleta com 28 Famílias e Escala Tonal de 13 Passos</td>
+                  <td>28</td>
+                  <td>Incluso</td>
+                </tr>
+                <tr>
+                  <td>DX-004</td>
+                  <td>CSS de Impressão (@media print) ABNT/W3C</td>
+                  <td>1</td>
+                  <td>Incluso</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="3" class="text-end">Total:</th>
+                  <th>Livre &amp; Open Source</th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </section>
+
+        <!-- 7. Preservação Exata de Cores -->
+        <section id="cores-exatas" class="mb-5">
+          <h2>7. Preservação Exata de Cores (.print-color-exact)</h2>
+          <p>Quando for estritamente necessário imprimir cores de fundo (como em gráficos, crachás, selos ou logos), use a classe <code>.print-color-exact</code>:</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="doc-card">
+                <h5>Sem preservação (Padrão de Tinta)</h5>
+                <div class="p-3 border rounded text-center bg-primary text-white">
+                  Fundo colorido na tela, fundo transparente no papel.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="doc-card">
+                <h5>Com <code>.print-color-exact</code></h5>
+                <div class="p-3 border rounded text-center bg-primary text-white print-color-exact">
+                  Mantém a cor exata mesmo no papel impresso.
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script>
+    
+const printDate = document.getElementById("printDate");
+    if (printDate) {
+      printDate.textContent = new Date().toLocaleString("pt-BR");
+    }
+  </script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+</body>
+</html>

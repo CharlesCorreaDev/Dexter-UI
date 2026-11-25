@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autosize, Zoom &amp; Wheelzoom - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Utilitários Interativos</span>
+          <span class="badge bg-indigo text-white">Autosize.js</span>
+          <span class="badge bg-purple text-white">Zoom (4 Modos)</span>
+          <span class="badge bg-teal text-white">Wheelzoom Scroll &amp; Pan</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Autosize, Zoom &amp; Wheelzoom (Zero Dependências)</h1>
+        <p class="lead text-muted mb-0">
+          Portagem fiel em <strong>Vanilla JS puro</strong> dos três utilitários de entrada e manipulação de imagem de <strong>Jack Moore</strong> (<code>autosize</code>, <code>zoom</code> e <code>wheelzoom</code>), integrados ao Dexter UI sem jQuery, com suporte a eventos customizados e controles responsivos.
+        </p>
+      </div>
+
+      <!-- 1. Autosize -->
+      <section id="mt-autosize" class="mb-5">
+        <h2>1. Textarea Autosize (<code>autosize()</code>)</h2>
+        <p class="text-muted">Ajusta automaticamente a altura da caixa de texto conforme você digita ou altera o conteúdo programaticamente com <code>autosize.update()</code>.</p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-sm btn-primary" id="btnAutosizeFill">Preencher 6 Linhas + update()</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="btnAutosizeClear">Limpar Texto</button>
+              <button type="button" class="btn btn-sm btn-outline-danger" id="btnAutosizeToggle">Alternar destroy() / init</button>
+            </div>
+            <span class="badge bg-soft-indigo" id="autosizeHeightBadge">Altura: auto</span>
+          </div>
+
+          <label for="demoAutosize" class="form-label fw-semibold">Campo com Expansão Automática</label>
+          <textarea id="demoAutosize" class="form-control dx-autosize" rows="2" data-dx-autosize placeholder="Digite várias linhas aqui para observar o redimensionamento automático..."></textarea>
+        </div>
+      </section>
+
+      <!-- 2. Image Zoom (4 Modos) -->
+      <section id="mt-zoom" class="mb-5">
+        <h2>2. Lupa &amp; Pan em Imagens (<code>DexterZoom</code> — 4 Modos)</h2>
+        <p class="text-muted">Reproduz os quatro modos do <code>jquery-zoom</code> em CSS + Vanilla JS puro: <strong>mouseover</strong>, <strong>grab</strong>, <strong>click</strong> e <strong>toggle</strong>.</p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold mb-1">Modo 1: <code>mouseover</code> (Passe o cursor)</h5>
+              <p class="small text-muted mb-2">Ampliação instantânea 2x ao entrar com o mouse.</p>
+              <span class="dx-zoom dx-zoom-primary" id="demoZoomHover" data-dx-zoom data-zoom-on="mouseover" data-zoom-magnify="2">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360' viewBox='0 0 600 360'><defs><linearGradient id='z1' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%231e40af'/><stop offset='100%' stop-color='%233b82f6'/></linearGradient></defs><rect width='600' height='360' fill='url(%23z1)'/><circle cx='170' cy='180' r='85' fill='none' stroke='white' stroke-width='4' stroke-dasharray='8 6'/><circle cx='420' cy='180' r='65' fill='rgba(255,255,255,0.18)'/><text x='50%' y='50%' fill='white' font-family='sans-serif' font-size='28' font-weight='bold' text-anchor='middle'>Zoom Hover 2.0x</text><text x='50%' y='62%' fill='%23dbeafe' font-family='sans-serif' font-size='15' text-anchor='middle'>Inspecione detalhes finos da grade SVG</text></svg>"
+                     alt="Demonstração Zoom Mouseover">
+                <span class="dx-zoom-badge">Hover (2x)</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold mb-1">Modo 2: <code>grab</code> (Clique e segure)</h5>
+              <p class="small text-muted mb-2">Pressione o botão do mouse e arraste para explorar.</p>
+              <span class="dx-zoom dx-zoom-indigo" id="demoZoomGrab" data-dx-zoom data-zoom-on="grab" data-zoom-magnify="2">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360' viewBox='0 0 600 360'><defs><linearGradient id='z2' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%234b0082'/><stop offset='100%' stop-color='%238b5cf6'/></linearGradient></defs><rect width='600' height='360' fill='url(%23z2)'/><rect x='70' y='70' width='460' height='220' rx='18' fill='none' stroke='rgba(255,255,255,0.35)' stroke-width='3'/><text x='50%' y='50%' fill='white' font-family='sans-serif' font-size='28' font-weight='bold' text-anchor='middle'>Zoom Grab 2.0x</text><text x='50%' y='62%' fill='%23ede9fe' font-family='sans-serif' font-size='15' text-anchor='middle'>Segure e arraste para mover a lupa</text></svg>"
+                     alt="Demonstração Zoom Grab">
+                <span class="dx-zoom-badge">Grab (2x)</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold mb-1">Modo 3: <code>click</code> (Clique para ativar)</h5>
+              <p class="small text-muted mb-2">Ativa no clique; sai ao clicar novamente ou deixar a área.</p>
+              <span class="dx-zoom dx-zoom-teal" id="demoZoomClick" data-dx-zoom data-zoom-on="click" data-zoom-magnify="2">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360' viewBox='0 0 600 360'><defs><linearGradient id='z3' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%230f766e'/><stop offset='100%' stop-color='%2314b8a6'/></linearGradient></defs><rect width='600' height='360' fill='url(%23z3)'/><polygon points='300,60 440,290 160,290' fill='rgba(255,255,255,0.16)' stroke='white' stroke-width='3'/><text x='50%' y='50%' fill='white' font-family='sans-serif' font-size='28' font-weight='bold' text-anchor='middle'>Zoom Click 2.0x</text><text x='50%' y='62%' fill='%23ccfbf1' font-family='sans-serif' font-size='15' text-anchor='middle'>Clique para ampliar e mova o cursor</text></svg>"
+                     alt="Demonstração Zoom Click">
+                <span class="dx-zoom-badge">Click (2x)</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="doc-card h-100">
+              <h5 class="fw-bold mb-1">Modo 4: <code>toggle</code> (Trava até novo clique)</h5>
+              <p class="small text-muted mb-2">Permanece ampliado mesmo ao mover o cursor para fora.</p>
+              <span class="dx-zoom dx-zoom-coral" id="demoZoomToggle" data-dx-zoom data-zoom-on="toggle" data-zoom-magnify="2.2">
+                <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='360' viewBox='0 0 600 360'><defs><linearGradient id='z4' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='%23be123c'/><stop offset='100%' stop-color='%23f97316'/></linearGradient></defs><rect width='600' height='360' fill='url(%23z4)'/><line x1='80' y1='80' x2='520' y2='280' stroke='rgba(255,255,255,0.3)' stroke-width='4'/><line x1='520' y1='80' x2='80' y2='280' stroke='rgba(255,255,255,0.3)' stroke-width='4'/><text x='50%' y='50%' fill='white' font-family='sans-serif' font-size='28' font-weight='bold' text-anchor='middle'>Zoom Toggle 2.2x</text><text x='50%' y='62%' fill='%23ffedd5' font-family='sans-serif' font-size='15' text-anchor='middle'>Clique para travar ou destravar</text></svg>"
+                     alt="Demonstração Zoom Toggle">
+                <span class="dx-zoom-badge">Toggle (2.2x)</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Wheelzoom -->
+      <section id="mt-wheelzoom" class="mb-5">
+        <h2>3. Wheelzoom por Scroll &amp; Arrasto (<code>wheelzoom()</code>)</h2>
+        <p class="text-muted">Use a roda do mouse sobre a planta abaixo para ampliar no ponto exato do cursor, arraste para navegar e clique duas vezes (ou use os botões flutuantes) para resetar.</p>
+
+        <div class="doc-card mb-4">
+          <div class="dx-wheelzoom-stage dx-wheelzoom-indigo mb-3">
+            <div class="dx-wheelzoom-controls">
+              <button type="button" data-wz-action="out" id="btnWzOut" aria-label="Diminuir zoom">&minus;</button>
+              <span class="dx-wheelzoom-level" id="wheelzoomScaleBadge">1.0x</span>
+              <button type="button" data-wz-action="in" id="btnWzIn" aria-label="Aumentar zoom">+</button>
+              <button type="button" data-wz-action="reset" id="btnWzReset">Reset</button>
+            </div>
+            <img id="demoWheelzoomImg"
+                 data-dx-wheelzoom
+                 data-wheelzoom-step="0.25"
+                 data-wheelzoom-max="4"
+                 src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='420' viewBox='0 0 900 420'><rect width='900' height='420' fill='%230f172a'/><g stroke='%231e293b' stroke-width='1.5'><line x1='0' y1='70' x2='900' y2='70'/><line x1='0' y1='140' x2='900' y2='140'/><line x1='0' y1='210' x2='900' y2='210'/><line x1='0' y1='280' x2='900' y2='280'/><line x1='0' y1='350' x2='900' y2='350'/><line x1='150' y1='0' x2='150' y2='420'/><line x1='300' y1='0' x2='300' y2='420'/><line x1='450' y1='0' x2='450' y2='420'/><line x1='600' y1='0' x2='600' y2='420'/><line x1='750' y1='0' x2='750' y2='420'/></g><rect x='90' y='60' width='220' height='140' rx='10' fill='%231d4ed8' fill-opacity='0.32' stroke='%2360a5fa' stroke-width='2.5'/><text x='200' y='136' fill='%23dbeafe' font-family='sans-serif' font-size='20' font-weight='bold' text-anchor='middle'>Módulo A · Grid</text><rect x='360' y='120' width='240' height='180' rx='10' fill='%236d28d9' fill-opacity='0.32' stroke='%23a78bfa' stroke-width='2.5'/><text x='480' y='215' fill='%23ede9fe' font-family='sans-serif' font-size='22' font-weight='bold' text-anchor='middle'>Núcleo Dexter UI</text><rect x='650' y='90' width='180' height='150' rx='10' fill='%230d9488' fill-opacity='0.32' stroke='%235eead4' stroke-width='2.5'/><text x='740' y='170' fill='%23ccfbf1' font-family='sans-serif' font-size='18' font-weight='bold' text-anchor='middle'>Tokens 28 Cores</text><text x='450' y='380' fill='%2394a3b8' font-family='sans-serif' font-size='16' text-anchor='middle'>Role a roda do mouse ou clique + e - para ampliar e arrastar (1.0x a 4.0x)</text></svg>"
+                 alt="Diagrama Técnico Wheelzoom">
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Código -->
+      <section id="mt-code" class="mb-5">
+        <h2>4. Exemplos de Uso (JS &amp; Atributos HTML)</h2>
+
+        <div class="code-window mb-4">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="dot-close"></span><span class="dot-minimize"></span><span class="dot-maximize"></span></div>
+            <div class="code-actions"><span class="code-badge">JS</span><button type="button" class="code-copy-btn">Copiar</button></div>
+          </div>
+          <pre><code class="language-js">// 1. Autosize (expansão automática de textarea)
+autosize(document.querySelectorAll('textarea.dx-autosize'));
+// Após alterar textarea.value via script:
+autosize.update(textarea);
+// Para remover listeners:
+autosize.destroy(textarea);
+
+// 2. DexterZoom (modos: 'mouseover' | 'grab' | 'click' | 'toggle')
+zoom('#minhaFoto', { on: 'grab', magnify: 2 });
+
+// 3. Wheelzoom (scroll focalizado no cursor + arrasto)
+wheelzoom(document.querySelectorAll('img.zoomable'), { zoom: 0.2, maxZoom: 4 });
+// Eventos e métodos nativos:
+wheelzoom.reset('#minhaPlanta');</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-media-tools.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    (function () {
+      var ta = document.getElementById('demoAutosize');
+      var badge = document.getElementById('autosizeHeightBadge');
+      var active = true;
+
+      function syncHeightBadge() {
+        badge.textContent = 'Altura: ' + Math.round(ta.getBoundingClientRect().height) + 'px';
+      }
+
+      ta.addEventListener('autosize:resized', function (e) {
+        badge.textContent = 'Altura: ' + e.detail.height + 'px';
+      });
+      syncHeightBadge();
+
+      document.getElementById('btnAutosizeFill').addEventListener('click', function () {
+        ta.value = [
+          'Linha 1: Dexter UI Framework — Zero Dependências.',
+          'Linha 2: Textarea expandida automaticamente via autosize.update().',
+          'Linha 3: Calcula scrollHeight preservando a rolagem da página.',
+          'Linha 4: Compatível com border-box e content-box.',
+          'Linha 5: Dispara CustomEvent("autosize:resized").',
+          'Linha 6: Reduz e expande instantaneamente sem saltos.'
+        ].join('\n');
+        autosize.update(ta);
+        syncHeightBadge();
+      });
+
+      document.getElementById('btnAutosizeClear').addEventListener('click', function () {
+        ta.value = '';
+        autosize.update(ta);
+        syncHeightBadge();
+      });
+
+      document.getElementById('btnAutosizeToggle').addEventListener('click', function () {
+        if (active) {
+          autosize.destroy(ta);
+          active = false;
+          badge.textContent = 'Autosize destruído (resize padrão restaurado)';
+        } else {
+          autosize(ta);
+          active = true;
+          syncHeightBadge();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

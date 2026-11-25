@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starter Template - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../../dist/css/dexter.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="#">Dexter Starter</a>
+      <button class="navbar-toggler" type="button" data-dx-toggle="collapse" data-dx-target="#starterNav" aria-expanded="false" aria-label="Menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="starterNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="#recursos">Recursos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <section class="hero hero-gradient-primary mb-5">
+      <div class="hero-body text-center">
+        <span class="badge bg-light text-dark mb-3">Starter Web Template</span>
+        <h1 class="display-5 fw-bold mb-3">Template Inicial Dexter UI</h1>
+        <p class="lead mb-4" style="opacity: 0.92;">Ponto de partida enxuto com grid de 14 colunas, tokens CSS Variables e acessibilidade nativa.</p>
+        <div class="d-flex justify-content-center gap-2 flex-wrap">
+          <a href="#recursos" class="btn btn-light">Começar Agora</a>
+          <a href="#contato" class="btn btn-outline-light">Saiba Mais</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="recursos" class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="card h-100 card-hover">
+          <div class="card-body">
+            <h5 class="card-title">Zero Dependências</h5>
+            <p class="card-text text-muted">Componentes modulares escritos em Sass moderno e Vanilla JavaScript.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 card-hover">
+          <div class="card-body">
+            <h5 class="card-title">Grid &amp; Utilities v4</h5>
+            <p class="card-text text-muted">Alterne livremente entre Flexbox de 14 colunas e utilitários Grid CSS modernos.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 card-hover">
+          <div class="card-body">
+            <h5 class="card-title">Dark Mode Nativo</h5>
+            <p class="card-text text-muted">Temas dinâmicos com um atributo <code>data-dx-theme</code> sem recompilar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contato" class="border-top py-4 text-center text-muted small">
+    &copy; 2026 Charles Corrêa &bull; Dexter UI Framework &bull; Licenciado sob MIT
+  </footer>
+
+  <script src="../../dist/js/dexter-ui-kit.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!--
+  =============================================================================
+  Dexter UI Framework
+  =============================================================================
+
+  @file        examples/colors.html
+  @description [PT-BR] Catálogo e demonstração visual da paleta de cores completa: 28 famílias
+                       (5 oficiais do tema + 23 estendidas), cada uma com escala tonal padronizada
+                       de 13 passos (025, 050, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 975).
+               [EN]    Catalog and visual showcase of the full color palette: 28 families
+                       (5 official theme + 23 extended), each with a standardized 13-step tonal
+                       scale (025, 050, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 975).
+
+  @author      Charles Corrêa
+  @contact     E-mail: charlescorreaweb@gmail.com
+  @website     https://charlescorrea.com.br
+  @github      https://github.com/CharlesCorreaDev
+
+  @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+  @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+  @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+  @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+  @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+
+  @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+  @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+               [EN]    MIT – see the LICENSE file at the repository root.
+  =============================================================================
+-->
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paleta de Cores e Escala Tonal – Dexter UI</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+    <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <small class="text-muted">Documentação &gt; Design Tokens &gt; <strong style="color: inherit;">Paleta de Cores e Escala Tonal</strong></small>
+        </nav>
+
+        <h1 class="mb-2">Paleta de Cores e Escala Tonal</h1>
+        <p class="lead text-muted mb-4">28 famílias de cores (5 cores oficiais do tema + 23 cores estendidas), cada uma com escala tonal de 13 passos (025 a 975) geradas por algoritmo.</p>
+        <hr class="my-4">
+
+        <!-- 1. Cores Oficiais -->
+        <section id="theme-colors" class="mb-5">
+          <h2>1. Cores Oficiais do Tema (5)</h2>
+          <p class="text-muted">Cores base da identidade do Dexter UI.</p>
+          <div id="theme-colors-container" class="row"></div>
+        </section>
+
+        <!-- 2. Paleta Estendida -->
+        <section id="extended-colors" class="mb-5">
+          <h2>2. Paleta Estendida (23)</h2>
+          <p class="text-muted">Cores estendidas com suporte a classes utilitárias de texto, fundo, bordas e sombras.</p>
+          <div id="extended-colors-container" class="row"></div>
+        </section>
+
+        <!-- 3. Classes Práticas -->
+        <section id="classes-praticas" class="mb-5">
+          <h2>3. Classes Práticas: Bordas, Sombras, Textos e Links</h2>
+          <p class="text-muted">Demonstração de como combinar <code>bg-*-subtle</code>, <code>border-*-subtle</code>, <code>text-*-emphasis</code>, <code>border-*</code>, <code>shadow-*</code> e <code>link-*</code>.</p>
+
+          <div class="row g-4 my-2">
+            <div class="col-md-4">
+              <div class="p-3 rounded border border-primary-subtle bg-primary-subtle">
+                <h4 class="text-primary-emphasis mb-1">Primary Subtle</h4>
+                <p class="text-primary mb-2" style="font-size: 0.875rem;">Fundo 050, borda 200 e texto 800 para contraste equilibrado.</p>
+                <a href="#primary" class="link-primary" style="font-size: 0.875rem;">Link primário &rarr;</a>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="p-3 rounded border border-purple-subtle bg-purple-subtle">
+                <h4 class="text-purple-emphasis mb-1">Roxo / Purple</h4>
+                <p class="text-purple mb-2" style="font-size: 0.875rem;"><code>.bg-purple-subtle .border-purple-subtle</code></p>
+                <a href="#purple" class="link-purple" style="font-size: 0.875rem;">Link roxo interativo &rarr;</a>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="p-3 rounded border border-green-subtle bg-green-subtle">
+                <h4 class="text-green-emphasis mb-1">Verde / Green</h4>
+                <p class="text-green mb-2" style="font-size: 0.875rem;"><code>.bg-green-subtle .text-green-emphasis</code></p>
+                <a href="#green" class="link-green" style="font-size: 0.875rem;">Link verde interativo &rarr;</a>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="p-3 rounded border border-coral-subtle bg-coral-subtle">
+                <h4 class="text-coral-emphasis mb-1">Coral</h4>
+                <p class="text-coral mb-2" style="font-size: 0.875rem;">Tons quentes de destaque.</p>
+                <a href="#coral" class="link-coral" style="font-size: 0.875rem;">Link coral &rarr;</a>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="p-3 rounded border border-turquoise-subtle bg-turquoise-subtle">
+                <h4 class="text-turquoise-emphasis mb-1">Turquesa</h4>
+                <p class="text-turquoise mb-2" style="font-size: 0.875rem;"><code>.border-turquoise-subtle</code></p>
+                <a href="#turq" class="link-turquoise" style="font-size: 0.875rem;">Link turquesa &rarr;</a>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="p-3 rounded border border-red-subtle bg-red-subtle">
+                <h4 class="text-red-emphasis mb-1">Vermelho</h4>
+                <p class="text-red mb-2" style="font-size: 0.875rem;">Atenção e alertas com máxima clareza.</p>
+                <a href="#red" class="link-red" style="font-size: 0.875rem;">Link vermelho &rarr;</a>
+              </div>
+            </div>
+          </div>
+
+          <h3 class="mt-4 mb-3 fs-5">Sombras Coloridas / Colored Shadows</h3>
+          <div class="row g-4 mb-4">
+            <div class="col-sm-3">
+              <div class="p-3 rounded bg-white text-dark shadow shadow-purple">
+                <strong>.shadow-purple</strong>
+                <p class="mb-0 text-muted" style="font-size: 0.8rem;">Brilho roxo.</p>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="p-3 rounded bg-white text-dark shadow shadow-green">
+                <strong>.shadow-green</strong>
+                <p class="mb-0 text-muted" style="font-size: 0.8rem;">Brilho verde.</p>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="p-3 rounded bg-white text-dark shadow shadow-cyan">
+                <strong>.shadow-cyan</strong>
+                <p class="mb-0 text-muted" style="font-size: 0.8rem;">Brilho ciano.</p>
+              </div>
+            </div>
+            <div class="col-sm-3">
+              <div class="p-3 rounded bg-white text-dark shadow shadow-coral">
+                <strong>.shadow-coral</strong>
+                <p class="mb-0 text-muted" style="font-size: 0.8rem;">Brilho coral.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Navegação Inferior -->
+        <div class="d-flex justify-content-between pt-4 border-top mt-5">
+          <a href="index.html" class="doc-nav-link text-primary fw-semibold">
+            &larr; Anterior: Introdução
+          </a>
+          <a href="typography.html" class="doc-nav-link text-primary fw-semibold">
+            Próximo: Tipografia &rarr;
+          </a>
+        </div>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script>
+    
+const themeFamilies = [
+      { id: "primary", name: "Primary (Primária)", hex: "#3b5998" },
+      { id: "secondary", name: "Secondary (Secundária)", hex: "#14306b" },
+      { id: "tertiary", name: "Tertiary (Terciária)", hex: "#869dcc" },
+      { id: "quaternary", name: "Quaternary (Quaternária)", hex: "#224389" },
+      { id: "quinary", name: "Quinary (Quinária)", hex: "#5772ac" }
+    ];
+
+    const extendedFamilies = [
+      { id: "purple", name: "Purple / Roxo", hex: "#501b85" },
+      { id: "red", name: "Red / Vermelho", hex: "#cf000f" },
+      { id: "navy", name: "Navy", hex: "#003171" },
+      { id: "brown", name: "Brown / Marrom", hex: "#3f1b0f" },
+      { id: "green", name: "Green / Verde", hex: "#1b7021" },
+      { id: "midnight", name: "Midnight", hex: "#2c3e50" },
+      { id: "silver-light", name: "Silver Light", hex: "#e9eaeb" },
+      { id: "silver", name: "Silver", hex: "#8e9aa2" },
+      { id: "light", name: "Light", hex: "#f7f7f7" },
+      { id: "turquoise", name: "Turquoise / Turquesa", hex: "#007e65" },
+      { id: "cyan", name: "Cyan / Ciano", hex: "#0099a7" },
+      { id: "dark", name: "Dark", hex: "#130f10" },
+      { id: "black", name: "Black", hex: "#030303" },
+      { id: "beige", name: "Beige / Bege", hex: "#e9d7be" },
+      { id: "olive", name: "Olive", hex: "#546c00" },
+      { id: "steelblue", name: "SteelBlue", hex: "#4682b4" },
+      { id: "aquamarine", name: "Aquamarine", hex: "#7fffd4" },
+      { id: "coral", name: "Coral", hex: "#ff7f50" },
+      { id: "lime", name: "Lime", hex: "#00ff00" },
+      { id: "teal", name: "Teal", hex: "#008080" },
+      { id: "indigo", name: "Indigo", hex: "#4b0082" },
+      { id: "gray", name: "Gray", hex: "#808080" },
+      { id: "fuchsia", name: "Fuchsia", hex: "#ff00ff" }
+    ];
+
+    const steps = ["025", "050", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950", "975"];
+
+    function renderFamily(item) {
+      let rampHtml = '<div class="swatch-ramp">';
+      for (const s of steps) {
+        const isDarkText = parseInt(s, 10) <= 400;
+        const textColor = isDarkText ? "#000" : "#fff";
+        rampHtml += `
+          <div class="swatch-step bg-${item.id}-${s}" style="color: ${textColor}" title="var(--dx-${item.id}-${s})">
+            <span>${s}</span>
+          </div>`;
+      }
+      rampHtml += '</div>';
+
+      return `
+        <div class="col-lg-6">
+          <div class="doc-card">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <strong>${item.name}</strong>
+              <code class="text-muted" style="font-size: 0.75rem;">${item.hex} &middot; var(--dx-${item.id})</code>
+            </div>
+            ${rampHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    document.getElementById("theme-colors-container").innerHTML = themeFamilies.map(renderFamily).join("");
+    document.getElementById("extended-colors-container").innerHTML = extendedFamilies.map(renderFamily).join("");
+  </script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+</body>
+</html>

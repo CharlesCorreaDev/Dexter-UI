@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modais &amp; Diálogos Dinâmicos (Modals) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        <h1 class="display-6 fw-bold mb-3">Modais &amp; Diálogos Dinâmicos (Modals)</h1>
+        <p class="lead text-muted mb-4">
+          Suíte completa de modais e janelas de diálogo para Dexter UI, com suporte a estrutura HTML estática e criação
+          dinâmica via JavaScript inspirada no <code>bootstrap-show-modal</code> (shaack). Permite disparar caixas de alerta (<code>showAlert</code>),
+          confirmações assíncronas com Promises (<code>showConfirm</code>), caixas de entrada rápida (<code>showPrompt</code>) e modais
+          personalizados (<code>showModal</code>) sem escrever uma única linha de marcação no DOM.
+        </p>
+
+        <!-- 1. Diálogos Programáticos Dinâmicos (shaack inspired) -->
+        <section id="modal-dynamic" class="mb-5">
+          <h2>1. Diálogos Dinâmicos via JavaScript (ShowModal Suite)</h2>
+          <p class="text-muted">
+            Elimina a necessidade de código HTML estático repetitivo. Os modais são criados dinamicamente no DOM e destruídos automaticamente ao fechar:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Dispare Diálogos Dinâmicos Imediatos:</h6>
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <button type="button" class="btn btn-primary" id="btnDynamicAlert">
+                💬 Disparar Alert (showAlert)
+              </button>
+              <button type="button" class="btn btn-coral" id="btnDynamicConfirm">
+                ❓ Disparar Confirmação (showConfirm)
+              </button>
+              <button type="button" class="btn btn-green" id="btnDynamicPrompt">
+                ✏️ Disparar Prompt (showPrompt)
+              </button>
+              <button type="button" class="btn btn-indigo" id="btnDynamicCustom">
+                🛠️ Modal Customizado com Formulário (showModal)
+              </button>
+            </div>
+
+            <!-- Feedback do Resultado -->
+            <div class="p-3 bg-light rounded border" id="dynamicResultBox" style="display: none;">
+              <strong>Resultado da Ação:</strong> <span id="dynamicResultText" class="text-primary fw-bold"></span>
+            </div>
+          </div>
+
+          <!-- Snippet de Código Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// 1. Alerta simples com botão OK
+dexter.showAlert({
+  title: "Notificação do Sistema",
+  body: "Seus dados foram sincronizados com sucesso no Dexter UI!"
+});
+
+// 2. Confirmação assíncrona com Promise
+const confirmou = await dexter.showConfirm({
+  title: "Excluir Registro?",
+  body: "Esta ação é irreversível. Deseja realmente excluir?",
+  textConfirm: "Sim, Excluir",
+  classConfirm: "btn-danger",
+  textCancel: "Cancelar"
+});
+if (confirmou) {
+  console.log("Item excluído com sucesso!");
+}
+
+// 3. Prompt de entrada rápida de texto
+const nome = await dexter.showPrompt({
+  title: "Identificação",
+  body: "Por favor, digite seu nome completo:",
+  placeholder: "Ex: Charles Corrêa"
+});
+console.log("Nome digitado:", nome);
+
+// 4. Modal dinâmico completo com botões personalizados
+dexter.showModal({
+  title: "Modal Dinâmico Personalizado",
+  body: "<p>Criado via JavaScript sem marcação HTML prévia!</p>",
+  headerClass: "modal-header-coral",
+  size: "modal-md",
+  buttons: [
+    { label: "Fechar", class: "btn-outline-secondary" },
+    { label: "Salvar Alterações", class: "btn-coral", onClick: (e, modal) => {
+      console.log("Salvo!");
+    }}
+  ]
+});</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Modal Estático via HTML e Atributos -->
+        <section id="modal-static-demo" class="mb-5">
+          <h2>2. Modal Estático via Atributos HTML (.modal)</h2>
+          <p class="text-muted">
+            Estrutura clássica declarativa ativada por botões com <code>data-dx-toggle="modal"</code> e <code>data-dx-target="#meuModal"</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <button type="button" class="btn btn-outline-primary" data-dx-toggle="modal" data-dx-target="#demoStaticModal">
+              🚀 Abrir Modal Estático Clássico
+            </button>
+          </div>
+
+          <!-- Elemento Modal Estático -->
+          <div class="modal fade" id="demoStaticModal" tabindex="-1" aria-labelledby="staticModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticModalLabel">
+                    <span class="modal-icon">💼</span> Modal Declarativo Dexter UI
+                  </h5>
+                  <button type="button" class="btn-close" data-dx-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                  <p class="mb-2">Este modal foi declarado diretamente no HTML da página e controlado via atributos nativos de data.</p>
+                  <p class="text-muted small mb-0">Possui fechamento acessível por tecla <strong>Escape</strong>, clique no backdrop ou botão de fechar.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dx-dismiss="modal">Fechar</button>
+                  <button type="button" class="btn btn-primary" data-dx-dismiss="modal">Entendido</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Modificadores de Tamanho -->
+        <section id="modal-sizes" class="mb-5">
+          <h2>3. Tamanhos de Diálogo (.modal-sm, .modal-lg, .modal-xl, .modal-fullscreen)</h2>
+          <p class="text-muted">
+            Personalize a largura máxima do modal aplicando classes ao elemento <code>.modal-dialog</code>:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-outline-secondary btn-sm" id="btnSizeSm">Pequeno (.modal-sm / 320px)</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" id="btnSizeDefault">Padrão (500px)</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" id="btnSizeLg">Grande (.modal-lg / 800px)</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" id="btnSizeXl">Extra Grande (.modal-xl / 1140px)</button>
+              <button type="button" class="btn btn-outline-secondary btn-sm" id="btnSizeFullscreen">Tela Cheia (.modal-fullscreen)</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Conteúdo Rolável e Centralizado -->
+        <section id="modal-scrollable" class="mb-5">
+          <h2>4. Diálogo Centralizado e com Rolagem Interna</h2>
+          <p class="text-muted">
+            Combine <code>.modal-dialog-centered</code> para centralização vertical perfeita e <code>.modal-dialog-scrollable</code> para manter o cabeçalho e rodapé fixos enquanto o corpo rola:
+          </p>
+
+          <div class="doc-card mb-4">
+            <button type="button" class="btn btn-outline-primary" id="btnModalScrollable">
+              📜 Abrir Modal com Conteúdo Longo Rolável
+            </button>
+          </div>
+        </section>
+
+        <!-- 5. Cabeçalhos Cromáticos Oficiais (.modal-header-{cor}) -->
+        <section id="modal-colors" class="mb-5">
+          <h2>5. Cabeçalhos Cromáticos Oficiais (.modal-header-{cor})</h2>
+          <p class="text-muted">
+            Integre com facilidade as <strong>28 cores oficiais</strong> do Dexter UI no cabeçalho do diálogo aplicando classes temáticas:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-wrap gap-2">
+              <button type="button" class="btn btn-coral" id="btnColorCoral">Cabeçalho Coral</button>
+              <button type="button" class="btn btn-indigo" id="btnColorIndigo">Cabeçalho Índigo</button>
+              <button type="button" class="btn btn-green" id="btnColorGreen">Cabeçalho Verde</button>
+              <button type="button" class="btn btn-crimson" id="btnColorCrimson">Cabeçalho Carmesim (Perigo)</button>
+              <button type="button" class="btn btn-amber" id="btnColorAmber">Cabeçalho Âmbar</button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+
+  <!-- JavaScript Interativo para os Botões da Demonstração -->
+  <script>
+    const resultBox = document.getElementById('dynamicResultBox');
+    const resultText = document.getElementById('dynamicResultText');
+
+    function showResult(msg) {
+      resultBox.style.display = 'block';
+      resultText.textContent = msg;
+    }
+
+    // 1. Alert Dinâmico
+    document.getElementById('btnDynamicAlert').addEventListener('click', () => {
+      dexter.showAlert({
+        title: '🎉 Notificação Dexter UI',
+        body: 'Este diálogo foi instanciado programaticamente em tempo de execução via <code>dexter.showAlert()</code>!'
+      }).then(() => {
+        showResult('Alerta visualizado e fechado pelo usuário.');
+      });
+    });
+
+    // 2. Confirm Dinâmico
+    document.getElementById('btnDynamicConfirm').addEventListener('click', async () => {
+      const confirmou = await dexter.showConfirm({
+        title: '⚠️ Exclusão de Registro',
+        body: 'Deseja realmente excluir este contrato? Esta operação não poderá ser revertida.',
+        textConfirm: 'Sim, Excluir',
+        classConfirm: 'btn-danger',
+        textCancel: 'Não, Cancelar'
+      });
+      showResult(confirmou ? 'Usuário CONFIRMOU a ação (true).' : 'Usuário CANCELOU ou fechou o diálogo (false).');
+    });
+
+    // 3. Prompt Dinâmico
+    document.getElementById('btnDynamicPrompt').addEventListener('click', async () => {
+      const valor = await dexter.showPrompt({
+        title: '✏️ Identificação de Usuário',
+        body: 'Informe seu nome completo para emissão do certificado:',
+        placeholder: 'Ex: Charles Corrêa'
+      });
+      showResult(valor !== null ? `Nome informado: "${valor}"` : 'Prompt cancelado pelo usuário.');
+    });
+
+    // 4. Modal Customizado com Formulário
+    document.getElementById('btnDynamicCustom').addEventListener('click', () => {
+      dexter.showModal({
+        title: '🛠️ Configurações Rápidas de Perfil',
+        headerClass: 'modal-header-indigo',
+        body: `
+          <form id="quickConfigForm">
+            <div class="mb-3">
+              <label class="form-label fw-bold">Nome da Organização</label>
+              <input type="text" class="form-control" value="Dexter UI Enterprise">
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-bold">Ambiente</label>
+              <select class="form-select">
+                <option selected>Produção (Cluster AWS)</option>
+                <option>Homologação / Staging</option>
+                <option>Desenvolvimento Local</option>
+              </select>
+            </div>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="checkLogs" checked>
+              <label class="form-check-label" for="checkLogs">Ativar telemetria de performance em tempo real</label>
+            </div>
+          </form>
+        `,
+        buttons: [
+          { label: 'Cancelar', class: 'btn-outline-secondary' },
+          { label: 'Salvar Configurações', class: 'btn-indigo', onClick: (e, modal) => {
+            showResult('Configurações da organização salvas via callback do modal dinâmico!');
+          }}
+        ]
+      });
+    });
+
+    // 5. Modais de Tamanho
+    document.getElementById('btnSizeSm').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Tamanho Pequeno', body: 'Modal compacto com largura máxima de 320px.', size: 'modal-sm' });
+    });
+    document.getElementById('btnSizeDefault').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Tamanho Padrão', body: 'Modal padrão com largura máxima de 500px.' });
+    });
+    document.getElementById('btnSizeLg').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Tamanho Grande (.modal-lg)', body: 'Modal espaçoso com largura máxima de 800px para tabelas e formulários densos.', size: 'modal-lg' });
+    });
+    document.getElementById('btnSizeXl').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Tamanho Extra Grande (.modal-xl)', body: 'Modal amplo com largura máxima de 1140px para dashboards e visualizadores.', size: 'modal-xl' });
+    });
+    document.getElementById('btnSizeFullscreen').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Tela Cheia (.modal-fullscreen)', body: 'Modal ocupando 100% da largura e altura da tela do dispositivo.', size: 'modal-fullscreen' });
+    });
+
+    // 6. Modal Rolável
+    document.getElementById('btnModalScrollable').addEventListener('click', () => {
+      const paragraphs = Array.from({ length: 12 }, (_, i) => `<p>Parágrafo ${i + 1}: Demonstração de conteúdo extenso com rolagem interna suave enquanto o cabeçalho e rodapé permanecem perfeitamente fixos na tela.</p>`).join('');
+      dexter.showModal({
+        title: '📜 Termos de Uso do Serviço',
+        body: paragraphs,
+        scrollable: true,
+        centered: true,
+        buttons: [{ label: 'Concordo e Fechar', class: 'btn-primary' }]
+      });
+    });
+
+    // 7. Modais Cromáticos
+    document.getElementById('btnColorCoral').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Tema Coral Oficial', body: 'Cabeçalho vibrante na cor Coral do Dexter UI.', headerClass: 'modal-header-coral' });
+    });
+    document.getElementById('btnColorIndigo').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Tema Índigo Oficial', body: 'Cabeçalho corporativo na cor Índigo do Dexter UI.', headerClass: 'modal-header-indigo' });
+    });
+    document.getElementById('btnColorGreen').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Sucesso e Aprovação', body: 'Cabeçalho verde oficial para confirmações bem-sucedidas.', headerClass: 'modal-header-green' });
+    });
+    document.getElementById('btnColorCrimson').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Alerta Crítico / Perigo', body: 'Cabeçalho Carmesim oficial para avisos graves de segurança.', headerClass: 'modal-header-crimson' });
+    });
+    document.getElementById('btnColorAmber').addEventListener('click', () => {
+      dexter.showAlert({ title: 'Atenção Requerida', body: 'Cabeçalho Âmbar oficial para avisos pendentes.', headerClass: 'modal-header-amber' });
+    });
+
+        
+</script>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avaliação por Estrelas (Rating) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+
+        <!-- Page Header -->
+        <div class="mb-5 border-bottom pb-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge badge-primary">Componentes</span>
+            <span class="badge badge-soft-gold">Zero Dependências</span>
+            <span class="badge badge-outline-cyan">WCAG 2.1 AA</span>
+          </div>
+          <h1 class="display-5 fw-bold mb-3">Avaliação por Estrelas &amp; Reviews Fracionadas</h1>
+          <p class="lead text-muted">
+            Suíte completa de avaliação por estrelas para o <strong>Dexter UI</strong>, inspirada e aprimorada a partir do
+            <code>Krajee Bootstrap Star Rating</code> (<code>github.com/kartik-v/bootstrap-star-rating</code>).
+            Elimina totalmente a dependência de jQuery com o controlador nativo <code>DexterRating</code>, suportando
+            preenchimento fracionado de alta precisão (meias estrelas ou frações decimais contínuas por clipping CSS),
+            símbolos vetoriais SVG (estrelas, corações, polegares), botão de limpeza/reset, legendas dinâmicas em badges,
+            modos interativo e somente leitura para avaliações de produtos, 5 tamanhos modulares, suporte às 28 cores oficiais e Dark Mode.
+          </p>
+        </div>
+
+        <!-- 1. Avaliação Básica Interativa -->
+        <section id="rating-basic" class="mb-5">
+          <h2>1. Avaliação por Estrelas Básica Interativa</h2>
+          <p class="text-muted">
+            Transforma qualquer <code>&lt;input type="number"&gt;</code> em uma barra interativa de estrelas com suporte a meio ponto (<kbd>step="0.5"</kbd>)
+            e atualização instantânea da legenda ao mover o cursor do mouse:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="mb-3">
+              <label class="form-label fw-bold" for="demoRatingBasic">Como você avalia nosso atendimento?</label>
+              <div>
+                <input type="number" id="demoRatingBasic" class="rating" data-dx-rating min="0" max="5" step="0.5" value="3.5" data-dx-color="gold">
+              </div>
+            </div>
+            <div class="form-text text-muted">
+              Passe o mouse sobre as estrelas para pré-visualizar a nota e clique para fixá-la. Use o botão circular <kbd>✕</kbd> à esquerda para limpar a avaliação.
+            </div>
+          </div>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Input numérico nativo transformado em Star Rating --&gt;
+&lt;input type="number" class="rating" data-dx-rating min="0" max="5" step="0.5" value="3.5" data-dx-color="gold"&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Símbolos Alternativos (Corações, Polegares, Círculos) -->
+        <section id="rating-symbols" class="mb-5">
+          <h2>2. Símbolos Alternativos: Corações, Polegares e Círculos</h2>
+          <p class="text-muted">
+            Além das estrelas clássicas, o componente suporta múltiplos símbolos vetoriais personalizáveis via <code>data-symbol="heart|thumb|circle"</code>:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="row g-4">
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Avaliação com Corações (.rating-red)</h6>
+                <input type="number" data-dx-rating data-symbol="heart" data-dx-color="red" min="0" max="5" step="1" value="4">
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Recomendação com Polegares (.rating-blue)</h6>
+                <input type="number" data-dx-rating data-symbol="thumb" data-dx-color="blue" min="0" max="5" step="1" value="5">
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Indicador de Pontos / Círculos (.rating-purple)</h6>
+                <input type="number" data-dx-rating data-symbol="circle" data-dx-color="purple" min="0" max="5" step="0.5" value="3">
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Avaliação Coral (.rating-coral)</h6>
+                <input type="number" data-dx-rating data-symbol="star" data-dx-color="coral" min="0" max="5" step="0.5" value="4.5">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Modo Somente Leitura (Reviews & E-commerce) -->
+        <section id="rating-readonly" class="mb-5">
+          <h2>3. Modo Somente Leitura (Read-Only Reviews)</h2>
+          <p class="text-muted">
+            Ideal para exibir médias de avaliação de produtos, feedback de clientes e resenhas sem permitir edição por clique.
+            Ativado por <code>readonly</code> ou <code>data-readonly="true"</code> com suporte a decimais contínuos (ex: 4.8 / 5):
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="d-flex flex-column gap-3">
+              <div class="d-flex align-items-center justify-content-between p-3 border rounded">
+                <div>
+                  <h6 class="fw-bold mb-1">Dexter UI Framework - Edição Enterprise</h6>
+                  <div class="text-muted small">Baseado em 1.428 avaliações verificadas de desenvolvedores</div>
+                </div>
+                <div>
+                  <input type="number" data-dx-rating data-readonly="true" min="0" max="5" step="0.1" value="4.8" data-dx-color="gold" data-size="md">
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center justify-content-between p-3 border rounded">
+                <div>
+                  <h6 class="fw-bold mb-1">Módulo de Acessibilidade &amp; Ergonomia Cognitiva</h6>
+                  <div class="text-muted small">Baseado em 354 avaliações da comunidade</div>
+                </div>
+                <div>
+                  <input type="number" data-dx-rating data-readonly="true" min="0" max="5" step="0.1" value="4.9" data-dx-color="green" data-size="md">
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Escala de Tamanhos Modulares -->
+        <section id="rating-sizes" class="mb-5">
+          <h2>4. Escala de Tamanhos Modulares (.rating-xs até .rating-xl)</h2>
+          <p class="text-muted">
+            Cinco tamanhos perfeitamente dimensionados para qualquer contexto de layout, desde tabelas compactas até destaques hero:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="d-flex flex-column gap-4">
+              <div>
+                <span class="badge badge-soft-secondary mb-1">Extra Pequeno (.rating-xs)</span>
+                <div><input type="number" data-dx-rating data-size="xs" value="4" data-dx-color="gold"></div>
+              </div>
+              <div>
+                <span class="badge badge-soft-secondary mb-1">Pequeno (.rating-sm)</span>
+                <div><input type="number" data-dx-rating data-size="sm" value="4" data-dx-color="gold"></div>
+              </div>
+              <div>
+                <span class="badge badge-soft-secondary mb-1">Médio Padrão (.rating-md)</span>
+                <div><input type="number" data-dx-rating data-size="md" value="4" data-dx-color="gold"></div>
+              </div>
+              <div>
+                <span class="badge badge-soft-secondary mb-1">Grande (.rating-lg)</span>
+                <div><input type="number" data-dx-rating data-size="lg" value="4" data-dx-color="gold"></div>
+              </div>
+              <div>
+                <span class="badge badge-soft-secondary mb-1">Extra Grande (.rating-xl)</span>
+                <div><input type="number" data-dx-rating data-size="xl" value="4" data-dx-color="gold"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. API JavaScript Programática -->
+        <section id="rating-api" class="mb-5">
+          <h2>5. API Programática JavaScript</h2>
+          <p class="text-muted">
+            Instancie e manipule as avaliações programaticamente com métodos intuitivos e callbacks para eventos:
+          </p>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Instanciação programática
+const rating = new DexterRating(document.querySelector('#meuRating'), {
+  color: 'gold',
+  stars: 5,
+  step: 0.5,
+  showClear: true,
+  showCaption: true,
+  onRate: (score, instance) => {
+    console.log('Nota atribuída:', score);
+    dxToast.success('Avaliação Registrada', `Você atribuiu nota ${score}!`);
+  },
+  onClear: () => console.log('Avaliação zerada')
+});
+
+// Métodos disponíveis
+rating.rate(4.5);      // Define nota
+rating.clear();         // Limpa avaliação
+rating.getValue();      // Retorna valor atual (ex: 4.5)
+rating.disable();       // Desabilita interação
+rating.enable();        // Reabilita interação</code></pre>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-toast.js"></script>
+  <script src="../dist/js/dexter-fileinput.js"></script>
+  <script src="../dist/js/dexter-tags.js"></script>
+  <script src="../dist/js/dexter-rating.js"></script>
+  <script src="../dist/js/dexter-multiselect.js"></script>
+  <script src="../dist/js/dexter-input-spinner.js"></script>
+
+</body>
+</html>

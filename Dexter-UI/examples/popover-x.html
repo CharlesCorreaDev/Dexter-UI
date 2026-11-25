@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popover Estendido Modal (Popover-X) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <!-- Cabeçalho da Página -->
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Componentes</span>
+          <span class="badge bg-indigo text-white">Popover-X (Krajee)</span>
+          <span class="badge bg-purple text-white">19 Posições</span>
+          <span class="badge bg-teal text-white">28 Cores</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Popover Estendido com Comportamento Modal (Popover-X)</h1>
+        <p class="lead text-muted mb-0">
+          Controlador completo inspirado e compatível drop-in com <code>kartik-v/bootstrap-popover-x</code>. Elimina jQuery e Bootstrap JS, entregando cabeçalho cromático, rodapé com botões (<code>.popover-footer</code>), formulários embutidos, 12 posições direcionais + 7 modos automáticos responsivos, setas CSS coloridas, 4 tamanhos e suporte às 28 cores + Dark Mode.
+        </p>
+      </div>
+
+      <!-- 1. 12 Posições Direcionais & Auto-Placement -->
+      <section id="px-placements" class="mb-5">
+        <h2>1. Posicionamentos Direcionais (12 Fixos + 7 Automáticos)</h2>
+        <p class="text-muted">Clique nos botões para testar alinhamentos centrais, de canto (<code>top-left</code>, <code>bottom-right</code>, <code>left-top</code>, etc.) e posicionamento inteligente (<code>auto</code>):</p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <button type="button" class="btn btn-sm btn-outline-primary" id="btnPxTopLeft" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="top top-left">Top-Left</button>
+            <button type="button" class="btn btn-sm btn-primary" id="btnPxTop" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="top">Top (Centro)</button>
+            <button type="button" class="btn btn-sm btn-outline-primary" id="btnPxTopRight" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="top top-right">Top-Right</button>
+
+            <button type="button" class="btn btn-sm btn-outline-indigo" id="btnPxBottomLeft" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="bottom bottom-left">Bottom-Left</button>
+            <button type="button" class="btn btn-sm btn-indigo" id="btnPxBottom" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="bottom">Bottom</button>
+            <button type="button" class="btn btn-sm btn-outline-indigo" id="btnPxBottomRight" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="bottom bottom-right">Bottom-Right</button>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2">
+            <button type="button" class="btn btn-sm btn-outline-teal" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="left">Left</button>
+            <button type="button" class="btn btn-sm btn-outline-teal" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="left left-top">Left-Top</button>
+            <button type="button" class="btn btn-sm btn-outline-teal" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="right">Right</button>
+            <button type="button" class="btn btn-sm btn-outline-teal" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="right right-top">Right-Top</button>
+            <button type="button" class="btn btn-sm btn-coral" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="auto">Auto Smart</button>
+            <button type="button" class="btn btn-sm btn-purple" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="horizontal">Horizontal</button>
+            <button type="button" class="btn btn-sm btn-midnight" data-toggle="popover-x" data-target="#pxPlacePopover" data-placement="vertical">Vertical</button>
+          </div>
+        </div>
+
+        <!-- Popover compartilhado de posições -->
+        <div id="pxPlacePopover" class="popover popover-x popover-primary">
+          <div class="arrow"></div>
+          <h3 class="popover-header popover-title">
+            <span>Posição Direcional</span>
+            <button type="button" class="close" data-dismiss="popover-x" aria-label="Fechar">&times;</button>
+          </h3>
+          <div class="popover-body popover-content">
+            Seta alinhada automaticamente ao ponto de ancoragem selecionado, mantendo margens seguras na viewport.
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Popover Modal-Style com Formulário & Rodapé -->
+      <section id="px-form" class="mb-5">
+        <h2>2. Popover com Formulário &amp; Rodapé (<code>.popover-footer</code>)</h2>
+        <p class="text-muted">Ideal para formulários rápidos inline sem bloquear a rolagem da página:</p>
+
+        <div class="doc-card mb-4">
+          <button type="button" class="btn btn-primary" id="btnPxFormOpen" data-toggle="popover-x" data-target="#pxFormPopover" data-placement="bottom bottom-left">
+            Edição Rápida de Conta (.popover-footer)
+          </button>
+          <div class="small text-muted mt-3" id="popoverFormResult">Aguardando envio do formulário inline...</div>
+        </div>
+
+        <div id="pxFormPopover" class="popover popover-x popover-md popover-primary">
+          <div class="arrow"></div>
+          <h3 class="popover-header popover-title">
+            <span>Configurar E-mail de Alerta</span>
+            <button type="button" class="close" data-dismiss="popover-x" aria-label="Fechar">&times;</button>
+          </h3>
+          <form id="pxInlineForm">
+            <div class="popover-body popover-content">
+              <div class="mb-2">
+                <label class="form-label small fw-bold" for="pxEmailInput">E-mail de notificação</label>
+                <input type="email" class="form-control form-control-sm" id="pxEmailInput" placeholder="charles@empresa.com.br" required>
+              </div>
+              <div class="form-check form-switch mb-0">
+                <input class="form-check-input" type="checkbox" id="pxDigestCheck" checked>
+                <label class="form-check-label small" for="pxDigestCheck">Receber resumo diário</label>
+              </div>
+            </div>
+            <div class="popover-footer">
+              <button type="button" class="btn btn-sm btn-outline-secondary" data-dismiss="popover-x">Cancelar</button>
+              <button type="submit" class="btn btn-sm btn-primary" id="pxFormSubmitBtn">Salvar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- 3. Tamanhos, Hover & Paleta das 28 Cores -->
+      <section id="px-themes-sizes" class="mb-5">
+        <h2>3. Tamanhos (<code>.popover-sm|md|lg</code>), Hover &amp; 28 Cores</h2>
+        <div class="doc-card mb-4 d-flex flex-wrap gap-2">
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="popover-x" data-target="#pxThemeDefault" data-placement="top">Default</button>
+          <button type="button" class="btn btn-sm btn-green" data-toggle="popover-x" data-target="#pxThemeSuccess" data-placement="top">Success</button>
+          <button type="button" class="btn btn-sm btn-red" data-toggle="popover-x" data-target="#pxThemeDanger" data-placement="top">Danger</button>
+          <button type="button" class="btn btn-sm btn-indigo" id="btnPxSolidIndigo" data-toggle="popover-x" data-target="#pxThemeSolidIndigo" data-placement="bottom">Sólido Indigo (.popover-lg)</button>
+          <button type="button" class="btn btn-sm btn-coral" data-toggle="popover-x" data-target="#pxThemeHover" data-placement="top" data-trigger="hover focus">Passe o Mouse (Hover)</button>
+        </div>
+
+        <div id="pxThemeDefault" class="popover popover-x popover-sm popover-default">
+          <div class="arrow"></div>
+          <h3 class="popover-header popover-title"><span>Default (.popover-sm)</span><button type="button" class="close" data-dismiss="popover-x">&times;</button></h3>
+          <div class="popover-body popover-content">Estilo neutro compacto com seta superior e sombra suave.</div>
+        </div>
+
+        <div id="pxThemeSuccess" class="popover popover-x popover-success">
+          <div class="arrow"></div>
+          <h3 class="popover-header popover-title"><span>Sucesso (.popover-success)</span><button type="button" class="close" data-dismiss="popover-x">&times;</button></h3>
+          <div class="popover-body popover-content">Operação validada sem pendências.</div>
+        </div>
+
+        <div id="pxThemeDanger" class="popover popover-x popover-danger">
+          <div class="arrow"></div>
+          <h3 class="popover-header popover-title"><span>Crítico (.popover-danger)</span><button type="button" class="close" data-dismiss="popover-x">&times;</button></h3>
+          <div class="popover-body popover-content">Confirme antes de executar esta ação destrutiva.</div>
+        </div>
+
+        <div id="pxThemeSolidIndigo" class="popover popover-x popover-lg popover-solid-indigo">
+          <div class="arrow"></div>
+          <h3 class="popover-header popover-title"><span>Sólido Indigo (.popover-lg)</span><button type="button" class="close" data-dismiss="popover-x">&times;</button></h3>
+          <div class="popover-body popover-content">Largura estendida de 500px (com ajuste automático a 100vw em telas mobile) e cabeçalho sólido em alto contraste.</div>
+          <div class="popover-footer"><button type="button" class="btn btn-sm btn-indigo" data-dismiss="popover-x">Entendi</button></div>
+        </div>
+
+        <div id="pxThemeHover" class="popover popover-x popover-coral">
+          <div class="arrow"></div>
+          <h3 class="popover-header popover-title"><span>Acionamento Hover</span></h3>
+          <div class="popover-body popover-content">Aberto via <code>data-trigger="hover focus"</code> sem necessidade de clique.</div>
+        </div>
+      </section>
+
+      <!-- 4. Código de Uso -->
+      <section id="px-code" class="mb-5">
+        <h2>4. Código de Uso &amp; Compatibilidade Drop-in</h2>
+        <pre data-lang="html" data-file="popover-x.html"><code>&lt;button class="btn btn-primary" data-toggle="popover-x" data-target="#meuPopover" data-placement="bottom bottom-right"&gt;
+  Abrir Popover-X
+&lt;/button&gt;
+
+&lt;div id="meuPopover" class="popover popover-x popover-md popover-primary"&gt;
+  &lt;div class="arrow"&gt;&lt;/div&gt;
+  &lt;h3 class="popover-header popover-title"&gt;
+    &lt;span&gt;Título&lt;/span&gt;
+    &lt;button type="button" class="close" data-dismiss="popover-x"&gt;&amp;times;&lt;/button&gt;
+  &lt;/h3&gt;
+  &lt;div class="popover-body popover-content"&gt;Conteúdo rico...&lt;/div&gt;
+  &lt;div class="popover-footer"&gt;
+    &lt;button type="button" class="btn btn-sm btn-primary" data-dismiss="popover-x"&gt;Confirmar&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="../dist/js/dexter-popover-x.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    document.getElementById('pxInlineForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email = document.getElementById('pxEmailInput').value;
+      var digest = document.getElementById('pxDigestCheck').checked;
+      document.getElementById('popoverFormResult').textContent =
+        'Salvo: ' + email + ' (resumo diário: ' + (digest ? 'sim' : 'não') + ')';
+      var pop = DexterPopoverX.getOrCreateInstance('#pxFormPopover');
+      if (pop) pop.hide(true);
+    });
+  </script>
+</body>
+</html>

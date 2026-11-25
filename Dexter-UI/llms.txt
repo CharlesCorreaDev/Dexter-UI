@@ -1,0 +1,10 @@
+# llms.txt
+# Index of Dexter UI documentation (LLM‑ready)
+# Each line: <file>\t<description>\t<link>
+
+llms.txt\tIndex of documentation files\t./llms.txt
+llms-full.txt\tFull concatenated documentation\t./llms-full.txt
+README.md\tProject overview (pt‑BR & EN)\t./README.md
+installation.md\tInstallation guide\t./docs/installation.md
+components.md\tComponent reference\t./docs/components.md
+accessibility.md\tAccessibility guidelines\t./docs/accessibility.md

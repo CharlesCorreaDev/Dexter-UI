@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loaders, Lazy Loading &amp; Progresso - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+  <style>
+    .anim-demo-box {
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--dx-silver-light-050, #f1f5f9);
+      color: var(--dx-primary, #3b5998);
+      border-radius: 0.5rem;
+      font-weight: bold;
+      font-size: 1.25rem;
+      border: 1px solid var(--dx-silver-light-100, #e2e8f0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb" class="mb-3">
+          <small class="text-muted">Documentação &gt; Componentes &gt; <strong style="color: inherit;">Loaders &amp; Lazy Loading</strong></small>
+        </nav>
+
+        <h1 class="mb-2">Indicadores de Carregamento (Loaders), Skeletons &amp; Animações</h1>
+        <p class="lead text-muted mb-4">Suíte modular de indicadores de carregamento geométricos, 25 modelos (incluindo modelos Loading.io LDS), classes modulares de tamanho baseadas em <code>--size: 1px / 2px / 4px</code>, classes de cores da paleta tonal, telas de esqueleto Pure CSS (ThatSoftwareDude inspired) para lazy loading, barras contínuas no padrão Pace.js e utilitários de animação (loading.io/animation).</p>
+        <hr class="my-4">
+
+        <!-- 1. Catálogo dos 25 Modelos de Loaders -->
+        <section id="loader-models" class="mb-5">
+          <h2>1. Modelos de Loaders Animados (25 Modelos)</h2>
+          <p class="text-muted">Use a classe base <code>.loader</code> combinada com a classe do modelo por nome (ex: <code>.loader-ring</code>, <code>.lds-hourglass</code>) ou por número (ex: <code>.loader-1</code> até <code>.loader-25</code>):</p>
+
+          <div class="row g-4">
+            <!-- 1. Spinner Clássico -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-1"></span>
+                </div>
+                <h6 class="fw-bold mb-1">1. Spinner Clássico</h6>
+                <small class="text-muted"><code>.loader-ring</code> / <code>.loader-1</code></small>
+              </div>
+            </div>
+
+            <!-- 2. Órbita de Pontos -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-2"></span>
+                </div>
+                <h6 class="fw-bold mb-1">2. Órbita de Pontos</h6>
+                <small class="text-muted"><code>.loader-orbit</code> / <code>.loader-2</code></small>
+              </div>
+            </div>
+
+            <!-- 3. Meio Anel Oposto -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-3"></span>
+                </div>
+                <h6 class="fw-bold mb-1">3. Meio Anel Oposto</h6>
+                <small class="text-muted"><code>.loader-dual-ring</code> / <code>.loader-3</code></small>
+              </div>
+            </div>
+
+            <!-- 4. Anel Quadricolor -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-4"></span>
+                </div>
+                <h6 class="fw-bold mb-1">4. Anel Quadricolor</h6>
+                <small class="text-muted"><code>.loader-quad</code> / <code>.loader-4</code></small>
+              </div>
+            </div>
+
+            <!-- 5. Pulso de Pontos -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-5"></span>
+                </div>
+                <h6 class="fw-bold mb-1">5. Pulso de Pontos</h6>
+                <small class="text-muted"><code>.loader-dots</code> / <code>.loader-5</code></small>
+              </div>
+            </div>
+
+            <!-- 6. Cubos 3D Flip -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-6"></span>
+                </div>
+                <h6 class="fw-bold mb-1">6. Cubos 3D Flip</h6>
+                <small class="text-muted"><code>.loader-cube</code> / <code>.loader-6</code></small>
+              </div>
+            </div>
+
+            <!-- 7. Asas Dobráveis -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-7"></span>
+                </div>
+                <h6 class="fw-bold mb-1">7. Asas Dobráveis</h6>
+                <small class="text-muted"><code>.loader-wings</code> / <code>.loader-7</code></small>
+              </div>
+            </div>
+
+            <!-- 8. Barras em Onda -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-8"></span>
+                </div>
+                <h6 class="fw-bold mb-1">8. Barras em Onda</h6>
+                <small class="text-muted"><code>.loader-bars</code> / <code>.loader-8</code></small>
+              </div>
+            </div>
+
+            <!-- 9. Equalizador de Áudio -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-9"></span>
+                </div>
+                <h6 class="fw-bold mb-1">9. Equalizador de Áudio</h6>
+                <small class="text-muted"><code>.loader-equalizer</code> / <code>.loader-9</code></small>
+              </div>
+            </div>
+
+            <!-- 10. Barber Pole -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-10"></span>
+                </div>
+                <h6 class="fw-bold mb-1">10. Barber Pole</h6>
+                <small class="text-muted"><code>.loader-barber</code> / <code>.loader-10</code></small>
+              </div>
+            </div>
+
+            <!-- 11. Barra Candy Striped -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center w-100" style="height: 90px;">
+                  <span class="loader loader-11 w-75"></span>
+                </div>
+                <h6 class="fw-bold mb-1">11. Candy Progress</h6>
+                <small class="text-muted"><code>.loader-candy</code> / <code>.loader-11</code></small>
+              </div>
+            </div>
+
+            <!-- 12. Barra Pílula Fluida -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center w-100" style="height: 90px;">
+                  <span class="loader loader-12"></span>
+                </div>
+                <h6 class="fw-bold mb-1">12. Barra Pílula</h6>
+                <small class="text-muted"><code>.loader-progress</code> / <code>.loader-12</code></small>
+              </div>
+            </div>
+
+            <!-- 13. Trilho Deslizante -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-13"></span>
+                </div>
+                <h6 class="fw-bold mb-1">13. Trilho Deslizante</h6>
+                <small class="text-muted"><code>.loader-slide</code> / <code>.loader-13</code></small>
+              </div>
+            </div>
+
+            <!-- 14. Pacman Devorador -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-14"></span>
+                </div>
+                <h6 class="fw-bold mb-1">14. Pacman Devorador</h6>
+                <small class="text-muted"><code>.loader-pacman</code> / <code>.loader-14</code></small>
+              </div>
+            </div>
+
+            <!-- 15. Ampulheta de Areia -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-15"></span>
+                </div>
+                <h6 class="fw-bold mb-1">15. Ampulheta de Areia</h6>
+                <small class="text-muted"><code>.loader-hourglass</code> / <code>.loader-15</code></small>
+              </div>
+            </div>
+
+            <!-- 16. Engrenagens Duplas -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-16"></span>
+                </div>
+                <h6 class="fw-bold mb-1">16. Engrenagens (Cogs)</h6>
+                <small class="text-muted"><code>.loader-gears</code> / <code>.loader-16</code></small>
+              </div>
+            </div>
+
+            <!-- 17. Balão de Conversa (Typing) -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <span class="loader loader-17 loader-sm"></span>
+                </div>
+                <h6 class="fw-bold mb-1">17. Digitando (Chat)</h6>
+                <small class="text-muted"><code>.loader-typing</code> / <code>.loader-17</code></small>
+              </div>
+            </div>
+
+            <!-- 18. Skeleton Card Completo -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px; overflow: hidden;">
+                  <span class="loader loader-18 loader-sm"></span>
+                </div>
+                <h6 class="fw-bold mb-1">18. Skeleton Card</h6>
+                <small class="text-muted"><code>.loader-skeleton-card</code> / <code>.loader-18</code></small>
+              </div>
+            </div>
+
+            <!-- 19. Skeleton Media / Perfil -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px; overflow: hidden;">
+                  <span class="loader loader-19 loader-sm"></span>
+                </div>
+                <h6 class="fw-bold mb-1">19. Skeleton Media</h6>
+                <small class="text-muted"><code>.loader-skeleton-media</code> / <code>.loader-19</code></small>
+              </div>
+            </div>
+
+            <!-- 20. Skeleton Produto -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px; overflow: hidden;">
+                  <span class="loader loader-20 loader-sm"></span>
+                </div>
+                <h6 class="fw-bold mb-1">20. Skeleton Produto</h6>
+                <small class="text-muted"><code>.loader-skeleton-product</code> / <code>.loader-20</code></small>
+              </div>
+            </div>
+
+            <!-- 21. Skeleton Linhas de Texto -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px; overflow: hidden;">
+                  <span class="loader loader-21 loader-sm"></span>
+                </div>
+                <h6 class="fw-bold mb-1">21. Skeleton Texto</h6>
+                <small class="text-muted"><code>.loader-skeleton-text</code> / <code>.loader-21</code></small>
+              </div>
+            </div>
+
+            <!-- 22. LDS Hourglass (Loading.io) -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <div class="lds-hourglass loader-sm"></div>
+                </div>
+                <h6 class="fw-bold mb-1">22. LDS Hourglass</h6>
+                <small class="text-muted"><code>.lds-hourglass</code> / <code>.loader-22</code></small>
+              </div>
+            </div>
+
+            <!-- 23. LDS Ripple (Loading.io) -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <div class="lds-ripple loader-sm"><div></div><div></div></div>
+                </div>
+                <h6 class="fw-bold mb-1">23. LDS Ripple Radar</h6>
+                <small class="text-muted"><code>.lds-ripple</code> / <code>.loader-23</code></small>
+              </div>
+            </div>
+
+            <!-- 24. LDS Spinner Blades (Loading.io) -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <div class="lds-spinner loader-sm"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+                </div>
+                <h6 class="fw-bold mb-1">24. LDS Spinner Blades</h6>
+                <small class="text-muted"><code>.lds-spinner</code> / <code>.loader-24</code></small>
+              </div>
+            </div>
+
+            <!-- 25. LDS Ellipsis (Loading.io) -->
+            <div class="col-12 col-sm-7 col-md-4 col-xl-3">
+              <div class="doc-card text-center p-4">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="height: 90px;">
+                  <div class="lds-ellipsis loader-sm"><div></div><div></div><div></div><div></div></div>
+                </div>
+                <h6 class="fw-bold mb-1">25. LDS Ellipsis</h6>
+                <small class="text-muted"><code>.lds-ellipsis</code> / <code>.loader-25</code></small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Classes de Tamanho -->
+        <section id="loader-sizes" class="mb-5">
+          <h2>2. Classes Modulares de Tamanho</h2>
+          <p class="text-muted">Altere a escala do loader aplicando classes pré-configuradas baseadas na variável <code>--size</code> solicitada (<code>--size: 1px</code>, <code>--size: 2px</code>, <code>--size: 4px</code>), ou utilize os atalhos semânticos:</p>
+
+          <div class="doc-card mb-4">
+            <h5 class="fw-bold mb-3">Escala Modular (--size: 1px, 2px, 4px)</h5>
+            <div class="d-flex flex-wrap align-items-end justify-content-around gap-4 py-4 border rounded bg-silver-light-025">
+              <div class="text-center">
+                <div style="min-height: 60px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-size-1"></span>
+                </div>
+                <div class="mt-2 fw-semibold">Tamanho 1 (1px)</div>
+                <small class="text-muted"><code>.loader-size-1</code> / <code>.loader-sm</code></small>
+              </div>
+              <div class="text-center">
+                <div style="min-height: 110px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-size-2"></span>
+                </div>
+                <div class="mt-2 fw-semibold">Tamanho 2 (2px)</div>
+                <small class="text-muted"><code>.loader-size-2</code> / <code>.loader-md</code></small>
+              </div>
+              <div class="text-center">
+                <div style="min-height: 200px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-size-4"></span>
+                </div>
+                <div class="mt-2 fw-semibold">Tamanho 4 (4px)</div>
+                <small class="text-muted"><code>.loader-size-4</code> / <code>.loader-xl</code></small>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-card">
+            <h5 class="fw-bold mb-3">Gama Completa de Tamanhos Semânticos (.loader-xs a .loader-3xl)</h5>
+            <div class="d-flex flex-wrap align-items-end justify-content-around gap-4 py-4 border rounded bg-silver-light-025">
+              <div class="text-center">
+                <div style="min-height: 40px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-xs"></span>
+                </div>
+                <div class="mt-2 small text-muted"><code>.loader-xs</code><br>(0.5px / 24px)</div>
+              </div>
+              <div class="text-center">
+                <div style="min-height: 60px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-sm"></span>
+                </div>
+                <div class="mt-2 small text-muted"><code>.loader-sm</code><br>(1px / 48px)</div>
+              </div>
+              <div class="text-center">
+                <div style="min-height: 110px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-md"></span>
+                </div>
+                <div class="mt-2 small text-muted"><code>.loader-md</code><br>(2px / 96px)</div>
+              </div>
+              <div class="text-center">
+                <div style="min-height: 160px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-lg"></span>
+                </div>
+                <div class="mt-2 small text-muted"><code>.loader-lg</code><br>(3px / 144px)</div>
+              </div>
+              <div class="text-center">
+                <div style="min-height: 210px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-xl"></span>
+                </div>
+                <div class="mt-2 small text-muted"><code>.loader-xl</code><br>(4px / 192px)</div>
+              </div>
+              <div class="text-center">
+                <div style="min-height: 260px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-2xl"></span>
+                </div>
+                <div class="mt-2 small text-muted"><code>.loader-2xl</code><br>(5px / 240px)</div>
+              </div>
+              <div class="text-center">
+                <div style="min-height: 310px;" class="d-flex align-items-center justify-content-center">
+                  <span class="loader loader-ring loader-3xl"></span>
+                </div>
+                <div class="mt-2 small text-muted"><code>.loader-3xl</code><br>(6px / 288px)</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Classes de Cores da Paleta -->
+        <section id="loader-colors" class="mb-5">
+          <h2>3. Classes Modulares de Cores (.loader-{cor})</h2>
+          <p class="text-muted">Combine qualquer loader com uma classe de cor da paleta oficial do Dexter UI. As variáveis <code>--color-1</code>, <code>--color-2</code>, <code>--color-3</code> e <code>--color-4</code> são calculadas dinamicamente com base na escala tonal:</p>
+
+          <div class="doc-card">
+            <div class="d-flex flex-wrap align-items-center justify-content-around gap-4 py-3">
+              <div class="text-center">
+                <span class="loader loader-ring loader-primary"></span>
+                <div class="mt-2 small text-muted"><code>.loader-primary</code></div>
+              </div>
+              <div class="text-center">
+                <span class="loader loader-ring loader-secondary"></span>
+                <div class="mt-2 small text-muted"><code>.loader-secondary</code></div>
+              </div>
+              <div class="text-center">
+                <span class="loader loader-ring loader-green"></span>
+                <div class="mt-2 small text-muted"><code>.loader-green</code></div>
+              </div>
+              <div class="text-center">
+                <span class="loader loader-ring loader-red"></span>
+                <div class="mt-2 small text-muted"><code>.loader-red</code></div>
+              </div>
+              <div class="text-center">
+                <span class="loader loader-ring loader-purple"></span>
+                <div class="mt-2 small text-muted"><code>.loader-purple</code></div>
+              </div>
+              <div class="text-center">
+                <span class="loader loader-ring loader-cyan"></span>
+                <div class="mt-2 small text-muted"><code>.loader-cyan</code></div>
+              </div>
+              <div class="text-center">
+                <span class="loader loader-ring loader-midnight"></span>
+                <div class="mt-2 small text-muted"><code>.loader-midnight</code></div>
+              </div>
+              <div class="text-center">
+                <span class="loader loader-ring loader-coral"></span>
+                <div class="mt-2 small text-muted"><code>.loader-coral</code></div>
+              </div>
+              <div class="text-center">
+                <span class="loader loader-ring loader-dark"></span>
+                <div class="mt-2 small text-muted"><code>.loader-dark</code></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Alinhamentos e Posicionamento -->
+        <section id="loader-alignment" class="mb-5">
+          <h2>4. Classes de Alinhamento e Posicionamento</h2>
+          <p class="text-muted">Posicione e alinhe o loader facilmente (esquerda, direita, centro, top, bottom, absolute e float) com classes prontas:</p>
+
+          <div class="row g-4">
+            <!-- Esquerda, Centro e Direita -->
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3">Alinhamento Horizontal (.loader-left, .loader-center, .loader-right)</h6>
+                <div class="p-3 border rounded mb-2 bg-silver-light-025">
+                  <span class="loader loader-ring loader-left loader-sm"></span>
+                  <div class="text-muted small mt-1">Alinhado à esquerda (<code>.loader-left</code>)</div>
+                </div>
+                <div class="p-3 border rounded mb-2 bg-silver-light-025">
+                  <span class="loader loader-ring loader-center loader-sm"></span>
+                  <div class="text-muted small mt-1 text-center">Centralizado no bloco (<code>.loader-center</code>)</div>
+                </div>
+                <div class="p-3 border rounded bg-silver-light-025">
+                  <span class="loader loader-ring loader-right loader-sm"></span>
+                  <div class="text-muted small mt-1 text-end">Alinhado à direita (<code>.loader-right</code>)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Flutuante e Inline em Botões -->
+            <div class="col-12 col-md-7">
+              <div class="doc-card">
+                <h6 class="fw-bold mb-3">Loaders Inline e Flutuantes (.loader-inline, .loader-float-left)</h6>
+                <p>O loader pode ser embutido diretamente dentro de botões com <code>.loader-inline</code> e <code>.loader-xs</code>:</p>
+                <div class="d-flex flex-wrap gap-2 mb-3">
+                  <button type="button" class="btn btn-primary">
+                    <span class="loader loader-ring loader-light loader-xs me-2"></span>
+                    Salvando Dados...
+                  </button>
+                  <button type="button" class="btn btn-outline-primary">
+                    <span class="loader loader-ring loader-primary loader-xs me-2"></span>
+                    Sincronizando
+                  </button>
+                </div>
+
+                <div class="p-3 border rounded bg-silver-light-025 clearfix">
+                  <span class="loader loader-ring loader-float-left loader-sm"></span>
+                  <p class="mb-0 text-muted small">Texto correndo ao lado do loader flutuante à esquerda com <code>.loader-float-left</code>. O conteúdo contorna o indicador suavemente enquanto o carregamento é processado.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Posicionamento Absoluto e Backdrop Overlay -->
+          <div class="doc-card mt-4">
+            <h6 class="fw-bold mb-3">Posicionamento Absoluto com Cortina Backdrop (.loader-backdrop &amp; .loader-absolute-center)</h6>
+            <p class="text-muted">Bloqueie qualquer cartão ou seção com uma cortina translúcida com blur enquanto dados são carregados via AJAX ou HTMX:</p>
+            
+            <div class="position-relative p-4 border rounded" style="min-height: 220px;">
+              <h5 class="fw-bold">Painel de Métricas do Usuário</h5>
+              <p class="text-muted">Este conteúdo fica temporariamente inacessível e focado pelo indicador centralizado:</p>
+              <div class="d-flex gap-3">
+                <div class="p-3 border rounded w-50">Vendas: R$ 42.500,00</div>
+                <div class="p-3 border rounded w-50">Novos Leads: +124</div>
+              </div>
+
+              <!-- Cortina de Carregamento com Backdrop -->
+              <div class="loader-backdrop">
+                <div class="text-center">
+                  <span class="loader loader-ring loader-primary loader-md"></span>
+                  <div class="fw-semibold text-primary mt-3">Atualizando Métricas...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Efeitos e Animações Utilitárias Loading.io -->
+        <section id="loading-io-animations" class="mb-5">
+          <h2>5. Efeitos de Animação Utilitários (https://loading.io/animation/)</h2>
+          <p class="text-muted">Aplique animações universais inspiradas no Loading.io em qualquer loader, ícone, badge, botão ou elemento com classes utilitárias <code>.ld-*</code>:</p>
+
+          <div class="row g-4">
+            <div class="col-6 col-sm-4 col-md-3 text-center">
+              <div class="doc-card p-3">
+                <div class="anim-demo-box ld-spin mb-2 mx-auto">⚙️</div>
+                <div class="fw-semibold small">Spin</div>
+                <small class="text-muted"><code>.ld-spin</code></small>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 text-center">
+              <div class="doc-card p-3">
+                <div class="anim-demo-box ld-beat mb-2 mx-auto" style="color: #ef4444;">❤️</div>
+                <div class="fw-semibold small">Heartbeat</div>
+                <small class="text-muted"><code>.ld-beat</code></small>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 text-center">
+              <div class="doc-card p-3">
+                <div class="anim-demo-box ld-bounce mb-2 mx-auto">⚽</div>
+                <div class="fw-semibold small">Bounce</div>
+                <small class="text-muted"><code>.ld-bounce</code></small>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 text-center">
+              <div class="doc-card p-3">
+                <div class="anim-demo-box ld-pulse mb-2 mx-auto">💡</div>
+                <div class="fw-semibold small">Pulse</div>
+                <small class="text-muted"><code>.ld-pulse</code></small>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 text-center">
+              <div class="doc-card p-3">
+                <div class="anim-demo-box ld-shake mb-2 mx-auto">🔔</div>
+                <div class="fw-semibold small">Shake</div>
+                <small class="text-muted"><code>.ld-shake</code></small>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 text-center">
+              <div class="doc-card p-3">
+                <div class="anim-demo-box ld-float mb-2 mx-auto">🚀</div>
+                <div class="fw-semibold small">Float</div>
+                <small class="text-muted"><code>.ld-float</code></small>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 text-center">
+              <div class="doc-card p-3">
+                <div class="anim-demo-box ld-fade mb-2 mx-auto">✨</div>
+                <div class="fw-semibold small">Fade</div>
+                <small class="text-muted"><code>.ld-fade</code></small>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 col-md-3 text-center">
+              <div class="doc-card p-3">
+                <div class="anim-demo-box ld-swing mb-2 mx-auto">🎯</div>
+                <div class="fw-semibold small">Swing</div>
+                <small class="text-muted"><code>.ld-swing</code></small>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Skeletons e Lazy Loading -->
+        <section id="skeletons" class="mb-5">
+          <h2>6. Pure CSS Skeleton Screens (https://www.thatsoftwaredude.com/content/14165/pure-css-loading-skeleton-screens)</h2>
+          <p class="text-muted">Placeholders modernos com animação contínua de Shimmer em CSS puro para lazy loading instantâneo sem Javascript:</p>
+
+          <div class="row g-4">
+            <!-- Skeleton Card Completo no padrão ThatSoftwareDude -->
+            <div class="col-12 col-md-7">
+              <div class="doc-card p-4">
+                <h6 class="fw-bold mb-3 text-primary">Cartão Completo com Shimmer (.card-skeleton)</h6>
+                <div class="card-skeleton">
+                  <div class="skeleton skeleton-thumbnail mb-3"></div>
+                  <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="skeleton skeleton-avatar"></div>
+                    <div class="flex-grow-1">
+                      <div class="skeleton skeleton-title"></div>
+                      <div class="skeleton skeleton-text-sm" style="width: 40%;"></div>
+                    </div>
+                  </div>
+                  <div class="skeleton skeleton-text"></div>
+                  <div class="skeleton skeleton-text" style="width: 85%;"></div>
+                  <div class="skeleton skeleton-text" style="width: 60%;"></div>
+                  <div class="d-flex justify-content-between align-items-center mt-3 pt-2">
+                    <div class="skeleton skeleton-badge"></div>
+                    <div class="skeleton skeleton-btn"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Skeletons Modulares Pré-formatados -->
+            <div class="col-12 col-md-7">
+              <div class="doc-card p-4">
+                <h6 class="fw-bold mb-3 text-primary">Skeletons Geométricos Prontos (.loader-skeleton-*)</h6>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <div class="p-2 border rounded bg-silver-light-025 text-center">
+                      <span class="loader loader-skeleton-card"></span>
+                    </div>
+                    <small class="text-muted d-block mt-1">18. <code>.loader-skeleton-card</code></small>
+                  </div>
+                  <div class="col-12">
+                    <div class="p-2 border rounded bg-silver-light-025 text-center">
+                      <span class="loader loader-skeleton-media"></span>
+                    </div>
+                    <small class="text-muted d-block mt-1">19. <code>.loader-skeleton-media</code></small>
+                  </div>
+                  <div class="col-12">
+                    <div class="p-2 border rounded bg-silver-light-025 text-center">
+                      <span class="loader loader-skeleton-text"></span>
+                    </div>
+                    <small class="text-muted d-block mt-1">21. <code>.loader-skeleton-text</code></small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Barras no Padrão Pace.js -->
+        <section id="pace-bars" class="mb-5">
+          <h2>7. Barras de Progresso no Estilo Pace.js (https://codebyzach.github.io/pace/)</h2>
+          <p class="text-muted">Demonstração visual das barras de carregamento superior e radares contínuos inspirados no consagrado Pace.js:</p>
+
+          <div class="doc-card">
+            <h6 class="fw-bold mb-3">Barra de Progresso Minimalista Superior (.pace-topbar)</h6>
+            <div class="position-relative p-4 border rounded bg-silver-light-025 mb-4" style="height: 80px; overflow: hidden;">
+              <div class="pace-topbar" style="position: absolute;">
+                <div class="pace-progress"></div>
+              </div>
+              <div class="text-muted small mt-2">Barra fluida no topo do contêiner com animação indeterminada contínua.</div>
+            </div>
+
+            <h6 class="fw-bold mb-3">Barra Barber Shop Listrada (.pace-barber-shop)</h6>
+            <div class="position-relative p-4 border rounded bg-silver-light-025 mb-4" style="height: 80px; overflow: hidden;">
+              <div class="pace-barber-shop" style="position: absolute;">
+                <div class="pace-progress"></div>
+              </div>
+              <div class="text-muted small mt-2">Barra com listras diagonais animadas (Barber Shop pattern).</div>
+            </div>
+
+            <h6 class="fw-bold mb-3">Radar de Canto (.pace-corner-radar)</h6>
+            <div class="position-relative p-4 border rounded bg-silver-light-025" style="height: 90px;">
+              <div class="pace-corner-radar" style="position: absolute; top: 15px; right: 15px;"></div>
+              <div class="text-muted small">Indicador circular contínuo fixado no canto superior direito do bloco ou da janela.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Materialize CSS Preloaders -->
+        <section id="materialize-preloaders" class="mb-5">
+          <h2>8. Preloaders no Padrão Materialize CSS (Linear &amp; Circular Flashing)</h2>
+          <p class="text-muted">
+            Compatibilidade direta com a sintaxe oficial do <a href="https://materializecss.com/preloader.html" target="_blank" rel="noopener">Materialize CSS Preloader</a>: barras lineares determinadas e indeterminadas, além de spinners circulares (<code>small</code>, padrão e <code>big</code>) em cor única (28 cores) ou alternando 4 cores (<em>Flashing Colors</em>).
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-2">Linear Determinado (<code>.progress &gt; .determinate</code>)</h6>
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-2">
+              <label for="matDeterminateSlider" class="small text-muted mb-0">Ajustar progresso ao vivo:</label>
+              <span class="badge badge-subtle theme-teal" id="matDeterminatePct">70%</span>
+            </div>
+            <input type="range" id="matDeterminateSlider" class="dx-range dx-range-teal mb-2" min="0" max="100" value="70" aria-label="Porcentagem do preloader determinado">
+            <div class="progress">
+              <div class="determinate" id="matDeterminateBar" style="width: 70%;"></div>
+            </div>
+
+            <h6 class="fw-bold mt-4 mb-2">Linear Indeterminado (<code>.progress &gt; .indeterminate</code>) &amp; 28 Cores</h6>
+            <div class="progress"><div class="indeterminate"></div></div>
+            <div class="progress progress-primary"><div class="indeterminate"></div></div>
+            <div class="progress progress-indigo"><div class="indeterminate"></div></div>
+            <div class="progress progress-coral mb-0"><div class="indeterminate"></div></div>
+          </div>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+              <h6 class="fw-bold mb-0">Circular Tamanhos, Cores Únicas &amp; 4 Cores Alternadas (Flashing)</h6>
+              <button type="button" class="btn btn-sm btn-outline-primary" id="btnToggleMatActive">Pausar / Ativar Flashing</button>
+            </div>
+
+            <div class="d-flex flex-wrap align-items-center gap-4">
+              <div class="text-center">
+                <div class="preloader-wrapper small active">
+                  <div class="spinner-layer spinner-primary-only">
+                    <div class="circle-clipper left"><div class="circle"></div></div>
+                    <div class="gap-patch"><div class="circle"></div></div>
+                    <div class="circle-clipper right"><div class="circle"></div></div>
+                  </div>
+                </div>
+                <div class="small text-muted mt-2"><code>.small</code> (36px)</div>
+              </div>
+
+              <div class="text-center">
+                <div class="preloader-wrapper active">
+                  <div class="spinner-layer spinner-indigo-only">
+                    <div class="circle-clipper left"><div class="circle"></div></div>
+                    <div class="gap-patch"><div class="circle"></div></div>
+                    <div class="circle-clipper right"><div class="circle"></div></div>
+                  </div>
+                </div>
+                <div class="small text-muted mt-2">Padrão (50px)</div>
+              </div>
+
+              <div class="text-center">
+                <div class="preloader-wrapper big active">
+                  <div class="spinner-layer spinner-coral-only">
+                    <div class="circle-clipper left"><div class="circle"></div></div>
+                    <div class="gap-patch"><div class="circle"></div></div>
+                    <div class="circle-clipper right"><div class="circle"></div></div>
+                  </div>
+                </div>
+                <div class="small text-muted mt-2"><code>.big</code> (64px)</div>
+              </div>
+
+              <div class="text-center">
+                <div class="preloader-wrapper big active" id="matFlashingPreloader">
+                  <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left"><div class="circle"></div></div>
+                    <div class="gap-patch"><div class="circle"></div></div>
+                    <div class="circle-clipper right"><div class="circle"></div></div>
+                  </div>
+                  <div class="spinner-layer spinner-red">
+                    <div class="circle-clipper left"><div class="circle"></div></div>
+                    <div class="gap-patch"><div class="circle"></div></div>
+                    <div class="circle-clipper right"><div class="circle"></div></div>
+                  </div>
+                  <div class="spinner-layer spinner-yellow">
+                    <div class="circle-clipper left"><div class="circle"></div></div>
+                    <div class="gap-patch"><div class="circle"></div></div>
+                    <div class="circle-clipper right"><div class="circle"></div></div>
+                  </div>
+                  <div class="spinner-layer spinner-green">
+                    <div class="circle-clipper left"><div class="circle"></div></div>
+                    <div class="gap-patch"><div class="circle"></div></div>
+                    <div class="circle-clipper right"><div class="circle"></div></div>
+                  </div>
+                </div>
+                <div class="small text-muted mt-2">Flashing 4 Cores</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-window mb-0" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Linear Determinado &amp; Indeterminado --&gt;
+&lt;div class="progress"&gt;&lt;div class="determinate" style="width: 70%"&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;div class="progress progress-indigo"&gt;&lt;div class="indeterminate"&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;!-- Circular em cor única (ou 28 cores com .spinner-{cor}-only) --&gt;
+&lt;div class="preloader-wrapper big active"&gt;
+  &lt;div class="spinner-layer spinner-blue-only"&gt;
+    &lt;div class="circle-clipper left"&gt;&lt;div class="circle"&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="gap-patch"&gt;&lt;div class="circle"&gt;&lt;/div&gt;&lt;/div&gt;
+    &lt;div class="circle-clipper right"&gt;&lt;div class="circle"&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- Navegação Inferior -->
+        <div class="d-flex justify-content-between pt-4 border-top mt-5">
+          <a href="prose.html" class="doc-header-link text-primary fw-semibold">
+            &larr; Anterior: Prose
+          </a>
+          <a href="images.html" class="doc-header-link text-primary fw-semibold">
+            Próximo: Imagens, Formas &amp; Efeitos &rarr;
+          </a>
+        </div>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+
+  <script>
+    (function () {
+      var slider = document.getElementById('matDeterminateSlider');
+      var bar = document.getElementById('matDeterminateBar');
+      var pct = document.getElementById('matDeterminatePct');
+      if (slider && bar && pct) {
+        slider.addEventListener('input', function () {
+          var v = this.value + '%';
+          bar.style.width = v;
+          pct.textContent = v;
+        });
+      }
+
+      var toggleBtn = document.getElementById('btnToggleMatActive');
+      var flashing = document.getElementById('matFlashingPreloader');
+      if (toggleBtn && flashing) {
+        toggleBtn.addEventListener('click', function () {
+          flashing.classList.toggle('active');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

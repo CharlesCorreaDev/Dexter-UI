@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tags, Badges &amp; Autocomplete - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+
+        <!-- Page Header -->
+        <div class="mb-5 border-bottom pb-4">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <span class="badge badge-primary">Componentes</span>
+            <span class="badge badge-soft-green">Zero Dependências</span>
+            <span class="badge badge-outline-cyan">WCAG 2.1 AA</span>
+          </div>
+          <h1 class="display-5 fw-bold mb-3">Tags, Badges &amp; Autocomplete Multiselect</h1>
+          <p class="lead text-muted">
+            Suíte completa de seleção de tags, badges interativas e autocomplete multiselect para o <strong>Dexter UI</strong>,
+            inspirada e aprimorada a partir do <code>bootstrap5-tags</code> (<code>github.com/lekoala/bootstrap5-tags</code>).
+            Zero dependência de jQuery ou bibliotecas externas com o controlador nativo <code>DexterTags</code>, trazendo
+            chips com botão de remoção, menu dropdown de sugestões com navegação fluida por teclado (setas, Enter, Tab e Backspace),
+            criação livre de tags (<code>allowNew</code>), limites máximos (<code>max</code>), estilos visuais (sólido, suave/soft e contorno),
+            integração às 28 cores oficiais do framework e suporte a Dark Mode.
+          </p>
+        </div>
+
+        <!-- 1. Badges & Chips Standalone -->
+        <section id="badges-standalone" class="mb-5">
+          <h2>1. Badges &amp; Chips Standalone</h2>
+          <p class="text-muted">
+            Emblemas compactos e chips de estado disponíveis nos formatos sólido, suave (soft) e contorno (outline),
+            com suporte a pílula (<code>.badge-pill</code>), ponto de status (<code>.badge-dot</code>) e botão de remoção (<code>.badge-close</code>):
+          </p>
+
+          <div class="card p-4 mb-4">
+            <h6 class="fw-bold mb-3">Estilo Suave (Soft Badges) - Cores Oficiais</h6>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <span class="badge badge-soft-primary">Primário</span>
+              <span class="badge badge-soft-secondary">Secundário</span>
+              <span class="badge badge-soft-blue">Azul</span>
+              <span class="badge badge-soft-green">Verde</span>
+              <span class="badge badge-soft-red">Vermelho</span>
+              <span class="badge badge-soft-gold">Ouro</span>
+              <span class="badge badge-soft-coral">Coral</span>
+              <span class="badge badge-soft-purple">Roxo</span>
+              <span class="badge badge-soft-cyan">Ciano</span>
+              <span class="badge badge-soft-teal">Teal</span>
+            </div>
+
+            <h6 class="fw-bold mb-3">Badges com Ponto Indicador (.badge-dot) &amp; Pílula (.badge-pill)</h6>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+              <span class="badge badge-soft-green badge-dot badge-pill">Online</span>
+              <span class="badge badge-soft-gold badge-dot badge-pill">Ausente</span>
+              <span class="badge badge-soft-red badge-dot badge-pill">Ocupado</span>
+              <span class="badge badge-soft-secondary badge-dot badge-pill">Offline</span>
+            </div>
+
+            <h6 class="fw-bold mb-3">Badges Dispensáveis / Removíveis (.badge-close)</h6>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="badge badge-soft-primary">Frontend <button type="button" class="badge-close" aria-label="Remover">×</button></span>
+              <span class="badge badge-soft-coral">UI/UX <button type="button" class="badge-close" aria-label="Remover">×</button></span>
+              <span class="badge badge-soft-cyan">Sass / CSS <button type="button" class="badge-close" aria-label="Remover">×</button></span>
+              <span class="badge badge-soft-purple">JavaScript <button type="button" class="badge-close" aria-label="Remover">×</button></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Tag Input Básico com Autocomplete -->
+        <section id="tags-basic" class="mb-5">
+          <h2>2. Seleção Múltipla com Autocomplete via &lt;select multiple&gt;</h2>
+          <p class="text-muted">
+            Transforma qualquer <code>&lt;select multiple&gt;</code> nativo em um campo interativo de tags com busca inteligente.
+            Basta adicionar o atributo <code>data-dx-tags</code>. A seleção permanece sincronizada com o elemento de formulário nativo.
+          </p>
+
+          <div class="card p-4 mb-4">
+            <label class="form-label fw-bold" for="demoSelectTags">Linguagens &amp; Tecnologias Favoritas</label>
+            <select id="demoSelectTags" class="form-tags" multiple data-dx-tags data-dx-color="primary" data-placeholder="Digite para buscar tecnologias...">
+              <option value="php" selected>PHP</option>
+              <option value="javascript" selected>JavaScript</option>
+              <option value="python">Python</option>
+              <option value="typescript" selected>TypeScript</option>
+              <option value="rust">Rust</option>
+              <option value="go">Go</option>
+              <option value="csharp">C#</option>
+              <option value="ruby">Ruby</option>
+              <option value="kotlin">Kotlin</option>
+              <option value="swift">Swift</option>
+            </select>
+            <div class="form-text mt-2 text-muted">Experimente clicar no campo, usar as setas do teclado para navegar pelas sugestões ou apagar tags com <kbd>Backspace</kbd>.</div>
+          </div>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Select Múltiplo nativo transformado em Tag Input interativo --&gt;
+&lt;select class="form-tags" multiple data-dx-tags data-dx-color="primary" placeholder="Adicionar tecnologias..."&gt;
+  &lt;option value="php" selected&gt;PHP&lt;/option&gt;
+  &lt;option value="javascript" selected&gt;JavaScript&lt;/option&gt;
+  &lt;option value="typescript" selected&gt;TypeScript&lt;/option&gt;
+  &lt;option value="python"&gt;Python&lt;/option&gt;
+  &lt;option value="rust"&gt;Rust&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 3. Criação Livre de Novas Tags (allowNew) -->
+        <section id="tags-allow-new" class="mb-5">
+          <h2>3. Criação Livre de Novas Tags (Free Tagging)</h2>
+          <p class="text-muted">
+            Permite aos usuários digitar qualquer termo e transformá-lo imediatamente em uma nova tag pressionando <kbd>Enter</kbd> ou vírgula <kbd>,</kbd>.
+            Ativado com <code>data-allow-new="true"</code>:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <label class="form-label fw-bold" for="demoAllowNew">Palavras-chave &amp; Tópicos do Artigo (Free Tagging)</label>
+            <input type="text" id="demoAllowNew" class="form-tags" data-dx-tags data-dx-color="coral" data-allow-new="true" value="design system, ux, acessibilidade" placeholder="Digite uma palavra e aperte Enter ou vírgula...">
+            <div class="form-text mt-2 text-muted">Digite qualquer termo livremente. O separador padrão aceita vírgula e Enter.</div>
+          </div>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Input com criação livre de novas tags e tema Coral --&gt;
+&lt;input type="text" class="form-tags" data-dx-tags data-dx-color="coral" data-allow-new="true" value="design system, ux" placeholder="Digite uma tag..."&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 3b. Recursos Avançados Tagin (Hashtags, Colagem Múltipla & Edição por Duplo Clique) -->
+        <section id="tags-tagin" class="mb-5">
+          <h2>3b. Recursos Avançados &amp; Compatibilidade Tagin (erwinheldy/tagin)</h2>
+          <p class="text-muted">
+            Incorpora e expande os diferenciais da biblioteca <code>tagin</code>: transformação automática de texto (como <strong>#hashtags</strong> via barra de espaço ou <code>lowercase</code>),
+            colagem em lote (paste com separador automático de texto copiado) e <strong>duplo clique</strong> em qualquer tag para reabrí-la para edição:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="row g-4">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Modo Hashtag (separador por espaço ou Enter)</label>
+                <input type="text" class="form-tags" data-dx-tags data-transform="hashtag" data-separator=" " data-dx-color="blue" value="#dextercss, #frontend" placeholder="Digite termos com espaço para gerar #hashtags...">
+                <div class="form-text mt-1 text-muted">Digite uma palavra e aperte a barra de espaço para prefixar automaticamente com <code>#</code>.</div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Transformação Minúscula &amp; Duplo Clique para Editar</label>
+                <input type="text" class="tagin" data-transform="lowercase" data-dx-color="green" value="alpha, beta, gamma" placeholder="Cole listas ou dê duplo clique em uma tag...">
+                <div class="form-text mt-1 text-muted">Dê <strong>duplo clique</strong> em uma tag para editá-la. Cole textos como <code>maçã, banana, uva</code> para inserir em lote.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML / JS</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Compatibilidade total com a classe .tagin e transformação de hashtags --&gt;
+&lt;input type="text" class="tagin" data-transform="hashtag" data-separator=" "&gt;
+
+&lt;!-- Inicialização compatível com a API do Tagin --&gt;
+&lt;script&gt;
+  const tagin = new Tagin(document.querySelector('.meu-input'), {
+    separator: ' ',
+    duplicate: false,
+    transform: 'hashtag'
+  });
+&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 3c. Compatibilidade bootstrap-tag-input (More-Than-Solitaire) -->
+        <section id="tags-bootstrap-tag-input" class="mb-5">
+          <h2>3c. Compatibilidade com Bootstrap Tag Input (More-Than-Solitaire)</h2>
+          <p class="text-muted">
+            Suporte nativo e transparente ao padrão de <strong>bootstrap-tag-input</strong> (More-Than-Solitaire),
+            permitindo usar contêineres <code>&lt;div class="tags-input form-control"&gt;</code> integrados em <code>.input-group</code>,
+            armazenamento automático em input oculto via <code>data-name</code>, separadores customizados via expressão regular
+            (<code>data-splitchars</code>), cores temáticas (<code>.tag-bg-*</code>) e a função global <code>initTags()</code>:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <h5 class="fw-bold mb-3">Exemplos com Input Groups e Cores de Tags</h5>
+
+            <!-- 1. Basic Tags Input com Input Group -->
+            <div class="mb-4">
+              <label class="form-label fw-bold">1. Tags Básicas em Grupo de Entrada (.input-group)</label>
+              <div class="input-group">
+                <span class="input-group-text">Tecnologias</span>
+                <div class="tags-input form-control" id="tagsInputBasic" data-name="techTags"></div>
+              </div>
+              <div class="form-text">Digite um termo e pressione <kbd>Enter</kbd> ou <kbd>,</kbd> (vírgula). Cole textos com vírgulas para inserção em lote.</div>
+            </div>
+
+            <!-- 2. Cores Customizadas via tag-bg-* -->
+            <div class="mb-4">
+              <label class="form-label fw-bold">2. Cores Customizadas de Tags (.tag-bg-success, .tag-bg-danger, .tag-bg-indigo)</label>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text bg-success text-white">Aprovados</span>
+                    <div class="tags-input form-control tag-bg-success" id="tagsInputSuccess" data-name="approvedTags"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text bg-danger text-white">Bloqueados</span>
+                    <div class="tags-input form-control tag-bg-danger" id="tagsInputDanger" data-name="blockedTags"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Separadores Customizados via Regex data-splitchars -->
+            <div class="mb-4">
+              <label class="form-label fw-bold">3. Separadores Customizados via Expressão Regular (data-splitchars="[;']")</label>
+              <div class="input-group">
+                <span class="input-group-text">Separar por ; ou '</span>
+                <div class="tags-input form-control tag-bg-indigo" id="tagsInputCustomSplit" data-splitchars="[;']" data-name="customSplitTags"></div>
+              </div>
+              <div class="form-text">Neste campo, digite ponto-e-vírgula (<code>;</code>) ou apóstrofo (<code>'</code>) para criar tags. Vírgulas normais são aceitas no texto da tag!</div>
+            </div>
+
+            <!-- 4. Barra de Ações Programáticas da API initTags -->
+            <div class="p-3 bg-light rounded mt-3">
+              <h6 class="fw-bold mb-2">Controle da API Programática (initTags / addTag / getValue)</h6>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <button type="button" class="btn btn-sm btn-primary" id="btnBtiAddTag">+ Adicionar 'Docker'</button>
+                <button type="button" class="btn btn-sm btn-success" id="btnBtiAddMultiple">+ Adicionar Lote ('Node.js', 'PostgreSQL')</button>
+                <button type="button" class="btn btn-sm btn-info text-white" id="btnBtiGetValue">Obter Valor Oculto (getValue)</button>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btnBtiReset">Resetar Tags (resetTags)</button>
+              </div>
+              <div id="btiValueOutput" class="small font-monospace text-muted"></div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Input Group com tags coloridas e input oculto para submissão --&gt;
+&lt;div class="input-group"&gt;
+  &lt;span class="input-group-text"&gt;Tecnologias&lt;/span&gt;
+  &lt;div class="tags-input form-control tag-bg-success" data-name="tecnologias"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Separadores customizados via expressão regular --&gt;
+&lt;div class="tags-input form-control tag-bg-indigo" data-splitchars="[;']" data-name="itens"&gt;&lt;/div&gt;
+
+&lt;!-- Inicialização compatível com initTags() --&gt;
+&lt;script&gt;
+  window.onload = function() {
+    const tags = initTags(['PHP', 'JavaScript', 'CSS3']);
+    // tagElements['meuId'].addTag('Novo');
+  };
+&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 3c. Compatibilidade bootstrap-tag-input (More-Than-Solitaire) -->
+        <section id="tags-bootstrap-tag-input" class="mb-5">
+          <h2>3c. Compatibilidade com Bootstrap Tag Input (More-Than-Solitaire)</h2>
+          <p class="text-muted">
+            Suporte nativo e transparente ao padrão de <strong>bootstrap-tag-input</strong> (More-Than-Solitaire),
+            permitindo usar contêineres <code>&lt;div class="tags-input form-control"&gt;</code> integrados em <code>.input-group</code>,
+            armazenamento automático em input oculto via <code>data-name</code>, separadores customizados via expressão regular
+            (<code>data-splitchars</code>), cores temáticas (<code>.tag-bg-*</code>) e a função global <code>initTags()</code>:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <h5 class="fw-bold mb-3">Exemplos com Input Groups e Cores de Tags</h5>
+
+            <!-- 1. Basic Tags Input com Input Group -->
+            <div class="mb-4">
+              <label class="form-label fw-bold">1. Tags Básicas em Grupo de Entrada (.input-group)</label>
+              <div class="input-group">
+                <span class="input-group-text">Tecnologias</span>
+                <div class="tags-input form-control" id="tagsInputBasic" data-name="techTags"></div>
+              </div>
+              <div class="form-text">Digite um termo e pressione <kbd>Enter</kbd> ou <kbd>,</kbd> (vírgula). Cole textos com vírgulas para inserção em lote.</div>
+            </div>
+
+            <!-- 2. Cores Customizadas via tag-bg-* -->
+            <div class="mb-4">
+              <label class="form-label fw-bold">2. Cores Customizadas de Tags (.tag-bg-success, .tag-bg-danger, .tag-bg-indigo)</label>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text bg-success text-white">Aprovados</span>
+                    <div class="tags-input form-control tag-bg-success" id="tagsInputSuccess" data-name="approvedTags"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="input-group">
+                    <span class="input-group-text bg-danger text-white">Bloqueados</span>
+                    <div class="tags-input form-control tag-bg-danger" id="tagsInputDanger" data-name="blockedTags"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Separadores Customizados via Regex data-splitchars -->
+            <div class="mb-4">
+              <label class="form-label fw-bold">3. Separadores Customizados via Expressão Regular (data-splitchars="[;']")</label>
+              <div class="input-group">
+                <span class="input-group-text">Separar por ; ou '</span>
+                <div class="tags-input form-control tag-bg-indigo" id="tagsInputCustomSplit" data-splitchars="[;']" data-name="customSplitTags"></div>
+              </div>
+              <div class="form-text">Neste campo, digite ponto-e-vírgula (<code>;</code>) ou apóstrofo (<code>'</code>) para criar tags. Vírgulas normais são aceitas no texto da tag!</div>
+            </div>
+
+            <!-- 4. Barra de Ações Programáticas da API initTags -->
+            <div class="p-3 bg-light rounded mt-3">
+              <h6 class="fw-bold mb-2">Controle da API Programática (initTags / addTag / getValue)</h6>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <button type="button" class="btn btn-sm btn-primary" id="btnBtiAddTag">+ Adicionar 'Docker'</button>
+                <button type="button" class="btn btn-sm btn-success" id="btnBtiAddMultiple">+ Adicionar Lote ('Node.js', 'PostgreSQL')</button>
+                <button type="button" class="btn btn-sm btn-info text-white" id="btnBtiGetValue">Obter Valor Oculto (getValue)</button>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btnBtiReset">Resetar Tags (resetTags)</button>
+              </div>
+              <div id="btiValueOutput" class="small font-monospace text-muted"></div>
+            </div>
+          </div>
+
+          <!-- Code Snippet -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Input Group com tags coloridas e input oculto para submissão --&gt;
+&lt;div class="input-group"&gt;
+  &lt;span class="input-group-text"&gt;Tecnologias&lt;/span&gt;
+  &lt;div class="tags-input form-control tag-bg-success" data-name="tecnologias"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Separadores customizados via expressão regular --&gt;
+&lt;div class="tags-input form-control tag-bg-indigo" data-splitchars="[;']" data-name="itens"&gt;&lt;/div&gt;
+
+&lt;!-- Inicialização compatível com initTags() --&gt;
+&lt;script&gt;
+  window.onload = function() {
+    const tags = initTags(['PHP', 'JavaScript', 'CSS3']);
+    // tagElements['meuId'].addTag('Novo');
+  };
+&lt;/script&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 4. Limite Máximo de Tags (max) com Contador -->
+        <section id="tags-max" class="mb-5">
+          <h2>4. Limite Máximo de Tags com Badge de Contagem (data-max="N")</h2>
+          <p class="text-muted">
+            Controle rígido da quantidade de itens que o usuário pode selecionar. Uma badge de contagem automática avisa a cota atual (ex: <code>3/5</code>)
+            e impede adições excedentes:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <label class="form-label fw-bold" for="demoMaxTags">Top 3 Competências Principais (Máximo: 3)</label>
+            <select id="demoMaxTags" class="form-tags" multiple data-dx-tags data-dx-color="purple" data-max="3" placeholder="Selecione até 3 opções...">
+              <option value="lideranca" selected>Liderança Técnica</option>
+              <option value="arquitetura" selected>Arquitetura de Software</option>
+              <option value="scrum">Metodologias Ágeis</option>
+              <option value="devops">DevOps &amp; CI/CD</option>
+              <option value="design">UI/UX Design</option>
+            </select>
+          </div>
+        </section>
+
+        <!-- 5. Estilos Visuais e Formatos (Sólido, Contorno & Pílula) -->
+        <section id="tags-styles" class="mb-5">
+          <h2>5. Estilos Visuais: Sólido, Contorno e Pílula</h2>
+          <p class="text-muted">
+            Personalize a aparência das badges através de <code>data-badge-style="solid|outline|soft"</code> e <code>data-pill="true"</code>:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="row g-4">
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Estilo Sólido (.tags-solid)</h6>
+                <input type="text" class="form-tags" data-dx-tags data-dx-color="cyan" data-badge-style="solid" value="Sólido 1, Sólido 2">
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Estilo Contorno (.tags-outline)</h6>
+                <input type="text" class="form-tags" data-dx-tags data-dx-color="green" data-badge-style="outline" value="Contorno 1, Contorno 2">
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Estilo Pílula (.tag-pill)</h6>
+                <input type="text" class="form-tags" data-dx-tags data-dx-color="gold" data-pill="true" value="Pílula 1, Pílula 2">
+              </div>
+              <div class="col-12 col-md-6">
+                <h6 class="fw-bold mb-2">Tamanho Compacto (.form-tags-sm)</h6>
+                <input type="text" class="form-tags form-tags-sm" data-dx-tags data-dx-color="red" value="Compacto A, Compacto B">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Estados de Validação e Desabilitado -->
+        <section id="tags-validation" class="mb-5">
+          <h2>6. Estados de Validação e Controle Desabilitado</h2>
+          <p class="text-muted">
+            Total compatibilidade com os estados de validação de formulários do Dexter UI:
+          </p>
+
+          <div class="card p-4 mb-4">
+            <div class="row g-4">
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Estado Válido (.is-valid)</label>
+                <input type="text" class="form-tags is-valid" data-dx-tags value="Tags Válidas, Aprovado">
+                <div class="valid-feedback d-block mt-1">Configuração de tags válida.</div>
+              </div>
+              <div class="col-12 col-md-6">
+                <label class="form-label fw-bold">Estado Inválido (.is-invalid)</label>
+                <input type="text" class="form-tags is-invalid" data-dx-tags value="Tag com Erro">
+                <div class="invalid-feedback d-block mt-1">Selecione pelo menos duas tags válidas.</div>
+              </div>
+              <div class="col-12">
+                <label class="form-label fw-bold">Desabilitado (disabled)</label>
+                <input type="text" class="form-tags" data-dx-tags value="Somente Leitura, Bloqueado" disabled>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. API JavaScript Programática -->
+        <section id="tags-api" class="mb-5">
+          <h2>7. API Programática JavaScript</h2>
+          <p class="text-muted">
+            Controle o componente programaticamente de forma simples e direta com a classe <code>DexterTags</code>:
+          </p>
+
+          <!-- Code Window Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">JavaScript</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-javascript">// Instanciação programática
+const myTags = new DexterTags(document.querySelector('#meuElemento'), {
+  color: 'primary',
+  allowNew: true,
+  max: 5,
+  badgeStyle: 'soft',
+  suggestions: ['React', 'Vue', 'Angular', 'Svelte', 'SolidJS'],
+  onTagAdd: (tag, allTags) => console.log('Adicionada:', tag),
+  onTagRemove: (tag, allTags) => console.log('Removida:', tag),
+  onChange: (allTags) => console.log('Tags atuais:', allTags)
+});
+
+// Métodos disponíveis
+myTags.addTag('Next.js');
+myTags.removeTag('React');
+myTags.getValues(); // ['Next.js', ...]
+myTags.clear();     // Limpa tudo</code></pre>
+          </div>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-carousel.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+  <script src="../dist/js/dexter-dropdown.js"></script>
+  <script src="../dist/js/dexter-toast.js"></script>
+  <script src="../dist/js/dexter-fileinput.js"></script>
+  <script src="../dist/js/dexter-tags.js"></script>
+  <script src="../dist/js/dexter-rating.js"></script>
+  <script src="../dist/js/dexter-multiselect.js"></script>
+  <script src="../dist/js/dexter-input-spinner.js"></script>
+<script>
+    
+// Demonstração da API initTags (More-Than-Solitaire / bootstrap-tag-input)
+    document.addEventListener('DOMContentLoaded', () => {
+      const basicEl = document.getElementById('tagsInputBasic');
+      const successEl = document.getElementById('tagsInputSuccess');
+      const dangerEl = document.getElementById('tagsInputDanger');
+      const customSplitEl = document.getElementById('tagsInputCustomSplit');
+
+      // Adiciona algumas tags iniciais para demonstração
+      if (basicEl && basicEl.addTags) {
+        basicEl.addTags(['HTML5', 'CSS3', 'JavaScript']);
+      }
+      if (successEl && successEl.addTags) {
+        successEl.addTags(['Compilado', 'Aprovado em QA']);
+      }
+      if (dangerEl && dangerEl.addTags) {
+        dangerEl.addTags(['Spam', 'Malware']);
+      }
+      if (customSplitEl && customSplitEl.addTags) {
+        customSplitEl.addTags(['Item A', 'Item B']);
+      }
+
+      // Botões interativos
+      const output = document.getElementById('btiValueOutput');
+      document.getElementById('btnBtiAddTag')?.addEventListener('click', () => {
+        if (basicEl && basicEl.addTag) {
+          basicEl.addTag('Docker');
+          if (output) output.textContent = 'Tag "Docker" adicionada! Valor oculto atual: ' + basicEl.getValue();
+        }
+      });
+
+      document.getElementById('btnBtiAddMultiple')?.addEventListener('click', () => {
+        if (basicEl && basicEl.addTags) {
+          basicEl.addTags(['Node.js', 'PostgreSQL']);
+          if (output) output.textContent = 'Lote adicionado! Valor oculto atual: ' + basicEl.getValue();
+        }
+      });
+
+      document.getElementById('btnBtiGetValue')?.addEventListener('click', () => {
+        if (basicEl && basicEl.getValue) {
+          const val = basicEl.getValue();
+          if (output) output.textContent = 'Input Oculto (name="' + basicEl.dataset.name + '"): "' + val + '"';
+        }
+      });
+
+      document.getElementById('btnBtiReset')?.addEventListener('click', () => {
+        if (basicEl && basicEl.resetTags) {
+          basicEl.resetTags();
+          if (output) output.textContent = 'Tags resetadas com sucesso. Valor oculto limpo: ""';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

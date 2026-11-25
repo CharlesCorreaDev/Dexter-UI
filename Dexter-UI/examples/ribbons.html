@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ribbons &amp; Faixas CSS (57 Estilos) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+  <style>
+    .ribbon-playground-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem 1.25rem;
+    }
+
+    .ribbon-card-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .ribbon-demo-box,
+    .ribbon-demo-stage {
+      position: relative;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      background-color: var(--dx-doc-surface, #ffffff);
+      min-height: 165px;
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .ribbon-demo-box {
+      margin: 0.35rem 0.65rem;
+    }
+
+    .ribbon-demo-stage {
+      overflow: hidden;
+      min-height: 195px;
+      padding: 2rem 1.25rem;
+    }
+
+    .ribbon-demo-stage.is-tall {
+      min-height: 235px;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    .ribbon-card-wrap:hover .ribbon-demo-box,
+    .ribbon-card-wrap:hover .ribbon-demo-stage {
+      border-color: var(--dx-primary, #3b5998);
+      box-shadow: 0 8px 22px -8px rgba(15, 23, 42, 0.2);
+    }
+
+    .ribbon-demo-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      font-size: 0.78rem;
+      padding-inline: 0.35rem;
+    }
+
+    [data-dx-theme="dark"] .ribbon-demo-box,
+    [data-dx-theme="dark"] .ribbon-demo-stage {
+      background-color: #161f30;
+      border-color: rgba(148, 163, 184, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="doc-header" data-doc-header></header>
+
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+      <!-- Cabeçalho -->
+      <div class="mb-5 border-bottom pb-4">
+        <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+          <span class="badge bg-primary text-white">Core UI</span>
+          <span class="badge bg-indigo text-white">CSS Puro</span>
+          <span class="badge bg-purple text-white">57 Variações</span>
+          <span class="badge bg-teal text-white">28 Cores + 5 Tamanhos</span>
+        </div>
+        <h1 class="font-title fw-bold mb-2">Ribbons &amp; Faixas CSS (57 Estilos Modernos)</h1>
+        <p class="lead text-muted mb-0">
+          Catálogo modular em CSS puro dividido em <strong>3 eixos independentes de classes</strong>: classe do formato (<code>.ribbon-{formato}</code> ou <code>.ribbon-1</code>..<code>.ribbon-57</code>), classe de tamanho (<code>.ribbon-size-xs</code> a <code>.ribbon-size-2xl</code> / <code>.ribbon-size-1</code>..<code>.ribbon-size-6</code>) e classe de cor (<code>.ribbon-color-{cor}</code> para todas as 28 cores oficiais + semânticas WCAG).
+        </p>
+      </div>
+
+      <!-- Barra de Controles ao Vivo -->
+      <div class="doc-card mb-5">
+        <div class="row g-3 align-items-end">
+          <div class="col-md-4">
+            <label for="selectRibbonColor" class="form-label fw-semibold">Classe de Cor (<code>.ribbon-color-*</code>)</label>
+            <select id="selectRibbonColor" class="form-select form-select-sm">
+              <option value="varied" selected>Cores Variadas (Padrão)</option>
+              <option value="primary">primary (Azul Dexter)</option>
+              <option value="indigo">indigo</option>
+              <option value="teal">teal</option>
+              <option value="turquoise">turquoise</option>
+              <option value="coral">coral</option>
+              <option value="red">red</option>
+              <option value="purple">purple</option>
+              <option value="green">green</option>
+              <option value="olive">olive</option>
+              <option value="warning">warning (contraste escuro)</option>
+              <option value="lime">lime (contraste escuro)</option>
+              <option value="aquamarine">aquamarine (contraste escuro)</option>
+              <option value="midnight">midnight</option>
+              <option value="navy">navy</option>
+              <option value="brown">brown</option>
+              <option value="fuchsia">fuchsia</option>
+              <option value="steelblue">steelblue</option>
+              <option value="cyan">cyan</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="selectRibbonSize" class="form-label fw-semibold">Classe de Tamanho (<code>.ribbon-size-*</code>)</label>
+            <select id="selectRibbonSize" class="form-select form-select-sm">
+              <option value="ribbon-size-xs">ribbon-size-xs (0.72rem)</option>
+              <option value="ribbon-size-sm">ribbon-size-sm (0.85rem)</option>
+              <option value="ribbon-size-md" selected>ribbon-size-md (1.00rem — Padrão)</option>
+              <option value="ribbon-size-lg">ribbon-size-lg (1.35rem)</option>
+              <option value="ribbon-size-xl">ribbon-size-xl (1.75rem)</option>
+              <option value="ribbon-size-2xl">ribbon-size-2xl (2.15rem)</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label for="inputRibbonText" class="form-label fw-semibold">Texto Dinâmico</label>
+            <input type="text" id="inputRibbonText" class="form-control form-control-sm" value="Destaque" maxlength="24">
+          </div>
+        </div>
+        <div class="mt-3 pt-2 border-top small text-muted" id="ribbonCopyStatus" role="status">
+          Dica: clique em qualquer cartão abaixo para copiar a combinação completa <code>.ribbon .{formato} .ribbon-size-* .ribbon-color-*</code>.
+        </div>
+      </div>
+
+      <!-- 1. Classes Dedicadas de Tamanho -->
+      <section id="rb-sizes" class="mb-5">
+        <h2>1. Classes de Tamanho (<code>.ribbon-size-*</code>)</h2>
+        <p class="text-muted">Combine qualquer formato de ribbon com uma das 6 escalas dedicadas de tamanho (<code>.ribbon-size-xs</code> a <code>.ribbon-size-2xl</code> ou <code>.ribbon-size-1</code> a <code>.ribbon-size-6</code>):</p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap align-items-center gap-4" id="demoRibbonSizes">
+            <div class="text-center">
+              <div class="ribbon ribbon-banner ribbon-size-xs ribbon-color-primary">XS</div>
+              <div class="small text-muted mt-2"><code>.ribbon-size-xs</code></div>
+            </div>
+            <div class="text-center">
+              <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-indigo">SM</div>
+              <div class="small text-muted mt-2"><code>.ribbon-size-sm</code></div>
+            </div>
+            <div class="text-center">
+              <div class="ribbon ribbon-banner ribbon-size-md ribbon-color-teal">MD</div>
+              <div class="small text-muted mt-2"><code>.ribbon-size-md</code></div>
+            </div>
+            <div class="text-center">
+              <div class="ribbon ribbon-banner ribbon-size-lg ribbon-color-coral">LG</div>
+              <div class="small text-muted mt-2"><code>.ribbon-size-lg</code></div>
+            </div>
+            <div class="text-center">
+              <div class="ribbon ribbon-banner ribbon-size-xl ribbon-color-purple">XL</div>
+              <div class="small text-muted mt-2"><code>.ribbon-size-xl</code></div>
+            </div>
+            <div class="text-center">
+              <div class="ribbon ribbon-banner ribbon-size-2xl ribbon-color-red">2XL</div>
+              <div class="small text-muted mt-2"><code>.ribbon-size-2xl</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Classes Dedicadas de Cor -->
+      <section id="rb-colors" class="mb-5">
+        <h2>2. Classes de Cor (<code>.ribbon-color-*</code> — 28 Oficiais + Semânticas)</h2>
+        <p class="text-muted">Todas as 28 cores oficiais da paleta + semânticas aplicam contraste automático WCAG (texto escuro em fundos claros como <code>warning</code>, <code>lime</code>, <code>beige</code> e <code>light</code>):</p>
+
+        <div class="doc-card mb-4">
+          <div class="d-flex flex-wrap gap-2" id="demoRibbonColorSwatches">
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-primary">primary</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-secondary">secondary</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-tertiary">tertiary</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-quaternary">quaternary</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-quinary">quinary</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-purple">purple</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-red">red</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-navy">navy</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-brown">brown</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-green">green</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-midnight">midnight</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-silver-light">silver-light</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-silver">silver</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-light">light</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-turquoise">turquoise</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-cyan">cyan</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-dark">dark</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-black">black</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-beige">beige</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-olive">olive</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-steelblue">steelblue</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-aquamarine">aquamarine</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-coral">coral</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-lime">lime</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-teal">teal</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-indigo">indigo</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-gray">gray</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-fuchsia">fuchsia</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-success">success</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-danger">danger</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-warning">warning</div>
+            <div class="ribbon ribbon-banner ribbon-size-sm ribbon-color-info">info</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="rb-wrap-corners" class="mb-5">
+        <h2>3. Faixas Dobradas, Cantos Diagonais &amp; Bandeirinhas (#1 – #14)</h2>
+        <div class="ribbon-playground-grid" data-ribbon-group="1"></div>
+      </section>
+
+      <section id="rb-curls" class="mb-5">
+        <h2>4. Curvas 3D Cilíndricas (#15 – #20)</h2>
+        <div class="ribbon-playground-grid" data-ribbon-group="2"></div>
+      </section>
+
+      <section id="rb-tags-3d" class="mb-5">
+        <h2>5. Medalha Starburst, Etiquetas Sombreadas &amp; Degrau 3D (#21 – #31)</h2>
+        <div class="ribbon-playground-grid" data-ribbon-group="3"></div>
+      </section>
+
+      <section id="rb-origami" class="mb-5">
+        <h2>6. Faixas 3D com Asas &amp; Origami Angulado (#32 – #38)</h2>
+        <div class="ribbon-playground-grid" data-ribbon-group="4"></div>
+      </section>
+
+      <section id="rb-hearts-bookmarks" class="mb-5">
+        <h2>7. Medalhas Coração, Marcadores Cilíndricos &amp; Pendentes (#39 – #49)</h2>
+        <div class="ribbon-playground-grid" data-ribbon-group="5"></div>
+      </section>
+
+      <section id="rb-bleed-arches" class="mb-5">
+        <h2>8. Borda Infinita (Full-Bleed), Medalhas Arqueadas &amp; Multilinha (#50 – #57)</h2>
+        <div class="ribbon-playground-grid" data-ribbon-group="6"></div>
+      </section>
+
+      <section id="rb-code" class="mb-5">
+        <h2>9. Exemplos de Código (3 Classes Modulares: Formato + Tamanho + Cor)</h2>
+        <div class="code-window mb-4">
+          <div class="code-window-header">
+            <div class="code-dots"><span class="dot-close"></span><span class="dot-minimize"></span><span class="dot-maximize"></span></div>
+            <div class="code-actions"><span class="code-badge">HTML</span><button type="button" class="code-copy-btn">Copiar</button></div>
+          </div>
+          <pre><code class="language-html">&lt;!-- Sintaxe modular: .ribbon + .{formato} + .ribbon-size-* + .ribbon-color-* --&gt;
+&lt;div class="card ribbon-box p-4"&gt;
+  &lt;div class="ribbon ribbon-corner-tr ribbon-size-sm ribbon-color-red"&gt;NOVO&lt;/div&gt;
+  &lt;h5&gt;Plano Profissional&lt;/h5&gt;
+&lt;/div&gt;
+
+&lt;!-- Medalha autônoma com tamanho e cor explícitos --&gt;
+&lt;div class="ribbon ribbon-medal-star ribbon-size-lg ribbon-color-indigo"&gt;TOP 1&lt;/div&gt;
+&lt;div class="ribbon ribbon-multiline ribbon-size-md ribbon-color-teal"&gt;Oferta&lt;br&gt;Dexter UI&lt;/div&gt;
+
+&lt;!-- Ribbon Full-Bleed encostando na borda do container --&gt;
+&lt;div class="ribbon-bleed-wrap p-4 border rounded"&gt;
+  &lt;div class="ribbon ribbon-bleed-left ribbon-size-md ribbon-color-coral"&gt;Destaque&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+
+  <script>
+    (function () {
+      var ITEMS = [
+        // Grupo 1 (#1-#14)
+        { n: 1,  g: 1, cls: 'ribbon-wrap-bottom',       mode: 'box',   color: 'green' },
+        { n: 2,  g: 1, cls: 'ribbon-corner-tr',         mode: 'box',   color: 'red' },
+        { n: 3,  g: 1, cls: 'ribbon-corner-tl',         mode: 'box',   color: 'coral' },
+        { n: 4,  g: 1, cls: 'ribbon-bookmark-tl',       mode: 'box',   color: 'brown' },
+        { n: 5,  g: 1, cls: 'ribbon-bookmark-tl-arrow', mode: 'box',   color: 'indigo' },
+        { n: 6,  g: 1, cls: 'ribbon-flag-tr',           mode: 'box',   color: 'coral' },
+        { n: 7,  g: 1, cls: 'ribbon-flag-tr-arrow',     mode: 'box',   color: 'purple' },
+        { n: 8,  g: 1, cls: 'ribbon-bookmark-tr-arrow', mode: 'box',   color: 'lime' },
+        { n: 9,  g: 1, cls: 'ribbon-flag-br-arrow',     mode: 'box',   color: 'primary' },
+        { n: 10, g: 1, cls: 'ribbon-flag-br',           mode: 'box',   color: 'teal' },
+        { n: 11, g: 1, cls: 'ribbon-flag-tl-arrow',     mode: 'box',   color: 'brown' },
+        { n: 12, g: 1, cls: 'ribbon-flag-bl',           mode: 'box',   color: 'warning' },
+        { n: 13, g: 1, cls: 'ribbon-flag-bl-arrow',     mode: 'box',   color: 'olive' },
+        { n: 14, g: 1, cls: 'ribbon-banner',            mode: 'stage', color: 'red' },
+
+        // Grupo 2 (#15-#20)
+        { n: 15, g: 2, cls: 'ribbon-curl-tl',           mode: 'box',   color: 'coral' },
+        { n: 16, g: 2, cls: 'ribbon-curl-bl',           mode: 'box',   color: 'indigo' },
+        { n: 17, g: 2, cls: 'ribbon-curl-tr',           mode: 'box',   color: 'warning' },
+        { n: 18, g: 2, cls: 'ribbon-curl-br',           mode: 'box',   color: 'purple' },
+        { n: 19, g: 2, cls: 'ribbon-curl-wrap-top',     mode: 'box',   color: 'teal' },
+        { n: 20, g: 2, cls: 'ribbon-curl-wrap-bottom',  mode: 'box',   color: 'turquoise' },
+
+        // Grupo 3 (#21-#31)
+        { n: 21, g: 3, cls: 'ribbon-medal-star',        mode: 'tall',  color: 'primary' },
+        { n: 22, g: 3, cls: 'ribbon-tag-left',          mode: 'stage', color: 'steelblue' },
+        { n: 23, g: 3, cls: 'ribbon-tag-left-arrow',    mode: 'stage', color: 'red' },
+        { n: 24, g: 3, cls: 'ribbon-tag-right',         mode: 'stage', color: 'fuchsia' },
+        { n: 25, g: 3, cls: 'ribbon-tag-right-arrow',   mode: 'stage', color: 'teal' },
+        { n: 26, g: 3, cls: 'ribbon-3d-br',             mode: 'stage', color: 'red' },
+        { n: 27, g: 3, cls: 'ribbon-3d-tl',             mode: 'stage', color: 'coral' },
+        { n: 28, g: 3, cls: 'ribbon-3d-bl',             mode: 'stage', color: 'purple' },
+        { n: 29, g: 3, cls: 'ribbon-3d-tr',             mode: 'stage', color: 'brown' },
+        { n: 30, g: 3, cls: 'ribbon-wrap-center',       mode: 'box',   color: 'cyan' },
+        { n: 31, g: 3, cls: 'ribbon-wrap-center-alt',   mode: 'box',   color: 'green' },
+
+        // Grupo 4 (#32-#38)
+        { n: 32, g: 4, cls: 'ribbon-wings-up',          mode: 'stage', color: 'red' },
+        { n: 33, g: 4, cls: 'ribbon-wings-down',        mode: 'stage', color: 'warning' },
+        { n: 34, g: 4, cls: 'ribbon-origami',           mode: 'tall',  color: 'red' },
+        { n: 35, g: 4, cls: 'ribbon-origami-tr',        mode: 'tall',  color: 'warning' },
+        { n: 36, g: 4, cls: 'ribbon-origami-tl',        mode: 'tall',  color: 'cyan' },
+        { n: 37, g: 4, cls: 'ribbon-origami-br',        mode: 'tall',  color: 'brown' },
+        { n: 38, g: 4, cls: 'ribbon-origami-bl',        mode: 'tall',  color: 'purple' },
+
+        // Grupo 5 (#39-#49)
+        { n: 39, g: 5, cls: 'ribbon-medal-heart',           mode: 'tall',  color: 'red' },
+        { n: 40, g: 5, cls: 'ribbon-medal-heart-crossed',   mode: 'tall',  color: 'fuchsia' },
+        { n: 41, g: 5, cls: 'ribbon-medal-heart-notched',   mode: 'tall',  color: 'turquoise' },
+        { n: 42, g: 5, cls: 'ribbon-curl-bookmark-tl',      mode: 'box',   color: 'brown' },
+        { n: 43, g: 5, cls: 'ribbon-curl-bookmark-tr-arrow',mode: 'box',   color: 'lime' },
+        { n: 44, g: 5, cls: 'ribbon-curl-bookmark-tr',      mode: 'box',   color: 'olive' },
+        { n: 45, g: 5, cls: 'ribbon-curl-bookmark-tl-arrow',mode: 'box',   color: 'indigo' },
+        { n: 46, g: 5, cls: 'ribbon-hanging-arrow',         mode: 'stage', color: 'red' },
+        { n: 47, g: 5, cls: 'ribbon-hanging',               mode: 'stage', color: 'navy' },
+        { n: 48, g: 5, cls: 'ribbon-medal-diamond',         mode: 'tall',  color: 'indigo' },
+        { n: 49, g: 5, cls: 'ribbon-medal-diamond-crossed', mode: 'tall',  color: 'teal' },
+
+        // Grupo 6 (#50-#57)
+        { n: 50, g: 6, cls: 'ribbon-bleed-left',         mode: 'bleed-l', color: 'fuchsia' },
+        { n: 51, g: 6, cls: 'ribbon-bleed-left-arrow',   mode: 'bleed-l', color: 'teal' },
+        { n: 52, g: 6, cls: 'ribbon-bleed-right',        mode: 'bleed-r', color: 'primary' },
+        { n: 53, g: 6, cls: 'ribbon-bleed-right-arrow',  mode: 'bleed-r', color: 'red' },
+        { n: 54, g: 6, cls: 'ribbon-medal-star-arch',    mode: 'tall',    color: 'steelblue' },
+        { n: 55, g: 6, cls: 'ribbon-medal-heart-arch',   mode: 'tall',    color: 'fuchsia' },
+        { n: 56, g: 6, cls: 'ribbon-multiline',          mode: 'stage',   color: 'red',    multiline: true },
+        { n: 57, g: 6, cls: 'ribbon-multiline-origami',  mode: 'tall',    color: 'indigo', multiline: true }
+      ];
+
+      var statusEl = document.getElementById('ribbonCopyStatus');
+      var colorSel = document.getElementById('selectRibbonColor');
+      var sizeSel = document.getElementById('selectRibbonSize');
+      var textInp = document.getElementById('inputRibbonText');
+
+      function renderAll() {
+        var globalColor = colorSel.value;
+        var globalSize = sizeSel.value;
+        var label = (textInp.value || 'Destaque').trim();
+
+        for (var g = 1; g <= 6; g++) {
+          var container = document.querySelector('[data-ribbon-group="' + g + '"]');
+          if (!container) continue;
+          container.innerHTML = '';
+        }
+
+        ITEMS.forEach(function (item) {
+          var grid = document.querySelector('[data-ribbon-group="' + item.g + '"]');
+          if (!grid) return;
+
+          var activeColor = globalColor === 'varied' ? item.color : globalColor;
+          var cardWrap = document.createElement('div');
+          cardWrap.className = 'ribbon-card-wrap';
+
+          var stage = document.createElement('div');
+          if (item.mode === 'box') stage.className = 'ribbon-demo-box';
+          else if (item.mode === 'tall') stage.className = 'ribbon-demo-stage is-tall';
+          else if (item.mode === 'bleed-l') stage.className = 'ribbon-demo-stage justify-content-start ribbon-bleed-wrap';
+          else if (item.mode === 'bleed-r') stage.className = 'ribbon-demo-stage justify-content-end ribbon-bleed-wrap';
+          else stage.className = 'ribbon-demo-stage';
+
+          var rib = document.createElement('div');
+          rib.className = 'ribbon ' + item.cls + ' ribbon-' + item.n + ' ' + globalSize + ' ribbon-color-' + activeColor;
+          if (item.multiline) {
+            rib.innerHTML = label.replace(/</g, '&lt;') + '<br>Dexter UI';
+          } else {
+            rib.textContent = label;
+          }
+
+          if (item.mode === 'box') {
+            var hint = document.createElement('span');
+            hint.className = 'small text-muted';
+            hint.textContent = '#' + item.n + ' · Cartão';
+            stage.appendChild(hint);
+          }
+          stage.appendChild(rib);
+
+          var meta = document.createElement('div');
+          meta.className = 'ribbon-demo-meta';
+          meta.innerHTML = '<code>.' + item.cls + '</code><span class="text-muted">.' + 'ribbon-color-' + activeColor + '</span>';
+
+          cardWrap.appendChild(stage);
+          cardWrap.appendChild(meta);
+          cardWrap.addEventListener('click', function () {
+            var snippet = '<div class="ribbon ' + item.cls + ' ' + globalSize + ' ribbon-color-' + activeColor + '">' + label + '</div>';
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(snippet).catch(function () {});
+            }
+            statusEl.textContent = 'Copiado: ' + snippet;
+          });
+
+          grid.appendChild(cardWrap);
+        });
+      }
+
+      colorSel.addEventListener('change', renderAll);
+      sizeSel.addEventListener('change', renderAll);
+      textInp.addEventListener('input', renderAll);
+      renderAll();
+    })();
+  </script>
+</body>
+</html>

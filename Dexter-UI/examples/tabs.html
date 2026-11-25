@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-dx-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abas Horizontais &amp; Verticais (Tabs &amp; Vertical Tabs) - Dexter UI Framework</title>
+  <link rel="stylesheet" href="../dist/css/dexter.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body>
+
+  <!-- Topbar / Header -->
+  <header class="doc-header" data-doc-header></header>
+
+  <!-- Main Documentation Layout (14-Column Grid) -->
+  <div class="doc-layout">
+    <aside class="doc-sidebar" data-doc-sidebar aria-label="Navegação da documentação"></aside>
+
+    <main class="doc-main" data-toc-content>
+        <h1 class="display-6 fw-bold mb-3">Abas Horizontais &amp; Abas Verticais (Tabs &amp; Vertical Tabs)</h1>
+        <p class="lead text-muted mb-4">
+          Suíte completa e nativa de alternância de conteúdo por abas para o Dexter UI, com suporte a abas horizontais clássicas
+          (<code>.nav-tabs</code>), pílulas (<code>.nav-pills</code>), indicador em linha (<code>.nav-underline</code>) e abas verticais
+          responsivas (<code>.vtabs</code> / <code>.vtabs-left</code> / <code>.vtabs-right</code>) inspiradas no <code>bootstrap-5-vertical-tabs</code> (tromgy).
+          Conta com fusão visual perfeita de bordas, navegação acessível por teclado (WAI-ARIA Tabs), 28 cores oficiais e Dark Mode nativo.
+        </p>
+
+        <!-- ============================================================== -->
+        <!-- PARTE 1: ABAS HORIZONTAIS                                      -->
+        <!-- ============================================================== -->
+
+        <!-- 1. Abas Horizontais Clássicas com Painel Delimitado -->
+        <section id="tabs-horizontal-classic" class="mb-5">
+          <h2>1. Abas Horizontais Clássicas (.nav-tabs)</h2>
+          <p class="text-muted">
+            Abas conectadas no topo com fusão contínua ao painel de conteúdo. Adicione <code>.tab-content-bordered</code> para delimitar o conteúdo com borda arredondada unificada:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="tab-content-bordered" id="demoHorizontalClassic">
+              <!-- Navegação Horizontal -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="tab-h-home" data-dx-toggle="tab" data-dx-target="#pane-h-home" type="button" role="tab">
+                    <span class="tab-icon">🏠</span> Início
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="tab-h-projetos" data-dx-toggle="tab" data-dx-target="#pane-h-projetos" type="button" role="tab">
+                    <span class="tab-icon">📁</span> Projetos
+                    <span class="badge bg-primary text-white">12</span>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="tab-h-equipe" data-dx-toggle="tab" data-dx-target="#pane-h-equipe" type="button" role="tab">
+                    <span class="tab-icon">👥</span> Equipe
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link disabled" id="tab-h-arquivados" type="button" role="tab" disabled>
+                    <span class="tab-icon">📦</span> Arquivados
+                  </button>
+                </li>
+              </ul>
+
+              <!-- Painéis de Conteúdo -->
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="pane-h-home" role="tabpanel">
+                  <h5 class="fw-bold mb-2">Painel Inicial</h5>
+                  <p class="text-muted mb-0">Bem-vindo à suíte de navegação por abas do Dexter UI. Alterne rapidamente entre diferentes contextos sem recarregar a página.</p>
+                </div>
+                <div class="tab-pane fade" id="pane-h-projetos" role="tabpanel">
+                  <h5 class="fw-bold mb-2">Projetos em Andamento</h5>
+                  <p class="text-muted mb-0">12 repositórios sincronizados com compilação Sass ativa e verificação contínua por suíte de testes.</p>
+                </div>
+                <div class="tab-pane fade" id="pane-h-equipe" role="tabpanel">
+                  <h5 class="fw-bold mb-2">Colaboradores do Repositório</h5>
+                  <p class="text-muted mb-0">Desenvolvido por Charles Corrêa com suporte da comunidade de código aberto.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Snippet de Código Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Abas Horizontais Conectadas com Painel Delimitado (.tab-content-bordered) --&gt;
+&lt;div class="tab-content-bordered"&gt;
+  &lt;ul class="nav nav-tabs" role="tablist"&gt;
+    &lt;li class="nav-item"&gt;
+      &lt;button class="nav-link active" data-dx-toggle="tab" data-dx-target="#home" type="button"&gt;
+        &lt;span class="tab-icon"&gt;🏠&lt;/span&gt; Início
+      &lt;/button&gt;
+    &lt;/li&gt;
+    &lt;li class="nav-item"&gt;
+      &lt;button class="nav-link" data-dx-toggle="tab" data-dx-target="#projetos" type="button"&gt;
+        &lt;span class="tab-icon"&gt;📁&lt;/span&gt; Projetos &lt;span class="badge bg-primary text-white"&gt;12&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;div class="tab-content"&gt;
+    &lt;div class="tab-pane fade show active" id="home" role="tabpanel"&gt;...&lt;/div&gt;
+    &lt;div class="tab-pane fade" id="projetos" role="tabpanel"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- 2. Abas em Pílula (.nav-pills) -->
+        <section id="tabs-horizontal-pills" class="mb-5">
+          <h2>2. Abas Horizontais em Pílula (.nav-pills)</h2>
+          <p class="text-muted">
+            Abas com cantos totalmente arredondados e fundo sólido na aba ativa, ideais para filtros e seções de configurações:
+          </p>
+
+          <div class="doc-card mb-4">
+            <ul class="nav nav-pills mb-3" role="tablist">
+              <li class="nav-item">
+                <button class="nav-link active" data-dx-toggle="tab" data-dx-target="#pill-h-todos" type="button">Todos os Dados</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-dx-toggle="tab" data-dx-target="#pill-h-aprovados" type="button">Aprovados</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-dx-toggle="tab" data-dx-target="#pill-h-pendentes" type="button">Pendentes</button>
+              </li>
+            </ul>
+
+            <div class="tab-content p-3 border rounded">
+              <div class="tab-pane fade show active" id="pill-h-todos">Exibindo todos os 48 contratos registrados no sistema.</div>
+              <div class="tab-pane fade" id="pill-h-aprovados">Exibindo 42 contratos aprovados e ativos.</div>
+              <div class="tab-pane fade" id="pill-h-pendentes">Exibindo 6 contratos aguardando validação cadastral.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Abas com Indicador em Linha (.nav-underline) -->
+        <section id="tabs-horizontal-underline" class="mb-5">
+          <h2>3. Indicador Moderno em Linha (.nav-underline)</h2>
+          <p class="text-muted">
+            Estilo minimalista com destaque por linha na base da aba ativa:
+          </p>
+
+          <div class="doc-card mb-4">
+            <ul class="nav nav-underline mb-3" role="tablist">
+              <li class="nav-item">
+                <button class="nav-link active" data-dx-toggle="tab" data-dx-target="#und-h-1" type="button">Descrição</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-dx-toggle="tab" data-dx-target="#und-h-2" type="button">Especificações</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-dx-toggle="tab" data-dx-target="#und-h-3" type="button">Avaliações (4.9 ★)</button>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="und-h-1">
+                <p class="text-muted mb-0">Componente de abas ultraleve desenvolvido com HTML5 puro, Sass modular e JavaScript Vanilla sem jQuery.</p>
+              </div>
+              <div class="tab-pane fade" id="und-h-2">
+                <p class="text-muted mb-0">Compatível com Bootstrap 5, acessibilidade WAI-ARIA, suporte a gestos touch e modo escuro nativo.</p>
+              </div>
+              <div class="tab-pane fade" id="und-h-3">
+                <p class="text-muted mb-0">Avaliado com nota máxima por equipes de design e engenharia de software.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Abas Preenchidas & Justificadas (.nav-fill / .nav-justified) -->
+        <section id="tabs-horizontal-fill" class="mb-5">
+          <h2>4. Abas Preenchidas &amp; Justificadas (.nav-fill / .nav-justified)</h2>
+          <p class="text-muted">
+            Distribui os botões de abas proporcionalmente por toda a largura horizontal disponível:
+          </p>
+
+          <div class="doc-card mb-4">
+            <ul class="nav nav-pills nav-fill mb-3" role="tablist">
+              <li class="nav-item">
+                <button class="nav-link active" data-dx-toggle="tab" data-dx-target="#fill-1" type="button">1. Identificação</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-dx-toggle="tab" data-dx-target="#fill-2" type="button">2. Endereço</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-dx-toggle="tab" data-dx-target="#fill-3" type="button">3. Pagamento</button>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link" data-dx-toggle="tab" data-dx-target="#fill-4" type="button">4. Conclusão</button>
+              </li>
+            </ul>
+
+            <div class="tab-content p-3 border rounded">
+              <div class="tab-pane fade show active" id="fill-1">Passo 1: Informe seu nome e documento.</div>
+              <div class="tab-pane fade" id="fill-2">Passo 2: Preencha seu CEP e endereço completo.</div>
+              <div class="tab-pane fade" id="fill-3">Passo 3: Selecione a forma de pagamento (PIX ou Cartão).</div>
+              <div class="tab-pane fade" id="fill-4">Passo 4: Revise seu pedido e confirme a assinatura.</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Abas na Base (.tabs-bottom) -->
+        <section id="tabs-horizontal-bottom" class="mb-5">
+          <h2>5. Abas Invertidas na Base (.tabs-bottom)</h2>
+          <p class="text-muted">
+            Inverte a posição clássica, colocando a navegação por abas na parte inferior do painel:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="tabs-bottom tab-content-bordered" id="demoTabsBottom">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <button class="nav-link active" data-dx-toggle="tab" data-dx-target="#bot-pane-1" type="button">Console</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" data-dx-toggle="tab" data-dx-target="#bot-pane-2" type="button">Terminal</button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" data-dx-toggle="tab" data-dx-target="#bot-pane-3" type="button">Problemas (0)</button>
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="bot-pane-1">
+                  <code>[DexterTabs] Inicializado com sucesso. 0 avisos.</code>
+                </div>
+                <div class="tab-pane fade" id="bot-pane-2">
+                  <code>$ npm run build<br>&gt; built dexter.css (expanded)<br>&gt; built dexter.min.css (compressed)</code>
+                </div>
+                <div class="tab-pane fade" id="bot-pane-3">
+                  <p class="text-success mb-0">Nenhum problema encontrado no código.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Abas com Rolagem Horizontal & Setas (.tabs-scrollable) -->
+        <section id="tabs-horizontal-scrollable" class="mb-5">
+          <h2>6. Abas com Rolagem Horizontal &amp; Setas (.tabs-scrollable)</h2>
+          <p class="text-muted">
+            Inspirado no <code>scrollable-tabs-bootstrap-5</code> (SupernovaIC), permite exibir dezenas de abas em um contêiner horizontal
+            com setas de navegação inteligentes que aparecem quando há transbordamento (overflow), desativando-se automaticamente no início ou fim.
+            Suporta clique nas setas, rolagem suave com a roda do mouse (mouse wheel), arrastar para rolar (drag to scroll) e centralização automática da aba ativa:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Exemplo com 16 Abas Horizontais e Setas Inteligentes</h6>
+            
+            <div class="tabs-scrollable mb-0" data-dx-scrollable="true">
+              <button type="button" class="tabs-scroller-btn tabs-scroller-left" aria-label="Rolar abas para a esquerda">
+                <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
+              </button>
+              <div class="tabs-scrollable-track">
+                <ul class="nav nav-tabs mb-0" role="tablist">
+                  <li class="nav-item"><button class="nav-link active" data-dx-toggle="tab" data-dx-target="#pane-sc-1" type="button">Tab 1: Geral</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-2" type="button">Tab 2: Segurança</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-3" type="button">Tab 3: Notificações</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-4" type="button">Tab 4: Privacidade</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-5" type="button">Tab 5: Cobrança</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-6" type="button">Tab 6: Integrações</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-7" type="button">Tab 7: API Keys</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-8" type="button">Tab 8: Webhooks</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-9" type="button">Tab 9: Domínios</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-10" type="button">Tab 10: Auditoria</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-11" type="button">Tab 11: Backups</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-12" type="button">Tab 12: Logs</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-13" type="button">Tab 13: Membros</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-14" type="button">Tab 14: Permissões</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-15" type="button">Tab 15: Avançado</button></li>
+                  <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-sc-16" type="button">Tab 16: Suporte</button></li>
+                </ul>
+              </div>
+              <button type="button" class="tabs-scroller-btn tabs-scroller-right" aria-label="Rolar abas para a direita">
+                <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+              </button>
+            </div>
+
+            <!-- Conteúdo das Abas Roláveis -->
+            <div class="tab-content border border-top-0 rounded-bottom p-3">
+              <div class="tab-pane fade show active" id="pane-sc-1">
+                <h6 class="fw-bold">Painel Geral (Tab 1)</h6>
+                <p class="text-muted mb-0">Visão consolidada de métricas e status do sistema com suporte completo a rolagem horizontal suave.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-2">
+                <h6 class="fw-bold">Painel de Segurança (Tab 2)</h6>
+                <p class="text-muted mb-0">Autenticação de dois fatores, chaves SSH e gerenciamento de sessões ativas.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-3">
+                <h6 class="fw-bold">Notificações (Tab 3)</h6>
+                <p class="text-muted mb-0">Canais de alerta por e-mail, Slack, webhook e push notifications.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-4">
+                <h6 class="fw-bold">Privacidade (Tab 4)</h6>
+                <p class="text-muted mb-0">Controle de retenção de dados e conformidade LGPD/GDPR.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-5">
+                <h6 class="fw-bold">Cobrança &amp; Faturas (Tab 5)</h6>
+                <p class="text-muted mb-0">Histórico de pagamentos, dados de cartão e notas fiscais emitidas.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-6">
+                <h6 class="fw-bold">Integrações (Tab 6)</h6>
+                <p class="text-muted mb-0">Conexões com GitHub, GitLab, AWS, GCP e provedores externos.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-7">
+                <h6 class="fw-bold">API Keys (Tab 7)</h6>
+                <p class="text-muted mb-0">Gerencie tokens de acesso de leitura e escrita com expiração configurável.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-8">
+                <h6 class="fw-bold">Webhooks (Tab 8)</h6>
+                <p class="text-muted mb-0">Endpoints de entrega em tempo real para eventos de alteração de estado.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-9">
+                <h6 class="fw-bold">Domínios Personalizados (Tab 9)</h6>
+                <p class="text-muted mb-0">Configuração de registros DNS e certificados SSL/TLS automáticos.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-10">
+                <h6 class="fw-bold">Trilha de Auditoria (Tab 10)</h6>
+                <p class="text-muted mb-0">Registro imutável de todas as ações executadas pelos usuários da organização.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-11">
+                <h6 class="fw-bold">Backups &amp; Restauração (Tab 11)</h6>
+                <p class="text-muted mb-0">Rotinas automatizadas diárias e ponto de restauração instantâneo.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-12">
+                <h6 class="fw-bold">Logs do Sistema (Tab 12)</h6>
+                <p class="text-muted mb-0">Streaming em tempo real de logs de requisições e erros de execução.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-13">
+                <h6 class="fw-bold">Equipe &amp; Membros (Tab 13)</h6>
+                <p class="text-muted mb-0">Convide colaboradores e atribua grupos de responsabilidade técnica.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-14">
+                <h6 class="fw-bold">Permissões RBAC (Tab 14)</h6>
+                <p class="text-muted mb-0">Políticas granulares de acesso por recurso e papel de usuário.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-15">
+                <h6 class="fw-bold">Configurações Avançadas (Tab 15)</h6>
+                <p class="text-muted mb-0">Parâmetros de kernel, timeouts de conexão e limites de concorrência.</p>
+              </div>
+              <div class="tab-pane fade" id="pane-sc-16">
+                <h6 class="fw-bold">Suporte &amp; Ajuda (Tab 16)</h6>
+                <p class="text-muted mb-0">Canais de atendimento prioritário e base de conhecimento oficial.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Snippet Monokai -->
+          <div class="code-window mb-4" data-dx-copy="true">
+            <div class="code-window-header">
+              <div class="code-dots">
+                <span class="code-dot red"></span>
+                <span class="code-dot yellow"></span>
+                <span class="code-dot green"></span>
+              </div>
+              <div class="code-actions">
+                <span class="code-badge">HTML</span>
+                <button type="button" class="code-copy-btn">Copiar</button>
+              </div>
+            </div>
+            <pre class="code-block"><code class="language-html">&lt;!-- Abas com Rolagem Horizontal &amp; Setas Inteligentes --&gt;
+&lt;div class="tabs-scrollable" data-dx-scrollable="true"&gt;
+  &lt;button type="button" class="tabs-scroller-btn tabs-scroller-left" aria-label="Rolar para esquerda"&gt;
+    &lt;svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"&gt;&lt;path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+  &lt;div class="tabs-scrollable-track"&gt;
+    &lt;ul class="nav nav-tabs" role="tablist"&gt;
+      &lt;li class="nav-item"&gt;&lt;button class="nav-link active" data-dx-toggle="tab" data-dx-target="#tab1"&gt;Tab 1&lt;/button&gt;&lt;/li&gt;
+      &lt;li class="nav-item"&gt;&lt;button class="nav-link" data-dx-toggle="tab" data-dx-target="#tab2"&gt;Tab 2&lt;/button&gt;&lt;/li&gt;
+      &lt;!-- ... até 16+ abas ... --&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+  &lt;button type="button" class="tabs-scroller-btn tabs-scroller-right" aria-label="Rolar para direita"&gt;
+    &lt;svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor"&gt;&lt;path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- PARTE 2: ABAS VERTICAIS                                        -->
+        <!-- ============================================================== -->
+
+        <!-- 7. Abas Verticais à Esquerda (.vtabs / .vtabs-left) -->
+        <section id="vtabs-left" class="mb-5">
+          <h2>7. Abas Verticais à Esquerda (.vtabs / .vtabs-left)</h2>
+          <p class="text-muted">
+            Inspirado e aprimorado a partir do <code>bootstrap-5-vertical-tabs</code> (tromgy).
+            As abas verticais se posicionam à esquerda e se conectam perfeitamente ao painel à direita.
+            A borda direita da aba ativa se funde com o fundo do painel, eliminando lacunas:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="vtabs tab-content-bordered" id="demoVtabsLeft">
+              <!-- Navegação Vertical -->
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link active" id="tab-vleft-perfil" data-dx-toggle="tab" data-dx-target="#pane-vleft-perfil" type="button" role="tab">
+                    <span class="tab-icon">👤</span>
+                    <span class="tab-truncate">Perfil &amp; Conta</span>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="tab-vleft-seguranca" data-dx-toggle="tab" data-dx-target="#pane-vleft-seguranca" type="button" role="tab">
+                    <span class="tab-icon">🔐</span>
+                    <span class="tab-truncate">Segurança &amp; 2FA</span>
+                    <span class="badge bg-green text-white">Ativo</span>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="tab-vleft-notificacoes" data-dx-toggle="tab" data-dx-target="#pane-vleft-notificacoes" type="button" role="tab">
+                    <span class="tab-icon">🔔</span>
+                    <span class="tab-truncate">Notificações</span>
+                    <span class="badge bg-coral text-white">3</span>
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="tab-vleft-faturamento" data-dx-toggle="tab" data-dx-target="#pane-vleft-faturamento" type="button" role="tab">
+                    <span class="tab-icon">💳</span>
+                    <span class="tab-truncate">Faturamento</span>
+                  </button>
+                </li>
+              </ul>
+
+              <!-- Painéis de Conteúdo -->
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="pane-vleft-perfil" role="tabpanel">
+                  <h5 class="fw-bold mb-3">Informações de Perfil</h5>
+                  <p class="text-muted">Gerencie suas informações pessoais e credenciais da organização vinculada ao Dexter UI.</p>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">Nome Completo</label>
+                      <input type="text" class="form-control" value="Charles Corrêa" readonly>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label fw-bold">E-mail Profissional</label>
+                      <input type="email" class="form-control" value="charlescorreaweb@gmail.com" readonly>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="pane-vleft-seguranca" role="tabpanel">
+                  <h5 class="fw-bold mb-3">Segurança e Acesso</h5>
+                  <p class="text-muted">Autenticação em duas etapas configurada via aplicativo TOTP. Chaves de segurança WebAuthn habilitadas.</p>
+                  <div class="d-flex align-items-center gap-2 p-3 bg-green-subtle rounded border border-green">
+                    <span>🛡️</span>
+                    <div>
+                      <strong class="text-green-emphasis">2FA Ativado com Sucesso</strong>
+                      <div class="small text-muted">Sua conta corporativa está protegida com criptografia de ponta a ponta.</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="pane-vleft-notificacoes" role="tabpanel">
+                  <h5 class="fw-bold mb-3">Central de Notificações</h5>
+                  <p class="text-muted">Configure como deseja receber alertas no navegador e e-mail.</p>
+                  <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="checkNotif1" checked>
+                    <label class="form-check-label" for="checkNotif1">Alertas de novos commits e releases</label>
+                  </div>
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="checkNotif2" checked>
+                    <label class="form-check-label" for="checkNotif2">Notificações de segurança e login incomum</label>
+                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="pane-vleft-faturamento" role="tabpanel">
+                  <h5 class="fw-bold mb-3">Faturamento e Assinatura</h5>
+                  <p class="text-muted">Plano atual: <strong>Dexter Enterprise</strong> com suporte prioritário 24/7.</p>
+                  <button type="button" class="btn btn-primary btn-sm">Baixar Comprovantes Fiscais</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Abas Verticais à Direita (.vtabs-right) -->
+        <section id="vtabs-right" class="mb-5">
+          <h2>7. Abas Verticais à Direita (.vtabs-right)</h2>
+          <p class="text-muted">
+            Adicione <code>.vtabs-right</code> para inverter o fluxo: a navegação é posicionada à direita e a borda esquerda da aba ativa se funde com o painel:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="vtabs vtabs-right tab-content-bordered" id="demoVtabsRight">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <button class="nav-link active" data-dx-toggle="tab" data-dx-target="#pane-vright-html" type="button">
+                    <span class="tab-icon">🌐</span> HTML5 Semântico
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-vright-css" type="button">
+                    <span class="tab-icon">🎨</span> CSS Moderno
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-vright-js" type="button">
+                    <span class="tab-icon">⚡</span> JavaScript Vanilla
+                  </button>
+                </li>
+              </ul>
+
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="pane-vright-html">
+                  <h5 class="fw-bold mb-2">Estrutura HTML5 Acessível</h5>
+                  <p class="text-muted mb-0">Atributos WAI-ARIA nativos, suporte a leitores de tela e estrutura semântica limpa para máxima usabilidade.</p>
+                </div>
+                <div class="tab-pane fade" id="pane-vright-css">
+                  <h5 class="fw-bold mb-2">Arquitetura SCSS Modular</h5>
+                  <p class="text-muted mb-0">Design tokens em CSS Variables, grid de 14 colunas, 28 cores oficiais e transições fluidas aceleradas por hardware.</p>
+                </div>
+                <div class="tab-pane fade" id="pane-vright-js">
+                  <h5 class="fw-bold mb-2">Controlador Vanilla JS Zero-Dependency</h5>
+                  <p class="text-muted mb-0">Total independência de bibliotecas externas, navegação completa por teclado (setas, Home, End) e eventos de ciclo de vida.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. Colapso Responsivo (.vtabs-responsive) -->
+        <section id="vtabs-responsive" class="mb-5">
+          <h2>8. Colapso Responsivo Automático (.vtabs-responsive)</h2>
+          <p class="text-muted">
+            Em telas menores que <strong>768px</strong>, a classe <code>.vtabs-responsive</code> transforma as abas verticais automaticamente em abas horizontais com scroll suave por toque:
+          </p>
+
+          <div class="doc-card mb-4">
+            <div class="vtabs vtabs-responsive tab-content-bordered" id="demoVtabsResponsive">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><button class="nav-link active" data-dx-toggle="tab" data-dx-target="#pane-resp-1" type="button">Dashboard</button></li>
+                <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-resp-2" type="button">Relatórios</button></li>
+                <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-resp-3" type="button">Exportações</button></li>
+                <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-resp-4" type="button">Auditoria</button></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="pane-resp-1">
+                  <h6 class="fw-bold mb-1">Painel Responsivo</h6>
+                  <p class="text-muted small mb-0">Redimensione a janela do navegador para ver as abas colapsarem para o modo horizontal.</p>
+                </div>
+                <div class="tab-pane fade" id="pane-resp-2">
+                  <h6 class="fw-bold mb-1">Relatórios Periódicos</h6>
+                  <p class="text-muted small mb-0">Relatórios semanais compilados automaticamente em formato PDF e planilha.</p>
+                </div>
+                <div class="tab-pane fade" id="pane-resp-3">
+                  <h6 class="fw-bold mb-1">Central de Exportações</h6>
+                  <p class="text-muted small mb-0">Histórico de downloads de arquivos CSV e JSON gerados pelo sistema.</p>
+                </div>
+                <div class="tab-pane fade" id="pane-resp-4">
+                  <h6 class="fw-bold mb-1">Trilha de Auditoria</h6>
+                  <p class="text-muted small mb-0">Registro imutável de todas as ações executadas pelos usuários cadastrados.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Cores Oficiais (.vtabs-{cor} / .nav-tabs-{cor}) -->
+        <section id="tabs-colors" class="mb-5">
+          <h2>9. Variações Cromáticas Oficiais (.vtabs-{cor} / .nav-tabs-{cor})</h2>
+          <p class="text-muted">
+            Integre com facilidade qualquer uma das <strong>28 cores oficiais</strong> do Dexter UI:
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">Variação Coral (.vtabs-coral)</h6>
+            <div class="vtabs vtabs-coral tab-content-bordered" id="demoVtabsCoral">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><button class="nav-link active" data-dx-toggle="tab" data-dx-target="#pane-cor-1" type="button">Aba Coral 1</button></li>
+                <li class="nav-item"><button class="nav-link" data-dx-toggle="tab" data-dx-target="#pane-cor-2" type="button">Aba Coral 2</button></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="pane-cor-1">
+                  <p class="mb-0 text-muted">Aba ativa com destaque na cor oficial Coral e Dark Mode nativo.</p>
+                </div>
+                <div class="tab-pane fade" id="pane-cor-2">
+                  <p class="mb-0 text-muted">Segundo painel com transição fluida.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. Tabs-X Estendido (Krajee: Below, Sideways & Cache Remoto) -->
+        <section id="tabs-krajee-x" class="mb-5">
+          <h2>10. Tabs-X Estendido (<code>kartik-v/bootstrap-tabs-x</code>)</h2>
+          <p class="text-muted">
+            Suporte drop-in para <code>.tabs-x</code> e <code>TabsX</code> sem jQuery: abas na base (<code>.tabs-below</code>), alinhamento central/direita, rotação vertical moderna (<code>.tab-sideways</code> com <code>writing-mode</code>), altura fixa rolável (<code>.tab-height-xs..lg</code>) e carregamento remoto assíncrono com cache TTL e <code>flushCache()</code>.
+          </p>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">10.1 Abas na Base Centralizadas (.tabs-below.tab-bordered.tab-align-center)</h6>
+            <div class="tabs-x tabs-below tab-bordered tab-align-center tabs-x-primary" id="demoTabsXBelow">
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="tx-below-1">Painel 1 com barra de abas posicionada abaixo e borda fundida.</div>
+                <div class="tab-pane fade" id="tx-below-2">Painel 2 ativado pelas abas centralizadas na base do componente.</div>
+                <div class="tab-pane fade" id="tx-below-3">Painel 3 mantendo compatibilidade completa com Dark Mode e ARIA.</div>
+              </div>
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" href="#tx-below-1" data-bs-toggle="tab">Resumo</a></li>
+                <li class="nav-item"><a class="nav-link" id="tabXBelowBtn2" href="#tx-below-2" data-bs-toggle="tab">Detalhes</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tx-below-3" data-bs-toggle="tab">Auditoria</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="doc-card mb-4">
+            <h6 class="fw-bold mb-3">10.2 Abas Laterais Rotacionadas &amp; Altura Fixa (.tabs-left.tab-sideways.tab-height-xs)</h6>
+            <div class="tabs-x tabs-left tab-sideways tab-bordered tab-height-xs tabs-x-indigo" id="demoTabsXSideways">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" href="#tx-side-1" data-bs-toggle="tab">Geral</a></li>
+                <li class="nav-item"><a class="nav-link" id="tabXSideBtn2" href="#tx-side-2" data-bs-toggle="tab">Métricas</a></li>
+                <li class="nav-item"><a class="nav-link" href="#tx-side-3" data-bs-toggle="tab">Logs</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="tx-side-1">
+                  <strong>Orientação Sideways em CSS puro:</strong> utiliza <code>writing-mode: vertical-rl</code> sem margens negativas frágeis, colapsando para abas horizontais no mobile.
+                </div>
+                <div class="tab-pane fade" id="tx-side-2">
+                  <strong>Altura fixa (.tab-height-xs):</strong> limita o painel a 135px com rolagem interna limpa.
+                </div>
+                <div class="tab-pane fade" id="tx-side-3">
+                  Linha de auditoria #101 &mdash; Operação registrada com sucesso.<br>
+                  Linha de auditoria #102 &mdash; Cache TTL atualizado.<br>
+                  Linha de auditoria #103 &mdash; Verificação concluída.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="doc-card mb-4">
+            <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+              <h6 class="fw-bold mb-0">10.3 Carregamento Remoto com Cache TTL &amp; <code>flushCache()</code></h6>
+              <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-indigo text-white">Requisições executadas: <strong id="tabsXLoadCount">0</strong></span>
+                <button type="button" class="btn btn-sm btn-outline-danger" id="btnFlushTabsXCache" onclick="flushTabsXDemoCache()">Limpar Cache</button>
+              </div>
+            </div>
+
+            <div class="tabs-x tabs-above tab-bordered tabs-x-teal" id="demoTabsXAjax">
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" id="tabXLocalBtn" href="#tx-ajax-1" data-bs-toggle="tab">Aba Local</a></li>
+                <li class="nav-item"><a class="nav-link" id="tabXRemoteBtn" href="#tx-ajax-2" data-url="/api/relatorio-mensal" data-bs-toggle="tab">Relatório Remoto (AJAX)</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade show active" id="tx-ajax-1">Clique na aba <strong>Relatório Remoto (AJAX)</strong> para disparar o carregamento assíncrono com cache TTL. Reabrir a aba reutiliza o cache até clicar em <strong>Limpar Cache</strong>.</div>
+                <div class="tab-pane fade" id="tx-ajax-2">Carregando...</div>
+              </div>
+            </div>
+          </div>
+
+          <pre data-lang="javascript" data-file="tabs-x-ajax.js"><code>var tx = new TabsX('#demoTabsXAjax', {
+  enableCache: true,
+  cacheTimeout: 300000,
+  loader: function (url) {
+    return fetch(url).then(function (r) { return r.text(); });
+  }
+});
+
+// Limpar cache de uma aba específica ou globalmente
+tx.flushCache('#tx-ajax-2');</code></pre>
+        </section>
+
+      </main>
+
+    <nav class="doc-toc" id="toc" data-doc-toc aria-label="Nesta página"></nav>
+  </div>
+
+  <footer class="doc-footer">&copy; 2026 Charles Corrêa. Todos os direitos reservados. Licenciado sob MIT.</footer>
+
+  <!-- Controladores JS do Dexter UI -->
+  <script src="../dist/js/dexter-code.js"></script>
+  <script src="../dist/js/dexter-ui-kit.js"></script>
+  <script src="docs-shell.js"></script>
+  <script src="../dist/js/dexter-select.js"></script>
+  <script src="../dist/js/dexter-toc.js"></script>
+  <script src="../dist/js/dexter-tabs.js"></script>
+  <script src="../dist/js/dexter-modal.js"></script>
+  <script src="../dist/js/dexter-accordion.js"></script>
+  <script src="../dist/js/dexter-wizard.js"></script>
+
+  <script>
+    (function () {
+      var loadCount = 0;
+      window.demoTabsXAjaxInst = new TabsX('#demoTabsXAjax', {
+        enableCache: true,
+        cacheTimeout: 300000,
+        loader: function (url) {
+          return new Promise(function (resolve) {
+            setTimeout(function () {
+              loadCount += 1;
+              document.getElementById('tabsXLoadCount').textContent = String(loadCount);
+              resolve(
+                '<strong>Payload remoto carregado (#' + loadCount + ')</strong> de <code>' + url + '</code> em ' +
+                new Date().toLocaleTimeString('pt-BR') + '.'
+              );
+            }, 80);
+          });
+        }
+      });
+
+      window.flushTabsXDemoCache = function () {
+        if (window.demoTabsXAjaxInst) {
+          window.demoTabsXAjaxInst.flushCache('#tx-ajax-2');
+        }
+      };
+    })();
+  </script>
+
+</body>
+</html>
