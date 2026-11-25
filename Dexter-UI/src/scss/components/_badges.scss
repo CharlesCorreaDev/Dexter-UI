@@ -1,0 +1,433 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_badges.scss
+ * @description [PT-BR] Suíte moderna e completa de Badges, Pílulas, Contadores e
+ *              Etiquetas para o Dexter UI, unindo a arquitetura componível do
+ *              Bootstrap 6.0 (escala proporcional em cabeçalhos, .theme-*,
+ *              .badge-subtle, .badge-outline, contadores posicionados e
+ *              acessibilidade) com os padrões visuais do Stylify CSS (ícones SVG,
+ *              avatares, status pulsante, split badges, vidro fosco e remoção),
+ *              todas as 28 cores oficiais + semânticas, WCAG e Dark Mode.
+ *              [EN]    Complete modern Badges, Pills & Status Labels suite for
+ *              Dexter UI uniting Bootstrap 6.0 composable architecture and Stylify
+ *              CSS patterns across all 28 official + semantic colors & Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Badges & Etiquetas (Bootstrap 6 & Stylify) | Badges & Pills */
+
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$badge-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$badge-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning");
+$badge-palette: map.merge($all-colors, $badge-semantic-colors);
+
+// ---------------------------------------------------------------------------
+// 1. Acessibilidade (.visually-hidden — Bootstrap 5/6)
+// EN: Screen-Reader Helpers for Badge Context
+// ---------------------------------------------------------------------------
+.visually-hidden,
+.visually-hidden-focusable:not(:focus):not(:focus-within) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Base (.badge / .dx-badge) — Escala Fluida em em (Bootstrap 6)
+// EN: Base Badge Class with Heading-Relative Scaling
+// ---------------------------------------------------------------------------
+.badge,
+.dx-badge {
+  --#{$prefix}-badge-padding-x: 0.65em;
+  --#{$prefix}-badge-padding-y: 0.32em;
+  --#{$prefix}-badge-font-size: 0.75em;
+  --#{$prefix}-badge-font-weight: 600;
+  --#{$prefix}-badge-line-height: 1.15;
+  --#{$prefix}-badge-border-radius: var(--#{$prefix}-radius-sm, 0.35rem);
+  --#{$prefix}-badge-accent: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-badge-bg: var(--#{$prefix}-badge-accent);
+  --#{$prefix}-badge-color: #ffffff;
+  --#{$prefix}-badge-border-color: transparent;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35em;
+  padding: var(--#{$prefix}-badge-padding-y) var(--#{$prefix}-badge-padding-x);
+  font-size: max(var(--#{$prefix}-badge-font-size), 0.7rem);
+  font-weight: var(--#{$prefix}-badge-font-weight);
+  line-height: var(--#{$prefix}-badge-line-height);
+  color: var(--#{$prefix}-badge-color);
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: var(--#{$prefix}-badge-border-radius);
+  background-color: var(--#{$prefix}-badge-bg);
+  border: 1px solid var(--#{$prefix}-badge-border-color);
+  transition: opacity 0.16s ease, transform 0.16s ease, filter 0.16s ease, background-color 0.16s ease;
+  user-select: none;
+
+  &:empty:not(.badge-dot-only) {
+    display: none;
+  }
+
+  svg {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+  }
+
+  &.badge-dismissing {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+}
+
+a.badge,
+a.dx-badge,
+button.badge,
+button.dx-badge {
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    filter: brightness(0.92);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--#{$prefix}-badge-accent);
+    outline-offset: 2px;
+  }
+}
+
+// Formatos & Escalas (5 Tamanhos)
+.badge-pill,
+.badge.rounded-pill,
+.dx-badge.rounded-pill {
+  border-radius: 999px;
+  padding-inline: 0.78em;
+}
+
+.badge-square {
+  border-radius: 0.15rem;
+}
+
+.badge-xs { font-size: 0.65rem; padding: 0.14rem 0.42rem; }
+.badge-sm { font-size: 0.72rem; padding: 0.18rem 0.5rem; }
+.badge-md { font-size: 0.8125rem; padding: 0.28rem 0.65rem; }
+.badge-lg { font-size: 0.9375rem; padding: 0.36rem 0.82rem; }
+.badge-xl { font-size: 1.0625rem; padding: 0.44rem 1rem; }
+
+// ---------------------------------------------------------------------------
+// 3. Arquétipos Stylify (Dots, Pulse, Counters, Avatars, Close, Glass & Split)
+// EN: Stylify Special Patterns (Status Dots, Pulse, Counters, Avatars, Close & Split)
+// ---------------------------------------------------------------------------
+.badge-dot::before {
+  content: "";
+  display: inline-block;
+  width: 0.48em;
+  height: 0.48em;
+  border-radius: 50%;
+  background-color: currentColor;
+  flex-shrink: 0;
+}
+
+.badge-dot-pulse {
+  position: relative;
+
+  &::before {
+    box-shadow: 0 0 0 0 currentColor;
+    animation: dx-badge-pulse 1.8s infinite;
+  }
+}
+
+@keyframes dx-badge-pulse {
+  0%   { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  70%  { box-shadow: 0 0 0 5px transparent; opacity: 0.75; }
+  100% { box-shadow: 0 0 0 0 transparent; opacity: 1; }
+}
+
+.badge-dot-only {
+  width: 0.7rem;
+  height: 0.7rem;
+  min-width: 0;
+  padding: 0;
+  border-radius: 999px;
+  border: 2px solid #ffffff;
+}
+
+[data-dx-theme="dark"] .badge-dot-only,
+[data-bs-theme="dark"] .badge-dot-only {
+  border-color: #0f172a;
+}
+
+.badge-counter {
+  min-width: 1.45em;
+  height: 1.45em;
+  padding: 0 0.42em;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+}
+
+.badge-avatar {
+  padding-inline-start: 0.32em;
+  border-radius: 999px;
+
+  img,
+  .badge-avatar-img {
+    width: 1.45em;
+    height: 1.45em;
+    border-radius: 999px;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+  }
+}
+
+.badge-glass {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  --#{$prefix}-badge-bg: rgba(255, 255, 255, 0.22);
+  --#{$prefix}-badge-color: #0f172a;
+  --#{$prefix}-badge-border-color: rgba(15, 23, 42, 0.16);
+}
+
+[data-dx-theme="dark"] .badge-glass,
+[data-bs-theme="dark"] .badge-glass {
+  --#{$prefix}-badge-bg: rgba(255, 255, 255, 0.12);
+  --#{$prefix}-badge-color: #f8fafc;
+  --#{$prefix}-badge-border-color: rgba(255, 255, 255, 0.22);
+}
+
+.badge .badge-close,
+.badge .btn-close-badge,
+.dx-badge .badge-close,
+.dx-badge .btn-close-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15em;
+  height: 1.15em;
+  padding: 0;
+  margin-inline-start: 0.15em;
+  margin-inline-end: -0.25em;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  opacity: 0.72;
+  cursor: pointer;
+  font-size: 1.05em;
+  line-height: 1;
+  border-radius: 50%;
+  transition: opacity 0.15s ease, background-color 0.15s ease;
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.18);
+  }
+}
+
+.badge-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.badge-split {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: var(--#{$prefix}-radius-sm, 0.35rem);
+  overflow: hidden;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.2;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+
+  .badge-split-label {
+    padding: 0.3rem 0.55rem;
+    background-color: #1e293b;
+    color: #f8fafc;
+  }
+
+  .badge-split-value {
+    padding: 0.3rem 0.6rem;
+    background-color: var(--#{$prefix}-badge-accent, var(--#{$prefix}-primary, #{$primary}));
+    color: var(--#{$prefix}-badge-color, #ffffff);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Paleta Oficial (28 Cores + Semânticas) + .theme-* + .text-bg-*
+// EN: Official 28-Color Palette + Semantic Variants + Bootstrap 6 Themes
+// ---------------------------------------------------------------------------
+@each $name, $hex in $badge-palette {
+  $is-light: list.index($badge-light-names, $name) != null;
+  $fg: #ffffff;
+
+  @if $is-light {
+    $fg: #130f10;
+  }
+
+  // Bootstrap 6 composable theme class: .badge.theme-{cor}
+  .badge.theme-#{$name},
+  .dx-badge.theme-#{$name},
+  .badge-split.theme-#{$name} {
+    --#{$prefix}-badge-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-bg: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-color: #{$fg};
+  }
+
+  // Direct solid badge
+  .badge-#{$name},
+  .text-bg-#{$name} {
+    --#{$prefix}-badge-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-bg: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-color: #{$fg};
+    --#{$prefix}-badge-border-color: transparent;
+  }
+
+  // Soft / Subtle
+  .badge-soft-#{$name},
+  .badge-subtle-#{$name} {
+    --#{$prefix}-badge-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-bg: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 14%, transparent);
+    --#{$prefix}-badge-color: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-border-color: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 28%, transparent);
+  }
+
+  // Outline
+  .badge-outline-#{$name} {
+    --#{$prefix}-badge-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-bg: transparent;
+    --#{$prefix}-badge-color: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-border-color: var(--#{$prefix}-#{$name}, #{$hex});
+  }
+
+  // Ghost
+  .badge-ghost-#{$name} {
+    --#{$prefix}-badge-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-bg: transparent;
+    --#{$prefix}-badge-color: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-border-color: transparent;
+
+    &:hover {
+      --#{$prefix}-badge-bg: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 12%, transparent);
+    }
+  }
+
+  // Gradient
+  .badge-gradient-#{$name} {
+    --#{$prefix}-badge-accent: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-badge-color: #ffffff;
+    --#{$prefix}-badge-border-color: transparent;
+    background-image: linear-gradient(135deg, var(--#{$prefix}-#{$name}, #{$hex}), color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 60%, #0f172a));
+  }
+
+  [data-dx-theme="dark"] .badge-soft-#{$name},
+  [data-dx-theme="dark"] .badge-subtle-#{$name},
+  [data-dx-theme="dark"] .badge-outline-#{$name},
+  [data-dx-theme="dark"] .badge-ghost-#{$name},
+  [data-bs-theme="dark"] .badge-soft-#{$name},
+  [data-bs-theme="dark"] .badge-subtle-#{$name},
+  [data-bs-theme="dark"] .badge-outline-#{$name},
+  [data-bs-theme="dark"] .badge-ghost-#{$name} {
+    --#{$prefix}-badge-color: color-mix(in srgb, var(--#{$prefix}-#{$name}, #{$hex}) 68%, #ffffff);
+  }
+}
+
+// Aliases semânticos em Português
+@each $alias, $canonical in $color-aliases {
+  .badge-#{$alias}         { @extend .badge-#{$canonical}; }
+  .badge-soft-#{$alias}    { @extend .badge-soft-#{$canonical}; }
+  .badge-subtle-#{$alias}  { @extend .badge-subtle-#{$canonical}; }
+  .badge-outline-#{$alias} { @extend .badge-outline-#{$canonical}; }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Modificadores Componíveis (Bootstrap 6: .badge-subtle, .badge-outline, .badge-ghost)
+//    (Definidos após @each .theme-* para garantir precedência na cascata CSS)
+// EN: Composable Style Variants (.badge-subtle, .badge-outline, .badge-ghost)
+// ---------------------------------------------------------------------------
+.badge.badge-subtle,
+.badge.badge-soft,
+.dx-badge.badge-subtle,
+.dx-badge.badge-soft {
+  --#{$prefix}-badge-bg: color-mix(in srgb, var(--#{$prefix}-badge-accent) 14%, transparent);
+  --#{$prefix}-badge-color: var(--#{$prefix}-badge-accent);
+  --#{$prefix}-badge-border-color: color-mix(in srgb, var(--#{$prefix}-badge-accent) 28%, transparent);
+}
+
+.badge.badge-outline,
+.dx-badge.badge-outline {
+  --#{$prefix}-badge-bg: transparent;
+  --#{$prefix}-badge-color: var(--#{$prefix}-badge-accent);
+  --#{$prefix}-badge-border-color: var(--#{$prefix}-badge-accent);
+}
+
+.badge.badge-ghost,
+.dx-badge.badge-ghost {
+  --#{$prefix}-badge-bg: transparent;
+  --#{$prefix}-badge-color: var(--#{$prefix}-badge-accent);
+  --#{$prefix}-badge-border-color: transparent;
+
+  &:hover {
+    --#{$prefix}-badge-bg: color-mix(in srgb, var(--#{$prefix}-badge-accent) 12%, transparent);
+  }
+}
+
+[data-dx-theme="dark"] .badge.badge-subtle,
+[data-dx-theme="dark"] .badge.badge-soft,
+[data-dx-theme="dark"] .badge.badge-outline,
+[data-dx-theme="dark"] .badge.badge-ghost,
+[data-bs-theme="dark"] .badge.badge-subtle,
+[data-bs-theme="dark"] .badge.badge-soft,
+[data-bs-theme="dark"] .badge.badge-outline,
+[data-bs-theme="dark"] .badge.badge-ghost {
+  --#{$prefix}-badge-color: color-mix(in srgb, var(--#{$prefix}-badge-accent) 68%, #ffffff);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge,
+  .dx-badge,
+  .badge-dot-pulse::before,
+  .badge .badge-close,
+  .badge .btn-close-badge {
+    transition: none;
+    animation: none;
+  }
+}

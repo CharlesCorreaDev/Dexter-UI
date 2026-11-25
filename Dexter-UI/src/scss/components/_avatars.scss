@@ -1,0 +1,678 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _avatars.scss
+ * @description [PT-BR] Suíte completa de Avatares corporativos e sociais para o Dexter UI.
+ *              Baseado e aprimorado a partir do bootstrap-avatar (ghoststead), incluindo:
+ *              - 12 tamanhos fixos (16px a 160px) e semânticos (.avatar-3xs a .avatar-3xl);
+ *              - Dimensionamento responsivo por breakpoint (.avatar-{bp}-{size});
+ *              - Formas geométricas: círculo, arredondado, quadrado, squircle (superelipse) e hexágono;
+ *              - Badges de presença/status com anel protetor de recorte (.status-online, .status-busy, etc.);
+ *              - Grupos empilhados com sobreposição (.avatar-group), elevação e zoom suave (700ms) ao hover;
+ *              - Anéis de destaque e story rings concêntricos (.avatar-ring, .avatar-ring-gradient);
+ *              - Suporte completo às 28 famílias de cores oficiais (.avatar-{cor} e .avatar-soft-{cor});
+ *              - Avatares com iniciais perfeitamente tipadas, ícones, silhuetas SVG de fallback e modo editável;
+ *              - Blocos emparelhados de usuário com metadados (.avatar-block);
+ *              - Suporte total ao Dark Mode nativo via [data-dx-theme="dark"].
+ *              [EN]    Complete corporate and social Avatar suite for Dexter UI.
+ *              Based on and enhanced from bootstrap-avatar (ghoststead), including:
+ *              - 12 fixed (16px to 160px) and semantic sizes (.avatar-3xs to .avatar-3xl);
+ *              - Responsive breakpoint sizing (.avatar-{bp}-{size});
+ *              - Geometric shapes: circle, rounded, square, squircle (superellipse) and hexagon;
+ *              - Presence/status badges with protective cutout ring (.status-online, .status-busy, etc.);
+ *              - Stacked overlapping avatar groups (.avatar-group), elevation and 700ms smooth hover zoom;
+ *              - Concentric story rings and highlights (.avatar-ring, .avatar-ring-gradient);
+ *              - Full palette integration across all 28 color families (.avatar-{color} and .avatar-soft-{color});
+ *              - Pixel-perfect typography for initials, icons, SVG silhouette fallback and editable mode;
+ *              - Paired user profile blocks with metadata (.avatar-block);
+ *              - Full native Dark Mode support via [data-dx-theme="dark"].
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Componente de Avatar e Grupos de Avatares | Avatar and Avatar Groups */
+
+@use "sass:map";
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Design Tokens de Avatar
+// EN: Avatar Variables and Design Tokens
+// ---------------------------------------------------------------------------
+
+:root {
+  --#{$prefix}-avatar-size: 3rem; // 48px padrão (md)
+  --#{$prefix}-avatar-font-size: calc(var(--#{$prefix}-avatar-size) * 0.42);
+  --#{$prefix}-avatar-border-radius: 50%;
+  --#{$prefix}-avatar-bg: var(--#{$prefix}-silver-light-100, #f1f5f9);
+  --#{$prefix}-avatar-color: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-avatar-border-color: var(--#{$prefix}-body-bg, #ffffff);
+  --#{$prefix}-avatar-border-width: 2px;
+  --#{$prefix}-avatar-group-overlap: -0.875rem;
+  --#{$prefix}-avatar-transition: transform 700ms ease-in-out, box-shadow 700ms ease-in-out, border-color 700ms ease-in-out, z-index 700ms ease-in-out;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Classe Base do Avatar (.avatar)
+// EN: Avatar Base Class (.avatar)
+// ---------------------------------------------------------------------------
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: var(--#{$prefix}-avatar-size);
+  height: var(--#{$prefix}-avatar-size);
+  flex-shrink: 0;
+  flex-grow: 0;
+  border-radius: var(--#{$prefix}-avatar-border-radius);
+  font-family: var(--#{$prefix}-font-body);
+  font-size: var(--#{$prefix}-avatar-font-size);
+  font-weight: 600;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  user-select: none;
+  background-color: var(--#{$prefix}-avatar-bg);
+  color: var(--#{$prefix}-avatar-color);
+  vertical-align: middle;
+  box-sizing: border-box;
+  aspect-ratio: 1 / 1;
+  transition: var(--#{$prefix}-avatar-transition);
+
+  // Imagem embutida direta ou via <img> filha
+  img,
+  &.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    display: block;
+    aspect-ratio: inherit;
+  }
+
+  // Iniciais tipográficas
+  .avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    border-radius: inherit;
+    line-height: 1;
+  }
+
+  // Ícone centralizado
+  .avatar-icon,
+  > svg {
+    width: 52%;
+    height: 52%;
+    fill: currentColor;
+    display: block;
+  }
+
+  // Silhueta de usuário vazia / fallback SVG
+  &.avatar-fallback,
+  .avatar-placeholder {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23869dcc'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: 78%;
+  }
+
+  // Efeito interativo quando usado como link ou botão
+  &[href],
+  &[role="button"],
+  &.avatar-clickable {
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.92;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    &:active {
+      transform: translateY(0) scale(0.97);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Formas Geométricas do Avatar (.avatar-circle, .avatar-rounded, etc.)
+// EN: Geometric Shapes (.avatar-circle, .avatar-rounded, etc.)
+// ---------------------------------------------------------------------------
+
+// 3.1 Círculo Perfeito (Padrão)
+.avatar-circle,
+.avatar.rounded-circle {
+  border-radius: 50% !important;
+
+  img {
+    border-radius: 50% !important;
+  }
+}
+
+// 3.2 Cantos Arredondados
+.avatar-rounded,
+.avatar.rounded {
+  border-radius: var(--#{$prefix}-radius-lg, 0.5rem) !important;
+
+  img {
+    border-radius: var(--#{$prefix}-radius-lg, 0.5rem) !important;
+  }
+}
+
+.avatar-rounded-sm {
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem) !important;
+
+  img {
+    border-radius: var(--#{$prefix}-radius-sm, 0.25rem) !important;
+  }
+}
+
+.avatar-rounded-xl {
+  border-radius: var(--#{$prefix}-radius-xl, 1rem) !important;
+
+  img {
+    border-radius: var(--#{$prefix}-radius-xl, 1rem) !important;
+  }
+}
+
+// 3.3 Quadrado sem cantos
+.avatar-square {
+  border-radius: 0 !important;
+
+  img {
+    border-radius: 0 !important;
+  }
+}
+
+// 3.4 Squircle (Superelipse estilo iOS / macOS)
+.avatar-squircle {
+  border-radius: 28% !important;
+
+  img {
+    border-radius: 28% !important;
+  }
+}
+
+// 3.5 Hexagonal (Recorte poligonal geométrico)
+.avatar-hexagon {
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  border-radius: 0 !important;
+
+  img {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    border-radius: 0 !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Escala de Tamanhos Fixos, Semânticos e Responsivos (16px a 160px)
+// EN: Sizing Scale: Fixed, Semantic and Responsive (16px to 160px)
+// ---------------------------------------------------------------------------
+
+$avatar-sizes: (
+  16:  (rem: 1rem,     semantic: "3xs"),
+  20:  (rem: 1.25rem,  semantic: "2xs"),
+  24:  (rem: 1.5rem,   semantic: "xs"),
+  32:  (rem: 2rem,     semantic: "sm"),
+  40:  (rem: 2.5rem,   semantic: null),
+  48:  (rem: 3rem,     semantic: "md"),
+  56:  (rem: 3.5rem,   semantic: null),
+  64:  (rem: 4rem,     semantic: "lg"),
+  80:  (rem: 5rem,     semantic: null),
+  96:  (rem: 6rem,     semantic: "xl"),
+  128: (rem: 8rem,     semantic: "2xl"),
+  160: (rem: 10rem,    semantic: "3xl")
+);
+
+// Geração universal mobile-first com breakpoints
+@each $bp-name, $bp-width in $breakpoints {
+  $infix: breakpoint-infix($bp-name);
+
+  @include media-up($bp-name) {
+    @each $size-px, $meta in $avatar-sizes {
+      $val: map.get($meta, rem);
+      $sem: map.get($meta, semantic);
+
+      // Classe em pixels: .avatar-48, .avatar-md-64, etc.
+      .avatar#{$infix}-#{$size-px} {
+        --#{$prefix}-avatar-size: #{$val};
+        width: #{$val} !important;
+        height: #{$val} !important;
+      }
+
+      // Classe semântica: .avatar-md, .avatar-lg-xl, etc.
+      @if $sem != null {
+        .avatar#{$infix}-#{$sem} {
+          --#{$prefix}-avatar-size: #{$val};
+          width: #{$val} !important;
+          height: #{$val} !important;
+        }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Badges de Status e Presença (.avatar-status / .avatar-indicator)
+// EN: Presence and Status Badges (.avatar-status / .avatar-indicator)
+// ---------------------------------------------------------------------------
+
+.avatar-status,
+.avatar-indicator {
+  position: absolute;
+  display: block;
+  width: calc(var(--#{$prefix}-avatar-size) * 0.28);
+  height: calc(var(--#{$prefix}-avatar-size) * 0.28);
+  min-width: 0.5rem;
+  min-height: 0.5rem;
+  max-width: 1.5rem;
+  max-height: 1.5rem;
+  border-radius: 50%;
+  border: var(--#{$prefix}-avatar-border-width, 2px) solid var(--#{$prefix}-body-bg, #ffffff);
+  box-sizing: content-box;
+  z-index: 2;
+
+  // Posição Superior Direita (Default)
+  top: 2%;
+  right: 2%;
+
+  // Modificadores de posicionamento
+  &.status-bottom-right,
+  &.status-bottom {
+    top: auto;
+    bottom: 2%;
+    right: 2%;
+  }
+
+  &.status-bottom-left {
+    top: auto;
+    bottom: 2%;
+    right: auto;
+    left: 2%;
+  }
+
+  &.status-top-left {
+    top: 2%;
+    right: auto;
+    left: 2%;
+  }
+
+  // Cores de Presença
+  &.status-online,
+  &.status-success {
+    background-color: #22c55e;
+  }
+
+  &.status-busy,
+  &.status-danger {
+    background-color: #ef4444;
+  }
+
+  &.status-away,
+  &.status-warning {
+    background-color: #f59e0b;
+  }
+
+  &.status-offline,
+  &.status-secondary {
+    background-color: #94a3b8;
+  }
+
+  // Não Perturbe (DND) com barra interna
+  &.status-dnd {
+    background-color: #ef4444;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 20%;
+      right: 20%;
+      height: 2px;
+      background-color: #ffffff;
+      transform: translateY(-50%);
+    }
+  }
+
+  // Pulso animado de radar
+  &.status-pulse::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: inherit;
+    opacity: 0.75;
+    animation: avatar-status-pulse 1.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    z-index: -1;
+  }
+}
+
+@keyframes avatar-status-pulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Grupo de Avatares Sobrepostos (.avatar-group)
+// EN: Stacked Overlapping Avatar Group (.avatar-group)
+// ---------------------------------------------------------------------------
+
+.avatar-group {
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+
+  .avatar {
+    border: 2px solid var(--#{$prefix}-body-bg, #ffffff);
+    margin-inline-start: var(--#{$prefix}-avatar-group-overlap);
+    position: relative;
+    z-index: 1;
+
+    &:first-child {
+      margin-inline-start: 0;
+    }
+
+    // Elevação interativa e zoom suave ao passar o mouse
+    &:hover {
+      z-index: 15 !important;
+      transform: translateY(-4px) scale(1.12);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+    }
+  }
+
+  // Ordem visual invertida (Primeiro sobre o segundo)
+  &.avatar-group-reverse {
+    flex-direction: row-reverse;
+
+    .avatar {
+      margin-inline-start: 0;
+      margin-inline-end: var(--#{$prefix}-avatar-group-overlap);
+
+      &:first-child {
+        margin-inline-end: 0;
+      }
+    }
+  }
+
+  // Espaçamentos densos / compactos
+  &.avatar-group-dense {
+    --#{$prefix}-avatar-group-overlap: -1.25rem;
+  }
+
+  &.avatar-group-loose {
+    --#{$prefix}-avatar-group-overlap: -0.5rem;
+  }
+}
+
+// Avatar Contador / Excedente (+3, +10)
+.avatar-more,
+.avatar-counter {
+  background-color: var(--#{$prefix}-silver-light-200, #e2e8f0) !important;
+  color: var(--#{$prefix}-primary-800, #223760) !important;
+  font-weight: 700 !important;
+  font-size: calc(var(--#{$prefix}-avatar-size) * 0.38) !important;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--#{$prefix}-primary-100, #d0d7e6) !important;
+    color: var(--#{$prefix}-primary, #3b5998) !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Anéis de Destaque e Story Rings (.avatar-ring, .avatar-ring-gradient)
+// EN: Highlight Rings and Story Rings (.avatar-ring, .avatar-ring-gradient)
+// ---------------------------------------------------------------------------
+
+.avatar-ring {
+  box-shadow:
+    0 0 0 2px var(--#{$prefix}-body-bg, #ffffff),
+    0 0 0 4px var(--#{$prefix}-primary, #3b5998);
+
+  &.avatar-ring-sm {
+    box-shadow:
+      0 0 0 2px var(--#{$prefix}-body-bg, #ffffff),
+      0 0 0 3px var(--#{$prefix}-primary, #3b5998);
+  }
+
+  &.avatar-ring-lg {
+    box-shadow:
+      0 0 0 3px var(--#{$prefix}-body-bg, #ffffff),
+      0 0 0 6px var(--#{$prefix}-primary, #3b5998);
+  }
+}
+
+// Anel estilo Stories com Gradiente Vibrante
+.avatar-ring-gradient {
+  position: relative;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  display: inline-flex;
+  aspect-ratio: 1 / 1;
+
+  .avatar {
+    border: 2px solid var(--#{$prefix}-body-bg, #ffffff);
+  }
+
+  &.avatar-ring-viewed {
+    background: var(--#{$prefix}-silver-light-300, #cbd5e1);
+  }
+}
+
+// Anel com rotação contínua (.avatar-ring-animated)
+.avatar-ring-animated {
+  animation: avatar-ring-spin 6s linear infinite;
+}
+
+@keyframes avatar-ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+// ---------------------------------------------------------------------------
+// 8. Cores e Variantes Tonais da Paleta Oficial (.avatar-{cor} & .avatar-soft-{cor})
+// EN: Colors and Tonal Variants (.avatar-{color} & .avatar-soft-{color})
+// ---------------------------------------------------------------------------
+
+@each $name, $value in $all-colors {
+  // Sólido com fundo vibrante e texto contrastante
+  .avatar-#{$name} {
+    --#{$prefix}-avatar-bg: var(--#{$prefix}-#{$name}, #{$value});
+    --#{$prefix}-avatar-color: #ffffff;
+    background-color: var(--#{$prefix}-avatar-bg);
+    color: var(--#{$prefix}-avatar-color);
+  }
+
+  // Tom suave (fundo pastel nível 100 com texto escuro nível 800)
+  .avatar-soft-#{$name} {
+    --#{$prefix}-avatar-bg: var(--#{$prefix}-#{$name}-100, #d0d7e6);
+    --#{$prefix}-avatar-color: var(--#{$prefix}-#{$name}-800, #223760);
+    background-color: var(--#{$prefix}-avatar-bg);
+    color: var(--#{$prefix}-avatar-color);
+  }
+
+  // Anel colorido correspondente
+  .avatar-ring-#{$name} {
+    box-shadow:
+      0 0 0 2px var(--#{$prefix}-body-bg, #ffffff),
+      0 0 0 4px var(--#{$prefix}-#{$name}, #{$value}) !important;
+  }
+}
+
+// Aliases em Português
+@each $alias, $canonical in $color-aliases {
+  .avatar-#{$alias}      { @extend .avatar-#{$canonical}; }
+  .avatar-soft-#{$alias} { @extend .avatar-soft-#{$canonical}; }
+  .avatar-ring-#{$alias} { @extend .avatar-ring-#{$canonical}; }
+}
+
+// ---------------------------------------------------------------------------
+// 9. Bloco de Usuário com Metadados (.avatar-block / .avatar-meta)
+// EN: User Profile Block with Metadata (.avatar-block / .avatar-meta)
+// ---------------------------------------------------------------------------
+
+.avatar-block {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.875rem;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+
+  .avatar-meta {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.35;
+  }
+
+  .avatar-name {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--#{$prefix}-body-color, #212529);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .avatar-desc,
+  .avatar-role,
+  .avatar-subtext {
+    font-size: 0.8125rem;
+    color: var(--#{$prefix}-text-muted, #64748b);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &[href]:hover {
+    .avatar-name {
+      color: var(--#{$prefix}-primary, #3b5998);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 10. Modo Editável / Foto de Perfil (.avatar-editable)
+// EN: Editable Avatar / Profile Upload Overlay (.avatar-editable)
+// ---------------------------------------------------------------------------
+
+.avatar-editable {
+  cursor: pointer;
+  overflow: hidden;
+
+  .avatar-edit-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    border-radius: inherit;
+    transition: opacity 700ms ease-in-out;
+    z-index: 5;
+
+    svg {
+      width: 38%;
+      height: 38%;
+      fill: currentColor;
+    }
+  }
+
+  &:hover .avatar-edit-overlay {
+    opacity: 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 11. Dark Mode Automático
+// EN: Automatic Dark Mode
+// ---------------------------------------------------------------------------
+
+[data-dx-theme="dark"] {
+  --#{$prefix}-avatar-bg: #1e293b;
+  --#{$prefix}-avatar-color: #93c5fd;
+  --#{$prefix}-avatar-border-color: #0d1117;
+
+  .avatar-status,
+  .avatar-indicator {
+    border-color: #0d1117;
+  }
+
+  .avatar-group .avatar {
+    border-color: #0d1117;
+  }
+
+  .avatar-ring {
+    box-shadow:
+      0 0 0 2px #0d1117,
+      0 0 0 4px var(--#{$prefix}-primary, #3b5998);
+  }
+
+  .avatar-ring-gradient .avatar {
+    border-color: #0d1117;
+  }
+
+  .avatar-more,
+  .avatar-counter {
+    background-color: #334155 !important;
+    color: #e2e8f0 !important;
+
+    &:hover {
+      background-color: #475569 !important;
+      color: #ffffff !important;
+    }
+  }
+
+  .avatar-block .avatar-name {
+    color: #e6edf3;
+  }
+
+  .avatar-block .avatar-desc,
+  .avatar-block .avatar-role {
+    color: #8b949e;
+  }
+}

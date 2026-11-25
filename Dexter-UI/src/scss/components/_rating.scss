@@ -1,0 +1,312 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _rating.scss
+ * @description [PT-BR] Suíte completa de Avaliação por Estrelas (Star Rating & Fractional Reviews),
+ *              inspirada e aprimorada a partir do Krajee Bootstrap Star Rating (github.com/kartik-v/bootstrap-star-rating).
+ *              Elimina a dependência de jQuery com controlador nativo vanilla JS (DexterRating),
+ *              suporte a preenchimento fracionado preciso (estrelas pela metade ou decimais contínuos por CSS clipping),
+ *              ícones vetoriais SVG (estrelas, corações, polegares), botão de limpeza/reset (.rating-clear),
+ *              legendas dinâmicas em badges (.rating-caption), modos interativo e somente leitura (.rating-readonly),
+ *              5 tamanhos modulares (.rating-xs a .rating-xl), integração às 28 cores oficiais e suporte a Dark Mode.
+ *              [EN]    Complete Star Rating & Fractional Reviews Suite, inspired and enhanced from
+ *              Krajee Bootstrap Star Rating (github.com/kartik-v/bootstrap-star-rating). Eliminates jQuery
+ *              dependency with a zero-dependency vanilla JS controller (DexterRating), precise fractional
+ *              fills (half-stars or continuous decimals via CSS clipping), vector SVG symbols (stars, hearts,
+ *              thumbs), clear/reset button (.rating-clear), dynamic caption badges (.rating-caption),
+ *              interactive and read-only display modes (.rating-readonly), 5 modular sizes (.rating-xs to .rating-xl),
+ *              full 28-color palette integration, and native Dark Mode support.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Avaliação por Estrelas | Star Rating */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Tokens de Avaliação
+// EN: Rating Tokens and CSS Variables
+// ---------------------------------------------------------------------------
+
+:root {
+  --#{$prefix}-rating-empty-color: #cbd5e1;
+  --#{$prefix}-rating-filled-color: var(--#{$prefix}-gold, #f59e0b);
+  --#{$prefix}-rating-hover-color: var(--#{$prefix}-gold-600, #d97706);
+  --#{$prefix}-rating-gap: 0.25rem;
+
+  // Tamanhos dos ícones
+  --#{$prefix}-rating-size-xs: 0.875rem;
+  --#{$prefix}-rating-size-sm: 1.125rem;
+  --#{$prefix}-rating-size-md: 1.5rem;
+  --#{$prefix}-rating-size-lg: 2rem;
+  --#{$prefix}-rating-size-xl: 2.75rem;
+
+  --#{$prefix}-rating-size: var(--#{$prefix}-rating-size-md);
+}
+
+[data-#{$prefix}-theme="dark"] {
+  --#{$prefix}-rating-empty-color: #333948;
+  --#{$prefix}-rating-filled-color: var(--#{$prefix}-gold, #f59e0b);
+  --#{$prefix}-rating-hover-color: #fbbf24;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Contêiner Principal (.rating-container / .dx-rating)
+// EN: Main Rating Container (.rating-container / .dx-rating)
+// ---------------------------------------------------------------------------
+
+.rating-container,
+.dx-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  vertical-align: middle;
+  font-family: var(--#{$prefix}-font-body);
+  user-select: none;
+
+  // Estados desabilitado e somente leitura
+  &.rating-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &.rating-readonly {
+    cursor: default;
+
+    .rating-stars {
+      cursor: default;
+    }
+
+    .rating-clear {
+      display: none !important;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Estrutura de Estrelas & Preenchimento Fracionado (.rating-stars)
+// EN: Stars Structure & Fractional Fill (.rating-stars)
+// ---------------------------------------------------------------------------
+
+.rating-stars {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  line-height: 1;
+
+  &:focus-visible {
+    outline: 2px solid var(--#{$prefix}-primary, #3b5998);
+    outline-offset: 3px;
+    border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  }
+}
+
+// Camada Base: Estrelas Vazias / Inativas
+.rating-empty {
+  display: flex;
+  align-items: center;
+  gap: var(--#{$prefix}-rating-gap);
+  color: var(--#{$prefix}-rating-empty-color);
+  transition: color 150ms ease;
+}
+
+// Camada Superior: Estrelas Preenchidas (com corte percentual preciso)
+.rating-filled {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--#{$prefix}-rating-gap);
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--#{$prefix}-rating-filled-color);
+  transition: width 100ms ease-out, color 150ms ease;
+  pointer-events: none;
+}
+
+// Elemento individual de estrela / símbolo
+.rating-star {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--#{$prefix}-rating-size);
+  height: var(--#{$prefix}-rating-size);
+  flex-shrink: 0;
+  transition: transform 120ms ease;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+    display: block;
+  }
+
+  .rating-stars:hover & {
+    transform: scale(1.05);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Botão de Limpeza / Reset (.rating-clear)
+// EN: Clear / Reset Button (.rating-clear)
+// ---------------------------------------------------------------------------
+
+.rating-clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: color 150ms ease, background-color 150ms ease, transform 150ms ease;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    fill: currentColor;
+  }
+
+  &:hover {
+    color: var(--#{$prefix}-red, #ef4444);
+    background-color: rgba(239, 68, 68, 0.1);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.92);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Legenda Dinâmica de Avaliação (.rating-caption)
+// EN: Dynamic Rating Caption (.rating-caption)
+// ---------------------------------------------------------------------------
+
+.rating-caption {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  background-color: color-mix(in srgb, var(--#{$prefix}-rating-filled-color) 15%, transparent);
+  color: var(--#{$prefix}-rating-filled-color);
+  border: 1px solid color-mix(in srgb, var(--#{$prefix}-rating-filled-color) 25%, transparent);
+  white-space: nowrap;
+  min-width: 2.25rem;
+  text-align: center;
+  transition: all 150ms ease;
+}
+
+// ---------------------------------------------------------------------------
+// 6. Variantes de Tamanho (.rating-xs até .rating-xl)
+// EN: Size Variants (.rating-xs to .rating-xl)
+// ---------------------------------------------------------------------------
+
+.rating-xs {
+  --#{$prefix}-rating-size: var(--#{$prefix}-rating-size-xs);
+  --#{$prefix}-rating-gap: 0.15rem;
+
+  .rating-caption {
+    font-size: 0.6875rem;
+    padding: 0.125rem 0.375rem;
+  }
+  .rating-clear {
+    width: 1.125rem;
+    height: 1.125rem;
+    svg { width: 0.6875rem; height: 0.6875rem; }
+  }
+}
+
+.rating-sm {
+  --#{$prefix}-rating-size: var(--#{$prefix}-rating-size-sm);
+  --#{$prefix}-rating-gap: 0.2rem;
+
+  .rating-caption {
+    font-size: 0.75rem;
+    padding: 0.1875rem 0.5rem;
+  }
+  .rating-clear {
+    width: 1.25rem;
+    height: 1.25rem;
+    svg { width: 0.75rem; height: 0.75rem; }
+  }
+}
+
+.rating-md {
+  --#{$prefix}-rating-size: var(--#{$prefix}-rating-size-md);
+  --#{$prefix}-rating-gap: 0.25rem;
+}
+
+.rating-lg {
+  --#{$prefix}-rating-size: var(--#{$prefix}-rating-size-lg);
+  --#{$prefix}-rating-gap: 0.35rem;
+
+  .rating-caption {
+    font-size: 0.9375rem;
+    padding: 0.35rem 0.75rem;
+  }
+  .rating-clear {
+    width: 1.875rem;
+    height: 1.875rem;
+    svg { width: 1.125rem; height: 1.125rem; }
+  }
+}
+
+.rating-xl {
+  --#{$prefix}-rating-size: var(--#{$prefix}-rating-size-xl);
+  --#{$prefix}-rating-gap: 0.5rem;
+
+  .rating-caption {
+    font-size: 1.125rem;
+    padding: 0.45rem 0.875rem;
+  }
+  .rating-clear {
+    width: 2.25rem;
+    height: 2.25rem;
+    svg { width: 1.35rem; height: 1.35rem; }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Integração às 28 Cores Oficiais (.rating-{cor})
+// EN: Official 28-Color Palette Integration (.rating-{cor})
+// ---------------------------------------------------------------------------
+
+@each $color-name, $color-value in $all-colors {
+  .rating-#{$color-name} {
+    --#{$prefix}-rating-filled-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    --#{$prefix}-rating-hover-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+
+    .rating-caption {
+      background-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 15%, transparent);
+      color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+      border-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 25%, transparent);
+    }
+  }
+}

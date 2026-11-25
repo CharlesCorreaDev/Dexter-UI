@@ -1,0 +1,853 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_images.scss
+ * @description [PT-BR] Componentes e estilos para Imagens: responsividade (.img-fluid),
+ *                      miniaturas (.img-thumbnail), moldura analógica polaroid (.img-polaroid),
+ *                      efeitos de hover (.img-hover-zoom, .img-hover-lift, etc. em 700ms),
+ *                      alinhamento, ajuste de proporção (object-fit/position), figures e picture.
+ *              [EN]    Image components and styles: responsiveness (.img-fluid),
+ *                      thumbnails (.img-thumbnail), instant polaroid frame (.img-polaroid),
+ *                      hover effects (.img-hover-zoom, .img-hover-lift, etc. in 700ms),
+ *                      alignment, aspect fitting (object-fit/position), figures, and picture.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Imagens & Mídia | Images & Media */
+
+@use "../abstracts" as *;
+
+// -----------------------------------------------------------------------------
+// 1. Imagens Responsivas & Ajuste de Dimensão / Responsive Images & Fitting
+// -----------------------------------------------------------------------------
+.img-fluid,
+.img-responsive {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+.img-cover {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.img-contain {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+}
+
+// pt-BR: Utilitários de Object Fit
+// EN: Object Fit Utilities
+.object-fit-contain { object-fit: contain !important; }
+.object-fit-cover   { object-fit: cover !important; }
+.object-fit-fill    { object-fit: fill !important; }
+.object-fit-scale   { object-fit: scale-down !important; }
+.object-fit-none    { object-fit: none !important; }
+
+// pt-BR: Utilitários de Object Position
+// EN: Object Position Utilities
+.object-position-top    { object-position: top !important; }
+.object-position-center { object-position: center !important; }
+.object-position-bottom { object-position: bottom !important; }
+.object-position-start  { object-position: left !important; }
+.object-position-end    { object-position: right !important; }
+
+// -----------------------------------------------------------------------------
+// 2. Miniaturas / Image Thumbnails
+// -----------------------------------------------------------------------------
+.img-thumbnail {
+  padding: 0.25rem;
+  background-color: var(--#{$prefix}-body-bg, #ffffff);
+  border: 1px solid var(--#{$prefix}-border-color, #dee2e6);
+  border-radius: var(--#{$prefix}-radius);
+  max-width: 100%;
+  height: auto;
+  box-shadow: var(--#{$prefix}-shadow-sm);
+  transition: border-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              box-shadow var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+  &:hover {
+    border-color: var(--#{$prefix}-primary);
+    box-shadow: var(--#{$prefix}-shadow);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 3. Moldura Polaroid / Polaroid Instant Frame
+// -----------------------------------------------------------------------------
+.img-polaroid {
+  display: inline-block;
+  padding: 0.625rem 0.625rem 1.75rem 0.625rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--#{$prefix}-radius-sm);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 100%;
+  text-align: center;
+  transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              box-shadow var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 2px;
+  }
+
+  .polaroid-caption,
+  figcaption {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: #333333;
+    font-weight: 500;
+  }
+
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  }
+}
+
+// pt-BR: Adaptação dark mode da moldura polaroid
+// EN: Dark mode adaptation for polaroid frame
+[data-#{$prefix}-theme="dark"] .img-polaroid {
+  background-color: #1e242d;
+  border-color: #384252;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+
+  .polaroid-caption,
+  figcaption {
+    color: #e6edf3;
+  }
+
+  &:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.65);
+  }
+}
+
+// pt-BR: Inclinações charmosas de polaroid
+// EN: Charming polaroid tilt variations
+.polaroid-tilt-start {
+  transform: rotate(-2.5deg);
+}
+
+.polaroid-tilt-end {
+  transform: rotate(2.5deg);
+}
+
+// -----------------------------------------------------------------------------
+// 4. Efeitos Hover em Imagens (700ms ease-in-out) / Image Hover Effects
+// -----------------------------------------------------------------------------
+.img-hover-container {
+  overflow: hidden;
+  position: relative;
+  display: block;
+  border-radius: var(--#{$prefix}-radius);
+
+  img {
+    transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+                filter var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  }
+}
+
+.img-hover-zoom {
+  @extend .img-hover-container;
+
+  &:hover img {
+    transform: scale(1.08);
+  }
+}
+
+.img-hover-lift {
+  transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              box-shadow var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--#{$prefix}-shadow-lg);
+  }
+}
+
+.img-hover-glow {
+  transition: box-shadow var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+  &:hover {
+    box-shadow: 0 0 1.5rem rgba(var(--#{$prefix}-primary-rgb), 0.45);
+  }
+}
+
+.img-hover-rotate {
+  transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+  &:hover {
+    transform: rotate(3deg) scale(1.03);
+  }
+}
+
+.img-hover-flip {
+  perspective: 800px;
+  transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+  &:hover {
+    transform: rotateY(180deg);
+  }
+}
+
+.img-hover-fade {
+  transition: opacity var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+  &:hover {
+    opacity: 0.65;
+  }
+}
+
+.img-hover-brighten {
+  transition: filter var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+  &:hover {
+    filter: brightness(1.25);
+  }
+}
+
+// pt-BR: Classes utilitárias gerais de transição de imagem (700ms)
+// EN: General image transition utility classes (700ms)
+.img-transition {
+  transition: all var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out) !important;
+}
+
+.img-transition-transform {
+  transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out) !important;
+}
+
+.img-transition-filter {
+  transition: filter var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out) !important;
+}
+
+.img-transition-opacity {
+  transition: opacity var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out) !important;
+}
+
+// -----------------------------------------------------------------------------
+// 5. Alinhamento de Imagens / Aligning Images
+// -----------------------------------------------------------------------------
+.img-start {
+  float: inline-start;
+  margin-inline-end: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.img-end {
+  float: inline-end;
+  margin-inline-start: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.img-center {
+  display: block;
+  margin-inline: auto;
+}
+
+// -----------------------------------------------------------------------------
+// 6. Figures e Figcaptions / Figures & Captions
+// -----------------------------------------------------------------------------
+figure.figure {
+  display: inline-block;
+  margin: 0 0 1.25rem;
+  max-width: 100%;
+
+  > img {
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+}
+
+figcaption.figure-caption {
+  font-size: 0.875em;
+  color: var(--#{$prefix}-text-muted);
+  line-height: 1.4;
+}
+
+.figure-caption-start  { text-align: start !important; }
+.figure-caption-center { text-align: center !important; }
+.figure-caption-end    { text-align: end !important; }
+
+// -----------------------------------------------------------------------------
+// 7. Elemento Picture / Picture Element
+// -----------------------------------------------------------------------------
+picture {
+  display: block;
+  max-width: 100%;
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 8. Imagem Dupla / Dual Image & Image Swap (Crossfade 700ms)
+// -----------------------------------------------------------------------------
+.img-dual,
+.img-swap {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: var(--#{$prefix}-radius);
+
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .img-primary {
+    position: relative;
+    z-index: 1;
+    transition: opacity var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  }
+
+  .img-secondary {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  }
+
+  &:hover {
+    .img-primary {
+      opacity: 0;
+    }
+    .img-secondary {
+      opacity: 1;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 9. Imagens de Canto / Corner Images & Badges
+// -----------------------------------------------------------------------------
+.corner-img-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.corner-img {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  max-width: 5rem;
+  height: auto;
+}
+
+.corner-img-sm { max-width: 3rem !important; }
+.corner-img-md { max-width: 5rem !important; }
+.corner-img-lg { max-width: 8rem !important; }
+
+.corner-top-start {
+  top: 0;
+  inset-inline-start: 0;
+}
+
+.corner-top-end {
+  top: 0;
+  inset-inline-end: 0;
+}
+
+.corner-bottom-start {
+  bottom: 0;
+  inset-inline-start: 0;
+}
+
+.corner-bottom-end {
+  bottom: 0;
+  inset-inline-end: 0;
+}
+
+.corner-ribbon {
+  position: absolute;
+  padding: 0.25rem 2rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #ffffff;
+  background-color: var(--#{$prefix}-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+  text-align: center;
+}
+
+.corner-ribbon-top-start {
+  top: 1.25rem;
+  inset-inline-start: -1.75rem;
+  transform: rotate(-45deg);
+}
+
+.corner-ribbon-top-end {
+  top: 1.25rem;
+  inset-inline-end: -1.75rem;
+  transform: rotate(45deg);
+}
+
+// -----------------------------------------------------------------------------
+// 10. Efeito Imagem 2.5D & Perspectiva / 2.5D Image Depth & Perspective Tilt
+// -----------------------------------------------------------------------------
+.img-25d-container,
+.perspective-1000 {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.img-25d {
+  display: inline-block;
+  transform-style: preserve-3d;
+  transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              box-shadow var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  border-radius: var(--#{$prefix}-radius);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    transform: rotateX(8deg) rotateY(-8deg) scale3d(1.04, 1.04, 1.04);
+    box-shadow: -15px 22px 35px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.img-25d-tilt-start {
+  transform: rotateX(6deg) rotateY(10deg);
+  &:hover {
+    transform: rotateX(0deg) rotateY(0deg) scale3d(1.02, 1.02, 1.02);
+  }
+}
+
+.img-25d-tilt-end {
+  transform: rotateX(6deg) rotateY(-10deg);
+  &:hover {
+    transform: rotateX(0deg) rotateY(0deg) scale3d(1.02, 1.02, 1.02);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 11. Visão Noturna & Efeitos Táticos / Night Vision & Tactical FX
+// -----------------------------------------------------------------------------
+.night-vision {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: var(--#{$prefix}-radius);
+  background-color: #011401;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%) brightness(1.25) contrast(2) sepia(100%) hue-rotate(85deg) saturate(9);
+    transition: filter var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background:
+      repeating-linear-gradient(0deg, rgba(0, 255, 65, 0.08) 0px, rgba(0, 255, 65, 0.08) 1px, transparent 1px, transparent 3px),
+      radial-gradient(circle, transparent 45%, rgba(0, 20, 0, 0.95) 100%);
+    box-shadow: inset 0 0 40px rgba(0, 255, 65, 0.5);
+  }
+}
+
+.night-vision-white {
+  background-color: #020b14;
+
+  img {
+    filter: grayscale(100%) brightness(1.3) contrast(1.7) sepia(50%) hue-rotate(160deg) saturate(3);
+  }
+
+  &::before {
+    background:
+      repeating-linear-gradient(0deg, rgba(120, 200, 255, 0.06) 0px, rgba(120, 200, 255, 0.06) 1px, transparent 1px, transparent 3px),
+      radial-gradient(circle, transparent 45%, rgba(2, 15, 30, 0.95) 100%);
+    box-shadow: inset 0 0 40px rgba(120, 200, 255, 0.35);
+  }
+}
+
+.night-vision-thermal {
+  background-color: #1a0022;
+
+  img {
+    filter: contrast(2.2) invert(90%) hue-rotate(240deg) saturate(4);
+  }
+
+  &::before {
+    background:
+      repeating-linear-gradient(0deg, rgba(255, 0, 100, 0.05) 0px, rgba(255, 0, 100, 0.05) 1px, transparent 1px, transparent 4px),
+      radial-gradient(circle, transparent 50%, rgba(30, 0, 40, 0.85) 100%);
+  }
+}
+
+.night-vision-hover {
+  img {
+    filter: none;
+  }
+  &::before {
+    opacity: 0;
+    transition: opacity var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  }
+
+  &:hover {
+    img {
+      filter: grayscale(100%) brightness(1.25) contrast(2) sepia(100%) hue-rotate(85deg) saturate(9);
+    }
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 12. Efeitos de Revelação Cinemática / Image Reveal FX
+// -----------------------------------------------------------------------------
+.img-reveal-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  border-radius: var(--#{$prefix}-radius);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.img-reveal-curtain {
+  @extend .img-reveal-container;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--#{$prefix}-primary);
+    transform: scaleX(1);
+    transform-origin: left;
+    transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+    z-index: 2;
+  }
+
+  &:hover::after {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
+
+.img-reveal-curtain-up {
+  @extend .img-reveal-container;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--#{$prefix}-dark, #130f10);
+    transform: scaleY(1);
+    transform-origin: bottom;
+    transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+    z-index: 2;
+  }
+
+  &:hover::after {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+}
+
+.img-reveal-blur {
+  img {
+    filter: blur(8px) brightness(0.85);
+    transition: filter var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  }
+
+  &:hover img {
+    filter: blur(0) brightness(1);
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 13. Imagem Fatiada / Sliced Image
+// -----------------------------------------------------------------------------
+.img-sliced-vertical {
+  display: inline-flex;
+  overflow: hidden;
+  border-radius: var(--#{$prefix}-radius);
+
+  .slice {
+    overflow: hidden;
+    transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+    &:nth-child(odd) {
+      transform: translateY(0);
+    }
+    &:nth-child(even) {
+      transform: translateY(0);
+    }
+  }
+
+  &:hover {
+    .slice:nth-child(odd) {
+      transform: translateY(-8px);
+    }
+    .slice:nth-child(even) {
+      transform: translateY(8px);
+    }
+  }
+}
+
+.img-sliced-horizontal {
+  display: inline-flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--#{$prefix}-radius);
+
+  .slice {
+    overflow: hidden;
+    transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+    &:nth-child(odd) {
+      transform: translateX(0);
+    }
+    &:nth-child(even) {
+      transform: translateX(0);
+    }
+  }
+
+  &:hover {
+    .slice:nth-child(odd) {
+      transform: translateX(-10px);
+    }
+    .slice:nth-child(even) {
+      transform: translateX(10px);
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 14. Efeito Glitch Cibernético / Cyberpunk Glitch Effect
+// -----------------------------------------------------------------------------
+.img-glitch {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: var(--#{$prefix}-radius);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  }
+}
+
+.img-glitch-hover {
+  @extend .img-glitch;
+
+  &:hover {
+    img {
+      filter: drop-shadow(-3px 0 0 #00ffff) drop-shadow(3px 0 0 #ff0055);
+      transform: skewX(-1.5deg);
+      transition: filter 200ms ease, transform 200ms ease;
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 15. Efeito Lupa / Magnifying Glass Effect
+// -----------------------------------------------------------------------------
+.img-magnify-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  cursor: zoom-in;
+  border-radius: var(--#{$prefix}-radius);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  }
+
+  &:hover img {
+    transform: scale(1.65);
+  }
+}
+
+.img-magnify-lens {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.45), inset 0 0 15px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.85);
+  transition: opacity var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  z-index: 10;
+}
+
+.img-magnify-container:hover .img-magnify-lens {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+// -----------------------------------------------------------------------------
+// 16. Efeito 3D Flip / 3D Flip Card & Image
+// -----------------------------------------------------------------------------
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+  display: block;
+  border-radius: var(--#{$prefix}-radius);
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+// Variação de giro vertical (eixo X)
+.flip-card-y:hover .flip-card-inner {
+  transform: rotateX(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: var(--#{$prefix}-radius);
+  overflow: hidden;
+}
+
+.flip-card-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background-color: var(--#{$prefix}-primary);
+  color: #ffffff;
+  box-shadow: var(--#{$prefix}-shadow-lg);
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.flip-card-y .flip-card-back {
+  transform: rotateX(180deg);
+}
+
+// -----------------------------------------------------------------------------
+// 17. Slider de Imagens (CSS Scroll-Snap) / Image Slider
+// -----------------------------------------------------------------------------
+.img-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 0.5rem 0 1rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--#{$prefix}-border-color, #dee2e6);
+    border-radius: var(--#{$prefix}-radius-pill);
+  }
+
+  > * {
+    flex: 0 0 calc(100% - 1.5rem);
+    scroll-snap-align: center;
+    border-radius: var(--#{$prefix}-radius);
+  }
+}
+
+.img-slider-half > * {
+  flex: 0 0 calc(50% - 0.5rem) !important;
+}
+
+.img-slider-third > * {
+  flex: 0 0 calc(33.333% - 0.67rem) !important;
+}
+
+.img-slider-quarter > * {
+  flex: 0 0 calc(25% - 0.75rem) !important;
+}

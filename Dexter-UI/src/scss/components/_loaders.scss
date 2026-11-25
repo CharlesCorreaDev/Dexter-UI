@@ -1,0 +1,2303 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _loaders.scss
+ * @description [PT-BR] Suíte completa de Indicadores de Carregamento (Loaders), Skeletons (Lazy Loading)
+ *              e Barras de Progresso Pace.js. Inclui mais de 21 modelos animados geométricos,
+ *              classes modulares de tamanho (.loader-size-1, .loader-size-2, .loader-size-4, .loader-sm a .loader-xl),
+ *              classes de cores para toda a paleta oficial (.loader-primary, etc.) e classes
+ *              de alinhamento (esquerda, direita, centro, top, bottom, absolute e float).
+ *              [EN]    Complete Loading Indicators (Loaders), Skeletons (Lazy Loading) and Pace.js
+ *              Progress Bars suite. Includes over 21 geometric animated models, modular size classes
+ *              (.loader-size-1, .loader-size-2, .loader-size-4, .loader-sm to .loader-xl), color classes for the full
+ *              palette (.loader-primary, etc.) and alignment classes (left, right, center, top, bottom, absolute, float).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Indicadores de Carregamento e Lazy Loading | Loaders and Lazy Loading */
+
+@use "sass:color";
+@use "sass:map";
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis Base do Loader (.loader)
+// EN: Base Loader Variables (.loader)
+// ---------------------------------------------------------------------------
+.loader {
+  --color-1: var(--#{$prefix}-primary-100, #d0d7e6);
+  --color-2: var(--#{$prefix}-primary, #3b5998);
+  --color-3: var(--#{$prefix}-secondary, #14306b);
+  --color-4: var(--#{$prefix}-tertiary, #869dcc);
+  --color-track: var(--#{$prefix}-primary-200, #b1bdd6);
+  --size: 1px;
+
+  display: inline-block;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Modelos Individuais de Loaders
+// EN: Individual Loader Models
+// ---------------------------------------------------------------------------
+
+// 2.1 Modelo 1: Spinner Clássico em Anel (.loader-ring / .loader-spinner / .loader-1)
+.loader-ring,
+.loader-spinner,
+.loader-1,
+.loader:only-child:not([class*="loader-"]) {
+  width: calc(48 * var(--size));
+  height: calc(48 * var(--size));
+  border: calc(5 * var(--size)) solid var(--color-1);
+  border-bottom-color: var(--color-2);
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+// Fallback se o usuário aplicar somente <span class="loader"></span> sem classe de modelo
+.loader:not([class*="loader-ring"]):not([class*="loader-orbit"]):not([class*="loader-dual"]):not([class*="loader-half"]):not([class*="loader-quad"]):not([class*="loader-dots"]):not([class*="loader-cube"]):not([class*="loader-wings"]):not([class*="loader-bars"]):not([class*="loader-equalizer"]):not([class*="loader-barber"]):not([class*="loader-candy"]):not([class*="loader-prog"]):not([class*="loader-slide"]):not([class*="loader-track"]):not([class*="loader-pacman"]):not([class*="loader-hourglass"]):not([class*="loader-gears"]):not([class*="loader-typing"]):not([class*="loader-skeleton"]):not([class*="loader-pace"]):not([class*="loader-lds"]):not([class*="lds-"]):not([class*="loader-1"]):not([class*="loader-2"]):not([class*="loader-3"]):not([class*="loader-4"]):not([class*="loader-5"]):not([class*="loader-6"]):not([class*="loader-7"]):not([class*="loader-8"]):not([class*="loader-9"]):not([class*="loader-10"]):not([class*="loader-11"]):not([class*="loader-12"]):not([class*="loader-13"]):not([class*="loader-14"]):not([class*="loader-15"]):not([class*="loader-16"]):not([class*="loader-17"]):not([class*="loader-18"]):not([class*="loader-19"]):not([class*="loader-20"]):not([class*="loader-21"]):not([class*="loader-22"]):not([class*="loader-23"]):not([class*="loader-24"]):not([class*="loader-25"]) {
+  width: calc(48 * var(--size));
+  height: calc(48 * var(--size));
+  border: calc(5 * var(--size)) solid var(--color-1);
+  border-bottom-color: var(--color-2);
+  border-radius: 50%;
+  animation: rotation 1s linear infinite;
+}
+
+// 2.2 Modelo 2: Órbita de Pontos (.loader-orbit / .loader-2)
+.loader-orbit,
+.loader-2 {
+  font-size: calc(10 * var(--size));
+  width: 1em;
+  height: 1em;
+  margin: 2.8em auto;
+  border-radius: 50%;
+  position: relative;
+  text-indent: -9999em;
+  animation: mulShdSpin 1.1s infinite ease;
+  transform: translateZ(0);
+}
+
+// 2.3 Modelo 3: Meio Anel Oposto com Pseudo-Elemento (.loader-dual-ring / .loader-half-ring / .loader-3)
+.loader-dual-ring,
+.loader-half-ring,
+.loader-3 {
+  width: calc(48 * var(--size));
+  height: calc(48 * var(--size));
+  border-radius: 50%;
+  display: inline-block;
+  border-top: calc(4 * var(--size)) solid var(--color-1);
+  border-right: calc(4 * var(--size)) solid transparent;
+  position: relative;
+  animation: rotation 1s linear infinite;
+
+  &::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(48 * var(--size));
+    height: calc(48 * var(--size));
+    border-radius: 50%;
+    border-bottom: calc(4 * var(--size)) solid var(--color-2);
+    border-left: calc(4 * var(--size)) solid transparent;
+  }
+}
+
+// 2.4 Modelo 4: Anel Quadricolor (.loader-quad / .loader-4)
+.loader-quad,
+.loader-4 {
+  width: calc(48 * var(--size));
+  height: calc(48 * var(--size));
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  border: calc(10 * var(--size)) solid;
+  border-color: var(--color-1) var(--color-2) var(--color-3) var(--color-4);
+  animation: rotation 1s linear infinite;
+}
+
+// 2.5 Modelo 5: Pulso de Pontos em Linha (.loader-dots / .loader-dots-pulse / .loader-5)
+.loader-dots,
+.loader-dots-pulse,
+.loader-5 {
+  width: calc(12 * var(--size));
+  height: calc(12 * var(--size));
+  border-radius: 50%;
+  display: block;
+  margin: calc(15 * var(--size)) auto;
+  position: relative;
+  background: var(--color-2);
+  color: var(--color-2);
+  animation: animloader-dots 2s linear infinite;
+}
+
+// 2.6 Modelo 6: Cubo Isométrico 3D Flip (.loader-cube / .loader-cube-grid / .loader-6)
+.loader-cube,
+.loader-cube-grid,
+.loader-6 {
+  width: calc(48 * var(--size));
+  height: calc(48 * var(--size));
+  display: inline-block;
+  position: relative;
+  transform: rotate(45deg);
+
+  &::before {
+    content: '';
+    box-sizing: border-box;
+    width: calc(24 * var(--size));
+    height: calc(24 * var(--size));
+    position: absolute;
+    left: 0;
+    top: calc(-24 * var(--size));
+    animation: animloader-cube 4s ease infinite;
+  }
+
+  &::after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: calc(24 * var(--size));
+    height: calc(24 * var(--size));
+    background: var(--color-1);
+    box-shadow: 0 0 calc(10 * var(--size)) var(--color-2);
+    animation: animloader2 2s ease infinite;
+  }
+}
+
+// 2.7 Modelo 7: Asas Triangulares Dobráveis (.loader-wings / .loader-7)
+.loader-wings,
+.loader-7 {
+  width: calc(48 * var(--size));
+  height: calc(48 * var(--size));
+  position: relative;
+  display: inline-block;
+  animation: rotate 4s linear infinite;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    border: calc(24 * var(--size)) solid;
+    border-color: transparent transparent var(--color-1) var(--color-1);
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: mvx 1s infinite ease-in;
+  }
+
+  &::before {
+    left: calc(-1 * var(--size));
+    top: calc(1 * var(--size));
+    border-color: var(--color-2) var(--color-2) transparent transparent;
+    animation-name: mvrx;
+  }
+}
+
+// 2.8 Modelo 8: Barras em Linha Alternada (.loader-bars / .loader-bars-wave / .loader-8)
+.loader-bars,
+.loader-bars-wave,
+.loader-8 {
+  width: calc(8 * var(--size));
+  height: calc(48 * var(--size));
+  display: block;
+  margin: auto;
+  left: calc(-20 * var(--size));
+  position: relative;
+  border-radius: calc(4 * var(--size));
+  background: var(--color-track);
+  animation: animloader-bars 1s linear infinite alternate;
+}
+
+// 2.9 Modelo 9: Equalizador de Áudio (.loader-equalizer / .loader-9)
+.loader-equalizer,
+.loader-9 {
+  position: relative;
+  width: calc(60 * var(--size));
+  height: calc(48 * var(--size));
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-image:
+    linear-gradient(var(--color-2), var(--color-2)),
+    linear-gradient(var(--color-2), var(--color-2)),
+    linear-gradient(var(--color-2), var(--color-2)),
+    linear-gradient(var(--color-2), var(--color-2)),
+    linear-gradient(var(--color-2), var(--color-2)),
+    linear-gradient(var(--color-2), var(--color-2));
+  background-size:
+    calc(6 * var(--size)) calc(20 * var(--size)),
+    calc(6 * var(--size)) calc(35 * var(--size)),
+    calc(6 * var(--size)) calc(45 * var(--size)),
+    calc(6 * var(--size)) calc(25 * var(--size)),
+    calc(6 * var(--size)) calc(40 * var(--size)),
+    calc(6 * var(--size)) calc(15 * var(--size));
+  background-position:
+    0 100%,
+    calc(10 * var(--size)) 100%,
+    calc(20 * var(--size)) 100%,
+    calc(30 * var(--size)) 100%,
+    calc(40 * var(--size)) 100%,
+    calc(50 * var(--size)) 100%;
+  animation: spikeUp 1.2s ease-in-out infinite alternate;
+}
+
+// 2.10 Modelo 10: Linha Marchante Barber Pole (.loader-barber / .loader-10)
+.loader-barber,
+.loader-10 {
+  width: calc(160 * var(--size));
+  height: calc(10 * var(--size));
+  border-radius: calc(5 * var(--size));
+  display: block;
+  margin: calc(25 * var(--size)) auto;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--color-2) 0,
+    var(--color-2) calc(10 * var(--size)),
+    rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.2) calc(10 * var(--size)),
+    rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.2) calc(20 * var(--size))
+  );
+  background-size: calc(28 * var(--size)) 100%;
+  animation: march 0.8s linear infinite;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+// 2.11 Modelo 11: Barra Listrada Candy (.loader-candy / .loader-candy-progress / .loader-11)
+.loader-candy,
+.loader-candy-progress,
+.loader-11 {
+  --color-1: rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.35);
+  --color-2: rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.55);
+  --color-3: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+
+  width: 100%;
+  max-width: calc(320 * var(--size));
+  height: calc(8 * var(--size));
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: var(--color-1);
+    background-image: linear-gradient(
+      45deg,
+      var(--color-2) 25%,
+      transparent 25%,
+      transparent 50%,
+      var(--color-2) 50%,
+      var(--color-2) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-size: calc(15 * var(--size)) calc(15 * var(--size));
+    z-index: 10;
+  }
+
+  &::after {
+    content: '';
+    box-sizing: border-box;
+    width: 0%;
+    height: 100%;
+    background-color: var(--color-3);
+    position: absolute;
+    border-radius: 0 calc(4 * var(--size)) calc(4 * var(--size)) 0;
+    top: 0;
+    left: 0;
+    animation: animFw 10s ease-in infinite;
+  }
+}
+
+// 2.12 Modelo 12: Barra Pílula Fluida (.loader-progress / .loader-prog-bar / .loader-12)
+.loader-progress,
+.loader-prog-bar,
+.loader-12 {
+  --color-1: var(--color-track, var(--#{$prefix}-primary-100, #d0d7e6));
+  --color-2: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+
+  display: block;
+  position: relative;
+  height: calc(12 * var(--size));
+  width: 80%;
+  margin: auto;
+  border: calc(1 * var(--size)) solid var(--color-1);
+  border-radius: calc(10 * var(--size));
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: var(--color-2);
+    animation: 6s prog ease-in infinite;
+  }
+}
+
+// 2.13 Modelo 13: Trilho Deslizante (.loader-slide / .loader-track-slide / .loader-13)
+.loader-slide,
+.loader-track-slide,
+.loader-13 {
+  --color-1: rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.2);
+  --color-2: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+
+  width: calc(160 * var(--size));
+  height: calc(8 * var(--size));
+  border-radius: calc(4 * var(--size));
+  display: block;
+  margin: calc(20 * var(--size)) auto;
+  position: relative;
+  background: var(--color-1);
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: calc(70 * var(--size));
+    border-radius: inherit;
+    background: var(--color-2);
+    animation: slide 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+}
+
+// 2.14 Modelo 14: Pacman Devorador (.loader-pacman / .loader-14)
+.loader-pacman,
+.loader-14 {
+  --color-1: var(--color-1, var(--#{$prefix}-primary-100, #d0d7e6));
+  --color-2: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+
+  position: relative;
+  border: calc(24 * var(--size)) solid var(--color-1);
+  border-radius: 50%;
+  animation: eat 1s linear infinite;
+
+  &::after,
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(50 * var(--size));
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-2);
+    width: calc(15 * var(--size));
+    height: calc(15 * var(--size));
+    border-radius: 50%;
+    opacity: 0;
+    animation: move 2s linear infinite;
+  }
+
+  &::before {
+    animation-delay: 1s;
+  }
+}
+
+// 2.15 Modelo 15: Ampulheta de Areia (.loader-hourglass / .loader-15)
+.loader-hourglass,
+.loader-15 {
+  --color-1: var(--color-1, var(--#{$prefix}-primary-100, #d0d7e6));
+  --color-2: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+  --color-3: rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.4);
+
+  display: inline-block;
+  width: calc(50 * var(--size));
+  height: calc(80 * var(--size));
+  border-top: calc(5 * var(--size)) solid var(--color-1);
+  border-bottom: calc(5 * var(--size)) solid var(--color-1);
+  position: relative;
+  background: linear-gradient(var(--color-2) calc(30 * var(--size)), transparent 0) no-repeat;
+  background-size: calc(2 * var(--size)) calc(40 * var(--size));
+  background-position: 50% 0;
+  animation: spinx 5s linear infinite;
+
+  &::before,
+  &::after {
+    content: '';
+    width: calc(40 * var(--size));
+    left: 50%;
+    height: calc(35 * var(--size));
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    background: var(--color-3);
+    border-radius: 0 0 calc(20 * var(--size)) calc(20 * var(--size));
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    animation: lqt 5s linear infinite;
+  }
+
+  &::after {
+    top: auto;
+    bottom: 0;
+    border-radius: calc(20 * var(--size)) calc(20 * var(--size)) 0 0;
+    animation: lqb 5s linear infinite;
+  }
+}
+
+// 2.16 Modelo 16: Engrenagens Duplas (.loader-gears / .loader-16)
+.loader-gears,
+.loader-16 {
+  --color-1: #ffffff;
+  --color-2: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+
+  width: calc(60 * var(--size));
+  height: calc(40 * var(--size));
+  position: relative;
+  display: inline-block;
+  --base-color: var(--color-1);
+
+  &::before {
+    content: '';
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: calc(36 * var(--size));
+    height: calc(36 * var(--size));
+    border-radius: 50%;
+    background-color: var(--color-2);
+    background-image:
+      radial-gradient(circle calc(8 * var(--size)) at calc(18 * var(--size)) calc(18 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(4 * var(--size)) at calc(18 * var(--size)) 0, var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(4 * var(--size)) at 0 calc(18 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(4 * var(--size)) at calc(36 * var(--size)) calc(18 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(4 * var(--size)) at calc(18 * var(--size)) calc(36 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(4 * var(--size)) at calc(30 * var(--size)) calc(5 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(4 * var(--size)) at calc(30 * var(--size)) calc(30 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(4 * var(--size)) at calc(5 * var(--size)) calc(30 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(4 * var(--size)) at calc(5 * var(--size)) calc(5 * var(--size)), var(--base-color) 100%, transparent 0);
+    background-repeat: no-repeat;
+    animation: rotationBack 3s linear infinite;
+  }
+
+  &::after {
+    content: '';
+    left: calc(35 * var(--size));
+    top: calc(15 * var(--size));
+    position: absolute;
+    width: calc(24 * var(--size));
+    height: calc(24 * var(--size));
+    border-radius: 50%;
+    background-color: var(--color-2);
+    background-image:
+      radial-gradient(circle calc(5 * var(--size)) at calc(12 * var(--size)) calc(12 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(2.5 * var(--size)) at calc(12 * var(--size)) 0, var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(2.5 * var(--size)) at 0 calc(12 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(2.5 * var(--size)) at calc(24 * var(--size)) calc(12 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(2.5 * var(--size)) at calc(12 * var(--size)) calc(24 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(2.5 * var(--size)) at calc(20 * var(--size)) calc(3 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(2.5 * var(--size)) at calc(20 * var(--size)) calc(20 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(2.5 * var(--size)) at calc(3 * var(--size)) calc(20 * var(--size)), var(--base-color) 100%, transparent 0),
+      radial-gradient(circle calc(2.5 * var(--size)) at calc(3 * var(--size)) calc(3 * var(--size)), var(--base-color) 100%, transparent 0);
+    background-repeat: no-repeat;
+    animation: rotationBack 4s linear infinite reverse;
+  }
+}
+
+// 2.17 Modelo 17: Balão de Digitando Chat (.loader-typing / .loader-17)
+.loader-typing,
+.loader-17 {
+  --color-1: var(--color-track, var(--#{$prefix}-primary-100, #d0d7e6));
+  --color-2: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+  --color-3: rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.25);
+
+  width: calc(100 * var(--size));
+  height: calc(75 * var(--size));
+  margin: 0 auto;
+  background: var(--color-1);
+  position: relative;
+  border-radius: 100%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    border: calc(15 * var(--size)) solid transparent;
+    border-top: calc(25 * var(--size)) solid var(--color-1);
+    transform: rotate(45deg);
+    top: calc(50 * var(--size));
+    left: calc(-15 * var(--size));
+  }
+
+  &::after {
+    content: '';
+    width: calc(12 * var(--size));
+    height: calc(12 * var(--size));
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: var(--color-2);
+    box-shadow:
+      calc(20 * var(--size)) 0 var(--color-2),
+      calc(-20 * var(--size)) 0 var(--color-2);
+    animation: flash 0.5s ease-out infinite alternate;
+  }
+}
+
+// 2.18 Modelo 22: Hourglass Loading.io (.loader-lds-hourglass / .lds-hourglass / .loader-22)
+.loader-lds-hourglass,
+.lds-hourglass,
+.loader-22 {
+  --color-1: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+  color: var(--color-1);
+  display: inline-block;
+  position: relative;
+  width: calc(80 * var(--size));
+  height: calc(80 * var(--size));
+  box-sizing: border-box;
+
+  &::after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: calc(8 * var(--size));
+    box-sizing: border-box;
+    border: calc(32 * var(--size)) solid currentColor;
+    border-color: currentColor transparent currentColor transparent;
+    animation: lds-hourglass 1.2s infinite;
+  }
+}
+
+// 2.19 Modelo 23: Ripple Radar Loading.io (.loader-lds-ripple / .lds-ripple / .loader-23)
+.loader-lds-ripple,
+.lds-ripple,
+.loader-23 {
+  --color-1: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+  color: var(--color-1);
+  display: inline-block;
+  position: relative;
+  width: calc(80 * var(--size));
+  height: calc(80 * var(--size));
+  box-sizing: border-box;
+
+  div {
+    box-sizing: border-box;
+    position: absolute;
+    border: calc(4 * var(--size)) solid currentColor;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+
+    &:nth-child(2) {
+      animation-delay: -0.5s;
+    }
+  }
+
+  // Compatibilidade com elemento único sem divs filhos
+  &:not(:has(div)) {
+    &::before,
+    &::after {
+      content: '';
+      box-sizing: border-box;
+      position: absolute;
+      border: calc(4 * var(--size)) solid currentColor;
+      opacity: 1;
+      border-radius: 50%;
+      animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+
+    &::after {
+      animation-delay: -0.5s;
+    }
+  }
+}
+
+// 2.20 Modelo 24: Spinner Blades Loading.io (.loader-lds-spinner / .lds-spinner / .loader-24)
+.loader-lds-spinner,
+.lds-spinner,
+.loader-24 {
+  --color-1: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+  color: var(--color-1);
+  display: inline-block;
+  position: relative;
+  width: calc(80 * var(--size));
+  height: calc(80 * var(--size));
+  box-sizing: border-box;
+
+  div {
+    box-sizing: border-box;
+    transform-origin: calc(40 * var(--size)) calc(40 * var(--size));
+    animation: lds-spinner 1.2s linear infinite;
+
+    &::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: calc(3.2 * var(--size));
+      left: calc(36.8 * var(--size));
+      width: calc(6.4 * var(--size));
+      height: calc(17.6 * var(--size));
+      border-radius: 20%;
+      background: currentColor;
+    }
+
+    &:nth-child(1)  { transform: rotate(0deg);   animation-delay: -1.1s; }
+    &:nth-child(2)  { transform: rotate(30deg);  animation-delay: -1s; }
+    &:nth-child(3)  { transform: rotate(60deg);  animation-delay: -0.9s; }
+    &:nth-child(4)  { transform: rotate(90deg);  animation-delay: -0.8s; }
+    &:nth-child(5)  { transform: rotate(120deg); animation-delay: -0.7s; }
+    &:nth-child(6)  { transform: rotate(150deg); animation-delay: -0.6s; }
+    &:nth-child(7)  { transform: rotate(180deg); animation-delay: -0.5s; }
+    &:nth-child(8)  { transform: rotate(210deg); animation-delay: -0.4s; }
+    &:nth-child(9)  { transform: rotate(240deg); animation-delay: -0.3s; }
+    &:nth-child(10) { transform: rotate(270deg); animation-delay: -0.2s; }
+    &:nth-child(11) { transform: rotate(300deg); animation-delay: -0.1s; }
+    &:nth-child(12) { transform: rotate(330deg); animation-delay: 0s; }
+  }
+}
+
+// 2.21 Modelo 25: Ellipsis Loading.io (.loader-lds-ellipsis / .lds-ellipsis / .loader-25)
+.loader-lds-ellipsis,
+.lds-ellipsis,
+.loader-25 {
+  --color-1: var(--color-2, var(--#{$prefix}-primary, #3b5998));
+  color: var(--color-1);
+  display: inline-block;
+  position: relative;
+  width: calc(80 * var(--size));
+  height: calc(80 * var(--size));
+  box-sizing: border-box;
+
+  div {
+    box-sizing: border-box;
+    position: absolute;
+    top: calc(33.33333 * var(--size));
+    width: calc(13.33333 * var(--size));
+    height: calc(13.33333 * var(--size));
+    border-radius: 50%;
+    background: currentColor;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+
+    &:nth-child(1) {
+      left: calc(8 * var(--size));
+      animation: lds-ellipsis1 0.6s infinite;
+    }
+    &:nth-child(2) {
+      left: calc(8 * var(--size));
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+    &:nth-child(3) {
+      left: calc(32 * var(--size));
+      animation: lds-ellipsis2 0.6s infinite;
+    }
+    &:nth-child(4) {
+      left: calc(56 * var(--size));
+      animation: lds-ellipsis3 0.6s infinite;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Modelos de Skeletons (Lazy Loading)
+// EN: Skeleton Models (Lazy Loading)
+// ---------------------------------------------------------------------------
+
+// 3.1 Skeleton Card Completo (.loader-skeleton-card / .loader-18)
+.loader-skeleton-card,
+.loader-18 {
+  --color-1: #ffffff;
+  --color-2: rgba(255, 255, 255, 0.75);
+  --color-3: var(--color-track, var(--#{$prefix}-primary-100, #d0d7e6));
+
+  width: 100%;
+  max-width: calc(320 * var(--size));
+  height: calc(150 * var(--size));
+  margin: auto;
+  display: block;
+  position: relative;
+  background: var(--color-1);
+  border-radius: calc(8 * var(--size));
+
+  &::after {
+    content: '';
+    width: calc(100% - calc(30 * var(--size)));
+    height: calc(100% - calc(30 * var(--size)));
+    top: calc(15 * var(--size));
+    left: calc(15 * var(--size));
+    position: absolute;
+    background-image:
+      linear-gradient(100deg, transparent, var(--color-2) 50%, transparent 80%),
+      linear-gradient(var(--color-3) calc(56 * var(--size)), transparent 0),
+      linear-gradient(var(--color-3) calc(24 * var(--size)), transparent 0),
+      linear-gradient(var(--color-3) calc(18 * var(--size)), transparent 0),
+      linear-gradient(var(--color-3) calc(66 * var(--size)), transparent 0);
+    background-repeat: no-repeat;
+    background-size:
+      calc(75 * var(--size)) calc(130 * var(--size)),
+      calc(55 * var(--size)) calc(56 * var(--size)),
+      calc(160 * var(--size)) calc(30 * var(--size)),
+      calc(260 * var(--size)) calc(20 * var(--size)),
+      calc(290 * var(--size)) calc(56 * var(--size));
+    background-position:
+      0% 0,
+      0 0,
+      calc(70 * var(--size)) calc(5 * var(--size)),
+      calc(70 * var(--size)) calc(38 * var(--size)),
+      0 calc(66 * var(--size));
+    animation: animloader-skeleton 1s linear infinite;
+  }
+}
+
+// 3.2 Skeleton Media / Avatar Perfil (.loader-skeleton-media / .loader-19)
+.loader-skeleton-media,
+.loader-19 {
+  --color-1: #ffffff;
+  --color-2: rgba(255, 255, 255, 0.75);
+  --color-3: var(--color-track, var(--#{$prefix}-primary-100, #d0d7e6));
+
+  width: 100%;
+  max-width: calc(320 * var(--size));
+  height: calc(150 * var(--size));
+  display: block;
+  margin: auto;
+  position: relative;
+  background: var(--color-1);
+  border-radius: calc(8 * var(--size));
+
+  &::after {
+    content: '';
+    width: calc(100% - calc(30 * var(--size)));
+    height: calc(100% - calc(30 * var(--size)));
+    top: calc(15 * var(--size));
+    left: calc(15 * var(--size));
+    position: absolute;
+    background-image:
+      linear-gradient(100deg, transparent, var(--color-2) 50%, transparent 80%),
+      radial-gradient(circle calc(28 * var(--size)) at calc(28 * var(--size)) calc(28 * var(--size)), var(--color-3) 99%, transparent 0),
+      linear-gradient(var(--color-3) calc(24 * var(--size)), transparent 0),
+      linear-gradient(var(--color-3) calc(18 * var(--size)), transparent 0),
+      linear-gradient(var(--color-3) calc(66 * var(--size)), transparent 0);
+    background-repeat: no-repeat;
+    background-size:
+      calc(75 * var(--size)) calc(130 * var(--size)),
+      calc(55 * var(--size)) calc(56 * var(--size)),
+      calc(160 * var(--size)) calc(30 * var(--size)),
+      calc(260 * var(--size)) calc(20 * var(--size)),
+      calc(290 * var(--size)) calc(56 * var(--size));
+    background-position:
+      0% 0,
+      0 0,
+      calc(70 * var(--size)) calc(5 * var(--size)),
+      calc(70 * var(--size)) calc(38 * var(--size)),
+      0 calc(66 * var(--size));
+    animation: animloader-skeleton 1s linear infinite;
+  }
+}
+
+// 3.3 Skeleton Produto Quadrado (.loader-skeleton-product / .loader-20)
+.loader-skeleton-product,
+.loader-20 {
+  --color-1: #ffffff;
+  --color-2: rgba(255, 255, 255, 0.75);
+  --color-3: var(--color-track, var(--#{$prefix}-primary-100, #d0d7e6));
+
+  width: 100%;
+  max-width: calc(215 * var(--size));
+  height: calc(215 * var(--size));
+  display: block;
+  margin: auto;
+  position: relative;
+  background: var(--color-1);
+  border-radius: calc(8 * var(--size));
+
+  &::after {
+    content: '';
+    width: calc(100% - calc(30 * var(--size)));
+    height: calc(100% - calc(15 * var(--size)));
+    top: calc(15 * var(--size));
+    left: calc(15 * var(--size));
+    position: absolute;
+    background-image:
+      linear-gradient(90deg, transparent, var(--color-2) 50%, transparent 100%),
+      linear-gradient(var(--color-3) calc(100 * var(--size)), transparent 0),
+      linear-gradient(var(--color-3) calc(16 * var(--size)), transparent 0),
+      linear-gradient(var(--color-3) calc(50 * var(--size)), transparent 0);
+    background-repeat: no-repeat;
+    background-size:
+      calc(75 * var(--size)) calc(175 * var(--size)),
+      100% calc(100 * var(--size)),
+      100% calc(16 * var(--size)),
+      100% calc(30 * var(--size));
+    background-position:
+      calc(-185 * var(--size)) 0,
+      center 0,
+      center calc(115 * var(--size)),
+      center calc(142 * var(--size));
+    animation: animloader-product 1s linear infinite;
+  }
+}
+
+// 3.4 Skeleton Bloco de Texto (.loader-skeleton-text / .loader-21)
+.loader-skeleton-text,
+.loader-21 {
+  --color-1: rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.25);
+  --color-2: var(--color-track, var(--#{$prefix}-primary-100, #d0d7e6));
+
+  width: 100%;
+  max-width: calc(280 * var(--size));
+  height: calc(110 * var(--size));
+  display: block;
+  margin: auto;
+  background-image:
+    linear-gradient(100deg, transparent, var(--color-1) 50%, transparent 80%),
+    linear-gradient(var(--color-2) calc(16 * var(--size)), transparent 0),
+    linear-gradient(var(--color-2) calc(16 * var(--size)), transparent 0),
+    linear-gradient(var(--color-2) calc(16 * var(--size)), transparent 0),
+    linear-gradient(var(--color-2) calc(16 * var(--size)), transparent 0);
+  background-repeat: no-repeat;
+  background-size:
+    calc(75 * var(--size)) calc(110 * var(--size)),
+    calc(280 * var(--size)) calc(16 * var(--size)),
+    calc(240 * var(--size)) calc(16 * var(--size)),
+    calc(280 * var(--size)) calc(16 * var(--size)),
+    calc(180 * var(--size)) calc(16 * var(--size));
+  background-position:
+    -50% 0,
+    0 0,
+    0 calc(30 * var(--size)),
+    0 calc(60 * var(--size)),
+    0 calc(90 * var(--size));
+  animation: animloader-text 1.2s linear infinite;
+}
+
+// Skeletons Atômicos e Shimmer (Pure CSS Skeleton Screens - ThatSoftwareDude inspired)
+.skeleton {
+  background-color: var(--#{$prefix}-silver-light-100, #e2e8f0);
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  position: relative;
+  overflow: hidden;
+  display: block;
+
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0,
+      rgba(255, 255, 255, 0.25) 20%,
+      rgba(255, 255, 255, 0.6) 60%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    animation: shimmer 1.8s infinite;
+    content: '';
+  }
+
+  [data-dx-theme="dark"] & {
+    background-color: var(--#{$prefix}-midnight-dark-100, #1e293b);
+
+    &::after {
+      background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.06) 20%,
+        rgba(255, 255, 255, 0.15) 60%,
+        rgba(255, 255, 255, 0) 100%
+      );
+    }
+  }
+}
+
+.skeleton-text {
+  height: 1rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.skeleton-text-sm {
+  height: 0.75rem;
+  margin-bottom: 0.375rem;
+}
+
+.skeleton-text-lg {
+  height: 1.25rem;
+  margin-bottom: 0.625rem;
+}
+
+.skeleton-title {
+  height: 1.5rem;
+  width: 60%;
+  margin-bottom: 0.75rem;
+}
+
+.skeleton-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-avatar-sm {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-avatar-lg {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-thumbnail,
+.skeleton-img {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--#{$prefix}-radius-md, 0.375rem);
+}
+
+.skeleton-btn {
+  height: 2.25rem;
+  width: 120px;
+  border-radius: var(--#{$prefix}-radius-pill, 50rem);
+}
+
+.skeleton-badge {
+  height: 1.25rem;
+  width: 64px;
+  border-radius: var(--#{$prefix}-radius-pill, 50rem);
+}
+
+.card-skeleton {
+  padding: 1.25rem;
+  border: 1px solid var(--#{$prefix}-silver-light-100, #e2e8f0);
+  border-radius: var(--#{$prefix}-radius-lg, 0.5rem);
+  background: var(--#{$prefix}-body-bg, #ffffff);
+
+  [data-dx-theme="dark"] & {
+    border-color: var(--#{$prefix}-midnight-dark-100, #1e293b);
+    background: var(--#{$prefix}-midnight-dark-200, #0f172a);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Barras de Progresso no Estilo Pace.js (https://codebyzach.github.io/pace/)
+// EN: Pace.js Style Progress Bars
+// ---------------------------------------------------------------------------
+.pace-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 9999;
+  background-color: transparent;
+  pointer-events: none;
+
+  .pace-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: var(--#{$prefix}-primary, #3b5998);
+    animation: pace-indeterminate 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+}
+
+.pace-barber-shop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  z-index: 9999;
+  pointer-events: none;
+
+  .pace-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-size: 34px 34px;
+    background-image: linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.2) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.2) 75%,
+      transparent 75%,
+      transparent
+    );
+    background-color: var(--#{$prefix}-primary, #3b5998);
+    animation: pace-barber 1.5s linear infinite;
+  }
+}
+
+.pace-corner-radar {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.2);
+  border-top-color: var(--#{$prefix}-primary, #3b5998);
+  border-radius: 50%;
+  animation: rotation 0.8s linear infinite;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+// ---------------------------------------------------------------------------
+// 5. Classes de Tamanho (.loader-size-1 a .loader-size-4 / .loader-xs a .loader-3xl)
+// EN: Size Classes
+// ---------------------------------------------------------------------------
+.loader-xs      { --size: 0.5px; }
+.loader-size-1,
+.loader-sm      { --size: 1px; }
+.loader-size-2,
+.loader-md      { --size: 2px; }
+.loader-size-3,
+.loader-lg      { --size: 3px; }
+.loader-size-4,
+.loader-xl      { --size: 4px; }
+.loader-2xl     { --size: 5px; }
+.loader-3xl     { --size: 6px; }
+
+// ---------------------------------------------------------------------------
+// 6. Classes Modulares de Cores (.loader-{cor})
+// EN: Modular Color Classes
+// ---------------------------------------------------------------------------
+.loader-light {
+  --color-1: rgba(255, 255, 255, 0.35);
+  --color-2: #ffffff;
+  --color-3: #f8fafc;
+  --color-4: #e2e8f0;
+  --color-track: rgba(255, 255, 255, 0.2);
+  color: var(--color-2);
+}
+
+.loader-dark {
+  --color-1: rgba(15, 23, 42, 0.25);
+  --color-2: #0f172a;
+  --color-3: #1e293b;
+  --color-4: #334155;
+  --color-track: rgba(15, 23, 42, 0.15);
+  color: var(--color-2);
+}
+
+@each $color-name, $color-value in $all-colors {
+  .loader-#{$color-name} {
+    --color-1: var(--#{$prefix}-#{$color-name}-100, #d0d7e6);
+    --color-2: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    --color-3: var(--#{$prefix}-#{$color-name}-700, #{$color-value});
+    --color-4: var(--#{$prefix}-#{$color-name}-300, #{$color-value});
+    --color-track: var(--#{$prefix}-#{$color-name}-200, #b1bdd6);
+    color: var(--color-2);
+  }
+}
+
+@each $alias, $canonical in $color-aliases {
+  .loader-#{$alias} {
+    --color-1: var(--#{$prefix}-#{$canonical}-100, #d0d7e6);
+    --color-2: var(--#{$prefix}-#{$canonical});
+    --color-3: var(--#{$prefix}-#{$canonical}-700);
+    --color-4: var(--#{$prefix}-#{$canonical}-300);
+    --color-track: var(--#{$prefix}-#{$canonical}-200);
+    color: var(--color-2);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Classes de Alinhamento e Posicionamento
+// EN: Alignment and Positioning Classes
+// ---------------------------------------------------------------------------
+
+// 7.1 Alinhamento Horizontal (Esquerda, Centro, Direita)
+.loader-left,
+.loader-align-left,
+.loader-align-start {
+  display: block !important;
+  margin-inline-end: auto !important;
+  margin-inline-start: 0 !important;
+  text-align: left;
+}
+
+.loader-center,
+.loader-align-center {
+  display: block !important;
+  margin-inline-start: auto !important;
+  margin-inline-end: auto !important;
+  text-align: center;
+}
+
+.loader-right,
+.loader-align-right,
+.loader-align-end {
+  display: block !important;
+  margin-inline-start: auto !important;
+  margin-inline-end: 0 !important;
+  text-align: right;
+}
+
+// 7.2 Alinhamento Vertical (Top, Bottom, Inline)
+.loader-top,
+.loader-align-top {
+  vertical-align: top !important;
+}
+
+.loader-bottom,
+.loader-align-bottom {
+  vertical-align: bottom !important;
+}
+
+.loader-inline {
+  display: inline-block !important;
+  vertical-align: middle !important;
+}
+
+// 7.3 Flutuação (Float)
+.loader-float-left,
+.loader-float-start {
+  float: left !important;
+  margin-inline-end: 1rem !important;
+  margin-block-end: 0.5rem !important;
+}
+
+.loader-float-right,
+.loader-float-end {
+  float: right !important;
+  margin-inline-start: 1rem !important;
+  margin-block-end: 0.5rem !important;
+}
+
+.loader-float-none {
+  float: none !important;
+}
+
+// 7.4 Posicionamento Absoluto e Fixo
+.loader-absolute {
+  position: absolute !important;
+}
+
+.loader-absolute-center {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 10;
+}
+
+.loader-fixed-center {
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 1050;
+}
+
+// Cortina translúcida de fundo com blur (Backdrop)
+.loader-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  border-radius: inherit;
+
+  .loader {
+    display: inline-block !important;
+    position: relative !important;
+    z-index: 25;
+  }
+
+  [data-dx-theme="dark"] & {
+    background-color: rgba(15, 23, 42, 0.85);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 8. Efeitos e Animações Utilitárias Loading.io (.ld-* / .loader-anim-*)
+// EN: Loading.io Utility Effects and Animations (https://loading.io/animation/)
+// ---------------------------------------------------------------------------
+
+// 8.1 Efeito Spin (Rotação contínua)
+.ld-spin,
+.loader-anim-spin {
+  animation: ld-spin 1s linear infinite !important;
+  display: inline-block;
+}
+
+.ld-spin-reverse,
+.loader-anim-spin-reverse {
+  animation: ld-spin-reverse 1s linear infinite !important;
+  display: inline-block;
+}
+
+// 8.2 Efeito Heartbeat / Beat (Pulso estilo batimento cardíaco)
+.ld-beat,
+.loader-anim-beat {
+  animation: ld-beat 1.2s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+// 8.3 Efeito Bounce (Salto / Pulo vertical)
+.ld-bounce,
+.loader-anim-bounce {
+  animation: ld-bounce 1s ease infinite !important;
+  display: inline-block;
+}
+
+// 8.4 Efeito Pulse (Respiração suave em escala)
+.ld-pulse,
+.loader-anim-pulse {
+  animation: ld-pulse 1.4s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+// 8.5 Efeito Shake (Vibração / Tremor horizontal)
+.ld-shake,
+.loader-anim-shake {
+  animation: ld-shake 0.8s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+// 8.6 Efeito Float (Flutuação suave estilo gravidade zero)
+.ld-float,
+.loader-anim-float {
+  animation: ld-float 2s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+// 8.7 Efeito Fade (Esmaecimento contínuo de opacidade)
+.ld-fade,
+.loader-anim-fade {
+  animation: ld-fade 1.5s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+// 8.8 Efeito Blink / Flash (Piscar acentuado)
+.ld-blink,
+.loader-anim-blink {
+  animation: ld-blink 1s steps(2, start) infinite !important;
+  display: inline-block;
+}
+
+// 8.9 Efeito Swing (Pêndulo oscilante)
+.ld-swing,
+.loader-anim-swing {
+  transform-origin: top center;
+  animation: ld-swing 1.2s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+// 8.10 Efeito Rubber Band (Elástico esticando e comprimindo)
+.ld-rubber,
+.loader-anim-rubber {
+  animation: ld-rubber 1.2s ease-in-out infinite !important;
+  display: inline-block;
+}
+
+// Modificadores de Velocidade e Controle
+.ld-fast    { animation-duration: 0.5s !important; }
+.ld-slow    { animation-duration: 2.5s !important; }
+.ld-pause   { animation-play-state: paused !important; }
+.ld-running { animation-play-state: running !important; }
+
+// ---------------------------------------------------------------------------
+// 9. Keyframes de Animação
+// EN: Animation Keyframes
+// ---------------------------------------------------------------------------
+
+// Keyframes Universais de Rotação
+@keyframes rotation {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotationBack {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes rotate {
+  100% { transform: rotate(360deg); }
+}
+
+// Keyframes do Modelo 2 (mulShdSpin)
+@keyframes mulShdSpin {
+  0%, 100% {
+    box-shadow:
+      0em -2.6em 0em 0em var(--color-1),
+      1.8em -1.8em 0 0em var(--color-2),
+      2.5em 0em 0 0em var(--color-2),
+      1.75em 1.75em 0 0em var(--color-2),
+      0em 2.5em 0 0em var(--color-2),
+      -1.8em 1.8em 0 0em var(--color-2),
+      -2.6em 0em 0 0em var(--color-3),
+      -1.8em -1.8em 0 0em var(--color-4);
+  }
+  12.5% {
+    box-shadow:
+      0em -2.6em 0em 0em var(--color-4),
+      1.8em -1.8em 0 0em var(--color-1),
+      2.5em 0em 0 0em var(--color-2),
+      1.75em 1.75em 0 0em var(--color-2),
+      0em 2.5em 0 0em var(--color-2),
+      -1.8em 1.8em 0 0em var(--color-2),
+      -2.6em 0em 0 0em var(--color-2),
+      -1.8em -1.8em 0 0em var(--color-3);
+  }
+  25% {
+    box-shadow:
+      0em -2.6em 0em 0em var(--color-3),
+      1.8em -1.8em 0 0em var(--color-4),
+      2.5em 0em 0 0em var(--color-1),
+      1.75em 1.75em 0 0em var(--color-2),
+      0em 2.5em 0 0em var(--color-2),
+      -1.8em 1.8em 0 0em var(--color-2),
+      -2.6em 0em 0 0em var(--color-2),
+      -1.8em -1.8em 0 0em var(--color-2);
+  }
+  37.5% {
+    box-shadow:
+      0em -2.6em 0em 0em var(--color-2),
+      1.8em -1.8em 0 0em var(--color-3),
+      2.5em 0em 0 0em var(--color-4),
+      1.75em 1.75em 0 0em var(--color-1),
+      0em 2.5em 0 0em var(--color-2),
+      -1.8em 1.8em 0 0em var(--color-2),
+      -2.6em 0em 0 0em var(--color-2),
+      -1.8em -1.8em 0 0em var(--color-2);
+  }
+  50% {
+    box-shadow:
+      0em -2.6em 0em 0em var(--color-2),
+      1.8em -1.8em 0 0em var(--color-2),
+      2.5em 0em 0 0em var(--color-3),
+      1.75em 1.75em 0 0em var(--color-4),
+      0em 2.5em 0 0em var(--color-1),
+      -1.8em 1.8em 0 0em var(--color-2),
+      -2.6em 0em 0 0em var(--color-2),
+      -1.8em -1.8em 0 0em var(--color-2);
+  }
+  62.5% {
+    box-shadow:
+      0em -2.6em 0em 0em var(--color-2),
+      1.8em -1.8em 0 0em var(--color-2),
+      2.5em 0em 0 0em var(--color-2),
+      1.75em 1.75em 0 0em var(--color-3),
+      0em 2.5em 0 0em var(--color-4),
+      -1.8em 1.8em 0 0em var(--color-1),
+      -2.6em 0em 0 0em var(--color-2),
+      -1.8em -1.8em 0 0em var(--color-2);
+  }
+  75% {
+    box-shadow:
+      0em -2.6em 0em 0em var(--color-2),
+      1.8em -1.8em 0 0em var(--color-2),
+      2.5em 0em 0 0em var(--color-2),
+      1.75em 1.75em 0 0em var(--color-2),
+      0em 2.5em 0 0em var(--color-3),
+      -1.8em 1.8em 0 0em var(--color-4),
+      -2.6em 0em 0 0em var(--color-1),
+      -1.8em -1.8em 0 0em var(--color-2);
+  }
+  87.5% {
+    box-shadow:
+      0em -2.6em 0em 0em var(--color-2),
+      1.8em -1.8em 0 0em var(--color-2),
+      2.5em 0em 0 0em var(--color-2),
+      1.75em 1.75em 0 0em var(--color-2),
+      0em 2.5em 0 0em var(--color-2),
+      -1.8em 1.8em 0 0em var(--color-3),
+      -2.6em 0em 0 0em var(--color-4),
+      -1.8em -1.8em 0 0em var(--color-1);
+  }
+}
+
+// Keyframe do Modelo 5 (Dots Pulse)
+@keyframes animloader-dots {
+  0% {
+    box-shadow:
+      calc(14 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(38 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(-14 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(-38 * var(--size)) 0 0 calc(-2 * var(--size));
+  }
+  25% {
+    box-shadow:
+      calc(14 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(38 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(-14 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(-38 * var(--size)) 0 0 calc(2 * var(--size));
+  }
+  50% {
+    box-shadow:
+      calc(14 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(38 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(-14 * var(--size)) 0 0 calc(2 * var(--size)),
+      calc(-38 * var(--size)) 0 0 calc(-2 * var(--size));
+  }
+  75% {
+    box-shadow:
+      calc(14 * var(--size)) 0 0 calc(2 * var(--size)),
+      calc(38 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(-14 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(-38 * var(--size)) 0 0 calc(-2 * var(--size));
+  }
+  100% {
+    box-shadow:
+      calc(14 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(38 * var(--size)) 0 0 calc(2 * var(--size)),
+      calc(-14 * var(--size)) 0 0 calc(-2 * var(--size)),
+      calc(-38 * var(--size)) 0 0 calc(-2 * var(--size));
+  }
+}
+
+// Keyframes do Modelo 6 (Cube 3D)
+@keyframes animloader-cube {
+  0% {
+    box-shadow:
+      0 calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(48 * var(--size)) var(--color-3),
+      0 calc(48 * var(--size)) var(--color-3);
+  }
+  12% {
+    box-shadow:
+      0 calc(24 * var(--size)) white,
+      calc(24 * var(--size)) calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(48 * var(--size)) var(--color-3),
+      0 calc(48 * var(--size)) var(--color-3);
+  }
+  25% {
+    box-shadow:
+      0 calc(24 * var(--size)) white,
+      calc(24 * var(--size)) calc(24 * var(--size)) white,
+      calc(24 * var(--size)) calc(48 * var(--size)) var(--color-3),
+      0 calc(48 * var(--size)) var(--color-3);
+  }
+  37% {
+    box-shadow:
+      0 calc(24 * var(--size)) white,
+      calc(24 * var(--size)) calc(24 * var(--size)) white,
+      calc(24 * var(--size)) calc(48 * var(--size)) white,
+      0 calc(48 * var(--size)) var(--color-3);
+  }
+  50% {
+    box-shadow:
+      0 calc(24 * var(--size)) white,
+      calc(24 * var(--size)) calc(24 * var(--size)) white,
+      calc(24 * var(--size)) calc(48 * var(--size)) white,
+      0 calc(48 * var(--size)) white;
+  }
+  62% {
+    box-shadow:
+      0 calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(24 * var(--size)) white,
+      calc(24 * var(--size)) calc(48 * var(--size)) white,
+      0 calc(48 * var(--size)) white;
+  }
+  75% {
+    box-shadow:
+      0 calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(48 * var(--size)) white,
+      0 calc(48 * var(--size)) white;
+  }
+  87% {
+    box-shadow:
+      0 calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(48 * var(--size)) var(--color-3),
+      0 calc(48 * var(--size)) white;
+  }
+  100% {
+    box-shadow:
+      0 calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(24 * var(--size)) var(--color-3),
+      calc(24 * var(--size)) calc(48 * var(--size)) var(--color-3),
+      0 calc(48 * var(--size)) var(--color-3);
+  }
+}
+
+@keyframes animloader2 {
+  0% {
+    transform: translate(0, 0) rotateX(0) rotateY(0);
+  }
+  25% {
+    transform: translate(100%, 0) rotateX(0) rotateY(180deg);
+  }
+  50% {
+    transform: translate(100%, 100%) rotateX(-180deg) rotateY(180deg);
+  }
+  75% {
+    transform: translate(0, 100%) rotateX(-180deg) rotateY(360deg);
+  }
+  100% {
+    transform: translate(0, 0) rotateX(0) rotateY(360deg);
+  }
+}
+
+// Keyframes do Modelo 7 (Wings)
+@keyframes mvx {
+  0%, 15% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, 50%) rotate(180deg);
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(180deg);
+  }
+}
+
+@keyframes mvrx {
+  0%, 15% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(50%, -50%) rotate(180deg);
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(180deg);
+  }
+}
+
+// Keyframe do Modelo 8 (Bars Wave)
+@keyframes animloader-bars {
+  0% {
+    box-shadow:
+      calc(20 * var(--size)) 0 var(--color-2),
+      calc(40 * var(--size)) 0 var(--color-track),
+      calc(60 * var(--size)) 0 var(--color-track);
+  }
+  50% {
+    box-shadow:
+      calc(20 * var(--size)) 0 var(--color-track),
+      calc(40 * var(--size)) 0 var(--color-2),
+      calc(60 * var(--size)) 0 var(--color-track);
+  }
+  100% {
+    box-shadow:
+      calc(20 * var(--size)) 0 var(--color-track),
+      calc(40 * var(--size)) 0 var(--color-track),
+      calc(60 * var(--size)) 0 var(--color-2);
+  }
+}
+
+// Keyframe do Modelo 9 (Equalizer)
+@keyframes spikeUp {
+  0% {
+    background-size:
+      calc(6 * var(--size)) calc(20 * var(--size)),
+      calc(6 * var(--size)) calc(35 * var(--size)),
+      calc(6 * var(--size)) calc(15 * var(--size)),
+      calc(6 * var(--size)) calc(45 * var(--size)),
+      calc(6 * var(--size)) calc(25 * var(--size)),
+      calc(6 * var(--size)) calc(38 * var(--size));
+  }
+  33% {
+    background-size:
+      calc(6 * var(--size)) calc(45 * var(--size)),
+      calc(6 * var(--size)) calc(18 * var(--size)),
+      calc(6 * var(--size)) calc(40 * var(--size)),
+      calc(6 * var(--size)) calc(20 * var(--size)),
+      calc(6 * var(--size)) calc(48 * var(--size)),
+      calc(6 * var(--size)) calc(15 * var(--size));
+  }
+  66% {
+    background-size:
+      calc(6 * var(--size)) calc(15 * var(--size)),
+      calc(6 * var(--size)) calc(48 * var(--size)),
+      calc(6 * var(--size)) calc(25 * var(--size)),
+      calc(6 * var(--size)) calc(38 * var(--size)),
+      calc(6 * var(--size)) calc(18 * var(--size)),
+      calc(6 * var(--size)) calc(45 * var(--size));
+  }
+  100% {
+    background-size:
+      calc(6 * var(--size)) calc(38 * var(--size)),
+      calc(6 * var(--size)) calc(22 * var(--size)),
+      calc(6 * var(--size)) calc(48 * var(--size)),
+      calc(6 * var(--size)) calc(15 * var(--size)),
+      calc(6 * var(--size)) calc(35 * var(--size)),
+      calc(6 * var(--size)) calc(25 * var(--size));
+  }
+}
+
+// Keyframe do Modelo 10 (Barber Pole)
+@keyframes march {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: calc(28 * var(--size)) 0;
+  }
+}
+
+// Keyframe do Modelo 11 (Candy Progress)
+@keyframes animFw {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+// Keyframe do Modelo 12 (Progress Pill)
+@keyframes prog {
+  to {
+    width: 100%;
+  }
+}
+
+// Keyframe do Modelo 13 (Slide Track)
+@keyframes slide {
+  0% {
+    transform: translateX(calc(-70 * var(--size)));
+  }
+  100% {
+    transform: translateX(calc(160 * var(--size)));
+  }
+}
+
+// Keyframes do Modelo 14 (Pacman)
+@keyframes eat {
+  0%, 49% {
+    border-right-color: var(--color-1);
+  }
+  50%, 100% {
+    border-right-color: var(--color-2);
+  }
+}
+
+@keyframes move {
+  0% {
+    left: calc(75 * var(--size));
+    opacity: 1;
+  }
+  50% {
+    left: 0;
+    opacity: 1;
+  }
+  52%, 100% {
+    left: calc(-5 * var(--size));
+    opacity: 0;
+  }
+}
+
+// Keyframes do Modelo 15 (Hourglass)
+@keyframes spinx {
+  0%, 49% {
+    transform: rotate(0deg);
+    background-position: 50% calc(36 * var(--size));
+  }
+  51%, 98% {
+    transform: rotate(180deg);
+    background-position: 50% calc(4 * var(--size));
+  }
+  100% {
+    transform: rotate(360deg);
+    background-position: 50% calc(36 * var(--size));
+  }
+}
+
+@keyframes lqt {
+  0%, 100% {
+    background-image: linear-gradient(var(--color-2) calc(40 * var(--size)), transparent 0);
+    background-position: 0% 0;
+  }
+  50% {
+    background-image: linear-gradient(var(--color-2) calc(40 * var(--size)), transparent 0);
+    background-position: 0% calc(40 * var(--size));
+  }
+  50.1% {
+    background-image: linear-gradient(var(--color-2) calc(40 * var(--size)), transparent 0);
+    background-position: 0% calc(-40 * var(--size));
+  }
+}
+
+@keyframes lqb {
+  0% {
+    background-image: linear-gradient(var(--color-2) calc(40 * var(--size)), transparent 0);
+    background-position: 0 calc(40 * var(--size));
+  }
+  100% {
+    background-image: linear-gradient(var(--color-2) calc(40 * var(--size)), transparent 0);
+    background-position: 0 calc(-40 * var(--size));
+  }
+}
+
+// Keyframe do Modelo 17 (Typing Flash)
+@keyframes flash {
+  0% {
+    background-color: var(--color-3);
+    box-shadow:
+      calc(20 * var(--size)) 0 var(--color-3),
+      calc(-20 * var(--size)) 0 var(--color-2);
+  }
+  50% {
+    background-color: var(--color-2);
+    box-shadow:
+      calc(20 * var(--size)) 0 var(--color-3),
+      calc(-20 * var(--size)) 0 var(--color-3);
+  }
+  100% {
+    background-color: var(--color-3);
+    box-shadow:
+      calc(20 * var(--size)) 0 var(--color-2),
+      calc(-20 * var(--size)) 0 var(--color-3);
+  }
+}
+
+// Keyframes dos Skeletons (Lazy Loading)
+@keyframes animloader-skeleton {
+  0% {
+    background-position:
+      0% 0,
+      0 0,
+      calc(70 * var(--size)) calc(5 * var(--size)),
+      calc(70 * var(--size)) calc(38 * var(--size)),
+      0 calc(66 * var(--size));
+  }
+  100% {
+    background-position:
+      150% 0,
+      0 0,
+      calc(70 * var(--size)) calc(5 * var(--size)),
+      calc(70 * var(--size)) calc(38 * var(--size)),
+      0 calc(66 * var(--size));
+  }
+}
+
+@keyframes animloader-product {
+  to {
+    background-position:
+      calc(185 * var(--size)) 0,
+      center 0,
+      center calc(115 * var(--size)),
+      center calc(142 * var(--size));
+  }
+}
+
+@keyframes animloader-text {
+  0% {
+    background-position:
+      -50% 0,
+      0 0,
+      0 calc(30 * var(--size)),
+      0 calc(60 * var(--size)),
+      0 calc(90 * var(--size));
+  }
+  100% {
+    background-position:
+      120% 0,
+      0 0,
+      0 calc(30 * var(--size)),
+      0 calc(60 * var(--size)),
+      0 calc(90 * var(--size));
+  }
+}
+
+@keyframes skeleton-wave {
+  0%   { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+@keyframes pace-indeterminate {
+  0%   { width: 0%; transform: translateX(0); }
+  50%  { width: 60%; transform: translateX(30%); }
+  100% { width: 100%; transform: translateX(100%); }
+}
+
+@keyframes pace-barber {
+  from { background-position: 0 0; }
+  to   { background-position: 34px 0; }
+}
+
+// Keyframes dos Modelos Loading.io (LDS)
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+
+@keyframes lds-ripple {
+  0% {
+    top: calc(36 * var(--size));
+    left: calc(36 * var(--size));
+    width: calc(8 * var(--size));
+    height: calc(8 * var(--size));
+    opacity: 0;
+  }
+  4.9% {
+    top: calc(36 * var(--size));
+    left: calc(36 * var(--size));
+    width: calc(8 * var(--size));
+    height: calc(8 * var(--size));
+    opacity: 0;
+  }
+  5% {
+    top: calc(36 * var(--size));
+    left: calc(36 * var(--size));
+    width: calc(8 * var(--size));
+    height: calc(8 * var(--size));
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: calc(80 * var(--size));
+    height: calc(80 * var(--size));
+    opacity: 0;
+  }
+}
+
+@keyframes lds-spinner {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes lds-ellipsis1 {
+  0%   { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+@keyframes lds-ellipsis3 {
+  0%   { transform: scale(1); }
+  100% { transform: scale(0); }
+}
+
+@keyframes lds-ellipsis2 {
+  0%   { transform: translate(0, 0); }
+  100% { transform: translate(calc(24 * var(--size)), 0); }
+}
+
+// Keyframes das Animações Utilitárias Loading.io (loading.io/animation)
+@keyframes ld-spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ld-spin-reverse {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
+@keyframes ld-beat {
+  0%, 100% { transform: scale(1); }
+  14%      { transform: scale(1.25); }
+  28%      { transform: scale(1); }
+  42%      { transform: scale(1.25); }
+  70%      { transform: scale(1); }
+}
+
+@keyframes ld-bounce {
+  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(0.8, 0, 1, 1); }
+  50%      { transform: translateY(-30%); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); }
+}
+
+@keyframes ld-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(0.85); opacity: 0.7; }
+}
+
+@keyframes ld-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+@keyframes ld-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+@keyframes ld-fade {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.25; }
+}
+
+@keyframes ld-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+@keyframes ld-swing {
+  20% { transform: rotate(15deg); }
+  40% { transform: rotate(-10deg); }
+  60% { transform: rotate(5deg); }
+  80% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes ld-rubber {
+  0%   { transform: scale(1, 1); }
+  30%  { transform: scale(1.25, 0.75); }
+  40%  { transform: scale(0.75, 1.25); }
+  50%  { transform: scale(1.15, 0.85); }
+  65%  { transform: scale(0.95, 1.05); }
+  75%  { transform: scale(1.05, 0.95); }
+  100% { transform: scale(1, 1); }
+}
+
+// Keyframe de Shimmer para Skeleton Screens (ThatSoftwareDude)
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 10. Materialize CSS Preloaders (Linear Determinado/Indeterminado & Circular)
+// EN: Materialize CSS Preloaders (Linear Determinate/Indeterminate & Circular)
+// ---------------------------------------------------------------------------
+
+// 10.1 Preloader Linear (.progress com .determinate / .indeterminate)
+.progress:has(> .determinate, > .indeterminate),
+.progress.progress-material {
+  --#{$prefix}-preloader-color: var(--#{$prefix}-teal, #008080);
+
+  position: relative;
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-color: color-mix(in srgb, var(--#{$prefix}-preloader-color) 22%, transparent);
+  border-radius: 2px;
+  margin: 0.5rem 0 1rem;
+  overflow: hidden;
+}
+
+.progress .determinate {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: var(--#{$prefix}-preloader-color, var(--#{$prefix}-teal, #008080));
+  transition: width 0.3s linear;
+}
+
+.progress .indeterminate {
+  background-color: var(--#{$prefix}-preloader-color, var(--#{$prefix}-teal, #008080));
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: inherit;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    will-change: left, right;
+  }
+
+  &::before {
+    animation: dx-mat-indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  }
+
+  &::after {
+    animation: dx-mat-indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+    animation-delay: 1.15s;
+  }
+}
+
+[data-dx-theme="dark"] .progress:has(> .determinate, > .indeterminate),
+[data-dx-theme="dark"] .progress.progress-material,
+[data-bs-theme="dark"] .progress:has(> .determinate, > .indeterminate),
+[data-bs-theme="dark"] .progress.progress-material {
+  background-color: color-mix(in srgb, var(--#{$prefix}-preloader-color) 28%, rgba(255, 255, 255, 0.08));
+}
+
+// 10.2 Preloader Circular (.preloader-wrapper)
+.preloader-wrapper {
+  display: inline-block;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  vertical-align: middle;
+
+  &.small {
+    width: 36px;
+    height: 36px;
+  }
+
+  &.big {
+    width: 64px;
+    height: 64px;
+  }
+
+  &.active {
+    animation: dx-mat-container-rotate 1568ms linear infinite;
+  }
+}
+
+.spinner-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  border-color: var(--#{$prefix}-teal, #008080);
+}
+
+.spinner-blue,
+.spinner-blue-only {
+  border-color: #4285f4;
+}
+
+.spinner-red,
+.spinner-red-only {
+  border-color: #db4437;
+}
+
+.spinner-yellow,
+.spinner-yellow-only {
+  border-color: #f4b400;
+}
+
+.spinner-green,
+.spinner-green-only {
+  border-color: #0f9d58;
+}
+
+.active .spinner-layer.spinner-blue {
+  animation:
+    dx-mat-fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both,
+    dx-mat-blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.active .spinner-layer.spinner-red {
+  animation:
+    dx-mat-fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both,
+    dx-mat-red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.active .spinner-layer.spinner-yellow {
+  animation:
+    dx-mat-fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both,
+    dx-mat-yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.active .spinner-layer.spinner-green {
+  animation:
+    dx-mat-fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both,
+    dx-mat-green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.active .spinner-layer.spinner-blue-only,
+.active .spinner-layer.spinner-red-only,
+.active .spinner-layer.spinner-yellow-only,
+.active .spinner-layer.spinner-green-only,
+.active .spinner-layer[class*="-only"] {
+  opacity: 1;
+  animation: dx-mat-fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.gap-patch {
+  position: absolute;
+  top: 0;
+  left: 45%;
+  width: 10%;
+  height: 100%;
+  overflow: hidden;
+  border-color: inherit;
+
+  .circle {
+    width: 1000%;
+    left: -450%;
+  }
+}
+
+.circle-clipper {
+  display: inline-block;
+  position: relative;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  border-color: inherit;
+
+  .circle {
+    width: 200%;
+    height: 100%;
+    border-width: 3px;
+    border-style: solid;
+    border-color: inherit;
+    border-bottom-color: transparent !important;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    box-sizing: border-box;
+  }
+
+  &.left .circle {
+    left: 0;
+    border-right-color: transparent !important;
+    transform: rotate(129deg);
+  }
+
+  &.right .circle {
+    left: -100%;
+    border-left-color: transparent !important;
+    transform: rotate(-129deg);
+  }
+}
+
+.active .circle-clipper.left .circle {
+  animation: dx-mat-left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.active .circle-clipper.right .circle {
+  animation: dx-mat-right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+// 10.3 Paleta Oficial de 28 Cores + Semânticas para Materialize Preloaders
+$mat-loader-semantics: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+$mat-loader-palette: map.merge($all-colors, $mat-loader-semantics);
+
+@each $name, $hex in $mat-loader-palette {
+  .progress-#{$name} {
+    --#{$prefix}-preloader-color: var(--#{$prefix}-#{$name}, #{$hex});
+  }
+
+  .spinner-#{$name}-only,
+  .preloader-#{$name} .spinner-layer {
+    border-color: var(--#{$prefix}-#{$name}, #{$hex});
+  }
+}
+
+// Keyframes Materialize CSS Preloader
+@keyframes dx-mat-indeterminate {
+  0%   { left: -35%; right: 100%; }
+  60%  { left: 100%; right: -90%; }
+  100% { left: 100%; right: -90%; }
+}
+
+@keyframes dx-mat-indeterminate-short {
+  0%   { left: -200%; right: 100%; }
+  60%  { left: 107%; right: -8%; }
+  100% { left: 107%; right: -8%; }
+}
+
+@keyframes dx-mat-container-rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes dx-mat-fill-unfill-rotate {
+  12.5% { transform: rotate(135deg); }
+  25%   { transform: rotate(270deg); }
+  37.5% { transform: rotate(405deg); }
+  50%   { transform: rotate(540deg); }
+  62.5% { transform: rotate(675deg); }
+  75%   { transform: rotate(810deg); }
+  87.5% { transform: rotate(945deg); }
+  to    { transform: rotate(1080deg); }
+}
+
+@keyframes dx-mat-blue-fade-in-out {
+  from { opacity: 1; }
+  25%  { opacity: 1; }
+  26%  { opacity: 0; }
+  89%  { opacity: 0; }
+  90%  { opacity: 1; }
+  to   { opacity: 1; }
+}
+
+@keyframes dx-mat-red-fade-in-out {
+  from { opacity: 0; }
+  15%  { opacity: 0; }
+  25%  { opacity: 1; }
+  50%  { opacity: 1; }
+  51%  { opacity: 0; }
+}
+
+@keyframes dx-mat-yellow-fade-in-out {
+  from { opacity: 0; }
+  40%  { opacity: 0; }
+  50%  { opacity: 1; }
+  75%  { opacity: 1; }
+  76%  { opacity: 0; }
+}
+
+@keyframes dx-mat-green-fade-in-out {
+  from { opacity: 0; }
+  65%  { opacity: 0; }
+  75%  { opacity: 1; }
+  90%  { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes dx-mat-left-spin {
+  from { transform: rotate(130deg); }
+  50%  { transform: rotate(-5deg); }
+  to   { transform: rotate(130deg); }
+}
+
+@keyframes dx-mat-right-spin {
+  from { transform: rotate(-130deg); }
+  50%  { transform: rotate(5deg); }
+  to   { transform: rotate(-130deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress .indeterminate::before,
+  .progress .indeterminate::after,
+  .preloader-wrapper.active,
+  .active .spinner-layer,
+  .active .circle-clipper .circle {
+    animation: none;
+  }
+}

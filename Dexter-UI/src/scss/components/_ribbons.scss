@@ -1,0 +1,1328 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_ribbons.scss
+ * @description [PT-BR] Biblioteca completa com 57 estilos de Ribbons (faixas,
+ *              etiquetas dobradas, diagonais de canto, marcadores bookmark,
+ *              medalhas estrela/coração/losango, borda infinita e multilinha)
+ *              em CSS puro zero-dependência, integrada às 28 cores oficiais +
+ *              semânticas, 5 escalas de tamanho (.ribbon-xs a .ribbon-xl) e Dark Mode.
+ *              [EN]    Complete collection of 57 pure-CSS Ribbon shapes (folded
+ *              wraps, corner banners, bookmarks, curls, starburst/heart/diamond
+ *              medals, full-bleed tags and multiline ribbons) with zero
+ *              dependencies, 28 official + semantic colors, 5 size scales & Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Ribbons & Faixas CSS (57 Estilos) | Pure CSS Ribbons & Badges (57 Shapes) */
+
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$ribbon-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$ribbon-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning", "yellow", "gold");
+$ribbon-palette: map.merge($all-colors, $ribbon-semantic-colors);
+
+// ---------------------------------------------------------------------------
+// 1. Base (.ribbon), Contêineres & Tamanhos (.ribbon-xs .. .ribbon-xl)
+// EN: Base Class, Host Helpers & 5 Responsive Size Scales
+// ---------------------------------------------------------------------------
+.ribbon-box {
+  position: relative;
+}
+
+.ribbon-bleed-wrap {
+  position: relative;
+  overflow-x: clip;
+}
+
+.ribbon {
+  --#{$prefix}-ribbon-bg: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-ribbon-color: #ffffff;
+  --#{$prefix}-ribbon-size: 1rem;
+  --c: var(--#{$prefix}-ribbon-bg);
+
+  font-size: var(--#{$prefix}-ribbon-size);
+  font-weight: 700;
+  color: var(--#{$prefix}-ribbon-color);
+  z-index: 2;
+  box-sizing: border-box;
+  letter-spacing: 0.01em;
+}
+
+.ribbon-size-xs,
+.ribbon-size-1,
+.ribbon-xs { --#{$prefix}-ribbon-size: 0.72rem; }
+
+.ribbon-size-sm,
+.ribbon-size-2,
+.ribbon-sm { --#{$prefix}-ribbon-size: 0.85rem; }
+
+.ribbon-size-md,
+.ribbon-size-3,
+.ribbon-md { --#{$prefix}-ribbon-size: 1rem; }
+
+.ribbon-size-lg,
+.ribbon-size-4,
+.ribbon-lg { --#{$prefix}-ribbon-size: 1.35rem; }
+
+.ribbon-size-xl,
+.ribbon-size-5,
+.ribbon-xl { --#{$prefix}-ribbon-size: 1.75rem; }
+
+.ribbon-size-2xl,
+.ribbon-size-6,
+.ribbon-2xl { --#{$prefix}-ribbon-size: 2.15rem; }
+
+// ---------------------------------------------------------------------------
+// 2. Faixas Dobradas, Cantos Diagonais & Bandeirinhas (#1 – #14)
+// EN: Wrapped Edges, 45° Corner Folded Ribbons, Bookmarks & Flags (#1 – #14)
+// ---------------------------------------------------------------------------
+.ribbon-wrap-bottom,
+.ribbon-1 {
+  --d: 0.8em;
+  position: absolute;
+  bottom: 20px;
+  inset-inline: calc(-1 * var(--d));
+  border-top: var(--d) solid #0008;
+  line-height: 1.8;
+  text-align: center;
+  clip-path: polygon(0 100%, 100% 100%, 100% var(--d), calc(100% - var(--d)) 0%, calc(100% - var(--d)) var(--d), var(--d) var(--d), var(--d) 0%, 0 var(--d));
+  background-color: var(--c);
+}
+
+.ribbon-corner-tr,
+.ribbon-2 {
+  --f: 0.5em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  line-height: 1.8;
+  padding-inline: 1lh;
+  padding-bottom: var(--f);
+  border-style: solid;
+  border-color: transparent;
+  border-image-source: conic-gradient(#0008 0 0);
+  border-image-slice: 51%;
+  border-image-width: var(--f);
+  clip-path: polygon(100% calc(100% - var(--f)), 100% 100%, calc(100% - var(--f)) calc(100% - var(--f)), var(--f) calc(100% - var(--f)), 0 100%, 0 calc(100% - var(--f)), 999px calc(100% - var(--f) - 999px), calc(100% - 999px) calc(100% - var(--f) - 999px));
+  transform: translate(calc((1 - cos(45deg)) * 100%), -100%) rotate(45deg);
+  transform-origin: 0% 100%;
+  background-color: var(--c);
+  white-space: nowrap;
+}
+
+.ribbon-corner-tl,
+.ribbon-3 {
+  --f: 0.5em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  line-height: 1.8;
+  padding-inline: 1lh;
+  padding-bottom: var(--f);
+  border-style: solid;
+  border-color: transparent;
+  border-image-source: conic-gradient(#0008 0 0);
+  border-image-slice: 51%;
+  border-image-width: var(--f);
+  clip-path: polygon(100% calc(100% - var(--f)), 100% 100%, calc(100% - var(--f)) calc(100% - var(--f)), var(--f) calc(100% - var(--f)), 0 100%, 0 calc(100% - var(--f)), 999px calc(100% - var(--f) - 999px), calc(100% - 999px) calc(100% - var(--f) - 999px));
+  transform: translate(calc((cos(45deg) - 1) * 100%), -100%) rotate(-45deg);
+  transform-origin: 100% 100%;
+  background-color: var(--c);
+  white-space: nowrap;
+}
+
+.ribbon-bookmark-tl,
+.ribbon-4 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  left: 20px;
+  top: calc(-1 * var(--f));
+  padding: 0.2em 0.45em;
+  background-color: var(--c);
+  border-left: var(--f) solid #0005;
+  border-bottom: var(--r) solid #0000;
+  clip-path: polygon(var(--f) 0, 100% 0, 100% 100%, calc(50% + var(--f) / 2) calc(100% - var(--r)), var(--f) 100%, var(--f) var(--f), 0 var(--f));
+}
+
+.ribbon-bookmark-tl-arrow,
+.ribbon-5 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  left: 20px;
+  top: calc(-1 * var(--f));
+  padding: 0.2em 0.45em;
+  background-color: var(--c);
+  border-left: var(--f) solid #0005;
+  border-bottom: var(--r) solid #0000;
+  clip-path: polygon(var(--f) 0, 100% 0, 100% calc(100% - var(--r)), calc(50% + var(--f) / 2) 100%, var(--f) calc(100% - var(--r)), var(--f) var(--f), 0 var(--f));
+}
+
+.ribbon-flag-tr,
+.ribbon-6 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  top: 20px;
+  right: calc(-1 * var(--f));
+  padding-inline: 0.45em;
+  line-height: 1.8;
+  background-color: var(--c);
+  border-bottom: var(--f) solid #0005;
+  border-left: var(--r) solid #0000;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--f)), calc(100% - var(--f)) 100%, calc(100% - var(--f)) calc(100% - var(--f)), 0 calc(100% - var(--f)), var(--r) calc(50% - var(--f) / 2));
+}
+
+.ribbon-flag-tr-arrow,
+.ribbon-7 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  top: 20px;
+  right: calc(-1 * var(--f));
+  padding-inline: 0.45em;
+  line-height: 1.8;
+  background-color: var(--c);
+  border-bottom: var(--f) solid #0005;
+  border-left: var(--r) solid #0000;
+  clip-path: polygon(var(--r) 0, 100% 0, 100% calc(100% - var(--f)), calc(100% - var(--f)) 100%, calc(100% - var(--f)) calc(100% - var(--f)), var(--r) calc(100% - var(--f)), 0 calc(50% - var(--f) / 2));
+}
+
+.ribbon-bookmark-tr-arrow,
+.ribbon-8 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  right: 20px;
+  top: calc(-1 * var(--f));
+  padding: 0.2em 0.45em;
+  background-color: var(--c);
+  border-right: var(--f) solid #0005;
+  border-bottom: var(--r) solid #0000;
+  clip-path: polygon(calc(100% - var(--f)) 0, 0 0, 0 calc(100% - var(--r)), calc(50% - var(--f) / 2) 100%, calc(100% - var(--f)) calc(100% - var(--r)), calc(100% - var(--f)) var(--f), 100% var(--f));
+}
+
+.ribbon-flag-br-arrow,
+.ribbon-9 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  bottom: 20px;
+  right: calc(-1 * var(--f));
+  padding-inline: 0.45em;
+  line-height: 1.8;
+  background-color: var(--c);
+  border-top: var(--f) solid #0005;
+  border-left: var(--r) solid #0000;
+  clip-path: polygon(var(--r) 100%, 100% 100%, 100% var(--f), calc(100% - var(--f)) 0, calc(100% - var(--f)) var(--f), var(--r) var(--f), 0 calc(50% + var(--f) / 2));
+}
+
+.ribbon-flag-br,
+.ribbon-10 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  bottom: 20px;
+  right: calc(-1 * var(--f));
+  padding-inline: 0.45em;
+  line-height: 1.8;
+  background-color: var(--c);
+  border-top: var(--f) solid #0005;
+  border-left: var(--r) solid #0000;
+  clip-path: polygon(0 100%, 100% 100%, 100% var(--f), calc(100% - var(--f)) 0, calc(100% - var(--f)) var(--f), 0 var(--f), var(--r) calc(50% + var(--f) / 2));
+}
+
+.ribbon-flag-tl-arrow,
+.ribbon-11 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  top: 20px;
+  left: calc(-1 * var(--f));
+  padding-inline: 0.45em;
+  line-height: 1.8;
+  background-color: var(--c);
+  border-bottom: var(--f) solid #0005;
+  border-right: var(--r) solid #0000;
+  clip-path: polygon(calc(100% - var(--r)) 0, 0 0, 0 calc(100% - var(--f)), var(--f) 100%, var(--f) calc(100% - var(--f)), calc(100% - var(--r)) calc(100% - var(--f)), 100% calc(50% - var(--f) / 2));
+}
+
+.ribbon-flag-bl,
+.ribbon-12 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  bottom: 20px;
+  left: calc(-1 * var(--f));
+  padding-inline: 0.45em;
+  line-height: 1.8;
+  background-color: var(--c);
+  border-top: var(--f) solid #0005;
+  border-right: var(--r) solid #0000;
+  clip-path: polygon(0 100%, 0 var(--f), var(--f) 0, var(--f) var(--f), 100% var(--f), calc(100% - var(--r)) calc(50% + var(--f) / 2), 100% 100%);
+}
+
+.ribbon-flag-bl-arrow,
+.ribbon-13 {
+  --f: 0.5em;
+  --r: 0.8em;
+  position: absolute;
+  bottom: 20px;
+  left: calc(-1 * var(--f));
+  padding-inline: 0.45em;
+  line-height: 1.8;
+  background-color: var(--c);
+  border-top: var(--f) solid #0005;
+  border-right: var(--r) solid #0000;
+  clip-path: polygon(calc(100% - var(--r)) 100%, 0 100%, 0 var(--f), var(--f) 0, var(--f) var(--f), calc(100% - var(--r)) var(--f), 100% calc(50% + var(--f) / 2));
+}
+
+.ribbon-banner,
+.ribbon-14 {
+  --r: 0.8em;
+  padding-inline: calc(var(--r) + 0.45em);
+  line-height: 1.8;
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--r)) 50%, 100% 100%, 0 100%, var(--r) 50%);
+  background-color: var(--c);
+  width: fit-content;
+}
+
+// ---------------------------------------------------------------------------
+// 3. Curvas 3D Cilíndricas (#15 – #20)
+// EN: Rounded 3D Curled Ribbons (#15 – #20)
+// ---------------------------------------------------------------------------
+.ribbon-curl-tl,
+.ribbon-15 {
+  --r: 0.4em;
+  position: absolute;
+  top: 20px;
+  left: calc(-1 * var(--r));
+  line-height: 1.8;
+  padding: 0 0.6em calc(2 * var(--r));
+  border-radius: var(--r) 0 0 var(--r);
+  background-image:
+    radial-gradient(100% 50% at left, var(--c) 98%, #0000 101%),
+    radial-gradient(100% 50% at right, #0005 98%, #0000 101%),
+    conic-gradient(from 90deg at var(--r) calc(100% - 2 * var(--r)), #0000 25%, var(--c) 0);
+  background-position: 100% 0, 0 100%, 0 0;
+  background-size: 0.5lh calc(100% - 2 * var(--r)), var(--r) calc(2 * var(--r)), calc(101% - 0.5lh) 100%;
+  background-repeat: no-repeat;
+}
+
+.ribbon-curl-bl,
+.ribbon-16 {
+  --r: 0.4em;
+  position: absolute;
+  bottom: 20px;
+  left: calc(-1 * var(--r));
+  line-height: 1.8;
+  padding: calc(2 * var(--r)) 0.6em 0;
+  border-radius: var(--r) 0 0 var(--r);
+  background-image:
+    radial-gradient(100% 50% at left, var(--c) 98%, #0000 101%),
+    radial-gradient(100% 50% at right, #0005 98%, #0000 101%),
+    conic-gradient(at var(--r) calc(2 * var(--r)), #0000 25%, var(--c) 0);
+  background-position: 100% 100%, 0 0, 0 0;
+  background-size: 0.5lh calc(100% - 2 * var(--r)), var(--r) calc(2 * var(--r)), calc(101% - 0.5lh) 100%;
+  background-repeat: no-repeat;
+}
+
+.ribbon-curl-tr,
+.ribbon-17 {
+  --r: 0.4em;
+  position: absolute;
+  top: 20px;
+  right: calc(-1 * var(--r));
+  line-height: 1.8;
+  padding: 0 0.6em calc(2 * var(--r));
+  border-radius: 0 var(--r) var(--r) 0;
+  background-image:
+    radial-gradient(100% 50% at right, var(--c) 98%, #0000 101%),
+    radial-gradient(100% 50% at left, #0005 98%, #0000 101%),
+    conic-gradient(from 180deg at calc(100% - var(--r)) calc(100% - 2 * var(--r)), #0000 25%, var(--c) 0);
+  background-position: 0 0, 100% 100%, 100% 0;
+  background-size: 0.5lh calc(100% - 2 * var(--r)), var(--r) calc(2 * var(--r)), calc(101% - 0.5lh) 100%;
+  background-repeat: no-repeat;
+}
+
+.ribbon-curl-br,
+.ribbon-18 {
+  --r: 0.4em;
+  position: absolute;
+  bottom: 20px;
+  right: calc(-1 * var(--r));
+  line-height: 1.8;
+  padding: calc(2 * var(--r)) 0.6em 0;
+  border-radius: 0 var(--r) var(--r) 0;
+  background-image:
+    radial-gradient(100% 50% at right, var(--c) 98%, #0000 101%),
+    radial-gradient(100% 50% at left, #0005 98%, #0000 101%),
+    conic-gradient(at calc(100% - var(--r)) calc(2 * var(--r)), var(--c) 75%, #0000 0);
+  background-position: 0 100%, 100% 0, 100% 0;
+  background-size: 0.5lh calc(100% - 2 * var(--r)), var(--r) calc(2 * var(--r)), calc(101% - 0.5lh) 100%;
+  background-repeat: no-repeat;
+}
+
+.ribbon-curl-wrap-top,
+.ribbon-19 {
+  --r: 0.4em;
+  position: absolute;
+  top: 20px;
+  inset-inline: calc(-1 * var(--r));
+  text-align: center;
+  line-height: 1.8;
+  padding: 0 0.5em calc(2 * var(--r));
+  border-radius: var(--r);
+  background-image:
+    radial-gradient(100% 50% at right, #0005 98%, #0000 101%),
+    radial-gradient(100% 50% at left, #0005 98%, #0000 101%),
+    conic-gradient(from 90deg at var(--r) calc(100% - 2 * var(--r)), #0000 25%, var(--c) 0);
+  background-position: 0 100%, 100% 100%, 0 0;
+  background-size: var(--r) calc(2 * var(--r)), var(--r) calc(2 * var(--r)), calc(100% - var(--r)) 100%;
+  background-repeat: no-repeat;
+}
+
+.ribbon-curl-wrap-bottom,
+.ribbon-20 {
+  --r: 0.4em;
+  position: absolute;
+  bottom: 20px;
+  inset-inline: calc(-1 * var(--r));
+  text-align: center;
+  line-height: 1.8;
+  padding: calc(2 * var(--r)) 0.5em 0;
+  border-radius: var(--r);
+  background-image:
+    radial-gradient(100% 50% at right, #0005 98%, #0000 101%),
+    radial-gradient(100% 50% at left, #0005 98%, #0000 101%),
+    conic-gradient(at var(--r) calc(2 * var(--r)), #0000 25%, var(--c) 0);
+  background-position: 0 0, 100% 0, 0 0;
+  background-size: var(--r) calc(2 * var(--r)), var(--r) calc(2 * var(--r)), calc(100% - var(--r)) 100%;
+  background-repeat: no-repeat;
+}
+
+// ---------------------------------------------------------------------------
+// 4. Medalha Starburst, Etiquetas Sombreadas & Faixas 3D em Degrau (#21 – #31)
+// EN: Starburst Seal, Shadow-Inset Tags & Stepped 3D Ribbons (#21 – #31)
+// ---------------------------------------------------------------------------
+.ribbon-medal-star,
+.ribbon-21 {
+  --r: 20%;
+  padding: 0.6em 1.3em;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 60% 20% -40%;
+    background: color-mix(in srgb, var(--c), #000 35%);
+    clip-path: polygon(5% 0, 95% 0, 100% 100%, 50% calc(100% - var(--r)), 0 100%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(35% 35%, #0000 96%, #0003 97% 99%, #0000) var(--c);
+    clip-path: polygon(100% 50%, 89.23% 57.8%, 96.19% 69.13%, 83.26% 72.22%, 85.36% 85.36%, 72.22% 83.26%, 69.13% 96.19%, 57.8% 89.23%, 50% 100%, 42.2% 89.23%, 30.87% 96.19%, 27.78% 83.26%, 14.64% 85.36%, 16.74% 72.22%, 3.81% 69.13%, 10.77% 57.8%, 0% 50%, 10.77% 42.2%, 3.81% 30.87%, 16.74% 27.78%, 14.64% 14.64%, 27.78% 16.74%, 30.87% 3.81%, 42.2% 10.77%, 50% 0%, 57.8% 10.77%, 69.13% 3.81%, 72.22% 16.74%, 85.36% 14.64%, 83.26% 27.78%, 96.19% 30.87%, 89.23% 42.2%);
+  }
+}
+
+.ribbon-tag-left,
+.ribbon-22 {
+  --r: 0.8em;
+  border-block: 0.5em solid #0000;
+  padding-inline: calc(var(--r) + 0.35em) 0.65em;
+  line-height: 1.8;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 calc(100% - 0.25em), var(--r) 50%, 0 0.25em);
+  background:
+    radial-gradient(0.2em 50% at right, #000a, #0000) border-box,
+    var(--c) padding-box;
+  width: fit-content;
+}
+
+.ribbon-tag-left-arrow,
+.ribbon-23 {
+  --r: 0.8em;
+  border-block: 0.5em solid #0000;
+  padding-inline: calc(var(--r) + 0.35em) 0.65em;
+  line-height: 1.8;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, var(--r) calc(100% - 0.25em), 0 50%, var(--r) 0.25em);
+  background:
+    radial-gradient(0.2em 50% at right, #000a, #0000) border-box,
+    var(--c) padding-box;
+  width: fit-content;
+}
+
+.ribbon-tag-right,
+.ribbon-24 {
+  --r: 0.8em;
+  border-block: 0.5em solid #0000;
+  padding-inline: 0.65em calc(var(--r) + 0.35em);
+  line-height: 1.8;
+  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%, 100% calc(100% - 0.25em), calc(100% - var(--r)) 50%, 100% 0.25em);
+  background:
+    radial-gradient(0.2em 50% at left, #000a, #0000) border-box,
+    var(--c) padding-box;
+  width: fit-content;
+}
+
+.ribbon-tag-right-arrow,
+.ribbon-25 {
+  --r: 0.8em;
+  border-block: 0.5em solid #0000;
+  padding-inline: 0.65em calc(var(--r) + 0.35em);
+  line-height: 1.8;
+  clip-path: polygon(100% 0, 0 0, 0 100%, 100% 100%, calc(100% - var(--r)) calc(100% - 0.25em), 100% 50%, calc(100% - var(--r)) 0.25em);
+  background:
+    radial-gradient(0.2em 50% at left, #000a, #0000) border-box,
+    var(--c) padding-box;
+  width: fit-content;
+}
+
+.ribbon-3d-br,
+.ribbon-26 {
+  --s: 1.8em;
+  --d: 0.8em;
+  --c-cut: 0.8em;
+  padding: 0 calc(var(--s) + 0.5em) var(--d) var(--c-cut);
+  line-height: 1.8;
+  background: conic-gradient(at right var(--s) bottom var(--d), #0004 62.5%, #0008 0 75%, #0000 0);
+  clip-path: polygon(var(--c-cut) 0, calc(100% - var(--s)) 0, calc(100% - var(--s)) var(--d), 100% var(--d), calc(100% - var(--c-cut)) calc(50% + var(--d) / 2), 100% 100%, calc(100% - var(--s) - var(--d)) 100%, calc(100% - var(--s) - var(--d)) calc(100% - var(--d)), var(--c-cut) calc(100% - var(--d)), 0 calc(50% - var(--d) / 2));
+  background-color: var(--c);
+  width: fit-content;
+}
+
+.ribbon-3d-tl,
+.ribbon-27 {
+  --s: 1.8em;
+  --d: 0.8em;
+  --c-cut: 0.8em;
+  padding: var(--d) var(--c-cut) 0 calc(var(--s) + 0.5em);
+  line-height: 1.8;
+  background: conic-gradient(from 45deg at left var(--s) top var(--d), #0008 12.5%, #0000 0 37.5%, #0004 0);
+  clip-path: polygon(calc(100% - var(--c-cut)) var(--d), calc(var(--s) + var(--d)) var(--d), calc(var(--s) + var(--d)) 0, 0 0, var(--c-cut) calc(50% - var(--d) / 2), 0 calc(100% - var(--d)), var(--s) calc(100% - var(--d)), var(--s) 100%, calc(100% - var(--c-cut)) 100%, 100% calc(50% + var(--d) / 2));
+  background-color: var(--c);
+  width: fit-content;
+}
+
+.ribbon-3d-bl,
+.ribbon-28 {
+  --s: 1.8em;
+  --d: 0.8em;
+  --c-cut: 0.8em;
+  padding: 0 var(--c-cut) var(--d) calc(var(--s) + 0.5em);
+  line-height: 1.8;
+  background: conic-gradient(at left var(--s) bottom var(--d), #0000 25%, #0008 0 37.5%, #0004 0);
+  clip-path: polygon(calc(100% - var(--c-cut)) 0, var(--s) 0, var(--s) var(--d), 0 var(--d), var(--c-cut) calc(50% + var(--d) / 2), 0 100%, calc(var(--s) + var(--d)) 100%, calc(var(--s) + var(--d)) calc(100% - var(--d)), calc(100% - var(--c-cut)) calc(100% - var(--d)), 100% calc(50% - var(--d) / 2));
+  background-color: var(--c);
+  width: fit-content;
+}
+
+.ribbon-3d-tr,
+.ribbon-29 {
+  --s: 1.8em;
+  --d: 0.8em;
+  --c-cut: 0.8em;
+  padding: var(--d) calc(var(--s) + 0.5em) 0 var(--c-cut);
+  line-height: 1.8;
+  background: conic-gradient(from -45deg at right var(--s) top var(--d), #0004 62.5%, #0000 0 87.5%, #0008 0);
+  clip-path: polygon(var(--c-cut) var(--d), calc(100% - var(--s) - var(--d)) var(--d), calc(100% - var(--s) - var(--d)) 0, 100% 0, calc(100% - var(--c-cut)) calc(50% - var(--d) / 2), 100% calc(100% - var(--d)), calc(100% - var(--s)) calc(100% - var(--d)), calc(100% - var(--s)) 100%, var(--c-cut) 100%, 0 calc(50% + var(--d) / 2));
+  background-color: var(--c);
+  width: fit-content;
+}
+
+.ribbon-wrap-center,
+.ribbon-30 {
+  --d: 0.8em;
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  inset-inline: calc(-1 * var(--d));
+  padding-block: var(--d);
+  line-height: 1.8;
+  text-align: center;
+  clip-path: polygon(0 var(--d), calc(100% - var(--d)) var(--d), calc(100% - var(--d)) 0, 100% var(--d), 100% calc(100% - var(--d)), var(--d) calc(100% - var(--d)), var(--d) 100%, 0 calc(100% - var(--d)));
+  border-style: solid;
+  border-color: transparent;
+  border-image-source: conic-gradient(#0008 0 0);
+  border-image-slice: 50%;
+  border-image-width: var(--d);
+  background-color: var(--c);
+}
+
+.ribbon-wrap-center-alt,
+.ribbon-31 {
+  --d: 0.8em;
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  inset-inline: calc(-1 * var(--d));
+  padding-block: var(--d);
+  line-height: 1.8;
+  text-align: center;
+  clip-path: polygon(100% var(--d), var(--d) var(--d), var(--d) 0, 0 var(--d), 0 calc(100% - var(--d)), calc(100% - var(--d)) calc(100% - var(--d)), calc(100% - var(--d)) 100%, 100% calc(100% - var(--d)));
+  border-style: solid;
+  border-color: transparent;
+  border-image-source: conic-gradient(#0008 0 0);
+  border-image-slice: 50%;
+  border-image-width: var(--d);
+  background-color: var(--c);
+}
+
+// ---------------------------------------------------------------------------
+// 5. Faixas 3D Clássicas com Asas & Origami Angulado (#32 – #38)
+// EN: Double-Wing Classic 3D & Angled Origami Banners (#32 – #38)
+// ---------------------------------------------------------------------------
+.ribbon-wings-up,
+.ribbon-32 {
+  --s: 1.8em;
+  --d: 0.5em;
+  --c-cut: 0.8em;
+  padding: var(--d) calc(var(--s) + var(--d) + 0.5em) 0;
+  line-height: 1.8;
+  background-image: linear-gradient(90deg, #0004 var(--d), #0000 0 calc(100% - var(--d)), #0004 0);
+  background-position: 50% 0;
+  background-size: calc(100% - 2 * var(--s)) 100%;
+  background-repeat: no-repeat;
+  clip-path: polygon(0 0, var(--s) 0, calc(var(--s) + var(--d)) var(--d), calc(100% - var(--s) - var(--d)) var(--d), calc(100% - var(--s)) 0, 100% 0, calc(100% - var(--c-cut)) calc(50% - var(--d) / 2), 100% calc(100% - var(--d)), calc(100% - var(--s)) calc(100% - var(--d)), calc(100% - var(--s) - var(--d)) 100%, calc(var(--s) + var(--d)) 100%, var(--s) calc(100% - var(--d)), 0 calc(100% - var(--d)), var(--c-cut) calc(50% - var(--d) / 2));
+  background-color: var(--c);
+  width: fit-content;
+}
+
+.ribbon-wings-down,
+.ribbon-33 {
+  --s: 1.8em;
+  --d: 0.5em;
+  --c-cut: 0.8em;
+  padding: 0 calc(var(--s) + var(--d) + 0.5em) var(--d);
+  line-height: 1.8;
+  background-image: linear-gradient(90deg, #0004 var(--d), #0000 0 calc(100% - var(--d)), #0004 0);
+  background-position: 50% 0;
+  background-size: calc(100% - 2 * var(--s)) 100%;
+  background-repeat: no-repeat;
+  clip-path: polygon(0 100%, var(--s) 100%, calc(var(--s) + var(--d)) calc(100% - var(--d)), calc(100% - var(--s) - var(--d)) calc(100% - var(--d)), calc(100% - var(--s)) 100%, 100% 100%, calc(100% - var(--c-cut)) calc(50% + var(--d) / 2), 100% var(--d), calc(100% - var(--s)) var(--d), calc(100% - var(--s) - var(--d)) 0, calc(var(--s) + var(--d)) 0, var(--s) var(--d), 0 var(--d), var(--c-cut) calc(50% + var(--d) / 2));
+  background-color: var(--c);
+  width: fit-content;
+}
+
+.ribbon-origami,
+.ribbon-34 {
+  --s: 4em;
+  --a: 40deg;
+  --r: 0.8em;
+  line-height: 1.9;
+  padding-inline: calc(1lh * tan(var(--a) / 2) + 0.3em);
+  margin-bottom: calc(var(--s) * sin(var(--a)));
+  clip-path: polygon(calc(1lh * tan(var(--a) / 2)) 0, calc(100% - 1lh * tan(var(--a) / 2)) 0, 100% 100%, 100% 999px, 0 999px, 0 100%);
+  background-color: var(--c);
+  width: fit-content;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 1lh;
+    width: var(--s);
+    background: color-mix(in srgb, var(--c), #000 40%);
+  }
+
+  &::before {
+    right: 0;
+    transform-origin: bottom right;
+    rotate: calc(-1 * var(--a));
+    clip-path: polygon(0 0, calc(100% - 1lh / tan(var(--a))) 0, 100% 100%, 0 100%, var(--r) 50%);
+  }
+
+  &::after {
+    left: 0;
+    transform-origin: bottom left;
+    rotate: var(--a);
+    clip-path: polygon(calc(1lh / tan(var(--a))) 0, 100% 0, calc(100% - var(--r)) 50%, 100% 100%, 0 100%);
+  }
+}
+
+.ribbon-origami-tr,
+.ribbon-35 {
+  --s: 4em;
+  --a: 40deg;
+  --r: 0.8em;
+  line-height: 1.9;
+  padding-inline: calc(var(--r) + 0.3em) calc(1lh * tan(var(--a) / 2) + 0.3em);
+  margin-top: calc(var(--s) * sin(var(--a)));
+  clip-path: polygon(var(--r) 0, var(--r) -999px, 100% -999px, 100% 0, calc(100% - 1lh * tan(var(--a) / 2)) 100%, var(--r) 100%, 0 50%);
+  background-color: var(--c);
+  width: fit-content;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 1lh;
+    width: var(--s);
+    background: color-mix(in srgb, var(--c), #000 40%);
+    transform-origin: top right;
+    rotate: var(--a);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 1lh / tan(var(--a))) 100%, 0 100%, var(--r) 50%);
+  }
+}
+
+.ribbon-origami-tl,
+.ribbon-36 {
+  --s: 4em;
+  --a: 40deg;
+  --r: 0.8em;
+  line-height: 1.9;
+  padding-inline: calc(1lh * tan(var(--a) / 2) + 0.3em) calc(var(--r) + 0.3em);
+  margin-top: calc(var(--s) * sin(var(--a)));
+  clip-path: polygon(0 0, 0 -999px, calc(100% - var(--r)) -999px, calc(100% - var(--r)) 0, 100% 50%, calc(100% - var(--r)) 100%, calc(1lh * tan(var(--a) / 2)) 100%);
+  background-color: var(--c);
+  width: fit-content;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1lh;
+    width: var(--s);
+    background: color-mix(in srgb, var(--c), #000 40%);
+    transform-origin: top left;
+    rotate: calc(-1 * var(--a));
+    clip-path: polygon(0 0, 100% 0, calc(100% - var(--r)) 50%, 100% 100%, calc(1lh / tan(var(--a))) 100%);
+  }
+}
+
+.ribbon-origami-br,
+.ribbon-37 {
+  --s: 4em;
+  --a: 40deg;
+  --r: 0.8em;
+  line-height: 1.9;
+  padding-inline: calc(var(--r) + 0.3em) calc(1lh * tan(var(--a) / 2) + 0.3em);
+  margin-bottom: calc(var(--s) * sin(var(--a)));
+  clip-path: polygon(var(--r) 100%, var(--r) 999px, 100% 999px, 100% 100%, calc(100% - 1lh * tan(var(--a) / 2)) 0, var(--r) 0, 0 50%);
+  background-color: var(--c);
+  width: fit-content;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 1lh;
+    width: var(--s);
+    background: color-mix(in srgb, var(--c), #000 40%);
+    transform-origin: bottom right;
+    rotate: calc(-1 * var(--a));
+    clip-path: polygon(0 0, calc(100% - 1lh / tan(var(--a))) 0, 100% 100%, 0 100%, var(--r) 50%);
+  }
+}
+
+.ribbon-origami-bl,
+.ribbon-38 {
+  --s: 4em;
+  --a: 40deg;
+  --r: 0.8em;
+  line-height: 1.9;
+  padding-inline: calc(1lh * tan(var(--a) / 2) + 0.3em) calc(var(--r) + 0.3em);
+  margin-bottom: calc(var(--s) * sin(var(--a)));
+  clip-path: polygon(0 100%, 0 999px, calc(100% - var(--r)) 999px, calc(100% - var(--r)) 100%, 100% 50%, calc(100% - var(--r)) 0, calc(1lh * tan(var(--a) / 2)) 0);
+  background-color: var(--c);
+  width: fit-content;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1lh;
+    width: var(--s);
+    background: color-mix(in srgb, var(--c), #000 40%);
+    transform-origin: bottom left;
+    rotate: var(--a);
+    clip-path: polygon(calc(1lh / tan(var(--a))) 0, 100% 0, calc(100% - var(--r)) 50%, 100% 100%, 0 100%);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Medalhas Coração, Marcadores Cilíndricos & Pendentes (#39 – #49)
+// EN: Heart & Diamond Medals, Curled Bookmarks & Hanging Tags (#39 – #49)
+// ---------------------------------------------------------------------------
+.ribbon-medal-heart,
+.ribbon-39 {
+  --r: 20%;
+  padding: 0.6em 1.5em 1.6em;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 50% 20% -35%;
+    background: color-mix(in srgb, var(--c), #000 35%);
+    clip-path: polygon(5% 0, 95% 0, 100% 100%, 50% calc(100% - var(--r)), 0 100%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: var(--c);
+    -webkit-mask:
+      radial-gradient(at 70% 31%, #000 29%, #0000 30%),
+      radial-gradient(at 30% 31%, #000 29%, #0000 30%),
+      linear-gradient(#000 0 0) bottom / 100% 50% no-repeat;
+    mask:
+      radial-gradient(at 70% 31%, #000 29%, #0000 30%),
+      radial-gradient(at 30% 31%, #000 29%, #0000 30%),
+      linear-gradient(#000 0 0) bottom / 100% 50% no-repeat;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+  }
+}
+
+.ribbon-medal-heart-crossed,
+.ribbon-40 {
+  padding: 0.6em 1.5em 1.6em;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 30% 0 auto;
+    aspect-ratio: 1;
+    background: color-mix(in srgb, var(--c), #000 35%);
+    clip-path: polygon(33.3333% 0, 66.6667% 0, 100% 90%, 66.6667% 100%, 33.3333% 0, 66.6667% 0, 33.3333% 100%, 0 90%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: var(--c);
+    -webkit-mask:
+      radial-gradient(at 70% 31%, #000 29%, #0000 30%),
+      radial-gradient(at 30% 31%, #000 29%, #0000 30%),
+      linear-gradient(#000 0 0) bottom / 100% 50% no-repeat;
+    mask:
+      radial-gradient(at 70% 31%, #000 29%, #0000 30%),
+      radial-gradient(at 30% 31%, #000 29%, #0000 30%),
+      linear-gradient(#000 0 0) bottom / 100% 50% no-repeat;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+  }
+}
+
+.ribbon-medal-heart-notched,
+.ribbon-41 {
+  padding: 0.6em 1.5em 1.6em;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 30% 0 auto;
+    aspect-ratio: 1;
+    background: color-mix(in srgb, var(--c), #000 35%);
+    clip-path: polygon(33.3333% 0, 66.6667% 0, 100% 90%, 80% 85%, 66.6667% 100%, 33.3333% 0, 66.6667% 0, 33.3333% 100%, 20% 85%, 0 90%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: var(--c);
+    -webkit-mask:
+      radial-gradient(at 70% 31%, #000 29%, #0000 30%),
+      radial-gradient(at 30% 31%, #000 29%, #0000 30%),
+      linear-gradient(#000 0 0) bottom / 100% 50% no-repeat;
+    mask:
+      radial-gradient(at 70% 31%, #000 29%, #0000 30%),
+      radial-gradient(at 30% 31%, #000 29%, #0000 30%),
+      linear-gradient(#000 0 0) bottom / 100% 50% no-repeat;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+  }
+}
+
+.ribbon-curl-bookmark-tl,
+.ribbon-42 {
+  --f: 0.4em;
+  --r: 0.8em;
+  position: absolute;
+  left: 20px;
+  top: calc(-1 * var(--f));
+  padding: 0.25em 0.45em;
+  border: solid #0000;
+  border-width: 0 0 var(--r) calc(2 * var(--f));
+  background: radial-gradient(50% 100% at bottom, #0005 98%, #0000 101%) 0 0 / calc(2 * var(--f)) var(--f) no-repeat border-box;
+  background-color: var(--c);
+  border-radius: var(--f) var(--f) 0 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, calc(50% + var(--f)) calc(100% - var(--r)), calc(2 * var(--f)) 100%, calc(2 * var(--f)) var(--f), 0 var(--f));
+}
+
+.ribbon-curl-bookmark-tr-arrow,
+.ribbon-43 {
+  --f: 0.4em;
+  --r: 0.8em;
+  position: absolute;
+  right: 20px;
+  top: calc(-1 * var(--f));
+  padding: 0.25em 0.45em;
+  border: solid #0000;
+  border-width: 0 calc(2 * var(--f)) var(--r) 0;
+  background: radial-gradient(50% 100% at bottom, #0005 98%, #0000 101%) 100% 0 / calc(2 * var(--f)) var(--f) no-repeat border-box;
+  background-color: var(--c);
+  border-radius: var(--f) var(--f) 0 0;
+  clip-path: polygon(100% 0, 0 0, 0 calc(100% - var(--r)), calc(50% - var(--f)) 100%, calc(100% - 2 * var(--f)) calc(100% - var(--r)), calc(100% - 2 * var(--f)) var(--f), 100% var(--f));
+}
+
+.ribbon-curl-bookmark-tr,
+.ribbon-44 {
+  --f: 0.4em;
+  --r: 0.8em;
+  position: absolute;
+  right: 20px;
+  top: calc(-1 * var(--f));
+  padding: 0.25em 0.45em;
+  border: solid #0000;
+  border-width: 0 calc(2 * var(--f)) var(--r) 0;
+  background: radial-gradient(50% 100% at bottom, #0005 98%, #0000 101%) 100% 0 / calc(2 * var(--f)) var(--f) no-repeat border-box;
+  background-color: var(--c);
+  border-radius: var(--f) var(--f) 0 0;
+  clip-path: polygon(100% 0, 0 0, 0 100%, calc(50% - var(--f)) calc(100% - var(--r)), calc(100% - 2 * var(--f)) 100%, calc(100% - 2 * var(--f)) var(--f), 100% var(--f));
+}
+
+.ribbon-curl-bookmark-tl-arrow,
+.ribbon-45 {
+  --f: 0.4em;
+  --r: 0.8em;
+  position: absolute;
+  left: 20px;
+  top: calc(-1 * var(--f));
+  padding: 0.25em 0.45em;
+  border: solid #0000;
+  border-width: 0 0 var(--r) calc(2 * var(--f));
+  background: radial-gradient(50% 100% at bottom, #0005 98%, #0000 101%) 0 0 / calc(2 * var(--f)) var(--f) no-repeat border-box;
+  background-color: var(--c);
+  border-radius: var(--f) var(--f) 0 0;
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--r)), calc(50% + var(--f)) 100%, calc(2 * var(--f)) calc(100% - var(--r)), calc(2 * var(--f)) var(--f), 0 var(--f));
+}
+
+.ribbon-hanging-arrow,
+.ribbon-46 {
+  --r: 0.8em;
+  border-inline: 0.5em solid #0000;
+  padding: 0.5em 0.4em calc(var(--r) + 0.25em);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 0.5em) calc(100% - var(--r)), 50% 100%, 0.5em calc(100% - var(--r)), 0 100%);
+  background:
+    radial-gradient(50% 0.2em at top, #000a, #0000) border-box,
+    var(--c) padding-box;
+  width: fit-content;
+}
+
+.ribbon-hanging,
+.ribbon-47 {
+  --r: 0.8em;
+  border-inline: 0.5em solid #0000;
+  padding: 0.5em 0.4em calc(var(--r) + 0.25em);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, calc(100% - 0.5em) 100%, 50% calc(100% - var(--r)), 0.5em 100%, 0 100%);
+  background:
+    radial-gradient(50% 0.2em at top, #000a, #0000) border-box,
+    var(--c) padding-box;
+  width: fit-content;
+}
+
+.ribbon-medal-diamond,
+.ribbon-48 {
+  --r: 20%;
+  padding: 1.3em;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 60% 20% -40%;
+    background: color-mix(in srgb, var(--c), #000 35%);
+    clip-path: polygon(5% 0, 95% 0, 100% 100%, 50% calc(100% - var(--r)), 0 100%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 10%;
+    rotate: 45deg;
+    outline: 0.1em solid #0003;
+    background: var(--c);
+    outline-offset: -0.4em;
+    border-radius: 0.3em;
+  }
+}
+
+.ribbon-medal-diamond-crossed,
+.ribbon-49 {
+  padding: 1.3em;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 40% 0 auto;
+    aspect-ratio: 1;
+    background: color-mix(in srgb, var(--c), #000 35%);
+    clip-path: polygon(33.3333% 0, 66.6667% 0, 100% 90%, 66.6667% 100%, 33.3333% 0, 66.6667% 0, 33.3333% 100%, 0 90%);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 10%;
+    rotate: 45deg;
+    outline: 0.1em solid #0003;
+    background: var(--c);
+    outline-offset: -0.4em;
+    border-radius: 0.3em;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Borda Infinita (Full-Bleed), Medalhas Arqueadas & Multilinha (#50 – #57)
+// EN: Full-Bleed Edge Tags, Circular Arch Seals & Multiline Ribbons (#50 – #57)
+// ---------------------------------------------------------------------------
+.ribbon-bleed-left,
+.ribbon-50 {
+  --r: 0.8em;
+  padding-right: calc(var(--r) + 0.45em);
+  padding-left: 0.4em;
+  line-height: 1.8;
+  clip-path: polygon(-100vw 0, 100% 0, calc(100% - var(--r)) 50%, 100% 100%, -100vw 100%);
+  border-style: solid;
+  border-width: 0;
+  border-image-source: conic-gradient(var(--c) 0 0);
+  border-image-slice: 0 fill;
+  border-image-outset: 0 100vw;
+  width: fit-content;
+}
+
+.ribbon-bleed-left-arrow,
+.ribbon-51 {
+  --r: 0.8em;
+  padding-right: calc(var(--r) + 0.45em);
+  padding-left: 0.4em;
+  line-height: 1.8;
+  clip-path: polygon(-100vw 0, calc(100% - var(--r)) 0, 100% 50%, calc(100% - var(--r)) 100%, -100vw 100%);
+  border-style: solid;
+  border-width: 0;
+  border-image-source: conic-gradient(var(--c) 0 0);
+  border-image-slice: 0 fill;
+  border-image-outset: 0 100vw;
+  width: fit-content;
+}
+
+.ribbon-bleed-right,
+.ribbon-52 {
+  --r: 0.8em;
+  padding-left: calc(var(--r) + 0.45em);
+  padding-right: 0.4em;
+  line-height: 1.8;
+  clip-path: polygon(100vw 0, 0 0, var(--r) 50%, 0 100%, 100vw 100%);
+  border-style: solid;
+  border-width: 0;
+  border-image-source: conic-gradient(var(--c) 0 0);
+  border-image-slice: 0 fill;
+  border-image-outset: 0 100vw;
+  width: fit-content;
+}
+
+.ribbon-bleed-right-arrow,
+.ribbon-53 {
+  --r: 0.8em;
+  padding-left: calc(var(--r) + 0.45em);
+  padding-right: 0.4em;
+  line-height: 1.8;
+  clip-path: polygon(100vw 0, var(--r) 0, 0 50%, var(--r) 100%, 100vw 100%);
+  border-style: solid;
+  border-width: 0;
+  border-image-source: conic-gradient(var(--c) 0 0);
+  border-image-slice: 0 fill;
+  border-image-outset: 0 100vw;
+  width: fit-content;
+}
+
+.ribbon-medal-star-arch,
+.ribbon-54 {
+  --a: 56deg;
+  --r: 6deg;
+  --s: 1.6em;
+  padding: 0.6em 1.3em;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: calc(50% - var(--s) / 2) -150% auto;
+    border-radius: 999px 999px 0 0;
+    aspect-ratio: 2;
+    border: var(--s) solid color-mix(in srgb, var(--c), #000 35%);
+    border-bottom: none;
+    clip-path: polygon(
+      100% 0,
+      calc(50% + 50% * cos(var(--a))) calc(100% - 100% * sin(var(--a))),
+      calc(50% + (50% - var(--s) / 2) * cos(var(--a) + var(--r))) calc(100% - (100% - var(--s) / 2) * sin(var(--a) + var(--r))),
+      calc(50% + (50% - var(--s)) * cos(var(--a))) calc(100% - (100% - var(--s)) * sin(var(--a))),
+      50% 100%,
+      calc(50% - (50% - var(--s)) * cos(var(--a))) calc(100% - (100% - var(--s)) * sin(var(--a))),
+      calc(50% - (50% - var(--s) / 2) * cos(var(--a) + var(--r))) calc(100% - (100% - var(--s) / 2) * sin(var(--a) + var(--r))),
+      calc(50% - 50% * cos(var(--a))) calc(100% - 100% * sin(var(--a))),
+      0 0
+    );
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(35% 35%, #0000 96%, #0003 97% 99%, #0000) var(--c);
+    clip-path: polygon(100% 50%, 89.23% 57.8%, 96.19% 69.13%, 83.26% 72.22%, 85.36% 85.36%, 72.22% 83.26%, 69.13% 96.19%, 57.8% 89.23%, 50% 100%, 42.2% 89.23%, 30.87% 96.19%, 27.78% 83.26%, 14.64% 85.36%, 16.74% 72.22%, 3.81% 69.13%, 10.77% 57.8%, 0% 50%, 10.77% 42.2%, 3.81% 30.87%, 16.74% 27.78%, 14.64% 14.64%, 27.78% 16.74%, 30.87% 3.81%, 42.2% 10.77%, 50% 0%, 57.8% 10.77%, 69.13% 3.81%, 72.22% 16.74%, 85.36% 14.64%, 83.26% 27.78%, 96.19% 30.87%, 89.23% 42.2%);
+  }
+}
+
+.ribbon-medal-heart-arch,
+.ribbon-55 {
+  --a: 56deg;
+  --r: 6deg;
+  --s: 1.6em;
+  padding: 0.6em 1.5em 1.6em;
+  aspect-ratio: 1;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 0;
+  width: fit-content;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: calc(50% - 0.5em - var(--s) / 2) -150% auto;
+    border-radius: 999px 999px 0 0;
+    aspect-ratio: 2;
+    border: var(--s) solid color-mix(in srgb, var(--c), #000 35%);
+    border-bottom: none;
+    clip-path: polygon(
+      100% 0,
+      calc(50% + 50% * cos(var(--a))) calc(100% - 100% * sin(var(--a))),
+      calc(50% + (50% - var(--s) / 2) * cos(var(--a) + var(--r))) calc(100% - (100% - var(--s) / 2) * sin(var(--a) + var(--r))),
+      calc(50% + (50% - var(--s)) * cos(var(--a))) calc(100% - (100% - var(--s)) * sin(var(--a))),
+      50% 100%,
+      calc(50% - (50% - var(--s)) * cos(var(--a))) calc(100% - (100% - var(--s)) * sin(var(--a))),
+      calc(50% - (50% - var(--s) / 2) * cos(var(--a) + var(--r))) calc(100% - (100% - var(--s) / 2) * sin(var(--a) + var(--r))),
+      calc(50% - 50% * cos(var(--a))) calc(100% - 100% * sin(var(--a))),
+      0 0
+    );
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: var(--c);
+    -webkit-mask:
+      radial-gradient(at 70% 31%, #000 29%, #0000 30%),
+      radial-gradient(at 30% 31%, #000 29%, #0000 30%),
+      linear-gradient(#000 0 0) bottom / 100% 50% no-repeat;
+    mask:
+      radial-gradient(at 70% 31%, #000 29%, #0000 30%),
+      radial-gradient(at 30% 31%, #000 29%, #0000 30%),
+      linear-gradient(#000 0 0) bottom / 100% 50% no-repeat;
+    clip-path: polygon(-41% 0, 50% 91%, 141% 0);
+  }
+}
+
+.ribbon-multiline,
+.ribbon-56 {
+  --r: 0.5em;
+  padding-inline: calc(0.2em + var(--r));
+  text-align: center;
+  line-height: 2;
+  background-image:
+    linear-gradient(var(--c) 70%, #0000 0),
+    linear-gradient(to bottom left, #0000 50%, color-mix(in srgb, var(--c), #000 40%) 51% 84%, #0000 85%);
+  background-position: 0 0.15lh;
+  background-size: 100% 1lh;
+  clip-path: polygon(0 0.15lh, 100% 0.15lh, calc(100% - var(--r)) 0.5lh, 100% 0.85lh, 100% calc(100% - 0.15lh), 0 calc(100% - 0.15lh), var(--r) calc(100% - 0.5lh), 0 calc(100% - 0.85lh));
+  width: fit-content;
+}
+
+.ribbon-multiline-origami,
+.ribbon-57 {
+  --r: 0.5em;
+  --a: 20deg;
+  --s: 6em;
+  padding-inline: calc(1lh * tan(var(--a) / 2) + 0.3em);
+  margin-block: calc(var(--s) * sin(var(--a)) - 0.15lh);
+  text-align: center;
+  line-height: 2;
+  background-image:
+    linear-gradient(var(--c) 70%, #0000 0),
+    linear-gradient(to bottom left, #0000 50%, color-mix(in srgb, var(--c), #000 40%) 51% 84%, #0000 85%);
+  background-position: 0 0.15lh;
+  background-size: 100% 1lh;
+  position: relative;
+  clip-path: polygon(
+    0 0.15lh,
+    calc(100% - 0.7lh / sin(var(--a))) 0.15lh,
+    calc(100% - 0.7lh / sin(var(--a)) - 999px) calc(0.15lh - 999px * tan(var(--a))),
+    100% -999px,
+    100% 0.15lh,
+    calc(100% - 0.7lh * tan(var(--a) / 2)) 0.85lh,
+    100% 1lh,
+    100% calc(100% - 0.15lh),
+    calc(0.7lh / sin(var(--a))) calc(100% - 0.15lh),
+    calc(0.7lh / sin(var(--a)) + 999px) calc(100% - 0.15lh + 999px * tan(var(--a))),
+    0 999px,
+    0 calc(100% - 0.15lh),
+    calc(0.7lh * tan(var(--a) / 2)) calc(100% - 0.85lh),
+    0 calc(100% - 1lh)
+  );
+  width: fit-content;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    height: 0.7lh;
+    width: var(--s);
+    background: color-mix(in srgb, var(--c), #000 40%);
+    rotate: var(--a);
+  }
+
+  &::before {
+    top: 0.15lh;
+    right: 0;
+    transform-origin: top right;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 0.7lh / tan(var(--a))) 100%, 0 100%, var(--r) 50%);
+  }
+
+  &::after {
+    bottom: 0.15lh;
+    left: 0;
+    transform-origin: bottom left;
+    clip-path: polygon(calc(0.7lh / tan(var(--a))) 0, 100% 0, calc(100% - var(--r)) 50%, 100% 100%, 0 100%);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 8. Paleta Oficial (28 Cores + Semânticas) & Acessibilidade
+// EN: Official 28-Color Palette + Semantic Variants
+// ---------------------------------------------------------------------------
+@each $name, $hex in $ribbon-palette {
+  $is-light: list.index($ribbon-light-names, $name) != null;
+  $fg: #ffffff;
+
+  @if $is-light {
+    $fg: #130f10;
+  }
+
+  .ribbon-color-#{$name},
+  .ribbon-#{$name} {
+    --#{$prefix}-ribbon-bg: var(--#{$prefix}-#{$name}, #{$hex});
+    --#{$prefix}-ribbon-color: #{$fg};
+  }
+}
+
+@each $alias, $canonical in $color-aliases {
+  .ribbon-color-#{$alias},
+  .ribbon-#{$alias} {
+    @extend .ribbon-color-#{$canonical};
+  }
+}

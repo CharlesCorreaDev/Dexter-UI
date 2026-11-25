@@ -1,0 +1,407 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_native-b6.scss
+ * @description [PT-BR] Primitivas HTML5 Nativas inspiradas no Bootstrap 6 e daisyUI v5:
+ *              diálogo nativo (<dialog class="dx-dialog">), acordeão nativo zero-JS
+ *              (<details class="dx-details"> com exclusão mútua HTML5 name), Popover API
+ *              ([popover].dx-popover-native), trocador puro CSS (.swap) e brilho cônico
+ *              animado (.dx-aura) com @starting-style, Dark Mode e prefers-reduced-motion.
+ *              [EN]    Native HTML5 Primitives inspired by Bootstrap 6 and daisyUI v5:
+ *              native dialog (<dialog class="dx-dialog">), zero-JS accordion
+ *              (<details class="dx-details"> with mutual exclusion), native Popover API
+ *              ([popover].dx-popover-native), pure CSS swap (.swap) and conic-gradient aura
+ *              (.dx-aura) with @starting-style, Dark Mode and prefers-reduced-motion.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Primitivas HTML5 Nativas (Bootstrap 6 / daisyUI) | Native HTML5 Primitives */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Native HTML5 <dialog class="dx-dialog"> (Bootstrap 6 style)
+// EN: Native HTML5 <dialog class="dx-dialog"> with ::backdrop & @starting-style
+// ---------------------------------------------------------------------------
+dialog.dx-dialog {
+  --#{$prefix}-nd-bg: #ffffff;
+  --#{$prefix}-nd-surface: #f8fafc;
+  --#{$prefix}-nd-color: #1e293b;
+  --#{$prefix}-nd-muted: #64748b;
+  --#{$prefix}-nd-border: rgba(15, 23, 42, 0.12);
+  --#{$prefix}-nd-accent: var(--#{$prefix}-primary, #{$primary});
+
+  margin: auto;
+  padding: 0;
+  width: min(520px, calc(100vw - 2rem));
+  max-height: calc(100vh - 2rem);
+  background-color: var(--#{$prefix}-nd-bg);
+  color: var(--#{$prefix}-nd-color);
+  border: 1px solid var(--#{$prefix}-nd-border);
+  border-top: 4px solid var(--#{$prefix}-nd-accent);
+  border-radius: 0.85rem;
+  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.3);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 0.2s ease, transform 0.2s ease, display 0.2s allow-discrete, overlay 0.2s allow-discrete;
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: translateY(0) scale(1);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(10px) scale(0.98);
+    }
+  }
+
+  &::backdrop {
+    background-color: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+
+  &.dx-dialog-sm {
+    width: min(380px, calc(100vw - 2rem));
+  }
+
+  &.dx-dialog-lg {
+    width: min(740px, calc(100vw - 2rem));
+  }
+
+  .dx-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--#{$prefix}-nd-border);
+
+    h4, h5, h6, .dx-dialog-title {
+      margin: 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--#{$prefix}-nd-color);
+    }
+  }
+
+  .dx-dialog-body {
+    padding: 1.15rem 1.25rem;
+    overflow-y: auto;
+    color: var(--#{$prefix}-nd-muted);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+  }
+
+  .dx-dialog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.85rem 1.25rem;
+    border-top: 1px solid var(--#{$prefix}-nd-border);
+    background-color: var(--#{$prefix}-nd-surface);
+  }
+}
+
+[data-dx-theme="dark"] dialog.dx-dialog,
+[data-bs-theme="dark"] dialog.dx-dialog {
+  --#{$prefix}-nd-bg: #161f30;
+  --#{$prefix}-nd-surface: #1e293b;
+  --#{$prefix}-nd-color: #e2e8f0;
+  --#{$prefix}-nd-muted: #94a3b8;
+  --#{$prefix}-nd-border: rgba(148, 163, 184, 0.2);
+}
+
+// ---------------------------------------------------------------------------
+// 2. Acordeão HTML5 Nativo Zero-JS (<details class="dx-details">)
+// EN: Zero-JS Native Accordion (<details class="dx-details">)
+// ---------------------------------------------------------------------------
+.dx-details-group {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 0.75rem;
+  overflow: hidden;
+
+  .dx-details {
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+
+    + .dx-details {
+      border-top: 1px solid rgba(15, 23, 42, 0.1);
+    }
+  }
+}
+
+details.dx-details {
+  --#{$prefix}-dt-bg: #ffffff;
+  --#{$prefix}-dt-summary-bg: #f8fafc;
+  --#{$prefix}-dt-color: #1e293b;
+  --#{$prefix}-dt-muted: #475569;
+  --#{$prefix}-dt-border: rgba(15, 23, 42, 0.12);
+  --#{$prefix}-dt-accent: var(--#{$prefix}-primary, #{$primary});
+
+  background-color: var(--#{$prefix}-dt-bg);
+  color: var(--#{$prefix}-dt-color);
+  border: 1px solid var(--#{$prefix}-dt-border);
+  border-radius: 0.75rem;
+  margin-bottom: 0.65rem;
+  overflow: hidden;
+
+  > summary,
+  > .dx-details-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.9rem 1.15rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    color: var(--#{$prefix}-dt-color);
+    background-color: var(--#{$prefix}-dt-bg);
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    &::-webkit-details-marker,
+    &::marker {
+      display: none;
+      content: "";
+    }
+
+    &:hover {
+      background-color: var(--#{$prefix}-dt-summary-bg);
+      color: var(--#{$prefix}-dt-accent);
+    }
+
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 0.9rem;
+      height: 0.9rem;
+      flex-shrink: 0;
+      background-color: currentColor;
+      -webkit-mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23000' fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+      mask-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='%23000' fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &[open] > summary,
+  &[open] > .dx-details-summary {
+    background-color: var(--#{$prefix}-dt-summary-bg);
+    color: var(--#{$prefix}-dt-accent);
+    border-bottom: 1px solid var(--#{$prefix}-dt-border);
+
+    &::after {
+      transform: rotate(180deg);
+    }
+  }
+
+  .dx-details-body {
+    padding: 1rem 1.15rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--#{$prefix}-dt-muted);
+  }
+}
+
+[data-dx-theme="dark"] details.dx-details,
+[data-bs-theme="dark"] details.dx-details {
+  --#{$prefix}-dt-bg: #161f30;
+  --#{$prefix}-dt-summary-bg: #1e293b;
+  --#{$prefix}-dt-color: #e2e8f0;
+  --#{$prefix}-dt-muted: #94a3b8;
+  --#{$prefix}-dt-border: rgba(148, 163, 184, 0.2);
+}
+
+[data-dx-theme="dark"] .dx-details-group,
+[data-bs-theme="dark"] .dx-details-group {
+  border-color: rgba(148, 163, 184, 0.2);
+
+  .dx-details + .dx-details {
+    border-top-color: rgba(148, 163, 184, 0.16);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Native HTML Popover API ([popover].dx-popover-native)
+// EN: Native HTML Popover API ([popover].dx-popover-native)
+// ---------------------------------------------------------------------------
+[popover].dx-popover-native {
+  margin: auto;
+  padding: 1rem 1.25rem;
+  max-width: 340px;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  background-color: #ffffff;
+  color: #1e293b;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.24);
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.18s ease, transform 0.18s ease, display 0.18s allow-discrete, overlay 0.18s allow-discrete;
+
+  &:popover-open {
+    opacity: 1;
+    transform: scale(1);
+
+    @starting-style {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+  }
+
+  &::backdrop {
+    background-color: rgba(15, 23, 42, 0.25);
+  }
+}
+
+[data-dx-theme="dark"] [popover].dx-popover-native,
+[data-bs-theme="dark"] [popover].dx-popover-native {
+  background-color: #1e293b;
+  color: #e2e8f0;
+  border-color: rgba(148, 163, 184, 0.24);
+}
+
+// ---------------------------------------------------------------------------
+// 4. Pure CSS State Toggler (.swap - daisyUI)
+// EN: Pure CSS State Toggler (.swap - daisyUI)
+// ---------------------------------------------------------------------------
+.swap {
+  position: relative;
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+  user-select: none;
+
+  > input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  > * {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+
+  .swap-on {
+    opacity: 0;
+  }
+
+  .swap-off {
+    opacity: 1;
+  }
+
+  &.swap-rotate .swap-on {
+    transform: rotate(45deg);
+  }
+
+  &.swap-flip .swap-on {
+    transform: rotateY(180deg);
+  }
+
+  &.swap-active .swap-on,
+  > input:checked ~ .swap-on {
+    opacity: 1;
+    transform: none;
+  }
+
+  &.swap-active .swap-off,
+  > input:checked ~ .swap-off {
+    opacity: 0;
+  }
+
+  &.swap-rotate.swap-active .swap-off,
+  &.swap-rotate > input:checked ~ .swap-off {
+    transform: rotate(-45deg);
+  }
+
+  &.swap-flip.swap-active .swap-off,
+  &.swap-flip > input:checked ~ .swap-off {
+    transform: rotateY(-180deg);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Efeito Borda / Aura Cônica Animada (.dx-aura - daisyUI v5.6)
+// EN: Animated Conic Glow Wrapper (.dx-aura - daisyUI v5.6)
+// ---------------------------------------------------------------------------
+.dx-aura {
+  position: relative;
+  display: inline-flex;
+  border-radius: 0.85rem;
+  padding: 2px;
+  background: conic-gradient(
+    from var(--dx-aura-angle, 0deg),
+    var(--#{$prefix}-primary, #{$primary}),
+    var(--#{$prefix}-indigo, #{$indigo}),
+    var(--#{$prefix}-coral, #{$coral}),
+    var(--#{$prefix}-cyan, #{$cyan}),
+    var(--#{$prefix}-primary, #{$primary})
+  );
+  animation: dx-aura-spin 4s linear infinite;
+
+  > .dx-aura-inner {
+    position: relative;
+    z-index: 1;
+    border-radius: calc(0.85rem - 2px);
+    background-color: var(--#{$prefix}-body-bg, #ffffff);
+    width: 100%;
+  }
+}
+
+@property --dx-aura-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes dx-aura-spin {
+  to {
+    --dx-aura-angle: 360deg;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Acessibilidade (Movimento Reduzido)
+// EN: Reduced Motion Support
+// ---------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  dialog.dx-dialog,
+  details.dx-details > summary::after,
+  [popover].dx-popover-native,
+  .swap > *,
+  .dx-aura {
+    transition: none;
+    animation: none;
+  }
+}

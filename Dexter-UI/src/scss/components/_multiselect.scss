@@ -1,0 +1,486 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _multiselect.scss
+ * @description [PT-BR] Suíte completa de Seleção Múltipla com Dropdown e Checkboxes (MultiSelect),
+ *              inspirada e aprimorada a partir do BsMultiSelect (github.com/DashboardCode/BsMultiSelect).
+ *              Elimina a dependência de jQuery com controlador nativo vanilla JS (DexterMultiSelect),
+ *              menu suspenso com caixas de seleção interativas (.multiselect-item), suporte a grupos (<optgroup>),
+ *              barra de ações (Selecionar Todos / Limpar), busca em tempo real com realce,
+ *              modo resumo condensado ("N selecionados"), badges customizadas nas 28 cores oficiais,
+ *              navegação por teclado, estados de validação (.is-valid, .is-invalid) e suporte nativo a Dark Mode.
+ *              [EN]    Complete MultiSelect Dropdown Suite with Checkboxes, inspired and enhanced from
+ *              BsMultiSelect (github.com/DashboardCode/BsMultiSelect). Eliminates jQuery dependency with a
+ *              zero-dependency native vanilla JS controller (DexterMultiSelect), dropdown menu with interactive
+ *              checkboxes (.multiselect-item), optgroups support, toolbar actions (Select All / Clear),
+ *              live search filter, collapsed summary mode ("N selected"), custom badges across 28 official colors,
+ *              keyboard navigation, validation states (.is-valid, .is-invalid), and native Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Seleção Múltipla com Dropdown | MultiSelect Dropdown */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Tokens do MultiSelect
+// EN: MultiSelect Tokens and CSS Variables
+// ---------------------------------------------------------------------------
+
+:root {
+  --#{$prefix}-multiselect-bg: var(--#{$prefix}-form-input-bg, #ffffff);
+  --#{$prefix}-multiselect-color: var(--#{$prefix}-form-input-color, #1e293b);
+  --#{$prefix}-multiselect-border: var(--#{$prefix}-form-input-border, #cbd5e1);
+  --#{$prefix}-multiselect-border-hover: #94a3b8;
+  --#{$prefix}-multiselect-focus-border: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-multiselect-radius: var(--#{$prefix}-radius-md, 0.375rem);
+  --#{$prefix}-multiselect-min-height: 2.375rem;
+
+  --#{$prefix}-multiselect-menu-bg: #ffffff;
+  --#{$prefix}-multiselect-menu-border: rgba(0, 0, 0, 0.12);
+  --#{$prefix}-multiselect-menu-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.12), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+  --#{$prefix}-multiselect-hover-bg: #f8fafc;
+  --#{$prefix}-multiselect-active-bg: #edf2fa;
+  --#{$prefix}-multiselect-active-color: var(--#{$prefix}-primary, #3b5998);
+}
+
+[data-#{$prefix}-theme="dark"] {
+  --#{$prefix}-multiselect-bg: #1e222d;
+  --#{$prefix}-multiselect-color: #f1f5f9;
+  --#{$prefix}-multiselect-border: #333948;
+  --#{$prefix}-multiselect-border-hover: #4b5563;
+  --#{$prefix}-multiselect-focus-border: var(--#{$prefix}-primary, #3b5998);
+
+  --#{$prefix}-multiselect-menu-bg: #1e222d;
+  --#{$prefix}-multiselect-menu-border: #333948;
+  --#{$prefix}-multiselect-menu-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.45);
+  --#{$prefix}-multiselect-hover-bg: #272d3b;
+  --#{$prefix}-multiselect-active-bg: #2b3648;
+  --#{$prefix}-multiselect-active-color: #60a5fa;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Contêiner Principal (.dx-multiselect / .bs-multiselect)
+// EN: Main MultiSelect Container (.dx-multiselect / .bs-multiselect)
+// ---------------------------------------------------------------------------
+
+.dx-multiselect,
+.bs-multiselect {
+  position: relative;
+  width: 100%;
+  font-family: var(--#{$prefix}-font-body);
+
+  &.is-disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Gatilho / Campo Visual (.multiselect-toggle)
+// EN: Trigger Field (.multiselect-toggle)
+// ---------------------------------------------------------------------------
+
+.multiselect-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.375rem;
+  width: 100%;
+  min-height: var(--#{$prefix}-multiselect-min-height);
+  padding: 0.3125rem 2.25rem 0.3125rem 0.625rem;
+  font-size: var(--#{$prefix}-form-input-font-size, 0.875rem);
+  color: var(--#{$prefix}-multiselect-color);
+  background-color: var(--#{$prefix}-multiselect-bg);
+  background-clip: padding-box;
+  border: 1px solid var(--#{$prefix}-multiselect-border);
+  border-radius: var(--#{$prefix}-multiselect-radius);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  transition: border-color 200ms ease-in-out, box-shadow 200ms ease-in-out, background-color 200ms ease-in-out;
+
+  &:hover {
+    border-color: var(--#{$prefix}-multiselect-border-hover);
+  }
+
+  // Foco ativo ou menu aberto
+  .dx-multiselect.is-open &,
+  &:focus-visible {
+    border-color: var(--#{$prefix}-multiselect-focus-border);
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+                0 0 8px color-mix(in srgb, var(--#{$prefix}-multiselect-focus-border) 45%, transparent);
+  }
+
+  // Chevron indicador à direita
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0.875rem;
+    top: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: solid currentColor;
+    border-width: 0 2px 2px 0;
+    transform: translateY(-70%) rotate(45deg);
+    opacity: 0.6;
+    pointer-events: none;
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+
+  .dx-multiselect.is-open &::after {
+    transform: translateY(-30%) rotate(-135deg);
+    opacity: 1;
+  }
+}
+
+// Placeholder
+.multiselect-placeholder {
+  color: #94a3b8;
+  font-size: inherit;
+  line-height: 1.4;
+}
+
+// Resumo condensado (ex: "4 itens selecionados")
+.multiselect-summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-weight: 500;
+  color: var(--#{$prefix}-multiselect-color);
+
+  .multiselect-count-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.125rem 0.45rem;
+    border-radius: 50rem;
+    background-color: color-mix(in srgb, var(--#{$prefix}-multiselect-focus-border) 15%, transparent);
+    color: var(--#{$prefix}-multiselect-focus-border);
+  }
+}
+
+// Badges de itens selecionados no gatilho
+.multiselect-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  white-space: nowrap;
+  animation: dx-tag-appear 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  background-color: color-mix(in srgb, var(--#{$prefix}-primary, #3b5998) 15%, transparent);
+  color: var(--#{$prefix}-primary, #3b5998);
+  border: 1px solid color-mix(in srgb, var(--#{$prefix}-primary, #3b5998) 25%, transparent);
+
+  .multiselect-badge-remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 0.875rem;
+    height: 0.875rem;
+    padding: 0;
+    margin-inline-start: 0.15rem;
+    margin-inline-end: -0.15rem;
+    background: transparent;
+    border: none;
+    color: currentColor;
+    opacity: 0.65;
+    cursor: pointer;
+    font-size: 0.875rem;
+    line-height: 1;
+    border-radius: 50%;
+    transition: opacity 150ms ease, background-color 150ms ease;
+
+    &:hover {
+      opacity: 1;
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Menu Suspenso de Seleção (.multiselect-menu)
+// EN: MultiSelect Dropdown Menu (.multiselect-menu)
+// ---------------------------------------------------------------------------
+
+.multiselect-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 1060;
+  display: none;
+  background-color: var(--#{$prefix}-multiselect-menu-bg);
+  border: 1px solid var(--#{$prefix}-multiselect-menu-border);
+  border-radius: var(--#{$prefix}-multiselect-radius);
+  box-shadow: var(--#{$prefix}-multiselect-menu-shadow);
+  padding: 0;
+  margin: 0;
+  animation: dx-dropdown-in 150ms ease-out;
+
+  .dx-multiselect.is-open & {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Campo de busca interno com lupa
+.multiselect-search-wrapper {
+  padding: 0.5rem 0.625rem;
+  border-bottom: 1px solid var(--#{$prefix}-multiselect-menu-border);
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .multiselect-search-icon {
+    position: absolute;
+    left: 1.125rem;
+    width: 0.875rem;
+    height: 0.875rem;
+    color: #94a3b8;
+    pointer-events: none;
+  }
+
+  .multiselect-search-input {
+    width: 100%;
+    padding: 0.375rem 0.625rem 0.375rem 2rem;
+    font-size: 0.8125rem;
+    color: var(--#{$prefix}-multiselect-color);
+    background-color: var(--#{$prefix}-multiselect-bg);
+    border: 1px solid var(--#{$prefix}-multiselect-border);
+    border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+    outline: none;
+    transition: border-color 150ms ease;
+
+    &:focus {
+      border-color: var(--#{$prefix}-multiselect-focus-border);
+    }
+  }
+}
+
+// Barra de ações (Selecionar Todos / Limpar)
+.multiselect-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.375rem 0.75rem;
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid var(--#{$prefix}-multiselect-menu-border);
+  font-size: 0.75rem;
+
+  [data-#{$prefix}-theme="dark"] & {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .multiselect-action-btn {
+    background: transparent;
+    border: none;
+    color: var(--#{$prefix}-multiselect-focus-border);
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.2rem;
+    transition: color 120ms ease, background-color 120ms ease;
+
+    &:hover {
+      text-decoration: underline;
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+// Lista rolável de opções
+.multiselect-list {
+  max-height: 16rem;
+  overflow-y: auto;
+  padding: 0.25rem 0;
+  margin: 0;
+  list-style: none;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.4);
+    border-radius: 3px;
+  }
+}
+
+// Cabeçalho de optgroup
+.multiselect-group-header {
+  padding: 0.45rem 0.875rem 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+
+// Item individual com checkbox
+.multiselect-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.45rem 0.875rem;
+  font-size: 0.875rem;
+  color: var(--#{$prefix}-multiselect-color);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 120ms ease, color 120ms ease;
+
+  &:hover,
+  &.is-highlighted {
+    background-color: var(--#{$prefix}-multiselect-hover-bg);
+  }
+
+  &.is-selected {
+    background-color: var(--#{$prefix}-multiselect-active-bg);
+    color: var(--#{$prefix}-multiselect-active-color);
+    font-weight: 500;
+  }
+
+  // Checkbox estilizado integrado
+  .multiselect-check {
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--#{$prefix}-multiselect-focus-border);
+  }
+
+  .multiselect-item-text {
+    flex: 1 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // Realce de busca
+  .multiselect-highlight {
+    font-weight: 700;
+    color: var(--#{$prefix}-primary, #3b5998);
+  }
+}
+
+// Estado vazio / sem resultados
+.multiselect-empty {
+  padding: 1rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.8125rem;
+  font-style: italic;
+}
+
+// ---------------------------------------------------------------------------
+// 5. Variantes de Tamanho (.multiselect-sm, .multiselect-lg)
+// EN: Size Variants (.multiselect-sm, .multiselect-lg)
+// ---------------------------------------------------------------------------
+
+.multiselect-sm {
+  .multiselect-toggle {
+    min-height: 1.875rem;
+    padding: 0.1875rem 2rem 0.1875rem 0.5rem;
+    font-size: 0.8125rem;
+    gap: 0.25rem;
+  }
+  .multiselect-badge {
+    font-size: 0.6875rem;
+    padding: 0.125rem 0.45rem;
+  }
+}
+
+.multiselect-lg {
+  .multiselect-toggle {
+    min-height: 2.875rem;
+    padding: 0.45rem 2.5rem 0.45rem 0.75rem;
+    font-size: 1rem;
+    gap: 0.5rem;
+  }
+  .multiselect-badge {
+    font-size: 0.875rem;
+    padding: 0.35rem 0.75rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Estados de Validação (.is-valid, .is-invalid)
+// EN: Validation States (.is-valid, .is-invalid)
+// ---------------------------------------------------------------------------
+
+.dx-multiselect.is-valid .multiselect-toggle {
+  border-color: var(--#{$prefix}-green, #10b981) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+              0 0 8px color-mix(in srgb, var(--#{$prefix}-green, #10b981) 40%, transparent) !important;
+}
+
+.dx-multiselect.is-invalid .multiselect-toggle {
+  border-color: var(--#{$prefix}-red, #ef4444) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+              0 0 8px color-mix(in srgb, var(--#{$prefix}-red, #ef4444) 40%, transparent) !important;
+}
+
+// ---------------------------------------------------------------------------
+// 7. Integração às 28 Cores Oficiais (.multiselect-{cor})
+// EN: Official 28-Color Palette Integration (.multiselect-{cor})
+// ---------------------------------------------------------------------------
+
+@each $color-name, $color-value in $all-colors {
+  .multiselect-#{$color-name} {
+    --#{$prefix}-multiselect-focus-border: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    --#{$prefix}-multiselect-active-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    --#{$prefix}-multiselect-active-bg: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 12%, transparent);
+
+    .multiselect-badge {
+      background-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 15%, transparent);
+      color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+      border-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 25%, transparent);
+    }
+
+    // Estilo Sólido
+    &.multiselect-solid .multiselect-badge {
+      background-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    // Estilo Contorno / Outline
+    &.multiselect-outline .multiselect-badge {
+      background-color: transparent;
+      color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+      border-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    }
+
+    .multiselect-item .multiselect-highlight {
+      color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    }
+  }
+}

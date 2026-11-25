@@ -1,0 +1,857 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_data-display.scss
+ * @description [PT-BR] Suíte de Exibição de Dados, Indicadores e Comunicação para o
+ *              Dexter UI (inspirada em daisyUI v5, Bulma v1, Materialize e UIkit 3):
+ *              Stats KPI (.stats/.stat), Timeline (.timeline), Chat Bubbles (.chat),
+ *              Radial Progress (.radial-progress), Countdown (.countdown), Dividers (.divider),
+ *              Indicators (.indicator) & Status Dots (.status), Kbd (.kbd), Card Stack (.stack),
+ *              Device Mockups (.mockup-browser/.mockup-window/.mockup-phone), Listas UIkit
+ *              (.dx-list-*), Media Object (.media) e Comentários (.dx-comment).
+ *              [EN]    Data Display, Indicators & Communication suite for Dexter UI
+ *              (inspired by daisyUI v5, Bulma v1, Materialize and UIkit 3): Stats KPI strip,
+ *              Timeline, Chat Bubbles, pure CSS Radial Progress, Countdown, Dividers, Indicators
+ *              & Status dots, Kbd keys, Card Stack, Device Mockups, UIkit Lists, Media Object
+ *              and Comments thread.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Exibição de Dados e Comunicação | Data Display & Communication */
+
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$dd-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$dd-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning");
+$dd-palette: map.merge($all-colors, $dd-semantic-colors);
+
+// ---------------------------------------------------------------------------
+// 1. Stats / KPI Strip (.stats, .stat)
+// EN: Stats / KPI Strip (.stats, .stat)
+// ---------------------------------------------------------------------------
+.stats {
+  --#{$prefix}-stat-bg: #ffffff;
+  --#{$prefix}-stat-border: rgba(15, 23, 42, 0.1);
+  --#{$prefix}-stat-color: #1e293b;
+  --#{$prefix}-stat-muted: #64748b;
+
+  display: inline-grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  width: 100%;
+  background-color: var(--#{$prefix}-stat-bg);
+  color: var(--#{$prefix}-stat-color);
+  border: 1px solid var(--#{$prefix}-stat-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  overflow: hidden;
+
+  &.stats-vertical {
+    grid-auto-flow: row;
+
+    > .stat + .stat {
+      border-left: 0;
+      border-top: 1px solid var(--#{$prefix}-stat-border);
+    }
+  }
+
+  > .stat {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 1rem;
+    padding: 1.1rem 1.35rem;
+
+    + .stat {
+      border-left: 1px solid var(--#{$prefix}-stat-border);
+    }
+  }
+
+  .stat-figure {
+    grid-column-start: 2;
+    grid-row: 1 / span 3;
+    align-self: center;
+    color: var(--#{$prefix}-primary, #{$primary});
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .stat-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--#{$prefix}-stat-muted);
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--#{$prefix}-stat-color);
+    margin: 0.15rem 0;
+  }
+
+  .stat-desc {
+    font-size: 0.78rem;
+    color: var(--#{$prefix}-stat-muted);
+  }
+
+  .stat-actions {
+    margin-top: 0.65rem;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  @media (max-width: 767.98px) {
+    grid-auto-flow: row;
+
+    > .stat + .stat {
+      border-left: 0;
+      border-top: 1px solid var(--#{$prefix}-stat-border);
+    }
+  }
+}
+
+[data-dx-theme="dark"] .stats,
+[data-bs-theme="dark"] .stats {
+  --#{$prefix}-stat-bg: #161f30;
+  --#{$prefix}-stat-border: rgba(148, 163, 184, 0.18);
+  --#{$prefix}-stat-color: #e2e8f0;
+  --#{$prefix}-stat-muted: #94a3b8;
+}
+
+// ---------------------------------------------------------------------------
+// 2. Timeline (.timeline)
+// EN: Timeline (.timeline)
+// ---------------------------------------------------------------------------
+.timeline {
+  --#{$prefix}-tl-line: rgba(148, 163, 184, 0.35);
+  --#{$prefix}-tl-dot: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-tl-card-bg: #ffffff;
+  --#{$prefix}-tl-border: rgba(15, 23, 42, 0.1);
+  --#{$prefix}-tl-color: #1e293b;
+  --#{$prefix}-tl-muted: #64748b;
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  &.timeline-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    padding-left: 1.75rem;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0.35rem;
+      bottom: 0.35rem;
+      left: 0.5rem;
+      width: 2px;
+      background-color: var(--#{$prefix}-tl-line);
+    }
+  }
+
+  .timeline-item {
+    position: relative;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: -1.625rem;
+    top: 0.25rem;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 999px;
+    background-color: var(--#{$prefix}-tl-dot);
+    border: 2px solid #ffffff;
+    box-shadow: 0 0 0 2px var(--#{$prefix}-tl-dot);
+  }
+
+  .timeline-time {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--#{$prefix}-tl-muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-content {
+    background-color: var(--#{$prefix}-tl-card-bg);
+    color: var(--#{$prefix}-tl-color);
+    border: 1px solid var(--#{$prefix}-tl-border);
+    border-radius: 0.65rem;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+
+  &.timeline-compact {
+    gap: 0.65rem;
+
+    .timeline-content {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+[data-dx-theme="dark"] .timeline,
+[data-bs-theme="dark"] .timeline {
+  --#{$prefix}-tl-card-bg: #161f30;
+  --#{$prefix}-tl-border: rgba(148, 163, 184, 0.18);
+  --#{$prefix}-tl-color: #e2e8f0;
+  --#{$prefix}-tl-muted: #94a3b8;
+
+  .timeline-marker {
+    border-color: #161f30;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Chat Bubbles (.chat, .chat-start, .chat-end, .chat-bubble)
+// EN: Chat Bubbles (.chat, .chat-start, .chat-end, .chat-bubble)
+// ---------------------------------------------------------------------------
+.chat {
+  --#{$prefix}-chat-bg: #f1f5f9;
+  --#{$prefix}-chat-color: #1e293b;
+  --#{$prefix}-chat-muted: #64748b;
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.75rem;
+  row-gap: 0.25rem;
+  padding: 0.5rem 0;
+
+  &.chat-start {
+    place-items: start;
+
+    .chat-image {
+      grid-column: 1;
+      grid-row: 1 / span 3;
+      align-self: end;
+    }
+
+    .chat-header,
+    .chat-bubble,
+    .chat-footer {
+      grid-column: 2;
+    }
+
+    .chat-bubble {
+      border-bottom-left-radius: 0.2rem;
+    }
+  }
+
+  &.chat-end {
+    grid-template-columns: 1fr auto;
+    place-items: end;
+
+    .chat-image {
+      grid-column: 2;
+      grid-row: 1 / span 3;
+      align-self: end;
+    }
+
+    .chat-header,
+    .chat-bubble,
+    .chat-footer {
+      grid-column: 1;
+    }
+
+    .chat-bubble {
+      border-bottom-right-radius: 0.2rem;
+      background-color: var(--#{$prefix}-primary, #{$primary});
+      color: #ffffff;
+    }
+  }
+
+  .chat-header {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--#{$prefix}-chat-color);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    time {
+      font-weight: 400;
+      color: var(--#{$prefix}-chat-muted);
+    }
+  }
+
+  .chat-bubble {
+    position: relative;
+    max-width: min(82%, 440px);
+    padding: 0.65rem 1rem;
+    border-radius: 1rem;
+    background-color: var(--#{$prefix}-chat-bg);
+    color: var(--#{$prefix}-chat-color);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .chat-footer {
+    font-size: 0.72rem;
+    color: var(--#{$prefix}-chat-muted);
+  }
+}
+
+[data-dx-theme="dark"] .chat,
+[data-bs-theme="dark"] .chat {
+  --#{$prefix}-chat-bg: #1e293b;
+  --#{$prefix}-chat-color: #e2e8f0;
+  --#{$prefix}-chat-muted: #94a3b8;
+}
+
+// ---------------------------------------------------------------------------
+// 4. Radial Progress & Countdown (.radial-progress, .countdown)
+// EN: Radial Progress & Countdown (.radial-progress, .countdown)
+// ---------------------------------------------------------------------------
+.radial-progress {
+  --value: 0;
+  --size: 4.5rem;
+  --thickness: 0.45rem;
+  --#{$prefix}-rp-color: var(--#{$prefix}-primary, #{$primary});
+  --#{$prefix}-rp-track: rgba(148, 163, 184, 0.22);
+
+  position: relative;
+  display: inline-grid;
+  place-content: center;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  background: conic-gradient(
+    var(--#{$prefix}-rp-color) calc(var(--value) * 1%),
+    var(--#{$prefix}-rp-track) 0
+  );
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: var(--thickness);
+    border-radius: 999px;
+    background-color: var(--#{$prefix}-body-bg, #ffffff);
+  }
+
+  > span,
+  > strong {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+[data-dx-theme="dark"] .radial-progress::after,
+[data-bs-theme="dark"] .radial-progress::after {
+  background-color: #0f172a;
+}
+
+.countdown {
+  display: inline-flex;
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.dx-countdown-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.dx-countdown-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 4.25rem;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.65rem;
+  background-color: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+
+  .countdown {
+    font-size: 1.55rem;
+  }
+
+  .dx-countdown-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-top: 0.25rem;
+  }
+}
+
+[data-dx-theme="dark"] .dx-countdown-box,
+[data-bs-theme="dark"] .dx-countdown-box {
+  background-color: #161f30;
+  border-color: rgba(148, 163, 184, 0.2);
+
+  .dx-countdown-label {
+    color: #94a3b8;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Divider, Indicator & Status Dot (.divider, .indicator, .status)
+// EN: Divider, Indicator & Status Dot (.divider, .indicator, .status)
+// ---------------------------------------------------------------------------
+.divider {
+  --#{$prefix}-div-color: rgba(148, 163, 184, 0.3);
+
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 1rem 0;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+
+  &::before,
+  &::after {
+    content: "";
+    flex: 1 1 auto;
+    height: 1px;
+    background-color: var(--#{$prefix}-div-color);
+  }
+
+  &:empty {
+    gap: 0;
+  }
+
+  &.divider-start::before {
+    flex: 0 0 1.25rem;
+  }
+
+  &.divider-end::after {
+    flex: 0 0 1.25rem;
+  }
+
+  &.divider-horizontal {
+    flex-direction: column;
+    margin: 0 0.75rem;
+    height: auto;
+    align-self: stretch;
+
+    &::before,
+    &::after {
+      width: 1px;
+      height: auto;
+    }
+  }
+}
+
+.indicator {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+
+  .indicator-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(45%, -45%);
+    z-index: 2;
+    white-space: nowrap;
+  }
+
+  .indicator-top    { top: 0; bottom: auto; }
+  .indicator-bottom { top: auto; bottom: 0; transform: translate(45%, 45%); }
+  .indicator-start  { left: 0; right: auto; transform: translate(-45%, -45%); }
+  .indicator-center { left: 50%; right: auto; transform: translate(-50%, -50%); }
+}
+
+.status {
+  display: inline-block;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 999px;
+  background-color: var(--#{$prefix}-primary, #{$primary});
+  vertical-align: middle;
+  position: relative;
+
+  &.status-sm { width: 0.45rem; height: 0.45rem; }
+  &.status-lg { width: 0.85rem; height: 0.85rem; }
+
+  &.status-ping::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background-color: inherit;
+    animation: dx-status-ping 1.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  &.status-bounce {
+    animation: dx-status-bounce 1s infinite;
+  }
+}
+
+@keyframes dx-status-ping {
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes dx-status-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-25%); }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Kbd, Card Stack & Device Mockups (.kbd, .stack, .mockup-*)
+// EN: Keyboard Keys, Card Stack & Device Mockups
+// ---------------------------------------------------------------------------
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.5rem;
+  font-family: var(--#{$prefix}-font-code, monospace);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #1e293b;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-bottom-width: 3px;
+  border-radius: 0.4rem;
+
+  &.kbd-sm { padding: 0.1rem 0.38rem; font-size: 0.72rem; }
+  &.kbd-lg { padding: 0.35rem 0.7rem; font-size: 0.95rem; }
+}
+
+[data-dx-theme="dark"] .kbd,
+[data-bs-theme="dark"] .kbd {
+  color: #e2e8f0;
+  background-color: #1e293b;
+  border-color: #475569;
+}
+
+.stack {
+  display: inline-grid;
+  place-items: center;
+  align-items: end;
+
+  > * {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    width: 100%;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+    z-index: 3;
+  }
+
+  > :nth-child(2) {
+    transform: translateY(8px) scale(0.95);
+    opacity: 0.8;
+    z-index: 2;
+  }
+
+  > :nth-child(3) {
+    transform: translateY(16px) scale(0.9);
+    opacity: 0.55;
+    z-index: 1;
+  }
+}
+
+.mockup-browser,
+.mockup-window {
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  border-radius: 0.85rem;
+  background-color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 10px 24px -8px rgba(15, 23, 42, 0.12);
+
+  .mockup-browser-toolbar,
+  .mockup-window-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    background-color: #f1f5f9;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  .mockup-dots {
+    display: inline-flex;
+    gap: 0.4rem;
+
+    > span {
+      width: 0.68rem;
+      height: 0.68rem;
+      border-radius: 999px;
+      background-color: #cbd5e1;
+
+      &:nth-child(1) { background-color: #ef4444; }
+      &:nth-child(2) { background-color: #f59e0b; }
+      &:nth-child(3) { background-color: #22c55e; }
+    }
+  }
+
+  .mockup-url {
+    flex: 1 1 auto;
+    max-width: 340px;
+    margin: 0 auto;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background-color: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    font-size: 0.78rem;
+    color: #64748b;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.mockup-phone {
+  display: inline-block;
+  border: 6px solid #0f172a;
+  border-radius: 2rem;
+  background-color: #0f172a;
+  padding: 0.55rem 0.45rem;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.35);
+
+  .mockup-phone-camera {
+    width: 4.5rem;
+    height: 0.45rem;
+    background-color: #334155;
+    border-radius: 999px;
+    margin: 0.15rem auto 0.6rem;
+  }
+
+  .mockup-phone-display {
+    border-radius: 1.35rem;
+    overflow: hidden;
+    background-color: #ffffff;
+    min-width: 240px;
+  }
+}
+
+[data-dx-theme="dark"] .mockup-browser,
+[data-dx-theme="dark"] .mockup-window,
+[data-bs-theme="dark"] .mockup-browser,
+[data-bs-theme="dark"] .mockup-window {
+  background-color: #161f30;
+  border-color: rgba(148, 163, 184, 0.2);
+
+  .mockup-browser-toolbar,
+  .mockup-window-bar {
+    background-color: #1e293b;
+    border-bottom-color: rgba(148, 163, 184, 0.16);
+  }
+
+  .mockup-url {
+    background-color: #0f172a;
+    border-color: rgba(148, 163, 184, 0.2);
+    color: #cbd5e1;
+  }
+}
+
+[data-dx-theme="dark"] .mockup-phone .mockup-phone-display,
+[data-bs-theme="dark"] .mockup-phone .mockup-phone-display {
+  background-color: #161f30;
+}
+
+// ---------------------------------------------------------------------------
+// 7. UIkit Lists, Description Lists, Media Object & Comments
+// EN: UIkit Lists, Description Lists, Media Object & Comments Thread
+// ---------------------------------------------------------------------------
+.dx-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  > li {
+    padding: 0.45rem 0;
+  }
+
+  &.dx-list-divider > li + li {
+    border-top: 1px solid rgba(148, 163, 184, 0.25);
+  }
+
+  &.dx-list-striped > li {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+
+    &:nth-of-type(odd) {
+      background-color: rgba(148, 163, 184, 0.1);
+    }
+  }
+
+  &.dx-list-disc,
+  &.dx-list-circle,
+  &.dx-list-square,
+  &.dx-list-hyphen {
+    padding-left: 1.35rem;
+  }
+
+  &.dx-list-disc   { list-style-type: disc; }
+  &.dx-list-circle { list-style-type: circle; }
+  &.dx-list-square { list-style-type: square; }
+  &.dx-list-hyphen {
+    list-style-type: none;
+
+    > li::before {
+      content: "– ";
+      margin-left: -1rem;
+      color: var(--#{$prefix}-primary, #{$primary});
+      font-weight: 700;
+    }
+  }
+}
+
+.dl-divider {
+  margin: 0;
+
+  > dt {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    padding-top: 0.65rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.22);
+
+    &:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+  }
+
+  > dd {
+    margin: 0.15rem 0 0.65rem;
+  }
+}
+
+.media {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+
+  .media-left,
+  .media-right {
+    flex-shrink: 0;
+  }
+
+  .media-content {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
+
+.dx-comment {
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+
+  .dx-comment-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .dx-comment-meta {
+    font-size: 0.78rem;
+    color: #64748b;
+  }
+
+  .dx-comment-body {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .dx-comment-replies {
+    margin-top: 0.85rem;
+    padding-left: 1.25rem;
+    border-left: 2px solid rgba(148, 163, 184, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+[data-dx-theme="dark"] .dx-comment,
+[data-bs-theme="dark"] .dx-comment {
+  background-color: #161f30;
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
+// ---------------------------------------------------------------------------
+// 8. Variantes Cromáticas das 28 Cores + Semânticas
+// EN: 28 Official Palette + Semantic Variants
+// ---------------------------------------------------------------------------
+@each $name, $hex in $dd-palette {
+  $is-light: list.index($dd-light-names, $name) != null;
+  $fg: #ffffff;
+
+  @if $is-light {
+    $fg: #130f10;
+  }
+
+  .chat-bubble-#{$name} {
+    background-color: var(--#{$prefix}-#{$name}, #{$hex}) !important;
+    color: #{$fg} !important;
+  }
+
+  .radial-progress-#{$name} {
+    --#{$prefix}-rp-color: var(--#{$prefix}-#{$name}, #{$hex});
+  }
+
+  .timeline-#{$name} {
+    --#{$prefix}-tl-dot: var(--#{$prefix}-#{$name}, #{$hex});
+  }
+
+  .divider-#{$name} {
+    --#{$prefix}-div-color: var(--#{$prefix}-#{$name}, #{$hex});
+    color: var(--#{$prefix}-#{$name}, #{$hex});
+  }
+
+  .status-#{$name} {
+    background-color: var(--#{$prefix}-#{$name}, #{$hex});
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 9. Acessibilidade (Movimento Reduzido)
+// EN: Reduced Motion Support
+// ---------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .status-ping::after,
+  .status-bounce,
+  .stack > * {
+    animation: none;
+    transition: none;
+  }
+}

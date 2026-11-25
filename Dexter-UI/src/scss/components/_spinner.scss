@@ -1,0 +1,342 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _spinner.scss
+ * @description [PT-BR] Suíte completa de Seletores Numéricos e Steppers (Input Spinner),
+ *              inspirada e aprimorada a partir do bootstrap-input-spinner (github.com/shaack/bootstrap-input-spinner).
+ *              Elimina qualquer dependência com controlador nativo vanilla JS (DexterInputSpinner),
+ *              suporte a aceleração contínua ao pressionar os botões, prefixos e sufixos (moeda, percentual, unidades),
+ *              formatação internacional (Intl.NumberFormat), layout horizontal e vertical empilhado (.spinner-stacked),
+ *              tamanhos modulares (.input-spinner-sm, .input-spinner-lg), integração às 28 cores oficiais e Dark Mode.
+ *              [EN]    Complete Input Spinner and Stepper Suite, inspired and enhanced from
+ *              bootstrap-input-spinner (github.com/shaack/bootstrap-input-spinner). Zero-dependency native
+ *              vanilla JS controller (DexterInputSpinner), continuous hold-to-accelerate stepping,
+ *              prefixes and suffixes (currency, percentage, units), international number formatting
+ *              (Intl.NumberFormat), horizontal and vertical stacked layouts (.spinner-stacked),
+ *              modular sizes (.input-spinner-sm, .input-spinner-lg), full 28-color palette, and native Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Seletor Numérico Stepper | Input Spinner */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Tokens do Input Spinner
+// EN: Input Spinner Tokens and CSS Variables
+// ---------------------------------------------------------------------------
+
+:root {
+  --#{$prefix}-spinner-bg: var(--#{$prefix}-form-input-bg, #ffffff);
+  --#{$prefix}-spinner-color: var(--#{$prefix}-form-input-color, #1e293b);
+  --#{$prefix}-spinner-border: var(--#{$prefix}-form-input-border, #cbd5e1);
+  --#{$prefix}-spinner-btn-bg: #f8fafc;
+  --#{$prefix}-spinner-btn-color: #475569;
+  --#{$prefix}-spinner-btn-hover-bg: #edf2fa;
+  --#{$prefix}-spinner-btn-hover-color: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-spinner-focus-border: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-spinner-radius: var(--#{$prefix}-radius-md, 0.375rem);
+  --#{$prefix}-spinner-min-height: 2.375rem;
+}
+
+[data-#{$prefix}-theme="dark"] {
+  --#{$prefix}-spinner-bg: #1e222d;
+  --#{$prefix}-spinner-color: #f1f5f9;
+  --#{$prefix}-spinner-border: #333948;
+  --#{$prefix}-spinner-btn-bg: #272d3b;
+  --#{$prefix}-spinner-btn-color: #cbd5e1;
+  --#{$prefix}-spinner-btn-hover-bg: #333c4d;
+  --#{$prefix}-spinner-btn-hover-color: #60a5fa;
+  --#{$prefix}-spinner-focus-border: var(--#{$prefix}-primary, #3b5998);
+}
+
+// ---------------------------------------------------------------------------
+// 2. Contêiner Principal (.input-spinner-group / .dx-input-spinner)
+// EN: Main Input Spinner Group (.input-spinner-group / .dx-input-spinner)
+// ---------------------------------------------------------------------------
+
+.input-spinner-group,
+.dx-input-spinner {
+  display: inline-flex;
+  align-items: stretch;
+  position: relative;
+  width: 100%;
+  max-width: 14rem;
+  font-family: var(--#{$prefix}-font-body);
+  border-radius: var(--#{$prefix}-spinner-radius);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  user-select: none;
+
+  &.w-100 {
+    max-width: 100%;
+  }
+
+  // Foco ativo
+  &.is-focused {
+    .spinner-input {
+      border-color: var(--#{$prefix}-spinner-focus-border);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+                  0 0 8px color-mix(in srgb, var(--#{$prefix}-spinner-focus-border) 45%, transparent);
+      z-index: 2;
+    }
+  }
+
+  &.is-disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Campo de Entrada Central (.spinner-input)
+// EN: Central Input Field (.spinner-input)
+// ---------------------------------------------------------------------------
+
+.spinner-input {
+  flex: 1 1 auto;
+  width: 1%;
+  min-width: 3.5rem;
+  height: var(--#{$prefix}-spinner-min-height);
+  padding: 0.375rem 0.5rem;
+  font-family: inherit;
+  font-size: var(--#{$prefix}-form-input-font-size, 0.875rem);
+  color: var(--#{$prefix}-spinner-color);
+  background-color: var(--#{$prefix}-spinner-bg);
+  border: 1px solid var(--#{$prefix}-spinner-border);
+  text-align: center;
+  margin: 0;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease, background-color 150ms ease;
+
+  // Remove setinhas nativas dos browsers
+  appearance: textfield;
+  -moz-appearance: textfield;
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &:focus {
+    border-color: var(--#{$prefix}-spinner-focus-border);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+                0 0 8px color-mix(in srgb, var(--#{$prefix}-spinner-focus-border) 45%, transparent);
+    z-index: 2;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 4. Botões de Incremento e Decremento (.spinner-btn)
+// EN: Increment and Decrement Buttons (.spinner-btn)
+// ---------------------------------------------------------------------------
+
+.spinner-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.375rem;
+  height: var(--#{$prefix}-spinner-min-height);
+  padding: 0 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--#{$prefix}-spinner-btn-color);
+  background-color: var(--#{$prefix}-spinner-btn-bg);
+  border: 1px solid var(--#{$prefix}-spinner-border);
+  cursor: pointer;
+  transition: all 120ms ease;
+  user-select: none;
+  touch-action: manipulation;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    fill: currentColor;
+    transition: transform 100ms ease;
+  }
+
+  &:hover {
+    background-color: var(--#{$prefix}-spinner-btn-hover-bg);
+    color: var(--#{$prefix}-spinner-btn-hover-color);
+    border-color: var(--#{$prefix}-spinner-border);
+  }
+
+  &:active {
+    background-color: color-mix(in srgb, var(--#{$prefix}-spinner-btn-hover-bg) 80%, black);
+    transform: scale(0.96);
+  }
+
+  &:disabled,
+  &.is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+}
+
+// Botão Decremento (Esquerda)
+.spinner-btn-decrement {
+  border-top-left-radius: var(--#{$prefix}-spinner-radius);
+  border-bottom-left-radius: var(--#{$prefix}-spinner-radius);
+  border-right: none;
+}
+
+// Botão Incremento (Direita)
+.spinner-btn-increment {
+  border-top-right-radius: var(--#{$prefix}-spinner-radius);
+  border-bottom-right-radius: var(--#{$prefix}-spinner-radius);
+  border-left: none;
+}
+
+// Prefixos e Sufixos (.spinner-prefix, .spinner-suffix)
+.spinner-prefix,
+.spinner-suffix {
+  display: flex;
+  align-items: center;
+  padding: 0 0.625rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #64748b;
+  background-color: var(--#{$prefix}-spinner-btn-bg);
+  border: 1px solid var(--#{$prefix}-spinner-border);
+  white-space: nowrap;
+
+  [data-#{$prefix}-theme="dark"] & {
+    color: #94a3b8;
+  }
+}
+
+.spinner-prefix {
+  border-right: none;
+}
+
+.spinner-suffix {
+  border-left: none;
+}
+
+// ---------------------------------------------------------------------------
+// 5. Layout Vertical Empilhado (.spinner-stacked)
+// EN: Stacked Vertical Layout (.spinner-stacked)
+// ---------------------------------------------------------------------------
+
+.input-spinner-group.spinner-stacked {
+  .spinner-input {
+    border-top-left-radius: var(--#{$prefix}-spinner-radius);
+    border-bottom-left-radius: var(--#{$prefix}-spinner-radius);
+    text-align: left;
+    padding-left: 0.75rem;
+  }
+
+  .spinner-stacked-btns {
+    display: flex;
+    flex-direction: column;
+    width: 2rem;
+    flex-shrink: 0;
+
+    .spinner-btn {
+      min-width: 100%;
+      height: calc(var(--#{$prefix}-spinner-min-height) / 2);
+      padding: 0;
+      border-left: none;
+
+      svg {
+        width: 0.625rem;
+        height: 0.625rem;
+      }
+    }
+
+    .spinner-btn-increment {
+      border-top-right-radius: var(--#{$prefix}-spinner-radius);
+      border-bottom-right-radius: 0;
+      border-bottom: 1px solid var(--#{$prefix}-spinner-border);
+    }
+
+    .spinner-btn-decrement {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: var(--#{$prefix}-spinner-radius);
+      border-top: none;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Variantes de Tamanho (.input-spinner-sm, .input-spinner-lg)
+// EN: Size Variants (.input-spinner-sm, .input-spinner-lg)
+// ---------------------------------------------------------------------------
+
+.input-spinner-group.input-spinner-sm {
+  --#{$prefix}-spinner-min-height: 1.875rem;
+
+  .spinner-input {
+    font-size: 0.8125rem;
+    padding: 0.1875rem 0.375rem;
+  }
+  .spinner-btn {
+    min-width: 1.875rem;
+    font-size: 0.875rem;
+    svg { width: 0.75rem; height: 0.75rem; }
+  }
+}
+
+.input-spinner-group.input-spinner-lg {
+  --#{$prefix}-spinner-min-height: 2.875rem;
+
+  .spinner-input {
+    font-size: 1.125rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .spinner-btn {
+    min-width: 2.875rem;
+    font-size: 1.25rem;
+    svg { width: 1rem; height: 1rem; }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Estados de Validação (.is-valid, .is-invalid)
+// EN: Validation States (.is-valid, .is-invalid)
+// ---------------------------------------------------------------------------
+
+.input-spinner-group.is-valid .spinner-input {
+  border-color: var(--#{$prefix}-green, #10b981) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+              0 0 8px color-mix(in srgb, var(--#{$prefix}-green, #10b981) 40%, transparent) !important;
+}
+
+.input-spinner-group.is-invalid .spinner-input {
+  border-color: var(--#{$prefix}-red, #ef4444) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+              0 0 8px color-mix(in srgb, var(--#{$prefix}-red, #ef4444) 40%, transparent) !important;
+}
+
+// ---------------------------------------------------------------------------
+// 8. Integração às 28 Cores Oficiais (.input-spinner-{cor})
+// EN: Official 28-Color Palette Integration (.input-spinner-{cor})
+// ---------------------------------------------------------------------------
+
+@each $color-name, $color-value in $all-colors {
+  .input-spinner-#{$color-name} {
+    --#{$prefix}-spinner-focus-border: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    --#{$prefix}-spinner-btn-hover-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+    --#{$prefix}-spinner-btn-hover-bg: color-mix(in srgb, var(--#{$prefix}-#{$color-name}, #{$color-value}) 12%, transparent);
+  }
+}

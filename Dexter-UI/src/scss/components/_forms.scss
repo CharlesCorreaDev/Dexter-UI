@@ -1,0 +1,1371 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _forms.scss
+ * @description [PT-BR] Suíte completa de Formulários e Controles: inputs (.form-control),
+ *              foco e hover clássicos inspirados no Bootstrap 3.4/3.5 com o icônico
+ *              halo/glow adaptado às 28 famílias de cores do Dexter UI, tamanhos modulares
+ *              (sm, padrão, lg), selects customizados, textareas, checkboxes, radios,
+ *              switches (.form-switch), grupos de entrada (.input-group), estados de validação
+ *              (.is-valid, .is-invalid, .has-warning) e suporte total a tema escuro.
+ *              [EN]    Complete Forms and Controls Suite: inputs (.form-control),
+ *              classic hover and focus glow inspired by Bootstrap 3.4/3.5 tailored to
+ *              Dexter UI's 28 color families, modular sizing (sm, default, lg), custom
+ *              selects, textareas, checkboxes, radios, switches (.form-switch),
+ *              input groups (.input-group), validation states (.is-valid, .is-invalid, .has-warning)
+ *              and full dark theme support.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Formulários e Controles | Forms and Controls */
+
+@use "sass:color";
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Tokens de Formulário
+// EN: Form Tokens and Variables
+// ---------------------------------------------------------------------------
+:root {
+  --#{$prefix}-form-bg: var(--#{$prefix}-body-bg, #ffffff);
+  --#{$prefix}-form-color: var(--#{$prefix}-body-color, #1e293b);
+  --#{$prefix}-form-border-color: var(--#{$prefix}-silver-300, #cbd5e1);
+  --#{$prefix}-form-border-width: 1px;
+  --#{$prefix}-form-border-radius: var(--#{$prefix}-radius-md, 0.375rem);
+  --#{$prefix}-form-inset-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+  --#{$prefix}-form-transition: border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out, background-color 0.25s ease-in-out;
+
+  // Hover e Foco padrão (Paleta Primária Dexter)
+  --#{$prefix}-form-hover-border: var(--#{$prefix}-primary-300, #8d9fc3);
+  --#{$prefix}-form-focus-border: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-form-focus-rgb: var(--#{$prefix}-primary-rgb, 59, 89, 152);
+  --#{$prefix}-form-focus-glow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 8px rgba(var(--#{$prefix}-form-focus-rgb), 0.55);
+
+  // Estados desativados
+  --#{$prefix}-form-disabled-bg: var(--#{$prefix}-silver-100, #f1f5f9);
+  --#{$prefix}-form-disabled-border: var(--#{$prefix}-silver-200, #e2e8f0);
+  --#{$prefix}-form-disabled-color: var(--#{$prefix}-silver-500, #64748b);
+  --#{$prefix}-form-placeholder-color: var(--#{$prefix}-silver-400, #94a3b8);
+}
+
+[data-dx-theme="dark"] {
+  --#{$prefix}-form-bg: var(--#{$prefix}-midnight-900, #151f33);
+  --#{$prefix}-form-color: var(--#{$prefix}-silver-light-050, #f8fafc);
+  --#{$prefix}-form-border-color: var(--#{$prefix}-midnight-600, #314a7d);
+  --#{$prefix}-form-inset-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  --#{$prefix}-form-hover-border: var(--#{$prefix}-primary-400, #667eaf);
+  --#{$prefix}-form-focus-glow: inset 0 1px 2px rgba(0, 0, 0, 0.4), 0 0 10px rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.7);
+  --#{$prefix}-form-disabled-bg: var(--#{$prefix}-midnight-950, #0d121e);
+  --#{$prefix}-form-disabled-border: var(--#{$prefix}-midnight-800, #1e2c4b);
+  --#{$prefix}-form-disabled-color: var(--#{$prefix}-silver-600, #475569);
+  --#{$prefix}-form-placeholder-color: var(--#{$prefix}-silver-500, #64748b);
+}
+
+// ---------------------------------------------------------------------------
+// 2. Campo Base .form-control (Inputs, Textareas, Selects)
+// EN: Base .form-control (Inputs, Textareas, Selects)
+// ---------------------------------------------------------------------------
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.875rem;
+  font-family: inherit;
+  font-size: var(--#{$prefix}-fs-body, 1rem);
+  font-weight: 400;
+  line-height: var(--#{$prefix}-lh-base, 1.5);
+  color: var(--#{$prefix}-form-color);
+  background-color: var(--#{$prefix}-form-bg);
+  background-clip: padding-box;
+  border: var(--#{$prefix}-form-border-width) solid var(--#{$prefix}-form-border-color);
+  border-radius: var(--#{$prefix}-form-border-radius);
+  box-shadow: var(--#{$prefix}-form-inset-shadow);
+  transition: var(--#{$prefix}-form-transition);
+  box-sizing: border-box;
+
+  // Placeholder
+  &::placeholder {
+    color: var(--#{$prefix}-form-placeholder-color);
+    opacity: 1;
+  }
+
+  // Hover suave (Estilo Bootstrap 3.4/3.5 antes do foco)
+  &:hover:not(:disabled):not([readonly]):not(:focus) {
+    border-color: var(--#{$prefix}-form-hover-border);
+  }
+
+  // Foco Clássico Bootstrap 3.4/3.5 (Halo Glow suave na paleta Dexter)
+  &:focus {
+    color: var(--#{$prefix}-form-color);
+    background-color: var(--#{$prefix}-form-bg);
+    border-color: var(--#{$prefix}-form-focus-border);
+    outline: 0;
+    box-shadow: var(--#{$prefix}-form-focus-glow);
+  }
+
+  // Desativado e Somente Leitura
+  &:disabled,
+  &[readonly] {
+    background-color: var(--#{$prefix}-form-disabled-bg);
+    border-color: var(--#{$prefix}-form-disabled-border);
+    color: var(--#{$prefix}-form-disabled-color);
+    opacity: 0.85;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Modificadores de Tamanho (.form-control-sm, .form-control-lg)
+// EN: Size Modifiers (.form-control-sm, .form-control-lg)
+// ---------------------------------------------------------------------------
+.form-control-sm,
+.input-sm {
+  min-height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.625rem;
+  font-size: 0.875rem;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+}
+
+.form-control-lg,
+.input-lg {
+  min-height: calc(1.5em + 1rem + 2px);
+  padding: 0.75rem 1.125rem;
+  font-size: 1.125rem;
+  border-radius: var(--#{$prefix}-radius-lg, 0.5rem);
+}
+
+// ---------------------------------------------------------------------------
+// 4. Área de Texto (Textarea)
+// EN: Textarea
+// ---------------------------------------------------------------------------
+textarea.form-control {
+  min-height: calc(1.5em + 1.5rem + 2px);
+  resize: vertical;
+}
+
+// ---------------------------------------------------------------------------
+// 5. Select Customizado (.form-select)
+// EN: Custom Select (.form-select)
+// ---------------------------------------------------------------------------
+.form-select {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 2.25rem 0.5rem 0.875rem;
+  font-family: inherit;
+  font-size: var(--#{$prefix}-fs-body, 1rem);
+  font-weight: 400;
+  line-height: var(--#{$prefix}-lh-base, 1.5);
+  color: var(--#{$prefix}-form-color);
+  background-color: var(--#{$prefix}-form-bg);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%233b5998' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  border: var(--#{$prefix}-form-border-width) solid var(--#{$prefix}-form-border-color);
+  border-radius: var(--#{$prefix}-form-border-radius);
+  box-shadow: var(--#{$prefix}-form-inset-shadow);
+  transition: var(--#{$prefix}-form-transition);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  // Remove setas nativas do Windows / Edge / IE
+  &::-ms-expand {
+    display: none;
+  }
+
+  [data-dx-theme="dark"] & {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23809ac6' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  }
+
+  &:hover:not(:disabled):not(:focus) {
+    border-color: var(--#{$prefix}-form-hover-border);
+  }
+
+  &:focus {
+    border-color: var(--#{$prefix}-form-focus-border);
+    outline: 0;
+    box-shadow: var(--#{$prefix}-form-focus-glow);
+  }
+
+  &:disabled {
+    background-color: var(--#{$prefix}-form-disabled-bg);
+    border-color: var(--#{$prefix}-form-disabled-border);
+    color: var(--#{$prefix}-form-disabled-color);
+    cursor: not-allowed;
+    opacity: 0.85;
+  }
+
+  &[multiple],
+  &[size]:not([size="1"]) {
+    padding-right: 0.875rem;
+    background-image: none;
+  }
+}
+
+.form-select-sm {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.625rem;
+  font-size: 0.875rem;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+}
+
+.form-select-lg {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1.125rem;
+  font-size: 1.125rem;
+  border-radius: var(--#{$prefix}-radius-lg, 0.5rem);
+}
+
+// ---------------------------------------------------------------------------
+// 5.1 Opções Zebradas (.form-select, select, .form-select-striped & DexterSelect)
+// EN: Striped Select Options (.form-select, select, .form-select-striped & DexterSelect)
+// ---------------------------------------------------------------------------
+select,
+.form-select,
+.form-select-striped {
+  option {
+    background-color: var(--#{$prefix}-form-bg, #ffffff);
+    color: var(--#{$prefix}-form-color, #212529);
+    padding: 0.5rem 0.75rem;
+
+    // Zebrado com escala tonal oficial do Dexter UI
+    &:nth-child(even) {
+      background-color: var(--#{$prefix}-select-striped-bg, #edf2fa) !important;
+      color: #1e293b !important;
+    }
+
+    &:nth-child(odd) {
+      background-color: var(--#{$prefix}-form-bg, #ffffff) !important;
+      color: #1e293b !important;
+    }
+
+    &:checked,
+    &:hover {
+      background-color: var(--#{$prefix}-primary, #3b5998) !important;
+      color: #ffffff !important;
+    }
+
+    &:disabled {
+      color: var(--#{$prefix}-form-disabled-color, #94a3b8);
+      background-color: var(--#{$prefix}-form-disabled-bg, #e2e8f0);
+    }
+  }
+
+  optgroup {
+    font-weight: 700;
+    color: var(--#{$prefix}-primary, #3b5998);
+    background-color: var(--#{$prefix}-silver-light-100, #f1f5f9);
+    padding: 0.35rem 0.5rem;
+  }
+
+  [data-dx-theme="dark"] & {
+    option {
+      background-color: #1e293b;
+      color: #e2e8f0;
+
+      &:nth-child(even) {
+        background-color: #273549 !important; // Zebrado escuro elegante
+        color: #f1f5f9 !important;
+      }
+
+      &:nth-child(odd) {
+        background-color: #1e293b !important;
+        color: #e2e8f0 !important;
+      }
+
+      &:checked,
+      &:hover {
+        background-color: var(--#{$prefix}-primary, #3b5998) !important;
+        color: #ffffff !important;
+      }
+    }
+
+    optgroup {
+      background-color: #0f172a;
+      color: #93c5fd;
+    }
+  }
+}
+
+// Ocultação acessível do select nativo quando DexterSelect estiver ativo
+select.dx-native-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+// ---------------------------------------------------------------------------
+// 5.2 Componente Customizado DexterSelect (.dx-custom-select)
+// EN: Custom DexterSelect Component (.dx-custom-select)
+// ---------------------------------------------------------------------------
+.dx-custom-select {
+  position: relative;
+  display: block;
+  width: 100%;
+  font-family: inherit;
+
+  &.is-disabled {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+
+  .dx-select-control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.5rem 0.875rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--#{$prefix}-form-color, #212529);
+    background-color: var(--#{$prefix}-form-bg, #ffffff);
+    border: 1px solid var(--#{$prefix}-form-border-color, #cbd5e1);
+    border-radius: var(--#{$prefix}-form-border-radius, 0.375rem);
+    cursor: pointer;
+    text-align: left;
+    user-select: none;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+    &:focus,
+    &:focus-visible {
+      outline: 0;
+      border-color: var(--#{$prefix}-primary-light-600, #4c6ef5);
+      box-shadow: 0 0 0 0.25rem var(--#{$prefix}-focus-ring-color, rgba(59, 89, 152, 0.25));
+    }
+
+    .dx-select-label {
+      flex: 1 1 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-right: 0.5rem;
+    }
+
+    .dx-select-arrow-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--#{$prefix}-form-color, #64748b);
+      transition: transform 0.2s ease-in-out;
+
+      svg {
+        stroke: currentColor;
+      }
+    }
+  }
+
+  &.is-open {
+    .dx-select-control {
+      border-color: var(--#{$prefix}-primary, #3b5998);
+      box-shadow: 0 0 0 0.25rem var(--#{$prefix}-focus-ring-color, rgba(59, 89, 152, 0.25));
+
+      .dx-select-arrow-wrapper {
+        transform: rotate(180deg);
+      }
+    }
+
+    .dx-select-menu {
+      display: block;
+      animation: dxDropdownFadeIn 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+  }
+
+  // Menu Dropdown
+  .dx-select-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    right: 0;
+    z-index: 1060;
+    display: none;
+    background-color: var(--#{$prefix}-form-bg, #ffffff);
+    border: 1px solid var(--#{$prefix}-form-border-color, #cbd5e1);
+    border-radius: var(--#{$prefix}-form-border-radius, 0.375rem);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  &.is-dropup .dx-select-menu {
+    top: auto;
+    bottom: calc(100% + 4px);
+    box-shadow: 0 -10px 25px -5px rgba(0, 0, 0, 0.15), 0 -8px 10px -6px rgba(0, 0, 0, 0.1);
+  }
+
+  // Campo de Busca
+  .dx-select-search {
+    position: relative;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--#{$prefix}-gray-200, #e2e8f0);
+    background-color: var(--#{$prefix}-form-bg, #ffffff);
+
+    .dx-select-search-icon-box {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+      display: inline-flex;
+    }
+
+    .dx-select-search-input {
+      width: 100%;
+      padding: 0.375rem 0.5rem 0.375rem 2.25rem;
+      font-size: 0.875rem;
+      border: 1px solid var(--#{$prefix}-gray-300, #cbd5e1);
+      border-radius: 0.25rem;
+      background-color: var(--#{$prefix}-form-bg, #ffffff);
+      color: var(--#{$prefix}-form-color, #1e293b);
+
+      &:focus {
+        outline: 0;
+        border-color: var(--#{$prefix}-primary, #3b5998);
+      }
+    }
+  }
+
+  // Lista de Opções
+  .dx-select-list {
+    max-height: 260px;
+    overflow-y: auto;
+    padding: 0.25rem 0;
+  }
+
+  .dx-select-optgroup-label {
+    padding: 0.4rem 0.875rem 0.2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--#{$prefix}-primary, #3b5998);
+  }
+
+  // Opção Individual com Zebrado Garantido
+  .dx-select-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.55rem 0.875rem;
+    font-size: 0.9375rem;
+    color: var(--#{$prefix}-form-color, #1e293b);
+    cursor: pointer;
+    transition: background-color 0.1s ease, color 0.1s ease;
+
+    // Zebrado com escala oficial
+    &.dx-option-even,
+    &:nth-child(even) {
+      background-color: var(--#{$prefix}-select-striped-bg, #edf2fa);
+    }
+
+    &.dx-option-odd,
+    &:nth-child(odd) {
+      background-color: var(--#{$prefix}-form-bg, #ffffff);
+    }
+
+    &:hover,
+    &.is-focused {
+      background-color: #dbeafe !important;
+      color: #1e40af !important;
+    }
+
+    &.is-selected {
+      background-color: var(--#{$prefix}-primary, #3b5998) !important;
+      color: #ffffff !important;
+      font-weight: 600;
+
+      .dx-select-option-check {
+        display: inline-flex;
+      }
+    }
+
+    .dx-select-option-check {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.5rem;
+      color: #ffffff;
+    }
+
+    &.is-disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  // Tamanhos
+  &.form-select-sm,
+  &.dx-custom-select-sm {
+    .dx-select-control {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+      border-radius: var(--#{$prefix}-form-border-radius-sm, 0.25rem);
+    }
+  }
+
+  &.form-select-lg,
+  &.dx-custom-select-lg {
+    .dx-select-control {
+      padding: 0.75rem 1rem;
+      font-size: 1.125rem;
+      border-radius: var(--#{$prefix}-form-border-radius-lg, 0.5rem);
+    }
+  }
+}
+
+// Modo Escuro para DexterSelect
+[data-dx-theme="dark"] {
+  .dx-custom-select {
+    .dx-select-control {
+      background-color: #1e293b;
+      border-color: #334155;
+      color: #f1f5f9;
+
+      .dx-select-arrow-wrapper {
+        color: #94a3b8;
+      }
+    }
+
+    .dx-select-menu {
+      background-color: #1e293b;
+      border-color: #334155;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+    }
+
+    .dx-select-search {
+      border-bottom-color: #334155;
+      background-color: #1e293b;
+
+      .dx-select-search-input {
+        background-color: #0f172a;
+        border-color: #334155;
+        color: #f1f5f9;
+      }
+    }
+
+    .dx-select-optgroup-label {
+      color: #93c5fd;
+    }
+
+    .dx-select-option {
+      color: #e2e8f0;
+
+      &.dx-option-even,
+      &:nth-child(even) {
+        background-color: #273549; // Zebrado dark elegante
+      }
+
+      &.dx-option-odd,
+      &:nth-child(odd) {
+        background-color: #1e293b;
+      }
+
+      &:hover,
+      &.is-focused {
+        background-color: #334e68 !important;
+        color: #ffffff !important;
+      }
+
+      &.is-selected {
+        background-color: var(--#{$prefix}-primary, #3b5998) !important;
+        color: #ffffff !important;
+      }
+    }
+  }
+}
+
+// Gerador das 28 Cores Oficiais para DexterSelect
+@each $color-name, $color-value in $theme-colors {
+  .form-select-#{$color-name},
+  .dx-custom-select-#{$color-name} {
+    --#{$prefix}-primary: var(--#{$prefix}-#{$color-name});
+    --#{$prefix}-focus-ring-color: color-mix(in srgb, var(--#{$prefix}-#{$color-name}) 25%, transparent);
+
+    .dx-select-control:focus,
+    .dx-select-control:focus-visible,
+    &.is-open .dx-select-control {
+      border-color: var(--#{$prefix}-#{$color-name});
+      box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--#{$prefix}-#{$color-name}) 25%, transparent);
+    }
+
+    .dx-select-option.is-selected {
+      background-color: var(--#{$prefix}-#{$color-name}) !important;
+      color: #ffffff !important;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Controles Especiais (Cor e Arquivo)
+// EN: Special Controls (Color and File)
+// ---------------------------------------------------------------------------
+.form-control-color {
+  max-width: 4rem;
+  height: calc(1.5em + 1rem + 2px);
+  padding: 0.25rem;
+  cursor: pointer;
+
+  &::-moz-color-swatch {
+    border: 0;
+    border-radius: calc(var(--#{$prefix}-form-border-radius) - 1px);
+  }
+
+  &::-webkit-color-swatch {
+    border: 0;
+    border-radius: calc(var(--#{$prefix}-form-border-radius) - 1px);
+  }
+}
+
+.form-control[type="file"] {
+  overflow: hidden;
+
+  &:not(:disabled):not([readonly]) {
+    cursor: pointer;
+  }
+
+  &::file-selector-button {
+    padding: 0.5rem 1rem;
+    margin: -0.5rem 0.875rem -0.5rem -0.875rem;
+    color: #ffffff;
+    background-color: var(--#{$prefix}-primary, #3b5998);
+    border: 0;
+    border-inline-end-width: 1px;
+    border-inline-end-style: solid;
+    border-inline-end-color: var(--#{$prefix}-form-border-color);
+    border-radius: 0;
+    transition: background-color 0.2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--#{$prefix}-primary-700, #273b64);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Rótulos, Grupos e Textos de Ajuda
+// EN: Labels, Groups and Help Text
+// ---------------------------------------------------------------------------
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: inline-block;
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--#{$prefix}-form-color);
+
+  &.required::after,
+  &[data-required="true"]::after {
+    content: " *";
+    color: var(--#{$prefix}-red, #ef4444);
+    font-weight: bold;
+  }
+}
+
+.form-text,
+.help-block {
+  display: block;
+  margin-top: 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--#{$prefix}-silver-500, #64748b);
+
+  [data-dx-theme="dark"] & {
+    color: var(--#{$prefix}-silver-400, #94a3b8);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 8. Checkboxes, Radios e Switches (.form-check, .checkbox, .radio, .form-switch)
+// Inspirado e aprimorado a partir do Awesome Bootstrap Checkbox (Flatlogic)
+// EN: Checkboxes, Radios and Switches (Awesome Bootstrap Checkbox inspired)
+// ---------------------------------------------------------------------------
+.form-check,
+.checkbox,
+.radio {
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.75rem;
+  margin-bottom: 0.5rem;
+  position: relative;
+}
+
+.form-check-inline,
+.checkbox-inline,
+.radio-inline {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 1.25rem;
+  margin-bottom: 0;
+}
+
+// Checkbox / Radio sem texto de label (ex: cabeçalhos de tabelas e grids densos)
+.form-check-single,
+.checkbox-single,
+.radio-single {
+  padding-left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  .form-check-input {
+    position: static;
+    margin: 0;
+  }
+}
+
+.form-check-input,
+.checkbox input[type="checkbox"],
+.radio input[type="radio"] {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.1875rem;
+  margin-left: -1.75rem;
+  vertical-align: top;
+  background-color: var(--#{$prefix}-form-bg, #ffffff);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid var(--#{$prefix}-form-border-color, #cbd5e1);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease;
+  cursor: pointer;
+  position: absolute;
+
+  &[type="checkbox"] {
+    border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  }
+
+  &[type="radio"] {
+    border-radius: 50%;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--#{$prefix}-primary, #3b5998);
+    box-shadow: 0 0 0 3px rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.15);
+  }
+
+  &:focus {
+    border-color: var(--#{$prefix}-form-focus-border, #3b5998);
+    outline: 0;
+    box-shadow: 0 0 0 4px rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.25);
+  }
+
+  &:checked {
+    background-color: var(--#{$prefix}-primary, #3b5998);
+    border-color: var(--#{$prefix}-primary, #3b5998);
+
+    &[type="checkbox"] {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
+    }
+
+    &[type="radio"] {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2.2' fill='%23fff'/%3e%3c/svg%3e");
+    }
+  }
+
+  // Estado Indeterminado (Traço central)
+  &:indeterminate[type="checkbox"] {
+    background-color: var(--#{$prefix}-primary, #3b5998);
+    border-color: var(--#{$prefix}-primary, #3b5998);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M5 10h10'/%3e%3c/svg%3e");
+  }
+
+  &:disabled {
+    pointer-events: none;
+    filter: none;
+    opacity: 0.5;
+    background-color: var(--#{$prefix}-form-disabled-bg, #f1f5f9);
+    border-color: var(--#{$prefix}-form-disabled-border, #e2e8f0);
+    cursor: not-allowed;
+  }
+}
+
+// 8.1 Checkbox Redondo (Circle Checkbox)
+.checkbox-circle,
+.form-check-circle {
+  .form-check-input[type="checkbox"],
+  input[type="checkbox"] {
+    border-radius: 50% !important;
+  }
+}
+
+// 8.2 Modificadores de Dimensão de Checkbox e Radio
+.form-check-sm,
+.checkbox-sm,
+.radio-sm {
+  min-height: 1.25rem;
+  padding-left: 1.5rem;
+  font-size: 0.8125rem;
+
+  .form-check-input {
+    width: 0.875rem;
+    height: 0.875rem;
+    margin-left: -1.5rem;
+    margin-top: 0.2rem;
+  }
+}
+
+.form-check-lg,
+.checkbox-lg,
+.radio-lg {
+  min-height: 1.875rem;
+  padding-left: 2.25rem;
+  font-size: 1.125rem;
+
+  .form-check-input {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-left: -2.25rem;
+    margin-top: 0.125rem;
+  }
+}
+
+.form-check-label,
+.checkbox label,
+.radio label {
+  color: var(--#{$prefix}-form-color, #212529);
+  font-size: 0.9375rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+// 8.3 Interruptor Toggle Switch (.form-switch)
+.form-switch {
+  padding-left: 2.875rem;
+
+  .form-check-input {
+    width: 2.35rem;
+    height: 1.25rem;
+    margin-left: -2.875rem;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23809ac6'/%3e%3c/svg%3e");
+    background-position: left center;
+    border-radius: 2rem;
+    transition: background-position 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+    &:checked {
+      background-position: right center;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+    }
+  }
+
+  &.form-switch-sm {
+    padding-left: 2.25rem;
+    .form-check-input {
+      width: 1.75rem;
+      height: 0.95rem;
+      margin-left: -2.25rem;
+    }
+  }
+
+  &.form-switch-lg {
+    padding-left: 3.5rem;
+    .form-check-input {
+      width: 3rem;
+      height: 1.6rem;
+      margin-left: -3.5rem;
+    }
+  }
+}
+
+// 8.4 Variantes de Cores para Toda a Paleta Oficial (Awesome Checkbox & Radio)
+@each $color-name, $color-value in $all-colors {
+  .form-check-#{$color-name},
+  .checkbox-#{$color-name},
+  .radio-#{$color-name},
+  .form-switch-#{$color-name} {
+    .form-check-input:hover:not(:disabled),
+    input[type="checkbox"]:hover:not(:disabled),
+    input[type="radio"]:hover:not(:disabled) {
+      border-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+      box-shadow: 0 0 0 3px rgba(var(--#{$prefix}-#{$color-name}-rgb), 0.18);
+    }
+
+    .form-check-input:focus,
+    input[type="checkbox"]:focus,
+    input[type="radio"]:focus {
+      border-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+      box-shadow: 0 0 0 4px rgba(var(--#{$prefix}-#{$color-name}-rgb), 0.28);
+    }
+
+    .form-check-input:checked,
+    .form-check-input:indeterminate,
+    input[type="checkbox"]:checked,
+    input[type="checkbox"]:indeterminate,
+    input[type="radio"]:checked {
+      background-color: var(--#{$prefix}-#{$color-name}, #{$color-value}) !important;
+      border-color: var(--#{$prefix}-#{$color-name}, #{$color-value}) !important;
+    }
+  }
+}
+
+// Aliases em Português
+@each $alias, $canonical in $color-aliases {
+  .form-check-#{$alias},
+  .checkbox-#{$alias},
+  .radio-#{$alias},
+  .form-switch-#{$alias} {
+    @extend .form-check-#{$canonical};
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 8.5 Suíte Pure CSS iCheck Bootstrap ([class*="icheck-"])
+// Inspirado e 100% compatível com bantikyan/icheck-bootstrap
+// EN: Pure CSS iCheck Bootstrap Suite ([class*="icheck-"])
+// ---------------------------------------------------------------------------
+[class*="icheck-"] {
+  min-height: 1.5rem;
+  padding-left: 0;
+  margin-bottom: 0.5rem;
+  position: relative;
+  display: block;
+
+  &.icheck-inline {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 1.25rem;
+    margin-bottom: 0;
+  }
+
+  > input:first-child {
+    position: absolute !important;
+    opacity: 0 !important;
+    margin: 0 !important;
+    z-index: -1 !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+
+    // Pseudo-elemento de Caixa (Caixa do Checkbox ou Círculo do Radio)
+    + label,
+    + label::before,
+    + input[type="hidden"] + label,
+    + input[type="hidden"] + label::before {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    + label,
+    + input[type="hidden"] + label {
+      position: relative;
+      display: inline-block;
+      padding-left: 1.85rem;
+      min-height: 1.35rem;
+      line-height: 1.45;
+      font-size: 0.9375rem;
+      color: var(--#{$prefix}-form-color, #212529);
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 1.35rem;
+        height: 1.35rem;
+        background-color: var(--#{$prefix}-form-bg, #ffffff);
+        border: 1px solid var(--#{$prefix}-form-border-color, #cbd5e1);
+        border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+        box-sizing: border-box;
+        transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.15s ease, transform 0.15s ease;
+      }
+    }
+
+    // Radio: formato circular
+    &[type="radio"] + label::before,
+    &[type="radio"] + input[type="hidden"] + label::before {
+      border-radius: 50% !important;
+    }
+
+    // Hover
+    &:hover:not(:disabled) + label::before {
+      border-color: var(--#{$prefix}-primary, #3b5998);
+      box-shadow: 0 0 0 3px rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.15);
+    }
+
+    // Focus
+    &:focus + label::before {
+      outline: 0;
+      border-color: var(--#{$prefix}-primary, #3b5998);
+      box-shadow: 0 0 0 4px rgba(var(--#{$prefix}-primary-rgb, 59, 89, 152), 0.25);
+    }
+
+    // Checked Checkbox
+    &:checked[type="checkbox"] + label {
+      &::before {
+        background-color: var(--#{$prefix}-primary, #3b5998);
+        border-color: var(--#{$prefix}-primary, #3b5998);
+      }
+
+      &::after {
+        opacity: 1;
+        top: 0.22rem;
+        left: 0.48rem;
+        width: 0.4rem;
+        height: 0.75rem;
+        border: solid #ffffff;
+        border-width: 0 2.2px 2.2px 0;
+        transform: rotate(45deg);
+      }
+    }
+
+    // Checked Radio
+    &:checked[type="radio"] + label {
+      &::before {
+        background-color: var(--#{$prefix}-primary, #3b5998);
+        border-color: var(--#{$prefix}-primary, #3b5998);
+      }
+
+      &::after {
+        opacity: 1;
+        top: 0.38rem;
+        left: 0.38rem;
+        width: 0.58rem;
+        height: 0.58rem;
+        border-radius: 50%;
+        background-color: #ffffff;
+      }
+    }
+
+    // Disabled
+    &:disabled + label {
+      opacity: 0.6;
+      cursor: not-allowed;
+
+      &::before {
+        background-color: var(--#{$prefix}-form-disabled-bg, #f1f5f9);
+        border-color: var(--#{$prefix}-form-disabled-border, #e2e8f0);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  // Checkbox Circle: .icheck-circle
+  &.icheck-circle > input:first-child[type="checkbox"] + label::before {
+    border-radius: 50% !important;
+  }
+}
+
+// 8.6 Cores Oficiais do Dexter UI para iCheck Bootstrap (28 Cores)
+@each $color-name, $color-value in $all-colors {
+  .icheck-#{$color-name} {
+    > input:first-child {
+      &:hover:not(:disabled) + label::before {
+        border-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+        box-shadow: 0 0 0 3px rgba(var(--#{$prefix}-#{$color-name}-rgb), 0.18);
+      }
+
+      &:focus + label::before {
+        border-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+        box-shadow: 0 0 0 4px rgba(var(--#{$prefix}-#{$color-name}-rgb), 0.28);
+      }
+
+      &:checked + label::before {
+        background-color: var(--#{$prefix}-#{$color-name}, #{$color-value}) !important;
+        border-color: var(--#{$prefix}-#{$color-name}, #{$color-value}) !important;
+      }
+    }
+  }
+}
+
+// Aliases em Português para iCheck
+@each $alias, $canonical in $color-aliases {
+  .icheck-#{$alias} {
+    @extend .icheck-#{$canonical};
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 9. Grupos de Entrada (.input-group)
+// EN: Input Groups (.input-group)
+// ---------------------------------------------------------------------------
+.input-group {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+
+  > .form-control,
+  > .form-select {
+    position: relative;
+    flex: 1 1 auto;
+    width: 1%;
+    min-width: 0;
+
+    &:focus {
+      z-index: 5;
+    }
+  }
+
+  > :not(:first-child):not(.dropdown-menu) {
+    margin-left: calc(var(--#{$prefix}-form-border-width) * -1);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  > :not(:last-child):not(.dropdown-toggle) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.input-group-text,
+.input-group-addon {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.875rem;
+  font-size: var(--#{$prefix}-fs-body, 1rem);
+  font-weight: 400;
+  line-height: var(--#{$prefix}-lh-base, 1.5);
+  color: var(--#{$prefix}-silver-600, #475569);
+  text-align: center;
+  white-space: nowrap;
+  background-color: var(--#{$prefix}-silver-100, #f1f5f9);
+  border: var(--#{$prefix}-form-border-width) solid var(--#{$prefix}-form-border-color);
+  border-radius: var(--#{$prefix}-form-border-radius);
+
+  [data-dx-theme="dark"] & {
+    color: var(--#{$prefix}-silver-300, #cbd5e1);
+    background-color: var(--#{$prefix}-midnight-dark-200, #0f172a);
+    border-color: var(--#{$prefix}-midnight-600, #334155);
+  }
+}
+
+.input-group-sm > .form-control,
+.input-group-sm > .input-group-text {
+  padding: 0.25rem 0.625rem;
+  font-size: 0.875rem;
+}
+
+.input-group-lg > .form-control,
+.input-group-lg > .input-group-text {
+  padding: 0.75rem 1.125rem;
+  font-size: 1.125rem;
+}
+
+// ---------------------------------------------------------------------------
+// 10. Estados de Validação (Feedback Visual)
+// EN: Validation States (Visual Feedback)
+// ---------------------------------------------------------------------------
+
+// Válido / Sucesso (.is-valid / .has-success)
+.is-valid,
+.has-success .form-control {
+  border-color: var(--#{$prefix}-green, #10b981) !important;
+
+  &:focus {
+    border-color: var(--#{$prefix}-green, #10b981) !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 8px rgba(var(--#{$prefix}-green-rgb, 16, 185, 129), 0.6) !important;
+  }
+}
+
+.valid-feedback,
+.has-success .help-block {
+  display: block;
+  margin-top: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--#{$prefix}-green, #10b981);
+}
+
+// Inválido / Erro (.is-invalid / .has-error)
+.is-invalid,
+.has-error .form-control {
+  border-color: var(--#{$prefix}-red, #ef4444) !important;
+
+  &:focus {
+    border-color: var(--#{$prefix}-red, #ef4444) !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 8px rgba(var(--#{$prefix}-red-rgb, 239, 68, 68), 0.6) !important;
+  }
+}
+
+.invalid-feedback,
+.has-error .help-block {
+  display: block;
+  margin-top: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--#{$prefix}-red, #ef4444);
+}
+
+// Alerta / Atenção (.has-warning)
+.has-warning .form-control {
+  border-color: var(--#{$prefix}-amber, #f59e0b) !important;
+
+  &:focus {
+    border-color: var(--#{$prefix}-amber, #f59e0b) !important;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), 0 0 8px rgba(var(--#{$prefix}-amber-rgb, 245, 158, 11), 0.6) !important;
+  }
+}
+
+.warning-feedback,
+.has-warning .help-block {
+  display: block;
+  margin-top: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--#{$prefix}-amber, #f59e0b);
+}
+
+// ---------------------------------------------------------------------------
+// 11. Cores Temáticas de Focus (.form-control-{cor})
+// EN: Thematic Focus Colors (.form-control-{cor})
+// ---------------------------------------------------------------------------
+@each $color-name, $color-value in $all-colors {
+  .form-control-#{$color-name} {
+    &:hover:not(:disabled):not([readonly]):not(:focus) {
+      border-color: var(--#{$prefix}-#{$color-name}-300, #{$color-value});
+    }
+
+    &:focus {
+      border-color: var(--#{$prefix}-#{$color-name}, #{$color-value});
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+                  0 0 8px rgba(var(--#{$prefix}-#{$color-name}-rgb), 0.55);
+    }
+  }
+}
+
+@each $alias, $canonical in $color-aliases {
+  .form-control-#{$alias} {
+    &:hover:not(:disabled):not([readonly]):not(:focus) {
+      border-color: var(--#{$prefix}-#{$canonical}-300);
+    }
+
+    &:focus {
+      border-color: var(--#{$prefix}-#{$canonical});
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075),
+                  0 0 8px rgba(var(--#{$prefix}-#{$canonical}-rgb), 0.55);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 12. Botões Base para Formulários (.btn, .btn-primary, etc.)
+// EN: Base Buttons for Forms (.btn, .btn-primary, etc.)
+// ---------------------------------------------------------------------------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: var(--#{$prefix}-fs-body, 1rem);
+  line-height: var(--#{$prefix}-lh-base, 1.5);
+  padding: 0.5rem 1rem;
+  border-radius: var(--#{$prefix}-radius-md, 0.375rem);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+
+  &:disabled,
+  &.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+  }
+}
+
+.btn-sm {
+  padding: 0.25rem 0.625rem;
+  font-size: 0.875rem;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+}
+
+.btn-lg {
+  padding: 0.75rem 1.25rem;
+  font-size: 1.125rem;
+  border-radius: var(--#{$prefix}-radius-lg, 0.5rem);
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+.btn-primary {
+  background-color: var(--#{$prefix}-primary, #3b5998);
+  color: #ffffff;
+  border-color: var(--#{$prefix}-primary, #3b5998);
+
+  &:hover {
+    background-color: var(--#{$prefix}-primary-700, #273b64);
+    border-color: var(--#{$prefix}-primary-700, #273b64);
+    color: #ffffff;
+  }
+}
+
+.btn-secondary {
+  background-color: var(--#{$prefix}-silver-200, #e2e8f0);
+  color: var(--#{$prefix}-silver-800, #1e293b);
+  border-color: var(--#{$prefix}-silver-300, #cbd5e1);
+
+  &:hover {
+    background-color: var(--#{$prefix}-silver-300, #cbd5e1);
+  }
+
+  [data-dx-theme="dark"] & {
+    background-color: var(--#{$prefix}-midnight-600, #334155);
+    color: #ffffff;
+    border-color: var(--#{$prefix}-midnight-500, #475569);
+
+    &:hover {
+      background-color: var(--#{$prefix}-midnight-500, #475569);
+    }
+  }
+}
+
+.btn-outline-primary {
+  background-color: transparent;
+  color: var(--#{$prefix}-primary, #3b5998);
+  border-color: var(--#{$prefix}-primary, #3b5998);
+
+  &:hover {
+    background-color: var(--#{$prefix}-primary, #3b5998);
+    color: #ffffff;
+  }
+}

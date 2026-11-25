@@ -1,0 +1,504 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        _code.scss
+ * @description [PT-BR] Suíte completa de estilização de Blocos de Código e Realce de Sintaxe (Syntax Highlighting)
+ *              inspirada no PrismJS com o tema canônico Okaidia / Monokai.
+ *              Inclui janelas com cabeçalho estilo terminal/macOS (.code-window, .code-header),
+ *              botão de copiar interativo (.code-copy-btn), numeração de linhas (.line-numbers),
+ *              linhas destacadas (.line-highlight), badges de linguagem (.code-badge) e tokens
+ *              de sintaxe com precisão cromática (comentários em #75715e itálico, tags em #f92672 magenta,
+ *              strings em #a6e22e verde, funções em #e6db74 amarelo, keywords em #66d9ef ciano e números em #ae81ff).
+ *              [EN]    Complete Code Blocks and Syntax Highlighting styling suite inspired by PrismJS
+ *              with the canonical Okaidia / Monokai theme.
+ *              Includes terminal/macOS window headers (.code-window, .code-header), interactive copy button
+ *              (.code-copy-btn), line numbering (.line-numbers), highlighted lines (.line-highlight),
+ *              language badges (.code-badge) and chromatic tokens (comments in #75715e italic, tags in #f92672 magenta,
+ *              strings in #a6e22e green, functions in #e6db74 yellow, keywords in #66d9ef cyan and numbers in #ae81ff).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Blocos de Código e Sintaxe Okaidia / Monokai | Code Blocks and Syntax Highlighting */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// 1. Variáveis e Base dos Blocos de Código (Okaidia / Monokai Theme)
+// EN: Variables and Base Code Blocks (Okaidia / Monokai Theme)
+// ---------------------------------------------------------------------------
+
+:root {
+  --#{$prefix}-code-font: var(--#{$prefix}-font-code, #{'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace});
+}
+
+// Estilos base para blocos de código com tema Okaidia / Monokai
+.code-block,
+.highlight-monokai,
+.highlight-okaidia,
+pre[class*="language-"],
+pre.code-monokai,
+pre.code-okaidia {
+  background-color: var(--#{$prefix}-code-monokai-bg, #272822);
+  color: var(--#{$prefix}-code-monokai-color, #f8f8f2);
+  font-family: var(--#{$prefix}-code-font);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  tab-size: 2;
+  hyphens: none;
+  border-radius: var(--#{$prefix}-radius-lg, 0.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  margin: 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+
+  // Seleção de texto no tema Monokai
+  &::selection,
+  *::selection {
+    background: var(--#{$prefix}-code-monokai-selection, #49483e);
+    color: inherit;
+    text-shadow: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 2. Janela de Código com Barra de Ferramentas / Header (.code-window / .code-header)
+// EN: Code Window with Toolbar / Header (.code-window / .code-header)
+// ---------------------------------------------------------------------------
+
+.code-window {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--#{$prefix}-code-monokai-bg, #272822);
+  border-radius: var(--#{$prefix}-radius-lg, 0.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  margin: 1.25rem 0;
+  position: relative;
+  overflow: hidden;
+  white-space: normal;
+
+  pre {
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 0 var(--#{$prefix}-radius-lg, 0.5rem) var(--#{$prefix}-radius-lg, 0.5rem) !important;
+    box-shadow: none !important;
+    white-space: pre !important;
+  }
+}
+
+.code-header,
+.code-window-header {
+  background-color: var(--#{$prefix}-code-monokai-header-bg, #1e1f1c);
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+  font-family: var(--#{$prefix}-font-body);
+  gap: 0.75rem;
+  min-height: 2.25rem;
+  box-sizing: border-box;
+  white-space: normal;
+
+  // Ações do cabeçalho
+  .code-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-inline-start: auto;
+    white-space: nowrap;
+  }
+
+  // Alinhamento automático caso badge e botão de cópia estejam diretamente no header
+  > .code-badge:first-of-type {
+    margin-inline-start: auto;
+  }
+
+  > .code-badge,
+  > .code-copy-btn {
+    white-space: nowrap;
+  }
+}
+
+// Bolinhas estilo macOS / Terminal
+.code-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  flex-shrink: 0;
+
+  span,
+  .code-dot {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+
+  .dot-close,
+  .red {
+    background-color: #ff5f56;
+  }
+
+  .dot-minimize,
+  .yellow {
+    background-color: #ffbd2e;
+  }
+
+  .dot-maximize,
+  .green {
+    background-color: #27c93f;
+  }
+}
+
+// Título / Nome do arquivo
+.code-title,
+.code-filename {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(248, 248, 242, 0.75);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    opacity: 0.6;
+  }
+}
+
+// Ações do cabeçalho (Badge de linguagem + Botão Copiar)
+.code-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-inline-start: auto;
+}
+
+// Badge de linguagem (.code-badge / .code-lang)
+.code-badge,
+.code-lang {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  background: rgba(255, 255, 255, 0.08);
+  color: #66d9ef;
+  font-family: var(--#{$prefix}-code-font);
+}
+
+// Botão Copiar Código (.code-copy-btn)
+.code-copy-btn,
+.btn-copy-code {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f8f8f2;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: background-color 700ms ease-in-out, border-color 700ms ease-in-out, color 700ms ease-in-out, transform 700ms ease-in-out;
+  line-height: 1.4;
+
+  svg {
+    width: 0.875rem;
+    height: 0.875rem;
+    fill: currentColor;
+    transition: transform 700ms ease-in-out;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #fff;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &.copied {
+    background: rgba(166, 226, 46, 0.2);
+    border-color: #a6e22e;
+    color: #a6e22e;
+
+    svg {
+      transform: scale(1.1);
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. Estilização do <pre> e <code> (Corpo e Rolagem)
+// EN: <pre> and <code> Styling (Body and Scroll)
+// ---------------------------------------------------------------------------
+
+pre.code-block,
+.code-window pre,
+pre[class*="language-"] {
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin: 0;
+
+  code {
+    background-color: transparent !important;
+    color: inherit !important;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    border: none !important;
+    text-shadow: none;
+    box-shadow: none;
+    display: block;
+  }
+
+  // Scrollbar moderna e estilizada para código
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #1e1f1c;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #49483e;
+    border-radius: 4px;
+
+    &:hover {
+      background: #75715e;
+    }
+  }
+}
+
+// Quebra de linha suave quando habilitado (.code-wrap)
+.code-wrap,
+.code-wrap pre,
+pre.code-wrap {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+}
+
+// Bloco com altura fixa e rolagem vertical (.code-scroll)
+.code-scroll,
+.code-scroll pre {
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+// ---------------------------------------------------------------------------
+// 4. Tokens de Realce de Sintaxe PrismJS (Tema Okaidia / Monokai)
+// EN: PrismJS Syntax Highlighting Tokens (Okaidia / Monokai Theme)
+// ---------------------------------------------------------------------------
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--#{$prefix}-code-monokai-comment, #75715e);
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: var(--#{$prefix}-code-monokai-color, #f8f8f2);
+}
+
+.token.namespace {
+  opacity: 0.7;
+}
+
+// Propriedades, tags HTML, constantes, símbolos e remoções: Magenta Monokai (#f92672)
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--#{$prefix}-code-monokai-magenta, #f92672);
+}
+
+// Booleanos e números: Roxo/Lilás Monokai (#ae81ff)
+.token.boolean,
+.token.number {
+  color: var(--#{$prefix}-code-monokai-purple, #ae81ff);
+}
+
+// Strings, seletores CSS, atributos, caracteres, inserções: Verde Monokai (#a6e22e)
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--#{$prefix}-code-monokai-green, #a6e22e);
+}
+
+// Operadores, entidades, URLs: Branco / Ciano
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: var(--#{$prefix}-code-monokai-color, #f8f8f2);
+}
+
+// Atributos HTML valores, funções, classes: Amarelo Monokai (#e6db74)
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+  color: var(--#{$prefix}-code-monokai-yellow, #e6db74);
+}
+
+// Palavras-chave (Keywords): Ciano Elétrico Monokai (#66d9ef)
+.token.keyword {
+  color: var(--#{$prefix}-code-monokai-cyan, #66d9ef);
+}
+
+// Regex e importantes: Laranja Monokai (#fd971f)
+.token.regex,
+.token.important {
+  color: var(--#{$prefix}-code-monokai-orange, #fd971f);
+}
+
+.token.important,
+.token.bold {
+  font-weight: 700;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+// ---------------------------------------------------------------------------
+// 5. Plugin de Numeração de Linhas (.line-numbers)
+// EN: Line Numbers Plugin (.line-numbers)
+// ---------------------------------------------------------------------------
+
+pre[class*="language-"].line-numbers,
+pre.line-numbers {
+  position: relative;
+  padding-left: 3.8rem;
+  counter-reset: linenumber;
+
+  > code {
+    position: relative;
+    white-space: inherit;
+  }
+}
+
+.line-numbers .line-numbers-rows {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  font-size: 100%;
+  left: -3.8rem;
+  width: 3rem;
+  letter-spacing: -1px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  user-select: none;
+  padding-top: 1.25rem;
+
+  > span {
+    display: block;
+    counter-increment: linenumber;
+
+    &::before {
+      content: counter(linenumber);
+      color: #75715e;
+      display: block;
+      padding-right: 0.8rem;
+      text-align: right;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Linha Destacada (.line-highlight)
+// EN: Line Highlight (.line-highlight)
+// ---------------------------------------------------------------------------
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-left: 3px solid #66d9ef;
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+// ---------------------------------------------------------------------------
+// 7. Código Inline com variantes (.code-inline / code)
+// EN: Inline Code with Variants (.code-inline / code)
+// ---------------------------------------------------------------------------
+
+code:not(pre code) {
+  font-family: var(--#{$prefix}-code-font);
+  font-size: 0.875em;
+  padding: 0.1875rem 0.375rem;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem);
+  background-color: var(--#{$prefix}-code-bg, rgba(59, 89, 152, 0.08));
+  color: var(--#{$prefix}-code-color, var(--#{$prefix}-quaternary, #2d4373));
+  border: 1px solid rgba(59, 89, 152, 0.15);
+  word-break: break-word;
+
+  [data-dx-theme="dark"] & {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #66d9ef;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
+}
+
+// Código inline estilizado no tema Monokai (.code-monokai-inline)
+.code-monokai-inline {
+  background-color: #272822 !important;
+  color: #a6e22e !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  font-family: var(--#{$prefix}-code-font) !important;
+  padding: 0.2rem 0.45rem !important;
+  border-radius: var(--#{$prefix}-radius-sm, 0.25rem) !important;
+}

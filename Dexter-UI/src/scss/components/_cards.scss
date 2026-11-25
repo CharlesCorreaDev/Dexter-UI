@@ -1,0 +1,286 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        components/_cards.scss
+ * @description [PT-BR] Suíte de Cartões (.card) com cabeçalho, corpo, rodapé,
+ *                      imagens de capa e sobreposição (.card-img-overlay), grupos
+ *                      (.card-group, .card-deck), destaque hover (.card-hover),
+ *                      variantes temáticas para 28 cores e Modo Escuro nativo.
+ *              [EN]    Cards (.card) suite with header, body, footer, cover &
+ *                      overlay images (.card-img-overlay), groups (.card-group,
+ *                      .card-deck), hover lift (.card-hover), 28 theme colors
+ *                      and native Dark Mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Cartões | Cards */
+
+@use "sass:list";
+@use "sass:map";
+@use "../abstracts" as *;
+
+$card-semantic-colors: (
+  "success": $green,
+  "danger":  $red,
+  "warning": #f59e0b,
+  "info":    $cyan,
+);
+
+$card-color-palette: map.merge($all-colors, $card-semantic-colors);
+$card-light-names: ("light", "silver-light", "beige", "aquamarine", "lime", "warning");
+
+:root {
+  --#{$prefix}-card-spacer-y: 1rem;
+  --#{$prefix}-card-spacer-x: 1.25rem;
+  --#{$prefix}-card-cap-padding-y: 0.75rem;
+  --#{$prefix}-card-cap-padding-x: 1.25rem;
+  --#{$prefix}-card-cap-bg: rgba(0, 0, 0, 0.03);
+  --#{$prefix}-card-bg: #ffffff;
+  --#{$prefix}-card-color: var(--#{$prefix}-body-color, #1e293b);
+  --#{$prefix}-card-border-color: var(--#{$prefix}-border-color, #e2e8f0);
+  --#{$prefix}-card-border-width: 1px;
+  --#{$prefix}-card-border-radius: var(--#{$prefix}-radius-lg, 0.5rem);
+  --#{$prefix}-card-inner-border-radius: calc(var(--#{$prefix}-card-border-radius) - var(--#{$prefix}-card-border-width));
+  --#{$prefix}-card-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  color: var(--#{$prefix}-card-color);
+  background-color: var(--#{$prefix}-card-bg);
+  background-clip: border-box;
+  border: var(--#{$prefix}-card-border-width) solid var(--#{$prefix}-card-border-color);
+  border-radius: var(--#{$prefix}-card-border-radius);
+  box-shadow: var(--#{$prefix}-card-box-shadow);
+
+  > .list-group {
+    border-top: inherit;
+    border-bottom: inherit;
+
+    &:first-child {
+      border-top-width: 0;
+      border-top-left-radius: var(--#{$prefix}-card-inner-border-radius);
+      border-top-right-radius: var(--#{$prefix}-card-inner-border-radius);
+    }
+
+    &:last-child {
+      border-bottom-width: 0;
+      border-bottom-right-radius: var(--#{$prefix}-card-inner-border-radius);
+      border-bottom-left-radius: var(--#{$prefix}-card-inner-border-radius);
+    }
+  }
+}
+
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.14);
+  }
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: var(--#{$prefix}-card-spacer-y) var(--#{$prefix}-card-spacer-x);
+}
+
+.card-title {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.card-subtitle {
+  margin-top: -0.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--#{$prefix}-text-muted, #64748b);
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-link + .card-link {
+  margin-inline-start: 1rem;
+}
+
+.card-header {
+  padding: var(--#{$prefix}-card-cap-padding-y) var(--#{$prefix}-card-cap-padding-x);
+  margin-bottom: 0;
+  background-color: var(--#{$prefix}-card-cap-bg);
+  border-bottom: var(--#{$prefix}-card-border-width) solid var(--#{$prefix}-card-border-color);
+  font-weight: 600;
+
+  &:first-child {
+    border-top-left-radius: var(--#{$prefix}-card-inner-border-radius);
+    border-top-right-radius: var(--#{$prefix}-card-inner-border-radius);
+  }
+}
+
+.card-footer {
+  padding: var(--#{$prefix}-card-cap-padding-y) var(--#{$prefix}-card-cap-padding-x);
+  background-color: var(--#{$prefix}-card-cap-bg);
+  border-top: var(--#{$prefix}-card-border-width) solid var(--#{$prefix}-card-border-color);
+
+  &:last-child {
+    border-bottom-left-radius: var(--#{$prefix}-card-inner-border-radius);
+    border-bottom-right-radius: var(--#{$prefix}-card-inner-border-radius);
+  }
+}
+
+.card-header-tabs {
+  margin-right: calc(-0.5 * var(--#{$prefix}-card-cap-padding-x));
+  margin-bottom: calc(-1 * var(--#{$prefix}-card-cap-padding-y));
+  margin-left: calc(-0.5 * var(--#{$prefix}-card-cap-padding-x));
+  border-bottom: 0;
+}
+
+.card-img,
+.card-img-top,
+.card-img-bottom {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.card-img,
+.card-img-top {
+  border-top-left-radius: var(--#{$prefix}-card-inner-border-radius);
+  border-top-right-radius: var(--#{$prefix}-card-inner-border-radius);
+}
+
+.card-img,
+.card-img-bottom {
+  border-bottom-left-radius: var(--#{$prefix}-card-inner-border-radius);
+  border-bottom-right-radius: var(--#{$prefix}-card-inner-border-radius);
+}
+
+.card-img-overlay {
+  position: absolute;
+  inset: 0;
+  padding: var(--#{$prefix}-card-spacer-x);
+  border-radius: var(--#{$prefix}-card-inner-border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 60%, transparent 100%);
+  color: #ffffff;
+}
+
+.card-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  > .card {
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 576px) {
+    flex-flow: row wrap;
+
+    > .card {
+      flex: 1 0 0%;
+      margin-bottom: 0;
+
+      + .card {
+        margin-left: 0;
+        border-left: 0;
+      }
+
+      &:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      &:not(:first-child) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+  }
+}
+
+.card-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+@each $name, $hex in $card-color-palette {
+  $is-light: list.index($card-light-names, $name) != null;
+  $fg: #ffffff;
+  $muted: rgba(255, 255, 255, 0.8);
+
+  @if $is-light {
+    $fg: #130f10;
+    $muted: rgba(19, 15, 16, 0.75);
+  }
+
+  .card-#{$name} {
+    --#{$prefix}-card-bg: #{$hex};
+    --#{$prefix}-card-color: #{$fg};
+    --#{$prefix}-card-border-color: #{$hex};
+    --#{$prefix}-card-cap-bg: rgba(0, 0, 0, 0.12);
+
+    .card-subtitle,
+    .text-muted {
+      color: #{$muted} !important;
+    }
+  }
+
+  .card-outline-#{$name} {
+    --#{$prefix}-card-border-color: #{$hex};
+    border-top-width: 3px;
+  }
+
+  .card-header-#{$name} {
+    padding: var(--#{$prefix}-card-cap-padding-y) var(--#{$prefix}-card-cap-padding-x);
+    margin-bottom: 0;
+    font-weight: 600;
+    background-color: #{$hex};
+    color: #{$fg};
+    border-bottom: var(--#{$prefix}-card-border-width) solid #{$hex};
+
+    &:first-child {
+      border-top-left-radius: var(--#{$prefix}-card-inner-border-radius);
+      border-top-right-radius: var(--#{$prefix}-card-inner-border-radius);
+    }
+  }
+}
+
+[data-#{$prefix}-theme="dark"] {
+  --#{$prefix}-card-bg: #161b22;
+  --#{$prefix}-card-color: #e6edf3;
+  --#{$prefix}-card-border-color: #30363d;
+  --#{$prefix}-card-cap-bg: rgba(255, 255, 255, 0.04);
+  --#{$prefix}-card-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-hover {
+    transition: none;
+  }
+}
