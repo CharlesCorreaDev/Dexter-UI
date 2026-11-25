@@ -1,0 +1,235 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        base/_reset.scss
+ * @description [PT-BR] Reset moderno e normalização cross-browser: box-sizing, mídia responsiva,
+ *                      isolamento SPA, formulários, acessibilidade (:focus-visible e prefers-reduced-motion).
+ *                      Inspirado nas melhores práticas de Normalize.css, Josh Comeau, Eric Meyer e UA stylesheets.
+ *              [EN]    Modern reset and cross-browser normalization: box-sizing, responsive media,
+ *                      SPA isolation, forms, accessibility (:focus-visible and prefers-reduced-motion).
+ *                      Inspired by Normalize.css, Josh Comeau, Eric Meyer, and UA stylesheets.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Reset */
+
+// pt-BR: Box-sizing consistente em todos os elementos e pseudo-elementos.
+// EN: Consistent box-sizing across all elements and pseudo-elements.
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+// pt-BR: Zera margens e preenchimentos padrão do navegador.
+// EN: Zeroes out default browser margins and paddings.
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// pt-BR: Configurações do documento raiz: evita ajuste arbitrário de texto em mobile e define tabulação.
+// EN: Root document settings: prevents mobile text inflation and sets tab width.
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  tab-size: 4;
+  -webkit-tap-highlight-color: transparent;
+}
+
+// pt-BR: Rolagem suave automática ao navegar por âncoras (:target), respeitando preferências de movimento.
+// EN: Smooth anchor scrolling (:target) when motion is enabled by the user.
+@media (prefers-reduced-motion: no-preference) {
+  :has(:target) {
+    scroll-behavior: smooth;
+  }
+}
+
+// pt-BR: Altura mínima para preencher a viewport e suavização consistente de fontes.
+// EN: Minimum viewport height and consistent subpixel font smoothing.
+body {
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// pt-BR: Elementos estruturais do HTML5 exibidos como bloco para navegadores legados e consistência do DOM.
+// EN: HTML5 structural elements displayed as blocks for legacy engines and DOM consistency.
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+  display: block;
+}
+
+// pt-BR: Cria contexto de empilhamento isolado em raízes de SPA (React, Vue, Next.js).
+// EN: Creates an isolated stacking context on SPA roots (React, Vue, Next.js).
+#root,
+#__next,
+#app {
+  isolation: isolate;
+}
+
+// pt-BR: Mídias responsivas que respeitam a largura do container.
+// EN: Responsive media elements that respect their container width.
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+img {
+  border-style: none;
+}
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+// pt-BR: Controles de formulário herdam tipografia e cor do elemento pai.
+// EN: Form controls inherit typography and color from parent element.
+input,
+button,
+textarea,
+select,
+optgroup {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type="button"],
+[type="submit"],
+[type="reset"] {
+  cursor: pointer;
+}
+
+button:disabled,
+[disabled] {
+  cursor: not-allowed;
+}
+
+textarea {
+  resize: vertical;
+  overflow: auto;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+// pt-BR: Evita que palavras muito longas estourem a largura do container.
+// EN: Prevents long unbroken words from causing horizontal overflow.
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+// pt-BR: Listas semânticas marcadas explicitamente não exibem marcadores.
+// EN: Semantically-marked lists with role="list" display without markers.
+ul[role="list"],
+ol[role="list"] {
+  padding: 0;
+  list-style: none;
+}
+
+// pt-BR: Tabelas com bordas colapsadas e sem espaçamento indesejado.
+// EN: Tables with collapsed borders and zero cell spacing.
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+// pt-BR: Corrige renderização de fonte monoespaçada em navegadores WebKit/Gecko.
+// EN: Fixes monospace font-size rendering quirks in WebKit/Gecko engines.
+code,
+kbd,
+samp,
+pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace, monospace;
+  font-size: 1em;
+}
+
+// pt-BR: Elementos ocultos e templates sempre invisíveis no fluxo de renderização.
+// EN: Hidden elements and templates are always hidden from the render flow.
+template {
+  display: none;
+}
+
+dialog:not([open]) {
+  display: none;
+}
+
+[hidden]:not([hidden="until-found"]) {
+  display: none !important;
+}
+
+// pt-BR: Anel de foco visível e acessível para navegação via teclado (WCAG 2.4.7 / 2.4.11).
+// EN: Visible and accessible focus ring for keyboard navigation (WCAG 2.4.7 / 2.4.11).
+:focus-visible {
+  outline: 3px solid var(--dx-focus-ring, currentColor);
+  outline-offset: 2px;
+}
+
+// pt-BR: Acessibilidade: respeita a preferência do usuário por animações reduzidas,
+//        mantendo apenas animações essenciais de status/progresso (loaders, skeletons e pace).
+// EN: Accessibility: respects the user's preference for reduced motion,
+//     keeping only essential status/progress animations (loaders, skeletons and pace).
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *:where(:not(.loader, [class*="loader"], [class*="skeleton"], [class*="pace"], [class*="ld-"], [class*="lds-"], .loader *, [class*="loader"] *, [class*="skeleton"] *, [class*="pace"] *, [class*="ld-"] *, [class*="lds-"] *)),
+  *:where(:not(.loader, [class*="loader"], [class*="skeleton"], [class*="pace"], [class*="ld-"], [class*="lds-"], .loader *, [class*="loader"] *, [class*="skeleton"] *, [class*="pace"] *, [class*="ld-"] *, [class*="lds-"] *))::before,
+  *:where(:not(.loader, [class*="loader"], [class*="skeleton"], [class*="pace"], [class*="ld-"], [class*="lds-"], .loader *, [class*="loader"] *, [class*="skeleton"] *, [class*="pace"] *, [class*="ld-"] *, [class*="lds-"] *))::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,180 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_text.scss
+ * @description [PT-BR] Utilitários de texto: tamanho responsivo (.fs-*, .fs-{bp}-*), peso (.fw-*),
+ *                      estilo (.fst-*), altura de linha (.lh-*), espaçamento entre letras (.ls-*),
+ *                      família (.font-*), alinhamento responsivo (.text-start|center|end),
+ *                      transformação, decoração e quebra de linha (.text-wrap|nowrap|truncate|break|balance).
+ *              [EN]    Text utilities: responsive size (.fs-*, .fs-{bp}-*), weight (.fw-*), style
+ *                      (.fst-*), line height (.lh-*), letter spacing (.ls-*), family (.font-*),
+ *                      responsive alignment (.text-start|center|end), transform, decoration and
+ *                      wrapping (.text-wrap|nowrap|truncate|break|balance).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Utilitários de texto | Text utilities */
+
+@use "sass:map";
+@use "../abstracts" as *;
+
+// pt-BR: Tamanho de fonte: .fs-1 (maior) a .fs-6 (menor), com variantes por breakpoint
+//        (ex.: .fs-5 .fs-lg-3 usa fs-5 no mobile e fs-3 a partir de lg).
+// EN: Font size: .fs-1 (largest) to .fs-6 (smallest), with per-breakpoint variants
+//     (e.g. .fs-5 .fs-lg-3 uses fs-5 on mobile and fs-3 from lg up).
+@each $bp in map.keys($breakpoints) {
+  @include media-up($bp) {
+    $infix: breakpoint-infix($bp);
+
+    @each $key, $_ in $font-sizes {
+      .fs#{$infix}-#{$key} {
+        font-size: var(--#{$prefix}-fs-#{$key}) !important;
+      }
+    }
+  }
+}
+
+// pt-BR: Peso da fonte (semântico e numérico de 100 a 900).
+// EN: Font weight (semantic and numeric from 100 to 900).
+@each $key, $_ in $font-weights {
+  .fw-#{$key} {
+    font-weight: var(--#{$prefix}-fw-#{$key}) !important;
+  }
+}
+
+.fw-100     { font-weight: 100 !important; }
+.fw-200     { font-weight: 200 !important; }
+.fw-300     { font-weight: 300 !important; }
+.fw-400     { font-weight: 400 !important; }
+.fw-500     { font-weight: 500 !important; }
+.fw-600     { font-weight: 600 !important; }
+.fw-700     { font-weight: 700 !important; }
+.fw-800     { font-weight: 800 !important; }
+.fw-900     { font-weight: 900 !important; }
+.fw-bolder  { font-weight: bolder !important; }
+.fw-lighter { font-weight: lighter !important; }
+
+// pt-BR: Estilo da fonte.
+// EN: Font style.
+.fst-italic  { font-style: italic !important; }
+.fst-normal  { font-style: normal !important; }
+.fst-oblique { font-style: oblique !important; }
+
+// pt-BR: Altura de linha.
+// EN: Line height.
+@each $key, $_ in $line-heights {
+  .lh-#{$key} {
+    line-height: var(--#{$prefix}-lh-#{$key}) !important;
+  }
+}
+
+.lh-sm { line-height: 1.25 !important; }
+.lh-lg { line-height: 1.75 !important; }
+
+// pt-BR: Espaçamento entre letras.
+// EN: Letter spacing.
+@each $key, $_ in $letter-spacings {
+  .ls-#{$key} {
+    letter-spacing: var(--#{$prefix}-ls-#{$key}) !important;
+  }
+}
+
+// pt-BR: Família da fonte: texto, título, código e categorias web padrão.
+// EN: Font family: body, title, code and standard web categories.
+.font-body      { font-family: var(--#{$prefix}-font-body) !important; }
+.font-title     { font-family: var(--#{$prefix}-font-title) !important; }
+.font-code      { font-family: var(--#{$prefix}-font-code) !important; }
+.font-sans      { font-family: var(--#{$prefix}-font-body) !important; }
+.font-serif     { font-family: Georgia, Cambria, "Times New Roman", Times, serif !important; }
+.font-monospace { font-family: var(--#{$prefix}-font-code) !important; }
+
+// pt-BR: Alinhamento do texto, com variantes por breakpoint (ex.: .text-md-center).
+//        Usa valores lógicos (start/end) para funcionar também em idiomas da direita para a esquerda.
+// EN: Text alignment, with per-breakpoint variants (e.g. .text-md-center).
+//     Uses logical values (start/end) so it also works in right-to-left languages.
+@each $bp in map.keys($breakpoints) {
+  @include media-up($bp) {
+    $infix: breakpoint-infix($bp);
+
+    .text#{$infix}-start {
+      text-align: start !important;
+    }
+
+    .text#{$infix}-center {
+      text-align: center !important;
+    }
+
+    .text#{$infix}-end {
+      text-align: end !important;
+    }
+
+    .text#{$infix}-justify {
+      text-align: justify !important;
+    }
+  }
+}
+
+// pt-BR: Transformação do texto.
+// EN: Text transform.
+.text-lowercase      { text-transform: lowercase !important; }
+.text-uppercase      { text-transform: uppercase !important; }
+.text-capitalize     { text-transform: capitalize !important; }
+.text-transform-none,
+.text-none           { text-transform: none !important; }
+
+// pt-BR: Decoração do texto.
+// EN: Text decoration.
+.text-decoration-none         { text-decoration: none !important; }
+.text-decoration-underline    { text-decoration: underline !important; }
+.text-decoration-line-through { text-decoration: line-through !important; }
+.text-decoration-overline     { text-decoration: overline !important; }
+
+// pt-BR: Quebra de linha e overflow.
+// EN: Wrapping and overflow.
+.text-wrap {
+  white-space: normal !important;
+}
+
+.text-nowrap {
+  white-space: nowrap !important;
+}
+
+.text-truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.text-break {
+  overflow-wrap: anywhere !important;
+  word-break: break-word !important;
+}
+
+// pt-BR: Equilibra as linhas do texto (aprimoramento progressivo: navegadores sem suporte ignoram).
+// EN: Balances the text lines (progressive enhancement: unsupported browsers ignore it).
+.text-balance {
+  text-wrap: balance !important;
+}
+
+// pt-BR: Evita linhas órfãs e distribui o texto harmoniosamente (modern CSS text-wrap).
+// EN: Prevents typographic orphans and distributes text harmoniously (modern CSS text-wrap).
+.text-pretty {
+  text-wrap: pretty !important;
+}

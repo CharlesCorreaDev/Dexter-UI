@@ -1,0 +1,276 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        base/_root.scss
+ * @description [PT-BR] Design tokens como CSS Variables em `:root`, gerados a partir da configuração:
+ *                      paleta completa de 28 cores (5 oficiais + 23 estendidas) com escala tonal de 13 passos
+ *                      (025 a 975) e canais RGB, tipografia, espaçamentos, bordas, raio de borda (radius),
+ *                      sombras (shadows com suporte a opacidades e canal RGB), breakpoints, grid e z-index.
+ *              [EN]    Design tokens as CSS Variables on `:root`, generated from the configuration:
+ *                      full 28-color palette (5 official + 23 extended) with 13-step tonal scale
+ *                      (025 to 975) and RGB channels, typography, spacers, borders, border radius,
+ *                      shadows (with opacity and RGB channel support), breakpoints, grid and z-index.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Variáveis CSS | CSS Variables */
+
+@use "sass:map";
+@use "../abstracts" as *;
+
+:root {
+  // pt-BR: Paleta completa de cores (28 famílias) com escala tonal de 13 passos (025 a 975)
+  // EN: Full color palette (28 families) with 13-step tonal scale (025 to 975)
+  @each $name, $color in $all-colors {
+    --#{$prefix}-#{$name}: #{$color};
+    --#{$prefix}-#{$name}-rgb: #{to-rgb($color)};
+
+    $scale: color-scale($color);
+    @each $step, $val in $scale {
+      --#{$prefix}-#{$name}-#{$step}: #{$val};
+      --#{$prefix}-#{$name}-#{$step}-rgb: #{to-rgb($val)};
+    }
+  }
+
+  // pt-BR: Aliases de cores em português para compatibilidade bilíngue
+  // EN: Portuguese color aliases for bilingual compatibility
+  --#{$prefix}-roxo: var(--#{$prefix}-purple);
+  --#{$prefix}-vermelho: var(--#{$prefix}-red);
+  --#{$prefix}-marrom: var(--#{$prefix}-brown);
+  --#{$prefix}-verde: var(--#{$prefix}-green);
+  --#{$prefix}-turquesa: var(--#{$prefix}-turquoise);
+  --#{$prefix}-ciano: var(--#{$prefix}-cyan);
+  --#{$prefix}-bege: var(--#{$prefix}-beige);
+
+  --#{$prefix}-focus-ring: #{map.get($theme-colors, "quinary")};
+
+  // pt-BR: Tipografia
+  // EN: Typography
+  --#{$prefix}-font-body: #{$font-body};
+  --#{$prefix}-font-title: #{$font-title};
+  --#{$prefix}-font-code: #{$font-code};
+  --#{$prefix}-line-height: #{$line-height-base};
+  --#{$prefix}-font-size-base: #{$font-size-base};
+
+  // pt-BR: Escala tipográfica: títulos/.fs-*, display, pesos, alturas de linha e espaçamento entre letras.
+  // EN: Type scale: headings/.fs-*, display, weights, line heights and letter spacing.
+  @each $name, $value in $font-sizes {
+    --#{$prefix}-fs-#{$name}: #{$value};
+  }
+
+  @each $name, $value in $display-sizes {
+    --#{$prefix}-display-#{$name}: #{$value};
+  }
+
+  @each $name, $value in $font-weights {
+    --#{$prefix}-fw-#{$name}: #{$value};
+  }
+
+  @each $name, $value in $line-heights {
+    --#{$prefix}-lh-#{$name}: #{$value};
+  }
+
+  @each $name, $value in $letter-spacings {
+    --#{$prefix}-ls-#{$name}: #{$value};
+  }
+
+  --#{$prefix}-heading-font-weight: #{$heading-font-weight};
+  --#{$prefix}-heading-line-height: #{$heading-line-height};
+  --#{$prefix}-heading-margin-bottom: #{$heading-margin-bottom};
+  --#{$prefix}-display-font-weight: #{$display-font-weight};
+  --#{$prefix}-display-line-height: #{$display-line-height};
+  --#{$prefix}-lead-font-size: #{$lead-font-size};
+  --#{$prefix}-paragraph-margin-bottom: #{$paragraph-margin-bottom};
+  --#{$prefix}-list-padding-start: #{$list-padding-start};
+  --#{$prefix}-mark-bg: #{$mark-bg};
+  --#{$prefix}-text-muted: #{$text-muted};
+
+  // pt-BR: Elementos HTML nativos
+  // EN: Native HTML elements
+  --#{$prefix}-link-color: #{$link-color};
+  --#{$prefix}-link-hover-color: #{$link-hover-color};
+  --#{$prefix}-code-color: #{$code-color};
+  --#{$prefix}-code-bg: #{$code-bg};
+  --#{$prefix}-kbd-color: #{$kbd-color};
+  --#{$prefix}-kbd-bg: #{$kbd-bg};
+  --#{$prefix}-hr-margin: #{$hr-margin};
+  --#{$prefix}-hr-opacity: #{$hr-opacity};
+
+  // pt-BR: Design Tokens de Sintaxe de Código (Tema PrismJS Okaidia / Monokai)
+  // EN: Code Syntax Design Tokens (PrismJS Okaidia / Monokai Theme)
+  --#{$prefix}-code-monokai-bg: #{$code-monokai-bg};
+  --#{$prefix}-code-monokai-header-bg: #{$code-monokai-header-bg};
+  --#{$prefix}-code-monokai-color: #{$code-monokai-color};
+  --#{$prefix}-code-monokai-comment: #{$code-monokai-comment};
+  --#{$prefix}-code-monokai-magenta: #{$code-monokai-magenta};
+  --#{$prefix}-code-monokai-green: #{$code-monokai-green};
+  --#{$prefix}-code-monokai-yellow: #{$code-monokai-yellow};
+  --#{$prefix}-code-monokai-cyan: #{$code-monokai-cyan};
+  --#{$prefix}-code-monokai-orange: #{$code-monokai-orange};
+  --#{$prefix}-code-monokai-purple: #{$code-monokai-purple};
+  --#{$prefix}-code-monokai-selection: #{$code-monokai-selection};
+
+  // pt-BR: Bordas
+  // EN: Borders
+  --#{$prefix}-border-width: #{$border-width};
+  --#{$prefix}-border-style: #{$border-style};
+  --#{$prefix}-border-color: #{$border-color};
+  --#{$prefix}-border-color-translucent: #{$border-color-translucent};
+
+  @each $name, $value in $border-widths {
+    --#{$prefix}-border-width-#{$name}: #{$value};
+  }
+
+  // pt-BR: Raio de Borda (Radius)
+  // EN: Border Radius
+  --#{$prefix}-radius: #{$border-radius};
+  @each $name, $value in $border-radii {
+    --#{$prefix}-radius-#{$name}: #{$value};
+  }
+
+  // pt-BR: Sombras (Box Shadows)
+  // EN: Box Shadows
+  --#{$prefix}-shadow-rgb: #{$box-shadow-rgb};
+  --#{$prefix}-shadow-opacity: #{$box-shadow-opacity-normal};
+
+  @each $name, $val in $box-shadow-opacities {
+    --#{$prefix}-shadow-opacity-#{$name}: #{$val};
+  }
+
+  --#{$prefix}-shadow-none: none;
+  --#{$prefix}-shadow-sm: 0 0.125rem 0.25rem rgba(var(--#{$prefix}-shadow-rgb), calc(var(--#{$prefix}-shadow-opacity) * 0.5));
+  --#{$prefix}-shadow-base: 0 0.5rem 1rem rgba(var(--#{$prefix}-shadow-rgb), var(--#{$prefix}-shadow-opacity));
+  --#{$prefix}-shadow-lg: 0 1rem 3rem rgba(var(--#{$prefix}-shadow-rgb), calc(var(--#{$prefix}-shadow-opacity) * 1.15));
+  --#{$prefix}-shadow-inset: inset 0 1px 2px rgba(var(--#{$prefix}-shadow-rgb), calc(var(--#{$prefix}-shadow-opacity) * 0.5));
+
+  // pt-BR: Transições e Efeitos Hover (700ms ease-in-out)
+  // EN: Transitions and Hover Effects (700ms ease-in-out)
+  --#{$prefix}-transition-duration: #{$transition-duration};
+  --#{$prefix}-transition-timing: #{$transition-timing-function};
+  --#{$prefix}-transition-base: #{$transition-base};
+  --#{$prefix}-transition-hover: #{$transition-hover};
+  --#{$prefix}-transition-bg: background-color var(--#{$prefix}-transition-duration) var(--#{$prefix}-transition-timing);
+  --#{$prefix}-transition-color: color var(--#{$prefix}-transition-duration) var(--#{$prefix}-transition-timing);
+  --#{$prefix}-transition-border: border-color var(--#{$prefix}-transition-duration) var(--#{$prefix}-transition-timing);
+  --#{$prefix}-transition-shadow: box-shadow var(--#{$prefix}-transition-duration) var(--#{$prefix}-transition-timing);
+
+  // pt-BR: Tabelas
+  // EN: Tables
+  --#{$prefix}-table-color: #{$table-color};
+  --#{$prefix}-table-bg: #{$table-bg};
+  --#{$prefix}-table-border-color: #{$table-border-color};
+  --#{$prefix}-table-border-width: #{$table-border-width};
+  --#{$prefix}-table-cell-padding-y: #{$table-cell-padding-y};
+  --#{$prefix}-table-cell-padding-x: #{$table-cell-padding-x};
+  --#{$prefix}-table-striped-bg: #{$table-striped-bg};
+  --#{$prefix}-table-striped-color: var(--#{$prefix}-body-color);
+  --#{$prefix}-table-active-bg: #{$table-active-bg};
+  --#{$prefix}-table-active-color: var(--#{$prefix}-body-color);
+  --#{$prefix}-table-hover-bg: #{$table-hover-bg};
+  --#{$prefix}-table-hover-color: var(--#{$prefix}-body-color);
+  --#{$prefix}-table-group-divider-color: #{$table-group-divider-color};
+  --#{$prefix}-table-caption-color: #{$table-caption-color};
+
+  // pt-BR: Conteúdo Tipográfico (Prose)
+  // EN: Typographic Content (Prose)
+  --#{$prefix}-prose-max-width: #{$prose-max-width};
+  --#{$prefix}-prose-line-height: #{$prose-line-height};
+  --#{$prefix}-prose-body: var(--#{$prefix}-body-color);
+  --#{$prefix}-prose-headings: var(--#{$prefix}-dark-900, #130f10);
+  --#{$prefix}-prose-lead: var(--#{$prefix}-dark-700, #373b3e);
+  --#{$prefix}-prose-links: var(--#{$prefix}-link-color);
+  --#{$prefix}-prose-counters: var(--#{$prefix}-text-muted);
+  --#{$prefix}-prose-bullets: var(--#{$prefix}-primary);
+  --#{$prefix}-prose-hr: var(--#{$prefix}-border-color);
+  --#{$prefix}-prose-quotes: var(--#{$prefix}-dark-800, #212529);
+  --#{$prefix}-prose-quote-borders: var(--#{$prefix}-primary);
+  --#{$prefix}-prose-captions: var(--#{$prefix}-text-muted);
+  --#{$prefix}-prose-code: var(--#{$prefix}-code-color);
+  --#{$prefix}-prose-code-bg: var(--#{$prefix}-code-bg);
+  --#{$prefix}-prose-pre-code: #f8f9fa;
+  --#{$prefix}-prose-pre-bg: #1e293b;
+  --#{$prefix}-prose-th-borders: var(--#{$prefix}-border-color);
+  --#{$prefix}-prose-td-borders: var(--#{$prefix}-border-color);
+
+  // pt-BR: Indicadores de Carregamento (Loaders)
+  // EN: Loading Indicators (Loaders)
+  --#{$prefix}-loader-size: #{$loader-size-base};
+  --#{$prefix}-loader-color-1: var(--#{$prefix}-primary-100, #d0d7e6);
+  --#{$prefix}-loader-color-2: var(--#{$prefix}-primary, #3b5998);
+  --#{$prefix}-loader-color-3: var(--#{$prefix}-secondary, #14306b);
+  --#{$prefix}-loader-color-4: var(--#{$prefix}-tertiary, #869dcc);
+
+  // pt-BR: Breakpoints (apenas referência: custom properties não funcionam em @media).
+  // EN: Breakpoints (reference only: custom properties cannot be used in @media).
+  @each $name, $min in $breakpoints {
+    --#{$prefix}-breakpoint-#{$name}: #{$min};
+  }
+
+  // pt-BR: Espaçamentos
+  // EN: Spacers
+  --#{$prefix}-spacer: #{$spacer};
+  @each $name, $value in $spacers {
+    --#{$prefix}-spacer-#{$name}: #{$value};
+  }
+
+  // pt-BR: Grid e container
+  // EN: Grid and container
+  --#{$prefix}-grid-columns: #{$grid-columns};
+  --#{$prefix}-gutter: #{$grid-gutter};
+  --#{$prefix}-container-padding-x: #{$container-padding-x};
+
+  // pt-BR: Camadas de z-index
+  // EN: z-index layers
+  @each $name, $value in $z-layers {
+    --#{$prefix}-z-#{$name}: #{$value};
+  }
+}
+
+// pt-BR: Em tema escuro, sombras ganham maior opacidade para contraste adequado contra superfícies escuras.
+// EN: In dark mode, shadows gain higher opacity for adequate contrast against dark surfaces.
+[data-#{$prefix}-theme="dark"] {
+  --#{$prefix}-shadow-opacity: 0.45;
+  --#{$prefix}-shadow-opacity-light: 0.20;
+  --#{$prefix}-shadow-opacity-normal: 0.45;
+  --#{$prefix}-shadow-opacity-dark: 0.65;
+  --#{$prefix}-shadow-opacity-darker: 0.85;
+
+  --#{$prefix}-table-striped-bg: #{$table-striped-bg-dark};
+  --#{$prefix}-table-active-bg: #{$table-active-bg-dark};
+  --#{$prefix}-table-hover-bg: #{$table-hover-bg-dark};
+
+  --#{$prefix}-prose-body: var(--#{$prefix}-silver-light-100, #e9eaeb);
+  --#{$prefix}-prose-headings: #ffffff;
+  --#{$prefix}-prose-lead: var(--#{$prefix}-silver-light-300, #ced4da);
+  --#{$prefix}-prose-quotes: #ffffff;
+  --#{$prefix}-prose-code: #ff7f50;
+  --#{$prefix}-prose-code-bg: rgba(255, 255, 255, 0.1);
+  --#{$prefix}-prose-hr: rgba(255, 255, 255, 0.15);
+  --#{$prefix}-prose-th-borders: rgba(255, 255, 255, 0.2);
+  --#{$prefix}-prose-td-borders: rgba(255, 255, 255, 0.1);
+}
+
+// pt-BR: Tipografia base do documento.
+// EN: Base document typography.
+body {
+  font-family: var(--#{$prefix}-font-body);
+  font-size: var(--#{$prefix}-font-size-base);
+  line-height: var(--#{$prefix}-line-height);
+}

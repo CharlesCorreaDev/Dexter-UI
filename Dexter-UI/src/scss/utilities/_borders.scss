@@ -1,0 +1,138 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_borders.scss
+ * @description [PT-BR] Utilitários de bordas: larguras (.border-1 a .border-5), cores da paleta
+ *                      (.border-{cor}), passos da escala (.border-{cor}-{passo}), bordas sutis
+ *                      (.border-{cor}-subtle) e raio de arredondamento (.rounded-*).
+ *              [EN]    Border utilities: widths (.border-1 to .border-5), palette colors
+ *                      (.border-{color}), scale steps (.border-{color}-{step}), subtle borders
+ *                      (.border-{color}-subtle), and border radius (.rounded-*).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Bordas e Arredondamento | Borders and Radius */
+
+@use "../abstracts" as *;
+
+// pt-BR: Adicionar bordas
+// EN: Add borders
+.border         { border: var(--#{$prefix}-border-width) var(--#{$prefix}-border-style) var(--#{$prefix}-border-color) !important; }
+.border-top     { border-top: var(--#{$prefix}-border-width) var(--#{$prefix}-border-style) var(--#{$prefix}-border-color) !important; }
+.border-end     { border-inline-end: var(--#{$prefix}-border-width) var(--#{$prefix}-border-style) var(--#{$prefix}-border-color) !important; }
+.border-bottom  { border-bottom: var(--#{$prefix}-border-width) var(--#{$prefix}-border-style) var(--#{$prefix}-border-color) !important; }
+.border-start   { border-inline-start: var(--#{$prefix}-border-width) var(--#{$prefix}-border-style) var(--#{$prefix}-border-color) !important; }
+
+// pt-BR: Subtrair bordas
+// EN: Subtract borders
+.border-0        { border: 0 !important; }
+.border-top-0    { border-top: 0 !important; }
+.border-end-0    { border-inline-end: 0 !important; }
+.border-bottom-0 { border-bottom: 0 !important; }
+.border-start-0  { border-inline-start: 0 !important; }
+
+// pt-BR: Espessuras de borda
+// EN: Border widths
+@each $key, $value in $border-widths {
+  .border-#{$key} { border-width: $value !important; }
+}
+
+// pt-BR: Cores de borda com base na cor base (#500)
+// EN: Border colors based on base color (#500)
+@each $name, $color in $all-colors {
+  .border-#{$name} {
+    border-color: var(--#{$prefix}-#{$name}) !important;
+  }
+
+  // pt-BR: Borda sutil para cartões, caixas e alertas (passo 200)
+  // EN: Subtle border for cards, boxes and alerts (step 200)
+  .border-#{$name}-subtle {
+    border-color: var(--#{$prefix}-#{$name}-200) !important;
+  }
+}
+
+// pt-BR: Cores de borda para todos os 13 passos da escala tonal
+// EN: Border colors for all 13 tonal scale steps
+@each $name, $_ in $all-colors {
+  @each $step, $_w in $scale-weights {
+    .border-#{$name}-#{$step} {
+      border-color: var(--#{$prefix}-#{$name}-#{$step}) !important;
+    }
+  }
+}
+
+// pt-BR: Aliases em português para cores de borda
+// EN: Portuguese aliases for border colors
+@each $alias, $canonical in $color-aliases {
+  .border-#{$alias} {
+    border-color: var(--#{$prefix}-#{$canonical}) !important;
+  }
+  .border-#{$alias}-subtle {
+    border-color: var(--#{$prefix}-#{$canonical}-200) !important;
+  }
+}
+
+.border-white       { border-color: #fff !important; }
+.border-black       { border-color: #030303 !important; }
+.border-transparent { border-color: transparent !important; }
+
+// pt-BR: Raio de arredondamento (border-radius)
+// EN: Border radius
+.rounded {
+  border-radius: var(--#{$prefix}-radius) !important;
+}
+
+@each $key, $value in $border-radii {
+  @if $key != "base" {
+    .rounded-#{$key} {
+      border-radius: var(--#{$prefix}-radius-#{$key}) !important;
+    }
+  }
+}
+
+// pt-BR: Arredondamento direcional
+// EN: Directional border radius
+.rounded-top {
+  border-top-left-radius: var(--#{$prefix}-radius) !important;
+  border-top-right-radius: var(--#{$prefix}-radius) !important;
+}
+
+.rounded-end {
+  border-top-right-radius: var(--#{$prefix}-radius) !important;
+  border-bottom-right-radius: var(--#{$prefix}-radius) !important;
+}
+
+.rounded-bottom {
+  border-bottom-right-radius: var(--#{$prefix}-radius) !important;
+  border-bottom-left-radius: var(--#{$prefix}-radius) !important;
+}
+
+.rounded-start {
+  border-top-left-radius: var(--#{$prefix}-radius) !important;
+  border-bottom-left-radius: var(--#{$prefix}-radius) !important;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.rounded-pill {
+  border-radius: var(--#{$prefix}-radius-pill) !important;
+}

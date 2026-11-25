@@ -1,0 +1,63 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        abstracts/_breakpoints.scss
+ * @description [PT-BR] Funções e mixin de breakpoints mobile-first: breakpoint-min, breakpoint-infix e media-up.
+ *              [EN]    Mobile-first breakpoint functions and mixin: breakpoint-min, breakpoint-infix and media-up.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+@use "sass:map";
+@use "config" as *;
+
+/// pt-BR: Largura mínima de um breakpoint, ou `null` para o primeiro (xs = 0).
+/// EN: Min-width of a breakpoint, or `null` for the first one (xs = 0).
+@function breakpoint-min($name) {
+  @if not map.has-key($breakpoints, $name) {
+    @error "Unknown breakpoint `#{$name}`. Available: #{map.keys($breakpoints)}";
+  }
+  $min: map.get($breakpoints, $name);
+  @if $min == 0 {
+    @return null;
+  }
+  @return $min;
+}
+
+/// pt-BR: Infixo de classe: "" para xs; "-sm", "-md", ... para os demais.
+/// EN: Class infix: "" for xs; "-sm", "-md", ... for the others.
+@function breakpoint-infix($name) {
+  @if breakpoint-min($name) == null {
+    @return "";
+  }
+  @return "-#{$name}";
+}
+
+/// pt-BR: Media query mobile-first. Emite o conteúdo sem @media para xs.
+/// EN: Mobile-first media query. Emits the content without @media for xs.
+@mixin media-up($name) {
+  $min: breakpoint-min($name);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}

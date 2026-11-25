@@ -1,0 +1,66 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_display.scss
+ * @description [PT-BR] Utilitários de exibição responsivos: .d-none, .d-block, .d-flex, .d-grid, etc.,
+ *                      gerados para todos os breakpoints mobile-first (.d-md-flex, .d-lg-block, etc.).
+ *              [EN]    Responsive display utilities: .d-none, .d-block, .d-flex, .d-grid, etc.,
+ *                      generated across all mobile-first breakpoints (.d-md-flex, .d-lg-block, etc.).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Exibição | Display */
+
+@use "../abstracts" as *;
+
+$displays: (
+  "none",
+  "inline",
+  "inline-block",
+  "block",
+  "grid",
+  "table",
+  "table-row",
+  "table-cell",
+  "flex",
+  "inline-flex",
+);
+
+@each $bp-name, $bp-value in $breakpoints {
+  $infix: breakpoint-infix($bp-name);
+
+  @include media-up($bp-name) {
+    @each $value in $displays {
+      .d#{$infix}-#{$value} {
+        display: #{$value} !important;
+      }
+    }
+  }
+}
+
+// pt-BR: Utilitários de exibição para impressão
+// EN: Display utilities for print media
+@media print {
+  @each $value in $displays {
+    .d-print-#{$value} {
+      display: #{$value} !important;
+    }
+  }
+}

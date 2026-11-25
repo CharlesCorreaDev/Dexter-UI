@@ -1,0 +1,191 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        email/dexter-email.scss
+ * @description [PT-BR] Motor autônomo de estilos para E-mails HTML Responsivos (inspirado
+ *              em Foundation for Emails / ZURB). Compila apenas valores hexadecimais
+ *              resolvidos (zero CSS Custom Properties var()), estruturado para tabelas
+ *              600px compatíveis com Outlook, Gmail, Apple Mail e Yahoo, botões bulletproof,
+ *              callouts, espaçadores e media query mobile (< 600px).
+ *              [EN]    Standalone Responsive HTML Email Engine (inspired by Foundation for
+ *              Emails / ZURB). Compiles strictly resolved hex values (no CSS var()),
+ *              tailored for 600px tables across Outlook, Gmail, Apple Mail & Yahoo, with
+ *              bulletproof buttons, callouts, spacers and mobile column stacking (< 600px).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Motor de E-mail HTML Responsivo | Responsive HTML Email Engine */
+
+@use "sass:list";
+@use "../abstracts/config" as *;
+
+$email-light-names: ("light", "silver-light", "beige", "aquamarine", "lime");
+
+body,
+.email-wrapper {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #f1f5f9;
+  color: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+img {
+  border: 0;
+  line-height: 100%;
+  outline: none;
+  text-decoration: none;
+  max-width: 100%;
+  height: auto;
+}
+
+.email-preheader {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  color: transparent;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  mso-hide: all;
+}
+
+.email-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.email-header {
+  padding: 24px 28px;
+  background-color: $primary;
+  color: #ffffff;
+}
+
+.email-body {
+  padding: 28px;
+  color: #1e293b;
+  font-size: 15px;
+}
+
+.email-footer {
+  padding: 20px 28px;
+  background-color: #f8fafc;
+  color: #64748b;
+  font-size: 12px;
+  text-align: center;
+  border-top: 1px solid #e2e8f0;
+}
+
+.email-callout {
+  padding: 16px 20px;
+  margin: 18px 0;
+  background-color: #f1f5f9;
+  border-left: 4px solid $primary;
+  border-radius: 4px;
+  color: #1e293b;
+}
+
+.email-divider {
+  height: 1px;
+  background-color: #e2e8f0;
+  margin: 20px 0;
+  border: 0;
+}
+
+.email-spacer {
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
+}
+
+.email-menu {
+  width: 100%;
+  text-align: center;
+
+  a {
+    display: inline-block;
+    padding: 6px 12px;
+    color: $primary;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+  }
+}
+
+.email-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: $primary;
+  color: #ffffff !important;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 6px;
+  border: 1px solid $primary;
+  text-align: center;
+}
+
+@each $name, $hex in $all-colors {
+  $is-light: list.index($email-light-names, $name) != null;
+  $fg: #ffffff;
+
+  @if $is-light {
+    $fg: #130f10;
+  }
+
+  .email-btn-#{$name} {
+    background-color: #{$hex};
+    border-color: #{$hex};
+    color: #{$fg} !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .email-container {
+    width: 100% !important;
+    border-radius: 0 !important;
+  }
+
+  .email-col {
+    display: block !important;
+    width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .email-hide-mobile {
+    display: none !important;
+  }
+}

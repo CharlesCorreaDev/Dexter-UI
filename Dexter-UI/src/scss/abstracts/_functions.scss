@@ -1,0 +1,113 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        abstracts/_functions.scss
+ * @description [PT-BR] Funções Sass reutilizáveis: fluid-size() para tipografia responsiva,
+ *                      to-rgb() para canais RGB em variáveis com canal alfa, clean-color()
+ *                      para arredondamento de canais de cor, e color-scale() para gerar a escala
+ *                      tonal padronizada de 13 passos (025 a 975) a partir de qualquer cor base.
+ *              [EN]    Reusable Sass functions: fluid-size() for responsive typography,
+ *                      to-rgb() for RGB channels in alpha-composite variables, clean-color()
+ *                      for rounded color channels, and color-scale() to generate the standardized
+ *                      13-step tonal scale (025 to 975) from any base color.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+@use "sass:color";
+@use "sass:map";
+@use "sass:math";
+
+/// pt-BR: Tamanho de fonte fluido. Vale `$min` até `$min-vw` e `$max` a partir de `$max-vw`;
+///        entre os dois, cresce linearmente com a largura da tela. Tudo em `rem`, então respeita o zoom.
+///        Exemplo: fluid-size(2rem, 2.5rem) → clamp(2rem, 1.7rem + 0.8333vw, 2.5rem)
+/// EN: Fluid font size. It is `$min` up to `$min-vw` and `$max` from `$max-vw` on;
+///     in between it grows linearly with the viewport width. All in `rem`, so it respects zoom.
+///     Example: fluid-size(2rem, 2.5rem) → clamp(2rem, 1.7rem + 0.8333vw, 2.5rem)
+/// @param {Number} $min    pt-BR: tamanho mínimo (rem) / EN: minimum size (rem)
+/// @param {Number} $max    pt-BR: tamanho máximo (rem) / EN: maximum size (rem)
+/// @param {Number} $min-vw pt-BR: largura onde o mínimo termina (36rem = 576px) / EN: width where the minimum ends (36rem = 576px)
+/// @param {Number} $max-vw pt-BR: largura onde o máximo começa (96rem = 1536px) / EN: width where the maximum starts (96rem = 1536px)
+@function fluid-size($min, $max, $min-vw: 36rem, $max-vw: 96rem) {
+  @if math.unit($min) != "rem" or math.unit($max) != "rem" or math.unit($min-vw) != "rem" or math.unit($max-vw) != "rem" {
+    @error "fluid-size() expects all arguments in rem.";
+  }
+
+  $slope: math.div(math.div($max - $min, 1rem), math.div($max-vw - $min-vw, 1rem));
+  $intercept: $min - ($slope * $min-vw);
+
+  @return clamp(#{$min}, #{$intercept} + #{$slope * 100}vw, #{$max});
+}
+
+/// pt-BR: Arredonda os canais R, G, B de uma cor para inteiros limpos.
+/// EN: Rounds a color's R, G, B channels to clean integers.
+/// @param {Color} $c pt-BR: cor de entrada / EN: input color
+@function clean-color($c) {
+  $r: math.round(color.channel($c, "red", $space: rgb));
+  $g: math.round(color.channel($c, "green", $space: rgb));
+  $b: math.round(color.channel($c, "blue", $space: rgb));
+  @return rgb($r, $g, $b);
+}
+
+/// pt-BR: Converte uma cor em lista de canais R, G, B inteiros para compor CSS variables com canal alfa (rgba).
+/// EN: Converts a color into an integer R, G, B channels list to compose CSS variables with alpha channel (rgba).
+/// @param {Color} $color pt-BR: cor a ser decomposta / EN: color to decompose
+@function to-rgb($color) {
+  $r: math.round(color.channel($color, "red", $space: rgb));
+  $g: math.round(color.channel($color, "green", $space: rgb));
+  $b: math.round(color.channel($color, "blue", $space: rgb));
+  @return "#{$r}, #{$g}, #{$b}";
+}
+
+/// pt-BR: Pesos de interpolação da escala tonal de 13 passos (025 a 975).
+/// EN: Interpolation weights for the 13-step tonal scale (025 to 975).
+$scale-weights: (
+  "025": 6%,
+  "050": 12%,
+  "100": 24%,
+  "200": 40%,
+  "300": 58%,
+  "400": 78%,
+  "500": 100%,
+  "600": 82%,
+  "700": 65%,
+  "800": 48%,
+  "900": 32%,
+  "950": 18%,
+  "975": 8%,
+) !default;
+
+/// pt-BR: Gera um mapa de 13 variações (025, 050, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 975)
+///        a partir de uma cor base (#500).
+/// EN: Generates a 13-step tonal map (025, 050, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 975)
+///     from a base color (#500).
+/// @param {Color} $base pt-BR: cor base / EN: base color
+@function color-scale($base) {
+  $scale: ();
+  @each $step, $w in $scale-weights {
+    @if $step == "500" {
+      $scale: map.set($scale, $step, clean-color($base));
+    } @else if $step == "025" or $step == "050" or $step == "100" or $step == "200" or $step == "300" or $step == "400" {
+      $scale: map.set($scale, $step, clean-color(color.mix($base, #ffffff, $w)));
+    } @else {
+      $scale: map.set($scale, $step, clean-color(color.mix($base, #030303, $w)));
+    }
+  }
+  @return $scale;
+}

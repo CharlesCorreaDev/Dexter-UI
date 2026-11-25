@@ -1,0 +1,43 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_color-scheme.scss
+ * @description [PT-BR] Utilitários de esquema de cores: .color-scheme-light, .color-scheme-dark e
+ *                      .color-scheme-auto (claro e escuro, seguindo a preferência do sistema).
+ *                      Útil em iframes de terceiros sem modo escuro.
+ *              [EN]    Color scheme utilities: .color-scheme-light, .color-scheme-dark and
+ *                      .color-scheme-auto (light and dark, following the system preference).
+ *                      Useful on third-party iframes with no dark mode.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Esquema de cores | Color scheme */
+
+.color-scheme-light {
+  color-scheme: light !important;
+}
+
+.color-scheme-dark {
+  color-scheme: dark !important;
+}
+
+.color-scheme-auto {
+  color-scheme: light dark !important;
+}

@@ -1,0 +1,103 @@
+/*!
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        dexter.scss
+ * @description [PT-BR] Ponto de entrada principal do Dexter UI: reúne base, layout e utilitários.
+ *              [EN]    Dexter UI main entry point: gathers base, layout and utilities.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+// pt-BR: Base
+// EN: Base
+@use "base/root";
+@use "base/reset";
+@use "base/typography";
+@use "base/elements";
+@use "base/print";
+
+// pt-BR: Layout
+// EN: Layout
+@use "layout/container";
+@use "layout/grid";
+@use "layout/gutters";
+
+// pt-BR: Componentes
+// EN: Components
+@use "components/images";
+@use "components/tables";
+@use "components/prose";
+@use "components/loaders";
+@use "components/forms";
+@use "components/buttons";
+@use "components/alerts";
+@use "components/cards";
+@use "components/ui-primitives";
+@use "components/code";
+@use "components/avatars";
+@use "components/dropdowns";
+@use "components/toasts";
+@use "components/fileinput";
+@use "components/badges";
+@use "components/tags";
+@use "components/rating";
+@use "components/multiselect";
+@use "components/spinner";
+@use "components/carousel";
+@use "components/tabs";
+@use "components/wizard";
+@use "components/modals";
+@use "components/accordion";
+@use "components/select";
+@use "components/toc";
+@use "components/calendar";
+@use "components/sidebar";
+@use "components/treeview";
+@use "components/dashboard";
+@use "components/cookie-consent";
+@use "components/waiting";
+@use "components/native-b6";
+@use "components/data-display";
+@use "components/layouts-nav";
+@use "components/popover-x";
+@use "components/alertify";
+@use "components/colorbox";
+@use "components/media-zoom";
+@use "components/ribbons";
+
+// pt-BR: Utilitários
+// EN: Utilities
+@use "utilities/display";
+@use "utilities/flex";
+@use "utilities/position";
+@use "utilities/sizing";
+@use "utilities/spacing";
+@use "utilities/borders";
+@use "utilities/shadows";
+@use "utilities/interactions";
+@use "utilities/transitions";
+@use "utilities/colors";
+@use "utilities/text";
+@use "utilities/vertical-align";
+@use "utilities/filters";
+@use "utilities/shapes-masks";
+@use "utilities/blends";
+@use "utilities/color-scheme";
+@use "utilities/z-index";
+@use "utilities/modern-css";

@@ -1,0 +1,43 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_z-index.scss
+ * @description [PT-BR] Utilitários de z-index: níveis relativos (`.z-n1`, `.z-0` a `.z-3`) e camadas
+ *                      semânticas (`.z-modal`, `.z-tooltip`, ...) que leem as variáveis --dx-z-*.
+ *              [EN]    z-index utilities: relative levels (`.z-n1`, `.z-0` to `.z-3`) and semantic
+ *                      layers (`.z-modal`, `.z-tooltip`, ...) that read the --dx-z-* variables.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section z-index */
+
+@use "../abstracts" as *;
+
+@each $key, $value in $z-levels {
+  .z-#{$key} {
+    z-index: $value !important;
+  }
+}
+
+@each $name, $_ in $z-layers {
+  .z-#{$name} {
+    z-index: var(--#{$prefix}-z-#{$name}) !important;
+  }
+}

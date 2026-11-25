@@ -1,0 +1,346 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        base/_elements.scss
+ * @description [PT-BR] Estilos base dos elementos HTML nativos: links (WCAG 1.4.1), linhas horizontais,
+ *                      blocos de código, entrada do usuário (kbd/samp), tabelas, caixas de diálogo (dialog),
+ *                      formulários, checkboxes/radios, cursores em botões, address, summary, iframe
+ *                      e suporte a esquema de cores claro/escuro.
+ *              [EN]    Base styles for native HTML elements: links (WCAG 1.4.1), horizontal rules,
+ *                      code blocks, user input (kbd/samp), tables, dialogs, forms, checkboxes/radios,
+ *                      button pointers, address, summary, iframe, and light/dark color-scheme support.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Elementos HTML | HTML elements */
+
+@use "../abstracts" as *;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Links. O sublinhado é mantido por padrão: a cor sozinha não pode ser o único
+//        indicador de link (WCAG 1.4.1). Componentes (.btn, .nav-link...) sobrescrevem estas regras.
+// EN: Links. The underline is kept by default: color alone must not be the only link
+//     indicator (WCAG 1.4.1). Components (.btn, .nav-link...) override these rules.
+// ---------------------------------------------------------------------------
+a {
+  color: var(--#{$prefix}-link-color);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  transition: color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              text-decoration-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              background-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+  &:hover {
+    color: var(--#{$prefix}-link-hover-color);
+  }
+}
+
+// pt-BR: `<a>` sem href e sem classe é só texto (âncora/placeholder): sem cor nem sublinhado.
+// EN: An `<a>` with no href and no class is just text (anchor/placeholder): no color or underline.
+a:not([href]):not([class]) {
+  &,
+  &:hover {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: Linha horizontal.
+// EN: Horizontal rule.
+// ---------------------------------------------------------------------------
+hr {
+  height: 0;
+  color: inherit;
+  border: 0;
+  border-top: 1px solid;
+  margin-block: var(--#{$prefix}-hr-margin);
+  opacity: var(--#{$prefix}-hr-opacity);
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: Código. `code` inline ganha cor; `pre` vira bloco rolável com fundo e `code` herda a cor.
+//        Para acessibilidade, adicione tabindex="0" ao `pre` que rola (acesso por teclado).
+// EN: Code. Inline `code` gets a color; `pre` becomes a scrollable block with background and `code`
+//     inherits the color. For accessibility, add tabindex="0" to a `pre` that scrolls (keyboard access).
+// ---------------------------------------------------------------------------
+code {
+  font-size: 0.875em;
+  color: var(--#{$prefix}-code-color);
+  overflow-wrap: break-word;
+}
+
+a > code {
+  color: inherit;
+}
+
+pre {
+  display: block;
+  padding: 0.75rem 1rem;
+  margin-block-end: var(--#{$prefix}-paragraph-margin-bottom);
+  overflow: auto;
+  font-size: 0.875em;
+  background-color: var(--#{$prefix}-code-bg);
+  border-radius: var(--#{$prefix}-radius);
+
+  code {
+    font-size: inherit;
+    color: inherit;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: Entrada do usuário: `kbd` (teclas) e `samp` (saída de programa).
+// EN: User input: `kbd` (keys) and `samp` (program output).
+// ---------------------------------------------------------------------------
+kbd {
+  padding: 0.1875rem 0.375rem;
+  font-size: 0.875em;
+  color: var(--#{$prefix}-kbd-color);
+  background-color: var(--#{$prefix}-kbd-bg);
+  border-radius: var(--#{$prefix}-radius);
+
+  kbd {
+    padding: 0;
+    font-size: 1em;
+    font-weight: var(--#{$prefix}-fw-bold);
+  }
+}
+
+samp {
+  font-size: 0.875em;
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: Tabelas. A legenda fica embaixo e em texto secundário; `th` herda o alinhamento.
+//        Bordas e listras virão com o componente `.table`.
+// EN: Tables. The caption sits at the bottom in muted text; `th` inherits the alignment.
+//     Borders and stripes will come with the `.table` component.
+// ---------------------------------------------------------------------------
+table {
+  caption-side: bottom;
+}
+
+caption {
+  padding-block: 0.5rem;
+  color: var(--#{$prefix}-text-muted);
+  text-align: start;
+}
+
+th {
+  text-align: inherit;
+  text-align: -webkit-match-parent;
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: Diálogos nativos (<dialog>) com plano de fundo e espaçamento padrão.
+// EN: Native dialogs (<dialog>) with backdrop and standard padding.
+// ---------------------------------------------------------------------------
+dialog {
+  padding: 1.5rem;
+  color: inherit;
+  background-color: var(--#{$prefix}-body-bg, #fff);
+  border: 1px solid var(--#{$prefix}-border-color, #dee2e6);
+  border-radius: var(--#{$prefix}-radius);
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: Formulários. `fieldset` sem borda/padding/margem; `legend` vira um título;
+//        `label` aceita margem. Ajustes de motores específicos (WebKit/Firefox).
+// EN: Forms. `fieldset` without border/padding/margin; `legend` becomes a heading;
+//     `label` accepts margin. Engine-specific tweaks (WebKit/Firefox).
+// ---------------------------------------------------------------------------
+label {
+  display: inline-block;
+}
+
+fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+legend {
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin-block-end: 0.5rem;
+  font-size: var(--#{$prefix}-fs-5);
+  line-height: inherit;
+
+  + * {
+    clear: left;
+  }
+}
+
+output {
+  display: inline-block;
+}
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+select {
+  overflow-wrap: normal;
+
+  &:disabled {
+    opacity: 1;
+  }
+}
+
+[type="search"] {
+  outline-offset: -2px;
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+
+::file-selector-button {
+  font: inherit;
+  cursor: pointer;
+}
+
+// pt-BR: Seletores específicos de motor ficam em regras separadas: um seletor desconhecido
+//        invalida o grupo inteiro em navegadores sem suporte.
+// EN: Engine-specific selectors stay in separate rules: an unknown selector invalidates
+//     the whole group in browsers without support.
+::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+::-webkit-datetime-edit-fields-wrapper,
+::-webkit-datetime-edit-text,
+::-webkit-datetime-edit-minute,
+::-webkit-datetime-edit-hour-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-month-field,
+::-webkit-datetime-edit-year-field {
+  padding: 0;
+}
+
+::-webkit-inner-spin-button {
+  height: auto;
+}
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: Transições de hover para controles interativos (botões, inputs, seletores)
+// EN: Hover transitions for interactive controls (buttons, inputs, selects)
+// ---------------------------------------------------------------------------
+button,
+[type="button"],
+[type="reset"],
+[type="submit"],
+[role="button"],
+::file-selector-button {
+  transition: background-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              border-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              box-shadow var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+}
+
+input,
+select,
+textarea {
+  transition: border-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              box-shadow var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              background-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: Cursores. O reset já aplica `pointer` em botões ativos e `not-allowed` nos desativados;
+//        aqui cobrimos elementos que agem como botão por ARIA e o estado `aria-disabled`.
+// EN: Cursors. The reset already applies `pointer` to enabled buttons and `not-allowed` to disabled
+//     ones; here we cover elements acting as buttons via ARIA and the `aria-disabled` state.
+// ---------------------------------------------------------------------------
+[role="button"] {
+  cursor: pointer;
+}
+
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: Address e summary.
+// EN: Address and summary.
+// ---------------------------------------------------------------------------
+address {
+  margin-block-end: var(--#{$prefix}-paragraph-margin-bottom);
+  font-style: normal;
+  line-height: inherit;
+}
+
+// pt-BR: `summary` mantém o marcador (`list-item`) e o cursor indica que é clicável.
+// EN: `summary` keeps its marker (`list-item`) and the cursor shows it is clickable.
+summary {
+  display: list-item;
+  cursor: pointer;
+}
+
+// ---------------------------------------------------------------------------
+// pt-BR: iframe e esquema de cores. O iframe aceita claro e escuro (`light dark`): quando o
+//        documento embutido segue a preferência do sistema, o navegador não pinta um fundo
+//        opaco (caixa branca em páginas escuras). O atributo [hidden] é tratado em `_reset.scss`.
+// EN: iframe and color scheme. The iframe supports light and dark (`light dark`): when the embedded
+//     document follows the system preference, the browser does not paint an opaque background
+//     (a white box on dark pages). The [hidden] attribute is handled in `_reset.scss`.
+// ---------------------------------------------------------------------------
+iframe {
+  color-scheme: light dark;
+  border: 0;
+}
+
+:root {
+  color-scheme: light;
+}
+
+[data-#{$prefix}-theme="dark"] {
+  color-scheme: dark;
+}

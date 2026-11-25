@@ -1,0 +1,59 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_sizing.scss
+ * @description [PT-BR] Utilitários de dimensionamento: larguras (.w-*), alturas (.h-*),
+ *                      larguras máximas (.mw-*), alturas máximas (.mh-*) e tamanhos de viewport.
+ *              [EN]    Sizing utilities: widths (.w-*), heights (.h-*), max-widths (.mw-*),
+ *                      max-heights (.mh-*), and viewport dimensions.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Dimensionamento | Sizing */
+
+@use "../abstracts" as *;
+
+// pt-BR: Largura
+// EN: Width
+.w-25   { width: 25% !important; }
+.w-50   { width: 50% !important; }
+.w-75   { width: 75% !important; }
+.w-100  { width: 100% !important; }
+.w-auto { width: auto !important; }
+
+// pt-BR: Altura
+// EN: Height
+.h-25   { height: 25% !important; }
+.h-50   { height: 50% !important; }
+.h-75   { height: 75% !important; }
+.h-100  { height: 100% !important; }
+.h-auto { height: auto !important; }
+
+// pt-BR: Limites máximos
+// EN: Maximum limits
+.mw-100 { max-width: 100% !important; }
+.mh-100 { max-height: 100% !important; }
+
+// pt-BR: Dimensões relativas à viewport
+// EN: Viewport dimensions
+.min-vw-100 { min-width: 100vw !important; }
+.min-vh-100 { min-height: 100vh !important; }
+.vw-100     { width: 100vw !important; }
+.vh-100     { height: 100vh !important; }

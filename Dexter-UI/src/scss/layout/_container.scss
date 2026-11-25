@@ -1,0 +1,76 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        layout/_container.scss
+ * @description [PT-BR] Containers: `.container`, `.container-fluid` e `.container-{bp}`.
+ *              [EN]    Containers: `.container`, `.container-fluid` and `.container-{bp}`.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Contêineres | Containers */
+
+@use "sass:map";
+@use "../abstracts" as *;
+
+// pt-BR: Base comum: largura total, padding lateral e centralização.
+// EN: Shared base: full width, side padding and centering.
+@mixin container-base {
+  width: 100%;
+  padding-inline: var(--#{$prefix}-container-padding-x);
+  margin-inline: auto;
+}
+
+// pt-BR: Sempre 100% de largura, em qualquer breakpoint.
+// EN: Always 100% wide at every breakpoint.
+.container-fluid {
+  @include container-base;
+}
+
+// pt-BR: Largura máxima cresce a cada breakpoint.
+// EN: Max-width grows at each breakpoint.
+.container {
+  @include container-base;
+
+  @each $bp, $max in $container-max-widths {
+    @include media-up($bp) {
+      max-width: $max;
+    }
+  }
+}
+
+// pt-BR: 100% de largura até o breakpoint; daí em diante, larguras máximas fixas.
+// EN: 100% wide until the breakpoint, then fixed max-widths from there up.
+@each $name, $_ in $container-max-widths {
+  .container-#{$name} {
+    @include container-base;
+
+    $started: false;
+    @each $bp, $max in $container-max-widths {
+      @if $bp == $name {
+        $started: true;
+      }
+      @if $started {
+        @include media-up($bp) {
+          max-width: $max;
+        }
+      }
+    }
+  }
+}

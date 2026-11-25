@@ -1,0 +1,44 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_vertical-align.scss
+ * @description [PT-BR] Utilitários de alinhamento vertical: .align-baseline, .align-top,
+ *                      .align-middle, .align-bottom, .align-text-top e .align-text-bottom.
+ *              [EN]    Vertical alignment utilities: .align-baseline, .align-top,
+ *                      .align-middle, .align-bottom, .align-text-top and .align-text-bottom.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Alinhamento vertical | Vertical alignment */
+
+$vertical-alignments: (
+  "baseline":    baseline,
+  "top":         top,
+  "middle":      middle,
+  "bottom":      bottom,
+  "text-top":    text-top,
+  "text-bottom": text-bottom,
+);
+
+@each $name, $value in $vertical-alignments {
+  .align-#{$name} {
+    vertical-align: #{$value} !important;
+  }
+}

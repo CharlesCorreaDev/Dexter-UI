@@ -1,0 +1,165 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_blends.scss
+ * @description [PT-BR] Utilitários de Mesclagem (Blend Modes) e Sobreposição (Overlays):
+ *                      mix-blend-mode (.blend-*), background-blend-mode (.bg-blend-*),
+ *                      camadas de sobreposição (.img-overlay) com gradientes e
+ *                      transições suaves de revelação no hover (700ms ease-in-out).
+ *              [EN]    Blend Mode and Overlay utilities: mix-blend-mode (.blend-*),
+ *                      background-blend-mode (.bg-blend-*), overlay layers (.img-overlay)
+ *                      with gradients and smooth hover reveal transitions (700ms ease-in-out).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Mesclagem e Sobreposição | Blend Modes & Overlays */
+
+@use "../abstracts" as *;
+
+// -----------------------------------------------------------------------------
+// 1. Modos de Mesclagem (Mix Blend Modes)
+// -----------------------------------------------------------------------------
+$blend-modes: (
+  "normal":       normal,
+  "multiply":     multiply,
+  "screen":       screen,
+  "overlay":      overlay,
+  "darken":       darken,
+  "lighten":      lighten,
+  "color-dodge":  color-dodge,
+  "color-burn":   color-burn,
+  "hard-light":   hard-light,
+  "soft-light":   soft-light,
+  "difference":   difference,
+  "exclusion":    exclusion,
+  "hue":          hue,
+  "saturation":   saturation,
+  "color":        color,
+  "luminosity":   luminosity,
+);
+
+@each $name, $value in $blend-modes {
+  .blend-#{$name} {
+    mix-blend-mode: #{$value} !important;
+  }
+
+  .bg-blend-#{$name} {
+    background-blend-mode: #{$value} !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 2. Contêiner e Camadas de Sobreposição / Overlays
+// -----------------------------------------------------------------------------
+.img-overlay-container,
+.overlay-container {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  border-radius: var(--#{$prefix}-radius);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.img-overlay,
+.overlay-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  z-index: 2;
+  transition: opacity var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+              background var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+}
+
+// pt-BR: Modificadores de cor de sobreposição
+// EN: Overlay color modifiers
+.overlay-dark {
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+}
+
+.overlay-dark-heavy {
+  background: rgba(0, 0, 0, 0.75);
+  color: #ffffff;
+}
+
+.overlay-light {
+  background: rgba(255, 255, 255, 0.65);
+  color: #212529;
+}
+
+.overlay-primary {
+  background: rgba(var(--#{$prefix}-primary-rgb), 0.7);
+  color: #ffffff;
+}
+
+.overlay-secondary {
+  background: rgba(var(--#{$prefix}-secondary-rgb), 0.7);
+  color: #ffffff;
+}
+
+// pt-BR: Gradientes de sobreposição (ideais para cartões editoriais e hero)
+// EN: Overlay gradients (ideal for editorial cards and hero)
+.overlay-gradient-bottom {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 50%, transparent 100%);
+  color: #ffffff;
+}
+
+.overlay-gradient-top {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.35) 50%, transparent 100%);
+  color: #ffffff;
+}
+
+.overlay-gradient-radial {
+  background: radial-gradient(circle, transparent 35%, rgba(0, 0, 0, 0.85) 100%);
+  color: #ffffff;
+}
+
+// -----------------------------------------------------------------------------
+// 3. Efeitos de Sobreposição no Hover (700ms ease-in-out)
+// -----------------------------------------------------------------------------
+// pt-BR: Oculto inicialmente, surge suavemente no hover
+// EN: Hidden initially, smoothly fades in on hover
+.overlay-hover {
+  opacity: 0;
+
+  .overlay-container:hover &,
+  .img-overlay-container:hover & {
+    opacity: 1;
+  }
+}
+
+// pt-BR: Visível inicialmente, desaparece no hover para revelar a imagem nítida
+// EN: Visible initially, fades out on hover to reveal crisp image
+.overlay-hover-reveal {
+  opacity: 1;
+
+  .overlay-container:hover &,
+  .img-overlay-container:hover & {
+    opacity: 0;
+  }
+}

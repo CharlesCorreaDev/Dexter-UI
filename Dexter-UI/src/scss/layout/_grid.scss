@@ -1,0 +1,123 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        layout/_grid.scss
+ * @description [PT-BR] Grid de até 14 colunas: `.row`, `.col-*`, offsets, ordem e `.row-cols-*`.
+ *                      Os gutters são CSS Variables (--dx-gutter-x / --dx-gutter-y); veja `_gutters.scss`.
+ *              [EN]    Grid with up to 14 columns: `.row`, `.col-*`, offsets, order and `.row-cols-*`.
+ *                      Gutters are CSS Variables (--dx-gutter-x / --dx-gutter-y); see `_gutters.scss`.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Grid */
+
+@use "sass:map";
+@use "sass:math";
+@use "../abstracts" as *;
+
+// pt-BR: Linha: flex com quebra; o gutter é aplicado como padding nas colunas e margem negativa na linha.
+// EN: Row: wrapping flex; the gutter is applied as column padding and negative row margin.
+.row {
+  --#{$prefix}-gutter-x: var(--#{$prefix}-gutter);
+  --#{$prefix}-gutter-y: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(-1 * var(--#{$prefix}-gutter-y));
+  margin-inline: calc(-0.5 * var(--#{$prefix}-gutter-x));
+
+  > * {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-inline: calc(var(--#{$prefix}-gutter-x) * 0.5);
+    margin-top: var(--#{$prefix}-gutter-y);
+  }
+}
+
+// pt-BR: Para cada breakpoint, gera as classes com o infixo correspondente.
+// EN: For each breakpoint, generates the classes with the matching infix.
+@each $bp in map.keys($breakpoints) {
+  @include media-up($bp) {
+    $infix: breakpoint-infix($bp);
+
+    // pt-BR: Colunas de largura igual e colunas com largura do conteúdo.
+    // EN: Equal-width and content-width columns.
+    .col#{$infix} {
+      flex: 1 0 0%;
+    }
+
+    .col#{$infix}-auto {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    // pt-BR: Colunas fixas: .col-1 ... .col-14.
+    // EN: Fixed columns: .col-1 ... .col-14.
+    @for $i from 1 through $grid-columns {
+      .col#{$infix}-#{$i} {
+        flex: 0 0 auto;
+        width: math.percentage(math.div($i, $grid-columns));
+      }
+    }
+
+    // pt-BR: Colunas por linha: .row-cols-1, .row-cols-2, .row-cols-7, .row-cols-14, .row-cols-auto.
+    // EN: Columns per row: .row-cols-1, .row-cols-2, .row-cols-7, .row-cols-14, .row-cols-auto.
+    .row-cols#{$infix}-auto > * {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
+    @each $n in $row-cols {
+      .row-cols#{$infix}-#{$n} > * {
+        flex: 0 0 auto;
+        width: math.percentage(math.div(1, $n));
+      }
+    }
+
+    // pt-BR: Offsets: .offset-0 ... .offset-13.
+    // EN: Offsets: .offset-0 ... .offset-13.
+    @for $i from 0 to $grid-columns {
+      .offset#{$infix}-#{$i} {
+        @if $i == 0 {
+          margin-inline-start: 0;
+        } @else {
+          margin-inline-start: math.percentage(math.div($i, $grid-columns));
+        }
+      }
+    }
+
+    // pt-BR: Ordem: first, 0 a 5 e last.
+    // EN: Order: first, 0 to 5 and last.
+    .order#{$infix}-first {
+      order: -1;
+    }
+
+    @for $i from 0 through 5 {
+      .order#{$infix}-#{$i} {
+        order: $i;
+      }
+    }
+
+    .order#{$infix}-last {
+      order: $grid-columns + 1;
+    }
+  }
+}

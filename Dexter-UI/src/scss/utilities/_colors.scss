@@ -1,0 +1,123 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_colors.scss
+ * @description [PT-BR] Utilitários de cores: cor de texto (.text-*), texto enfatizado (.text-*-emphasis),
+ *                      links coloridos (.link-*), cor de fundo (.bg-*) e fundos sutis (.bg-*-subtle)
+ *                      para todas as 28 famílias de cores e para seus 13 passos da escala tonal (025 a 975).
+ *              [EN]    Color utilities: text color (.text-*), emphasized text (.text-*-emphasis),
+ *                      colored links (.link-*), background color (.bg-*), and subtle backgrounds
+ *                      (.bg-*-subtle) for all 28 color families and their 13 tonal scale steps (025 to 975).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Cores e Fundos | Colors and Backgrounds */
+
+@use "../abstracts" as *;
+
+// pt-BR: Cores de texto e fundo para a cor base (#500), links e versões sutis
+// EN: Text and background colors for base color (#500), links and subtle versions
+@each $name, $_ in $all-colors {
+  // pt-BR: Texto na cor base
+  // EN: Text in base color
+  .text-#{$name} {
+    color: var(--#{$prefix}-#{$name}) !important;
+  }
+
+  // pt-BR: Texto enfatizado com alto contraste para leitura sobre fundos sutis (passo 800)
+  // EN: Emphasized text with high contrast for reading on subtle backgrounds (step 800)
+  .text-#{$name}-emphasis {
+    color: var(--#{$prefix}-#{$name}-800) !important;
+  }
+
+  // pt-BR: Links coloridos com hover automático no passo 700 e transição suave
+  // EN: Colored links with automatic hover at step 700 and smooth transition
+  .link-#{$name} {
+    color: var(--#{$prefix}-#{$name}) !important;
+    text-decoration-color: var(--#{$prefix}-#{$name}) !important;
+    transition: color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+                text-decoration-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+                background-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--#{$prefix}-#{$name}-700) !important;
+      text-decoration-color: var(--#{$prefix}-#{$name}-700) !important;
+    }
+  }
+
+  // pt-BR: Fundo na cor base
+  // EN: Background in base color
+  .bg-#{$name} {
+    background-color: var(--#{$prefix}-#{$name}) !important;
+  }
+
+  // pt-BR: Fundo sutil para cartões, caixas e alertas (passo 050)
+  // EN: Subtle background for cards, boxes and alerts (step 050)
+  .bg-#{$name}-subtle {
+    background-color: var(--#{$prefix}-#{$name}-050) !important;
+  }
+}
+
+// pt-BR: Utilitários para todos os 13 passos da escala tonal (025 a 975)
+// EN: Utilities for all 13 tonal scale steps (025 to 975)
+@each $name, $_ in $all-colors {
+  @each $step, $_w in $scale-weights {
+    .text-#{$name}-#{$step} {
+      color: var(--#{$prefix}-#{$name}-#{$step}) !important;
+    }
+
+    .bg-#{$name}-#{$step} {
+      background-color: var(--#{$prefix}-#{$name}-#{$step}) !important;
+    }
+  }
+}
+
+// pt-BR: Aliases em português para textos, links e fundos
+// EN: Portuguese aliases for text, links and backgrounds
+@each $alias, $canonical in $color-aliases {
+  .text-#{$alias}          { color: var(--#{$prefix}-#{$canonical}) !important; }
+  .text-#{$alias}-emphasis { color: var(--#{$prefix}-#{$canonical}-800) !important; }
+  .link-#{$alias}          {
+    color: var(--#{$prefix}-#{$canonical}) !important;
+    text-decoration-color: var(--#{$prefix}-#{$canonical}) !important;
+    transition: color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+                text-decoration-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out),
+                background-color var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out);
+    &:hover, &:focus-visible {
+      color: var(--#{$prefix}-#{$canonical}-700) !important;
+      text-decoration-color: var(--#{$prefix}-#{$canonical}-700) !important;
+    }
+  }
+  .bg-#{$alias}            { background-color: var(--#{$prefix}-#{$canonical}) !important; }
+  .bg-#{$alias}-subtle     { background-color: var(--#{$prefix}-#{$canonical}-050) !important; }
+}
+
+// pt-BR: Cores utilitárias brancas, pretas e transparentes
+// EN: White, black and transparent utility colors
+.text-white       { color: #fff !important; }
+.text-black       { color: #030303 !important; }
+.text-body        { color: var(--#{$prefix}-body-color, #212529) !important; }
+.text-muted       { color: var(--#{$prefix}-text-muted) !important; }
+
+.bg-white         { background-color: #fff !important; }
+.bg-black         { background-color: #030303 !important; }
+.bg-transparent   { background-color: transparent !important; }
+.bg-body          { background-color: var(--#{$prefix}-body-bg, #fff) !important; }

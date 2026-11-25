@@ -1,0 +1,202 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_shapes-masks.scss
+ * @description [PT-BR] Formas, Recortes e Máscaras para Imagens e Elementos:
+ *                      formas geométricas (.shape-circle, .shape-pill, .shape-squircle),
+ *                      recortes poligonais (clip-path: hexágono, octógono, bisel, diagonal),
+ *                      máscaras de gradiente e esvanecimento (mask-image)
+ *                      e contorno de texto com shape-outside.
+ *              [EN]    Shapes, Clips, and Masks for Images and Elements:
+ *                      geometric shapes (.shape-circle, .shape-pill, .shape-squircle),
+ *                      polygonal clip-paths (hexagon, octagon, bevel, diagonal),
+ *                      gradient fading masks (mask-image), and text flow with shape-outside.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Formas, Recortes e Máscaras | Shapes, Clips & Masks */
+
+@use "../abstracts" as *;
+
+// -----------------------------------------------------------------------------
+// 1. Formas Geométricas / Shapes
+// -----------------------------------------------------------------------------
+.shape-circle,
+.img-circle {
+  border-radius: 50% !important;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.shape-pill,
+.img-pill {
+  border-radius: var(--#{$prefix}-radius-pill) !important;
+}
+
+.shape-squircle {
+  border-radius: 28% !important;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+// -----------------------------------------------------------------------------
+// 2. Recortes via Clip-Path / Polygonal Clip-Paths
+// -----------------------------------------------------------------------------
+.clip-circle {
+  clip-path: circle(50% at 50% 50%) !important;
+}
+
+.clip-ellipse {
+  clip-path: ellipse(50% 40% at 50% 50%) !important;
+}
+
+.clip-triangle {
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%) !important;
+}
+
+.clip-rhombus,
+.clip-diamond {
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%) !important;
+}
+
+.clip-hexagon {
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%) !important;
+}
+
+.clip-octagon {
+  clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%) !important;
+}
+
+.clip-star {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%) !important;
+}
+
+.clip-bevel {
+  clip-path: polygon(15px 0%, calc(100% - 15px) 0%, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0% calc(100% - 15px), 0% 15px) !important;
+}
+
+.clip-diagonal-start {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5rem), 0 100%) !important;
+}
+
+.clip-diagonal-end {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 2.5rem)) !important;
+}
+
+.clip-none {
+  clip-path: none !important;
+}
+
+// pt-BR: Efeitos de Recorte no Hover (Transição em 700ms ease-in-out)
+// EN: Clip-Path Hover Effects (Transitions in 700ms ease-in-out)
+.clip-transition {
+  transition: clip-path var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out) !important;
+}
+
+// pt-BR: Recorte inicial expande para 100% no hover
+// EN: Initial clip expands to 100% on hover
+.clip-hover-expand {
+  @extend .clip-transition;
+
+  &:hover {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+  }
+}
+
+// pt-BR: Imagem retangular recorta para círculo suave no hover
+// EN: Rectangular image clips to smooth circle on hover
+.clip-hover-circle {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  @extend .clip-transition;
+
+  &:hover {
+    clip-path: circle(42% at 50% 50%) !important;
+  }
+}
+
+// pt-BR: Abertura tipo lente/diafragma de câmera (círculo pequeno se expande)
+// EN: Iris diaphragm opening (small circle expands on hover)
+.clip-hover-iris {
+  clip-path: circle(25% at 50% 50%);
+  @extend .clip-transition;
+
+  &:hover {
+    clip-path: circle(75% at 50% 50%) !important;
+  }
+}
+
+// pt-BR: Recorte diagonal que se alinha perfeitamente no hover
+// EN: Diagonal clip that levels out on hover
+.clip-hover-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5rem), 0 100%);
+  @extend .clip-transition;
+
+  &:hover {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%) !important;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// 3. Máscaras de Gradiente / Mask Images
+// -----------------------------------------------------------------------------
+.mask-fade-bottom {
+  -webkit-mask-image: linear-gradient(to bottom, #000000 65%, transparent 100%) !important;
+  mask-image: linear-gradient(to bottom, #000000 65%, transparent 100%) !important;
+}
+
+.mask-fade-top {
+  -webkit-mask-image: linear-gradient(to top, #000000 65%, transparent 100%) !important;
+  mask-image: linear-gradient(to top, #000000 65%, transparent 100%) !important;
+}
+
+.mask-fade-start {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000000 35%) !important;
+  mask-image: linear-gradient(to right, transparent 0%, #000000 35%) !important;
+}
+
+.mask-fade-end {
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, #000000 35%) !important;
+  mask-image: linear-gradient(to left, transparent 0%, #000000 35%) !important;
+}
+
+.mask-radial {
+  -webkit-mask-image: radial-gradient(circle, #000000 50%, transparent 100%) !important;
+  mask-image: radial-gradient(circle, #000000 50%, transparent 100%) !important;
+}
+
+.mask-none {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+// -----------------------------------------------------------------------------
+// 4. Contorno de Texto com Shape-Outside / Text Flow with Shape-Outside
+// -----------------------------------------------------------------------------
+.shape-outside-circle {
+  float: inline-start;
+  shape-outside: circle(50%);
+  border-radius: 50%;
+  margin-inline-end: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.shape-outside-margin {
+  shape-margin: 1.25rem;
+}

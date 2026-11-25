@@ -1,0 +1,93 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_flex.scss
+ * @description [PT-BR] Utilitários de Flexbox responsivos: direção, quebra (wrap), crescimento/encolhimento,
+ *                      alinhamento de itens, justificação de conteúdo e auto-alinhamento.
+ *              [EN]    Responsive Flexbox utilities: direction, wrap, grow/shrink, items alignment,
+ *                      content justification and self-alignment.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Flexbox */
+
+@use "../abstracts" as *;
+
+@each $bp-name, $bp-value in $breakpoints {
+  $infix: breakpoint-infix($bp-name);
+
+  @include media-up($bp-name) {
+    // pt-BR: Direção do Flexbox
+    // EN: Flexbox direction
+    .flex#{$infix}-row            { flex-direction: row !important; }
+    .flex#{$infix}-column         { flex-direction: column !important; }
+    .flex#{$infix}-row-reverse    { flex-direction: row-reverse !important; }
+    .flex#{$infix}-column-reverse { flex-direction: column-reverse !important; }
+
+    // pt-BR: Quebra de linha (Wrap)
+    // EN: Wrap
+    .flex#{$infix}-wrap           { flex-wrap: wrap !important; }
+    .flex#{$infix}-nowrap         { flex-wrap: nowrap !important; }
+    .flex#{$infix}-wrap-reverse   { flex-wrap: wrap-reverse !important; }
+
+    // pt-BR: Preenchimento, crescimento e encolhimento
+    // EN: Fill, grow and shrink
+    .flex#{$infix}-fill           { flex: 1 1 auto !important; }
+    .flex#{$infix}-grow-0         { flex-grow: 0 !important; }
+    .flex#{$infix}-grow-1         { flex-grow: 1 !important; }
+    .flex#{$infix}-shrink-0       { flex-shrink: 0 !important; }
+    .flex#{$infix}-shrink-1       { flex-shrink: 1 !important; }
+
+    // pt-BR: Justificar conteúdo (Eixo principal)
+    // EN: Justify content (Main axis)
+    .justify-content#{$infix}-start    { justify-content: flex-start !important; }
+    .justify-content#{$infix}-end      { justify-content: flex-end !important; }
+    .justify-content#{$infix}-center   { justify-content: center !important; }
+    .justify-content#{$infix}-between  { justify-content: space-between !important; }
+    .justify-content#{$infix}-around   { justify-content: space-around !important; }
+    .justify-content#{$infix}-evenly   { justify-content: space-evenly !important; }
+
+    // pt-BR: Alinhar itens (Eixo transversal)
+    // EN: Align items (Cross axis)
+    .align-items#{$infix}-start    { align-items: flex-start !important; }
+    .align-items#{$infix}-end      { align-items: flex-end !important; }
+    .align-items#{$infix}-center   { align-items: center !important; }
+    .align-items#{$infix}-baseline { align-items: baseline !important; }
+    .align-items#{$infix}-stretch  { align-items: stretch !important; }
+
+    // pt-BR: Alinhamento próprio
+    // EN: Align self
+    .align-self#{$infix}-auto     { align-self: auto !important; }
+    .align-self#{$infix}-start    { align-self: flex-start !important; }
+    .align-self#{$infix}-end      { align-self: flex-end !important; }
+    .align-self#{$infix}-center   { align-self: center !important; }
+    .align-self#{$infix}-baseline { align-self: baseline !important; }
+    .align-self#{$infix}-stretch  { align-self: stretch !important; }
+
+    // pt-BR: Alinhar conteúdo
+    // EN: Align content
+    .align-content#{$infix}-start   { align-content: flex-start !important; }
+    .align-content#{$infix}-end     { align-content: flex-end !important; }
+    .align-content#{$infix}-center  { align-content: center !important; }
+    .align-content#{$infix}-between { align-content: space-between !important; }
+    .align-content#{$infix}-around  { align-content: space-around !important; }
+    .align-content#{$infix}-stretch { align-content: stretch !important; }
+  }
+}

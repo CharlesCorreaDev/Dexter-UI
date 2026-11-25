@@ -1,0 +1,294 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        base/_print.scss
+ * @description [PT-BR] Folha de estilos otimizada para mídia de impressão (@media print):
+ *                      elimina fundos decorativos e sombras para economia de tinta,
+ *                      assegura alto contraste, exibe destinos de links externos,
+ *                      controla quebras de página (órfãs/viúvas), repete cabeçalhos
+ *                      de tabelas e oculta elementos puramente interativos (menus, botões, modais).
+ *              [EN]    Optimized print media stylesheet (@media print): eliminates
+ *                      decorative backgrounds and shadows for ink saving, ensures high
+ *                      contrast, appends external link targets, controls page breaks
+ *                      (orphans/widows), repeats table headers, and hides purely interactive
+ *                      elements (navbars, buttons, modals).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Impressão | Print */
+
+// pt-BR: Utilitários de visibilidade exclusivos de impressão para mídia de tela (escondidos na tela)
+// EN: Print-only visibility utilities for screen media (hidden on screen)
+.print-only,
+.d-print-only {
+  display: none !important;
+}
+
+// pt-BR: Regras ativadas exclusivamente durante a impressão (@media print)
+// EN: Rules activated exclusively during print (@media print)
+@media print {
+  // ---------------------------------------------------------------------------
+  // 1. Configuração da Página / Page Setup
+  // ---------------------------------------------------------------------------
+  @page {
+    margin: 15mm 20mm;
+    size: auto;
+  }
+
+  @page :first {
+    margin-top: 20mm;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 2. Reset Universal de Tinta & Contraste / Universal Ink & Contrast Reset
+  // ---------------------------------------------------------------------------
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+  }
+
+  html,
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    line-height: 1.45 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 3. Links e Anotações de URL / Hyperlinks & URL Annotations
+  // ---------------------------------------------------------------------------
+  a,
+  a:visited {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+
+  // pt-BR: Exibe o destino de links externos completos após o texto
+  // EN: Appends the destination of full external links after the text
+  a[href^="http://"]::after,
+  a[href^="https://"]::after {
+    content: " (" attr(href) ")";
+    font-size: 85%;
+    font-weight: normal;
+    word-break: break-all;
+  }
+
+  // pt-BR: Oculta URLs de âncoras locais, scripts e números de telefone
+  // EN: Hides URLs for local anchors, scripts, and telephone numbers
+  a[href^="#"]::after,
+  a[href^="javascript:"]::after,
+  a[href^="tel:"]::after,
+  a.no-print-url::after,
+  .no-print-url a::after {
+    content: "" !important;
+  }
+
+  // pt-BR: E-mails mostram o endereço de destino
+  // EN: Emails show the destination address
+  a[href^="mailto:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 85%;
+  }
+
+  // pt-BR: Abreviações mostram o título completo expandido
+  // EN: Abbreviations show the full expanded title
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+    font-size: 85%;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 4. Quebras de Página, Órfãs e Viúvas / Page Breaks, Orphans & Widows
+  // ---------------------------------------------------------------------------
+  // pt-BR: Evita que títulos fiquem isolados no final da página anterior
+  // EN: Prevents headings from being isolated at the bottom of the previous page
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  // pt-BR: Controle de linhas órfãs e viúvas em parágrafos e citações
+  // EN: Control of orphan and widow lines in paragraphs and blockquotes
+  p,
+  blockquote {
+    orphans: 3;
+    widows: 3;
+  }
+
+  // pt-BR: Evita que blocos atômicos sejam divididos ao meio entre páginas
+  // EN: Prevents atomic blocks from splitting across pages
+  pre,
+  code,
+  blockquote,
+  tr,
+  img,
+  figure,
+  svg,
+  table,
+  .card,
+  .doc-card,
+  .table,
+  .alert {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 5. Utilitários de Quebra de Página / Page Break Utilities
+  // ---------------------------------------------------------------------------
+  .break-before-page,
+  .page-break-before {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  .break-after-page,
+  .page-break-after {
+    break-after: page !important;
+    page-break-after: always !important;
+  }
+
+  .break-inside-avoid,
+  .page-break-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .break-inside-auto {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 6. Elementos Ocultos na Impressão / Elements Hidden on Print
+  // ---------------------------------------------------------------------------
+  .no-print,
+  .d-print-none,
+  header.doc-header,
+  aside.doc-sidebar,
+  aside.doc-toc,
+  nav.navbar,
+  .theme-toggle-btn,
+  .btn-toolbar,
+  .modal,
+  .modal-backdrop,
+  .toast,
+  .tooltip,
+  .popover,
+  video,
+  audio,
+  object,
+  embed {
+    display: none !important;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 7. Visibilidade Exclusiva para Impressão / Print-Only Display
+  // ---------------------------------------------------------------------------
+  .print-only,
+  .d-print-only,
+  .d-print-block {
+    display: block !important;
+  }
+
+  .d-print-inline {
+    display: inline !important;
+  }
+
+  .d-print-inline-block {
+    display: inline-block !important;
+  }
+
+  .d-print-flex {
+    display: flex !important;
+  }
+
+  .d-print-grid {
+    display: grid !important;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 8. Tabelas Otimizadas para Impressão / Print-Optimized Tables
+  // ---------------------------------------------------------------------------
+  table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+
+  // pt-BR: Garante que cabeçalhos e rodapés se repitam em cada página impressa
+  // EN: Ensures table headers and footers repeat on every printed page
+  thead {
+    display: table-header-group !important;
+  }
+
+  tfoot {
+    display: table-footer-group !important;
+  }
+
+  tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  th,
+  td {
+    border: 1px solid #333333 !important;
+    padding: 0.35rem 0.5rem !important;
+    color: #000000 !important;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 9. Preservação Exata de Cores / Exact Color Preservation
+  // ---------------------------------------------------------------------------
+  // pt-BR: Use em gráficos, selos, assinaturas ou badges que precisem de cor no papel
+  // EN: Use on charts, stamps, signatures, or badges that require color on paper
+  .print-color-exact,
+  .print-preserve,
+  .print-exact {
+    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  // ---------------------------------------------------------------------------
+  // 10. Imagens Responsivas para Impressão / Print Responsive Images
+  // ---------------------------------------------------------------------------
+  img {
+    max-width: 100% !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+}

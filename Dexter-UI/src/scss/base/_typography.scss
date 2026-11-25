@@ -1,0 +1,223 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        base/_typography.scss
+ * @description [PT-BR] Tipografia base: títulos (h1-h6 e .h1-.h6), display (1-6), .lead, texto em
+ *                      linha (mark, small, abbr, b, strong, sub, sup), parágrafos (text-wrap: pretty),
+ *                      citações (.blockquote e .blockquote-footer) e listas (ul/ol aninhadas, dl, .list-unstyled, .list-inline).
+ *              [EN]    Base typography: headings (h1-h6 and .h1-.h6), display (1-6), .lead, inline
+ *                      text (mark, small, abbr, b, strong, sub, sup), paragraphs (text-wrap: pretty),
+ *                      quotes (.blockquote and .blockquote-footer) and lists (nested ul/ol, dl, .list-unstyled, .list-inline).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Tipografia | Typography */
+
+@use "../abstracts" as *;
+
+// pt-BR: Títulos: a mesma aparência vale para o elemento (h1) e para a classe (.h1),
+//        permitindo usar a semântica correta com o visual desejado.
+// EN: Headings: the same look applies to the element (h1) and to the class (.h1),
+//     so you can keep the right semantics with the look you want.
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  margin-block-end: var(--#{$prefix}-heading-margin-bottom);
+  font-family: var(--#{$prefix}-font-title);
+  font-weight: var(--#{$prefix}-heading-font-weight);
+  line-height: var(--#{$prefix}-heading-line-height);
+  text-wrap: balance;
+}
+
+@each $key, $_ in $font-sizes {
+  h#{$key},
+  .h#{$key} {
+    font-size: var(--#{$prefix}-fs-#{$key});
+  }
+}
+
+// pt-BR: Display: títulos de destaque, maiores que h1 (.display-1 a .display-6).
+// EN: Display: showcase headings, larger than h1 (.display-1 to .display-6).
+@each $key, $_ in $display-sizes {
+  .display-#{$key} {
+    font-family: var(--#{$prefix}-font-title);
+    font-size: var(--#{$prefix}-display-#{$key});
+    font-weight: var(--#{$prefix}-display-font-weight);
+    line-height: var(--#{$prefix}-display-line-height);
+    text-wrap: balance;
+  }
+}
+
+// pt-BR: Parágrafos e parágrafo de destaque. text-wrap: pretty evita órfãos no fim da linha.
+// EN: Paragraphs and lead paragraph. text-wrap: pretty prevents awkward typographic orphans.
+p {
+  margin-block-end: var(--#{$prefix}-paragraph-margin-bottom);
+  text-wrap: pretty;
+}
+
+.lead {
+  font-size: var(--#{$prefix}-lead-font-size);
+  font-weight: 400;
+}
+
+// pt-BR: Texto em negrito com peso semântico consistente.
+// EN: Bold text with consistent semantic font weight.
+b,
+strong {
+  font-weight: var(--#{$prefix}-fw-bold);
+}
+
+// pt-BR: Texto pequeno.
+// EN: Small text.
+small,
+.small {
+  font-size: 0.875em;
+}
+
+// pt-BR: Sobrescrito e subscrito sem alterar a altura de linha do parágrafo.
+// EN: Superscript and subscript without disrupting paragraph line-height.
+sub,
+sup {
+  position: relative;
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+// pt-BR: Destaque (marca-texto).
+// EN: Highlight (marker).
+mark,
+.mark {
+  padding: 0.1875em;
+  color: inherit;
+  background-color: var(--#{$prefix}-mark-bg);
+}
+
+// pt-BR: Abreviações: sublinhado pontilhado e cursor de ajuda para indicar o `title`.
+//        `.initialism` reduz e coloca em maiúsculas (siglas).
+// EN: Abbreviations: dotted underline and help cursor to hint at the `title`.
+//     `.initialism` shrinks and uppercases (acronyms).
+abbr[title] {
+  text-decoration: underline dotted;
+  text-decoration-skip-ink: none;
+  cursor: help;
+}
+
+.initialism {
+  font-size: 0.875em;
+  text-transform: uppercase;
+}
+
+// pt-BR: Citações em bloco. Para o alinhamento, use `.text-center` / `.text-end` no elemento pai.
+// EN: Block quotes. For alignment, use `.text-center` / `.text-end` on the parent element.
+.blockquote {
+  margin-block-end: var(--#{$prefix}-paragraph-margin-bottom);
+  font-size: var(--#{$prefix}-lead-font-size);
+}
+
+.blockquote > :last-child {
+  margin-block-end: 0;
+}
+
+// pt-BR: Fonte da citação (use em `<figcaption>` ou `<footer>` logo após o `.blockquote`).
+// EN: Quote source (use on a `<figcaption>` or `<footer>` right after the `.blockquote`).
+.blockquote-footer {
+  margin-block: calc(-1 * var(--#{$prefix}-paragraph-margin-bottom)) var(--#{$prefix}-paragraph-margin-bottom);
+  font-size: 0.875em;
+  color: var(--#{$prefix}-text-muted);
+
+  &::before {
+    content: "\2014\00A0";
+  }
+}
+
+// pt-BR: Listas: restauramos recuo e espaçamento vertical.
+//        Listas aninhadas não ganham margem inferior extra.
+// EN: Lists: restored indent and vertical spacing.
+//     Nested lists get no extra bottom margin.
+ul,
+ol {
+  padding-inline-start: var(--#{$prefix}-list-padding-start);
+}
+
+ul,
+ol,
+dl {
+  margin-block-end: var(--#{$prefix}-paragraph-margin-bottom);
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+  margin-block-end: 0;
+}
+
+// pt-BR: Listas de descrição: `dl`, `dt`, `dd`. Para alinhar termo e descrição lado a lado,
+//        use o grid: <dl class="row"><dt class="col-sm-3">…</dt><dd class="col-sm-9">…</dd></dl>.
+// EN: Description lists: `dl`, `dt`, `dd`. To align term and description side by side,
+//     use the grid: <dl class="row"><dt class="col-sm-3">…</dt><dd class="col-sm-9">…</dd></dl>.
+dt {
+  font-weight: var(--#{$prefix}-fw-bold);
+}
+
+dd {
+  margin-block-end: 0.5rem;
+  margin-inline-start: 0;
+}
+
+// pt-BR: Listas sem marcadores (remove também o recuo).
+// EN: Lists without markers (also removes the indent).
+.list-unstyled {
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+// pt-BR: Lista em linha: os itens ficam lado a lado.
+// EN: Inline list: the items sit side by side.
+.list-inline {
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+.list-inline-item {
+  display: inline-block;
+
+  &:not(:last-child) {
+    margin-inline-end: 0.5rem;
+  }
+}

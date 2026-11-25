@@ -1,0 +1,87 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_transitions.scss
+ * @description [PT-BR] Utilitários de transição e animação: classes atômicas para aplicar
+ *                      transições suaves de hover (padronizadas em 700ms ease-in-out),
+ *                      durações e curvas de aceleração (timing functions).
+ *              [EN]    Transition and animation utilities: atomic classes to apply
+ *                      smooth hover transitions (standardized to 700ms ease-in-out),
+ *                      durations, and timing functions.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Transições | Transitions */
+
+@use "../abstracts" as *;
+
+// pt-BR: Utilitários de propriedades de transição (padrão 700ms ease-in-out)
+// EN: Transition property utilities (default 700ms ease-in-out)
+.transition,
+.transition-hover {
+  transition: var(--#{$prefix}-transition-hover) !important;
+}
+
+.transition-all {
+  transition: var(--#{$prefix}-transition-base) !important;
+}
+
+.transition-bg {
+  transition: var(--#{$prefix}-transition-bg) !important;
+}
+
+.transition-color {
+  transition: var(--#{$prefix}-transition-color) !important;
+}
+
+.transition-border {
+  transition: var(--#{$prefix}-transition-border) !important;
+}
+
+.transition-shadow {
+  transition: var(--#{$prefix}-transition-shadow) !important;
+}
+
+.transition-opacity {
+  transition: opacity var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out) !important;
+}
+
+.transition-transform {
+  transition: transform var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out) !important;
+}
+
+.transition-none {
+  transition: none !important;
+}
+
+// pt-BR: Utilitários de duração de transição
+// EN: Transition duration utilities
+.duration-150  { transition-duration: 150ms !important; }
+.duration-300  { transition-duration: 300ms !important; }
+.duration-500  { transition-duration: 500ms !important; }
+.duration-700  { transition-duration: 700ms !important; }
+.duration-1000 { transition-duration: 1000ms !important; }
+
+// pt-BR: Utilitários de curva de aceleração (timing function)
+// EN: Timing function utilities
+.ease-linear { transition-timing-function: linear !important; }
+.ease-in     { transition-timing-function: ease-in !important; }
+.ease-out    { transition-timing-function: ease-out !important; }
+.ease-in-out { transition-timing-function: ease-in-out !important; }

@@ -1,0 +1,57 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        layout/_gutters.scss
+ * @description [PT-BR] Gutters `.g-*`, `.gx-*` e `.gy-*` com infixo responsivo; funcionam em `.row`.
+ *              [EN]    Gutters `.g-*`, `.gx-*` and `.gy-*` with responsive infix; they work on `.row`.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Gutters */
+
+@use "sass:map";
+@use "../abstracts" as *;
+
+@each $bp in map.keys($breakpoints) {
+  @include media-up($bp) {
+    $infix: breakpoint-infix($bp);
+
+    @each $key, $value in $spacers {
+      // pt-BR: Gutter horizontal e vertical.
+      // EN: Horizontal and vertical gutter.
+      .g#{$infix}-#{$key} {
+        --#{$prefix}-gutter-x: #{$value};
+        --#{$prefix}-gutter-y: #{$value};
+      }
+
+      // pt-BR: Somente horizontal.
+      // EN: Horizontal only.
+      .gx#{$infix}-#{$key} {
+        --#{$prefix}-gutter-x: #{$value};
+      }
+
+      // pt-BR: Somente vertical.
+      // EN: Vertical only.
+      .gy#{$infix}-#{$key} {
+        --#{$prefix}-gutter-y: #{$value};
+      }
+    }
+  }
+}

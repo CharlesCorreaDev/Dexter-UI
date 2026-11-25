@@ -1,0 +1,526 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        abstracts/_config.scss
+ * @description [PT-BR] Configuração do framework: cores (5 oficiais + 23 estendidas), escala tonal
+ *                      de 13 passos (025 a 975), breakpoints, containers, grid de 14 colunas,
+ *                      espaçamentos (margins/paddings), bordas, raio de borda (radius), sombras (shadows
+ *                      com intensidades clara/escura e coloridas), cursores/interações (pointers),
+ *                      tipografia e escala de z-index. Todos os valores são sobrescritíveis com `@use "config" with (...)`.
+ *              [EN]    Framework configuration: colors (5 official + 23 extended), 13-step tonal
+ *                      scale (025 to 975), breakpoints, containers, 14-column grid, spacings (margins/paddings),
+ *                      borders, border radius, shadows (with light/dark and colored intensities),
+ *                      cursors/interactions (pointers), typography and z-index scale.
+ *                      Every value can be overridden with `@use "config" with (...)`.
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+@use "sass:map";
+@use "functions" as *;
+
+// pt-BR: Prefixo das CSS Variables e das classes geradas (ex.: --dx-primary).
+// EN: Prefix for CSS Variables and generated classes (e.g. --dx-primary).
+$prefix: "dx" !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Cores Oficiais do Tema (5 cores)
+// EN: Official Theme Colors (5 colors)
+// ---------------------------------------------------------------------------
+$primary:    #3b5998 !default;
+$secondary:  #14306b !default;
+$tertiary:   #869dcc !default;
+$quaternary: #224389 !default;
+$quinary:    #5772ac !default;
+
+// pt-BR: Mapa de cores do tema; cada entrada vira uma CSS Variable `--dx-{nome}`.
+// EN: Theme color map; each entry becomes a `--dx-{name}` CSS Variable.
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "tertiary":   $tertiary,
+  "quaternary": $quaternary,
+  "quinary":    $quinary,
+) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Paleta de Cores Estendida (23 cores adicionais)
+// EN: Extended Color Palette (23 additional colors)
+// ---------------------------------------------------------------------------
+$purple:        #501b85 !default; // Roxo (80, 27, 133)
+$red:           #cf000f !default; // Vermelho (207, 0, 15)
+$navy:          #003171 !default; // Navy (0, 49, 113)
+$brown:         #3f1b0f !default; // Marrom (63, 27, 15)
+$green:         #1b7021 !default; // Verde (27, 112, 33)
+$midnight:      #2c3e50 !default; // Midnight (44, 62, 80)
+$silver-light:  #e9eaeb !default; // Silver Light (233, 234, 235)
+$silver:        #8e9aa2 !default; // Silver (142, 154, 162)
+$light:         #f7f7f7 !default; // Light (247, 247, 247)
+$turquoise:     #007e65 !default; // Turquesa (0, 126, 101)
+$cyan:          #0099a7 !default; // Ciano (0, 153, 167)
+$dark:          #130f10 !default; // Dark (19, 15, 16)
+$black:         #030303 !default; // Black (3, 3, 3)
+$beige:         #e9d7be !default; // Bege (233, 215, 190)
+$olive:         #546c00 !default; // Olive (84, 108, 0)
+$steelblue:     #4682b4 !default; // SteelBlue (70, 130, 180)
+$aquamarine:    #7fffd4 !default; // Aquamarine (127, 255, 212)
+$coral:         #ff7f50 !default; // Coral (255, 127, 80)
+$lime:          #00ff00 !default; // Lime (0, 255, 0)
+$teal:          #008080 !default; // Teal (0, 128, 128)
+$indigo:        #4b0082 !default; // Indigo (75, 0, 130)
+$gray:          #808080 !default; // Gray (128, 128, 128)
+$fuchsia:       #ff00ff !default; // Fuchsia (255, 0, 255)
+
+$colors: (
+  "purple":       $purple,
+  "red":          $red,
+  "navy":         $navy,
+  "brown":        $brown,
+  "green":        $green,
+  "midnight":     $midnight,
+  "silver-light": $silver-light,
+  "silver":       $silver,
+  "light":        $light,
+  "turquoise":    $turquoise,
+  "cyan":         $cyan,
+  "dark":         $dark,
+  "black":        $black,
+  "beige":        $beige,
+  "olive":        $olive,
+  "steelblue":    $steelblue,
+  "aquamarine":   $aquamarine,
+  "coral":        $coral,
+  "lime":         $lime,
+  "teal":         $teal,
+  "indigo":       $indigo,
+  "gray":         $gray,
+  "fuchsia":      $fuchsia,
+) !default;
+
+// pt-BR: Mapa unificado com todas as 28 famílias de cores
+// EN: Unified map with all 28 color families
+$all-colors: map.merge($theme-colors, $colors) !default;
+
+// pt-BR: Aliases em português para as cores da paleta
+// EN: Portuguese aliases for palette colors
+$color-aliases: (
+  "roxo":     "purple",
+  "vermelho": "red",
+  "marrom":   "brown",
+  "verde":    "green",
+  "turquesa": "turquoise",
+  "ciano":    "cyan",
+  "bege":     "beige",
+) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Breakpoints (min-width, mobile first). As chaves usam aspas: `2xl` sem aspas
+//        seria interpretado pelo Sass como um número com a unidade "xl".
+// EN: Breakpoints (min-width, mobile first). Keys are quoted: an unquoted `2xl`
+//     would be parsed by Sass as a number with unit "xl".
+// ---------------------------------------------------------------------------
+$breakpoints: (
+  "xs":  0,
+  "sm":  576px,
+  "md":  768px,
+  "lg":  1024px,
+  "xl":  1280px,
+  "2xl": 1536px,
+) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Containers (largura máxima a partir de cada breakpoint)
+// EN: Containers (max-width from each breakpoint up)
+// ---------------------------------------------------------------------------
+$container-max-widths: (
+  "sm":  540px,
+  "md":  720px,
+  "lg":  960px,
+  "xl":  1200px,
+  "2xl": 1440px,
+) !default;
+
+// pt-BR: Espaçamento horizontal interno dos containers.
+// EN: Horizontal inner padding of containers.
+$container-padding-x: 0.75rem !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Grid
+// EN: Grid
+// ---------------------------------------------------------------------------
+
+// pt-BR: Número de colunas do grid (até 14).
+// EN: Number of grid columns (up to 14).
+$grid-columns: 14 !default;
+
+// pt-BR: Gutter padrão entre colunas.
+// EN: Default gutter between columns.
+$grid-gutter: 1.5rem !default;
+
+// pt-BR: Valores de `.row-cols-{n}`; n deve dividir o número de colunas para alinhar perfeitamente.
+// EN: `.row-cols-{n}` values; n must divide the column count to align perfectly.
+$row-cols: (1, 2, 7, 14) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Espaçamentos (Margins, Paddings e Gutters)
+// EN: Spacers (Margins, Paddings and Gutters)
+// ---------------------------------------------------------------------------
+$spacer: 1rem !default;
+
+$spacers: (
+  "0": 0,
+  "1": $spacer * 0.25,
+  "2": $spacer * 0.5,
+  "3": $spacer,
+  "4": $spacer * 1.5,
+  "5": $spacer * 3,
+  "auto": auto,
+) !default;
+
+$negative-spacers: (
+  "1": -$spacer * 0.25,
+  "2": -$spacer * 0.5,
+  "3": -$spacer,
+  "4": -$spacer * 1.5,
+  "5": -$spacer * 3,
+) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Bordas
+// EN: Borders
+// ---------------------------------------------------------------------------
+$border-width: 1px !default;
+$border-widths: (
+  "1": 1px,
+  "2": 2px,
+  "3": 3px,
+  "4": 4px,
+  "5": 5px,
+) !default;
+$border-style: solid !default;
+$border-color: #dee2e6 !default;
+$border-color-translucent: rgba(0, 0, 0, 0.175) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Raio de Borda (Radius)
+// EN: Border Radius
+// ---------------------------------------------------------------------------
+$border-radius-base: 0.375rem !default;
+$border-radius:      $border-radius-base !default;
+$border-radius-sm:   0.25rem !default;
+$border-radius-lg:   0.5rem !default;
+$border-radius-xl:   1rem !default;
+$border-radius-2xl:  1.5rem !default;
+$border-radius-pill: 50rem !default;
+$border-radius-circle: 50% !default;
+
+$border-radii: (
+  "0":      0,
+  "sm":     $border-radius-sm,
+  "base":   $border-radius,
+  "lg":     $border-radius-lg,
+  "xl":     $border-radius-xl,
+  "2xl":    $border-radius-2xl,
+  "pill":   $border-radius-pill,
+  "circle": $border-radius-circle,
+) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Sombras (Box Shadows) com Intensidades e Cor
+// EN: Box Shadows with Intensities and Color
+// ---------------------------------------------------------------------------
+$box-shadow-base-color: #000 !default;
+$box-shadow-rgb: 0, 0, 0 !default;
+
+$box-shadow-opacity-light:   0.06 !default;
+$box-shadow-opacity-normal:  0.15 !default;
+$box-shadow-opacity-dark:    0.30 !default;
+$box-shadow-opacity-darker:  0.50 !default;
+
+$box-shadow-opacities: (
+  "light":  $box-shadow-opacity-light,
+  "normal": $box-shadow-opacity-normal,
+  "dark":   $box-shadow-opacity-dark,
+  "darker": $box-shadow-opacity-darker,
+) !default;
+
+$box-shadow:       0 0.5rem 1rem rgba($box-shadow-base-color, $box-shadow-opacity-normal) !default;
+$box-shadow-sm:    0 0.125rem 0.25rem rgba($box-shadow-base-color, $box-shadow-opacity-normal * 0.5) !default;
+$box-shadow-lg:    0 1rem 3rem rgba($box-shadow-base-color, $box-shadow-opacity-normal * 1.15) !default;
+$box-shadow-inset: inset 0 1px 2px rgba($box-shadow-base-color, $box-shadow-opacity-normal * 0.5) !default;
+
+$box-shadows: (
+  "none":  none,
+  "sm":    $box-shadow-sm,
+  "base":  $box-shadow,
+  "lg":    $box-shadow-lg,
+  "inset": $box-shadow-inset,
+) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Cursores e Interações (Pointers)
+// EN: Cursors and Interactions (Pointers)
+// ---------------------------------------------------------------------------
+$cursors: (
+  "auto":        auto,
+  "default":     default,
+  "pointer":     pointer,
+  "wait":        wait,
+  "text":        text,
+  "move":        move,
+  "not-allowed": not-allowed,
+  "grab":        grab,
+  "grabbing":    grabbing,
+) !default;
+
+$pointer-events: (
+  "auto": auto,
+  "none": none,
+) !default;
+
+$user-selects: (
+  "all":  all,
+  "auto": auto,
+  "none": none,
+  "text": text,
+) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Tipografia
+// EN: Typography
+// ---------------------------------------------------------------------------
+
+// pt-BR: Pilha de fontes do sistema, usada como fallback.
+// EN: System font stack, used as fallback.
+$font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif !default;
+
+// pt-BR: Fontes padrão de texto, títulos e código (sempre com fallback).
+// EN: Default fonts for body, titles and code (always with fallback).
+$font-body:  "Inter", $font-system !default;
+$font-title: "Poppins", $font-system !default;
+$font-code:  "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace !default;
+
+// pt-BR: Altura de linha base do texto.
+// EN: Base text line height.
+$line-height-base: 1.5 !default;
+
+// pt-BR: Tamanho de fonte base (1rem respeita o zoom e a preferência do usuário).
+// EN: Base font size (1rem respects the user zoom and preference).
+$font-size-base: 1rem !default;
+
+// pt-BR: Tamanhos de títulos (h1-h6, .h1-.h6) e de .fs-1 a .fs-6. h1 a h3 são fluidos:
+//        `fluid-size(min, max)` cresce linearmente entre 576px e 1536px (tipografia responsiva).
+// EN: Heading sizes (h1-h6, .h1-.h6) and .fs-1 to .fs-6. h1 to h3 are fluid:
+//     `fluid-size(min, max)` grows linearly between 576px and 1536px (responsive typography).
+$font-sizes: (
+  "1": fluid-size(2rem, 2.5rem),
+  "2": fluid-size(1.75rem, 2rem),
+  "3": fluid-size(1.5rem, 1.75rem),
+  "4": 1.5rem,
+  "5": 1.25rem,
+  "6": 1rem,
+) !default;
+
+// pt-BR: Tamanhos de destaque (.display-1 a .display-6), fluidos.
+// EN: Display sizes (.display-1 to .display-6), fluid.
+$display-sizes: (
+  "1": fluid-size(3rem, 5rem),
+  "2": fluid-size(2.75rem, 4.5rem),
+  "3": fluid-size(2.5rem, 4rem),
+  "4": fluid-size(2.25rem, 3.5rem),
+  "5": fluid-size(2rem, 3rem),
+  "6": fluid-size(1.75rem, 2.5rem),
+) !default;
+
+// pt-BR: Parâmetros de títulos, destaque (display) e .lead.
+// EN: Heading, display and .lead parameters.
+$heading-font-weight: 600 !default;
+$heading-line-height: 1.2 !default;
+$heading-margin-bottom: 0.5rem !default;
+$display-font-weight: 700 !default;
+$display-line-height: 1.1 !default;
+$lead-font-size: 1.25rem !default;
+$paragraph-margin-bottom: 1rem !default;
+
+// pt-BR: Listas: recuo à esquerda de `ul`/`ol` (o reset zera o padding).
+// EN: Lists: start indent of `ul`/`ol` (the reset zeroes the padding).
+$list-padding-start: 2rem !default;
+
+// pt-BR: Texto em linha: fundo de `mark` e cor de texto secundário (rodapé de citação).
+//        `#6c757d` tem contraste 4.69:1 sobre branco (AA).
+// EN: Inline text: `mark` background and muted text color (quote footer).
+//     `#6c757d` has 4.69:1 contrast on white (AA).
+$mark-bg: #fff3cd !default;
+$text-muted: #6c757d !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Elementos HTML nativos (links, hr, code, kbd, pre)
+// EN: Native HTML elements (links, hr, code, kbd, pre)
+// ---------------------------------------------------------------------------
+
+// pt-BR: Links: cor padrão = primary (6.84:1 sobre branco); hover = secondary (12.61:1). Ambos AA.
+// EN: Links: default color = primary (6.84:1 on white); hover = secondary (12.61:1). Both AA.
+$link-color: $primary !default;
+$link-hover-color: $secondary !default;
+
+// pt-BR: `code` inline usa quaternary (9.41:1 sobre branco); `kbd` é branco sobre secondary (12.61:1).
+//        `$code-bg` (fundo de `pre`) é PROPOSTA pendente de aprovação (ver Colors.md).
+// EN: Inline `code` uses quaternary (9.41:1 on white); `kbd` is white on secondary (12.61:1).
+//     `$code-bg` (`pre` background) is a PROPOSAL pending approval (see Colors.md).
+$code-color: $quaternary !default;
+$code-bg: #f4f6fb !default;
+$kbd-color: #fff !default;
+$kbd-bg: $secondary !default;
+
+// pt-BR: Tema de Sintaxe de Código PrismJS Okaidia / Monokai
+// EN: PrismJS Okaidia / Monokai Code Syntax Theme
+$code-monokai-bg: #272822 !default;
+$code-monokai-header-bg: #1e1f1c !default;
+$code-monokai-color: #f8f8f2 !default;
+$code-monokai-comment: #75715e !default;
+$code-monokai-magenta: #f92672 !default; // tags, properties, keywords, boolean, numbers
+$code-monokai-green: #a6e22e !default;   // strings, attributes, selectors, inserted
+$code-monokai-yellow: #e6db74 !default;  // functions, classes, attributes values
+$code-monokai-cyan: #66d9ef !default;    // keywords, atrules, operators
+$code-monokai-orange: #fd971f !default;  // constants, variables, regex
+$code-monokai-purple: #ae81ff !default;  // numbers, booleans, constants
+$code-monokai-selection: #49483e !default;
+
+// pt-BR: Linha horizontal (`hr`).
+// EN: Horizontal rule (`hr`).
+$hr-margin: 1rem !default;
+$hr-opacity: 0.25 !default;
+
+// pt-BR: Pesos de fonte (.fw-*). Carregue apenas os pesos que usar (ver WebFonts.md).
+// EN: Font weights (.fw-*). Load only the weights you use (see WebFonts.md).
+$font-weights: (
+  "light": 300,
+  "normal": 400,
+  "medium": 500,
+  "semibold": 600,
+  "bold": 700,
+  "extrabold": 800,
+) !default;
+
+// pt-BR: Alturas de linha (.lh-*).
+// EN: Line heights (.lh-*).
+$line-heights: (
+  "1": 1,
+  "tight": 1.25,
+  "base": 1.5,
+  "loose": 1.75,
+) !default;
+
+// pt-BR: Espaçamento entre letras (.ls-*).
+// EN: Letter spacing (.ls-*).
+$letter-spacings: (
+  "tight": -0.025em,
+  "normal": 0,
+  "wide": 0.025em,
+  "wider": 0.05em,
+  "widest": 0.1em,
+) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Transições e Efeitos Hover (Padronizados em 700ms ease-in-out)
+// EN: Transitions and Hover Effects (Standardized to 700ms ease-in-out)
+// ---------------------------------------------------------------------------
+$transition-duration: 700ms !default;
+$transition-timing-function: ease-in-out !default;
+$transition-base: all $transition-duration $transition-timing-function !default;
+$transition-hover: background-color $transition-duration $transition-timing-function,
+                   color $transition-duration $transition-timing-function,
+                   border-color $transition-duration $transition-timing-function,
+                   box-shadow $transition-duration $transition-timing-function !default;
+$transition-fade: opacity $transition-duration $transition-timing-function !default;
+$transition-collapse: height $transition-duration $transition-timing-function !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Escala de z-index (camadas semânticas; deixe intervalos para camadas customizadas)
+// EN: z-index scale (semantic layers; keep gaps for custom layers in between)
+// ---------------------------------------------------------------------------
+$z-layers: (
+  "dropdown":           1000,
+  "sticky":             1020,
+  "fixed":              1030,
+  "offcanvas-backdrop": 1040,
+  "offcanvas":          1045,
+  "modal-backdrop":     1050,
+  "modal":              1055,
+  "popover":            1070,
+  "tooltip":            1080,
+  "toast":              1090,
+  "alert-floating":     1100,
+) !default;
+
+// pt-BR: Níveis relativos, usados em .z-n1, .z-0 ... .z-3.
+// EN: Relative levels, used by .z-n1, .z-0 ... .z-3.
+$z-levels: (
+  "n1": -1,
+  "0":  0,
+  "1":  1,
+  "2":  2,
+  "3":  3,
+) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Configuração de Tabelas
+// EN: Table Configuration
+// ---------------------------------------------------------------------------
+$table-cell-padding-y:        0.625rem !default;
+$table-cell-padding-x:        0.75rem !default;
+$table-cell-padding-y-sm:     0.375rem !default;
+$table-cell-padding-x-sm:     0.5rem !default;
+$table-cell-padding-y-lg:     1rem !default;
+$table-cell-padding-x-lg:     1.25rem !default;
+
+$table-color:                 var(--#{$prefix}-body-color) !default;
+$table-bg:                    transparent !default;
+$table-border-color:          var(--#{$prefix}-border-color) !default;
+$table-border-width:          var(--#{$prefix}-border-width) !default;
+
+$table-striped-bg:            rgba(0, 0, 0, 0.035) !default;
+$table-striped-bg-dark:       rgba(255, 255, 255, 0.05) !default;
+$table-active-bg:             rgba(0, 0, 0, 0.075) !default;
+$table-active-bg-dark:        rgba(255, 255, 255, 0.1) !default;
+$table-hover-bg:              rgba(0, 0, 0, 0.05) !default;
+$table-hover-bg-dark:         rgba(255, 255, 255, 0.075) !default;
+
+$table-group-divider-color:   currentColor !default;
+$table-caption-color:         var(--#{$prefix}-text-muted) !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Configuração de Conteúdo Tipográfico (Prose)
+// EN: Typographic Content (Prose) Configuration
+// ---------------------------------------------------------------------------
+$prose-max-width:             65ch !default;
+$prose-max-width-narrow:      45ch !default;
+$prose-max-width-wide:        85ch !default;
+$prose-line-height:           1.75 !default;
+
+// ---------------------------------------------------------------------------
+// pt-BR: Configuração de Indicadores de Carregamento (Loaders)
+// EN: Loaders and Progress Configuration
+// ---------------------------------------------------------------------------
+$loader-size-base:            1px !default;
+$loader-color-primary:        $primary !default;
+$loader-color-track:          rgba(55, 88, 145, 0.2) !default;
+
+
+

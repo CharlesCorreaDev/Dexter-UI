@@ -1,0 +1,97 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_spacing.scss
+ * @description [PT-BR] Utilitários de espaçamento responsivos: margens (m-*), margens negativas (m-n*),
+ *                      preenchimentos (p-*) e espaçamento de grid/flex (gap-*).
+ *              [EN]    Responsive spacing utilities: margins (m-*), negative margins (m-n*),
+ *                      paddings (p-*) and grid/flex gap (gap-*).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Espaçamentos | Spacings */
+
+@use "../abstracts" as *;
+
+@each $bp-name, $bp-value in $breakpoints {
+  $infix: breakpoint-infix($bp-name);
+
+  @include media-up($bp-name) {
+    @each $key, $value in $spacers {
+      // pt-BR: Margens
+      // EN: Margins
+      .m#{$infix}-#{$key}  { margin: $value !important; }
+      .mt#{$infix}-#{$key} { margin-top: $value !important; }
+      .mb#{$infix}-#{$key} { margin-bottom: $value !important; }
+      .ms#{$infix}-#{$key} { margin-inline-start: $value !important; }
+      .me#{$infix}-#{$key} { margin-inline-end: $value !important; }
+      .mx#{$infix}-#{$key} {
+        margin-inline-start: $value !important;
+        margin-inline-end: $value !important;
+      }
+      .my#{$infix}-#{$key} {
+        margin-top: $value !important;
+        margin-bottom: $value !important;
+      }
+
+      // pt-BR: Preenchimentos (ignora valor "auto" para padding)
+      // EN: Paddings (skips "auto" value for padding)
+      @if $key != "auto" {
+        .p#{$infix}-#{$key}  { padding: $value !important; }
+        .pt#{$infix}-#{$key} { padding-top: $value !important; }
+        .pb#{$infix}-#{$key} { padding-bottom: $value !important; }
+        .ps#{$infix}-#{$key} { padding-inline-start: $value !important; }
+        .pe#{$infix}-#{$key} { padding-inline-end: $value !important; }
+        .px#{$infix}-#{$key} {
+          padding-inline-start: $value !important;
+          padding-inline-end: $value !important;
+        }
+        .py#{$infix}-#{$key} {
+          padding-top: $value !important;
+          padding-bottom: $value !important;
+        }
+
+        // pt-BR: Gap para flexbox e grid
+        // EN: Gap for flexbox and grid
+        .gap#{$infix}-#{$key}         { gap: $value !important; }
+        .row-gap#{$infix}-#{$key}     { row-gap: $value !important; }
+        .column-gap#{$infix}-#{$key}  { column-gap: $value !important; }
+      }
+    }
+
+    // pt-BR: Margens negativas
+    // EN: Negative margins
+    @each $key, $value in $negative-spacers {
+      .m#{$infix}-n#{$key}  { margin: $value !important; }
+      .mt#{$infix}-n#{$key} { margin-top: $value !important; }
+      .mb#{$infix}-n#{$key} { margin-bottom: $value !important; }
+      .ms#{$infix}-n#{$key} { margin-inline-start: $value !important; }
+      .me#{$infix}-n#{$key} { margin-inline-end: $value !important; }
+      .mx#{$infix}-n#{$key} {
+        margin-inline-start: $value !important;
+        margin-inline-end: $value !important;
+      }
+      .my#{$infix}-n#{$key} {
+        margin-top: $value !important;
+        margin-bottom: $value !important;
+      }
+    }
+  }
+}

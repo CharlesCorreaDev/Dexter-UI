@@ -1,0 +1,78 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_shadows.scss
+ * @description [PT-BR] Utilitários de sombras de caixa (box-shadow): níveis de tamanho (.shadow-sm,
+ *                      .shadow, .shadow-lg, .shadow-inset, .shadow-none), modificadores de intensidade
+ *                      (.shadow-light, .shadow-normal, .shadow-dark, .shadow-darker) e sombras coloridas
+ *                      por todas as cores (.shadow-{cor}) e passos da escala (.shadow-{cor}-{passo}).
+ *              [EN]    Box shadow utilities: size levels (.shadow-sm, .shadow, .shadow-lg,
+ *                      .shadow-inset, .shadow-none), intensity modifiers (.shadow-light, .shadow-normal,
+ *                      .shadow-dark, .shadow-darker), and colored shadows across all colors
+ *                      (.shadow-{color}) and scale steps (.shadow-{color}-{step}).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Sombras | Shadows */
+
+@use "../abstracts" as *;
+
+// pt-BR: Níveis de tamanho / elevação
+// EN: Size / elevation levels
+.shadow-none  { box-shadow: none !important; }
+.shadow-sm    { box-shadow: var(--#{$prefix}-shadow-sm) !important; }
+.shadow       { box-shadow: var(--#{$prefix}-shadow-base) !important; }
+.shadow-lg    { box-shadow: var(--#{$prefix}-shadow-lg) !important; }
+.shadow-inset { box-shadow: var(--#{$prefix}-shadow-inset) !important; }
+
+// pt-BR: Modificadores de intensidade (mais claras e mais escuras)
+//        Compõem com .shadow, .shadow-sm ou .shadow-lg ajustando o canal alfa.
+// EN: Intensity modifiers (lighter and darker)
+//     Compose with .shadow, .shadow-sm or .shadow-lg adjusting the alpha channel.
+.shadow-light  { --#{$prefix}-shadow-opacity: var(--#{$prefix}-shadow-opacity-light) !important; }
+.shadow-normal { --#{$prefix}-shadow-opacity: var(--#{$prefix}-shadow-opacity-normal) !important; }
+.shadow-dark   { --#{$prefix}-shadow-opacity: var(--#{$prefix}-shadow-opacity-dark) !important; }
+.shadow-darker { --#{$prefix}-shadow-opacity: var(--#{$prefix}-shadow-opacity-darker) !important; }
+
+// pt-BR: Sombras coloridas com base nas 28 cores da paleta (#500)
+// EN: Colored shadows based on all 28 palette colors (#500)
+@each $name, $color in $all-colors {
+  .shadow-#{$name} {
+    --#{$prefix}-shadow-rgb: var(--#{$prefix}-#{$name}-rgb) !important;
+  }
+}
+
+// pt-BR: Sombras coloridas em passos específicos da escala tonal
+// EN: Colored shadows in specific tonal scale steps
+@each $name, $_ in $all-colors {
+  @each $step, $_w in $scale-weights {
+    .shadow-#{$name}-#{$step} {
+      --#{$prefix}-shadow-rgb: var(--#{$prefix}-#{$name}-#{$step}-rgb) !important;
+    }
+  }
+}
+
+// pt-BR: Aliases em português para sombras
+// EN: Portuguese aliases for shadows
+@each $alias, $canonical in $color-aliases {
+  .shadow-#{$alias} {
+    --#{$prefix}-shadow-rgb: var(--#{$prefix}-#{$canonical}-rgb) !important;
+  }
+}

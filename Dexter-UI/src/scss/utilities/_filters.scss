@@ -1,0 +1,163 @@
+/**
+ * =============================================================================
+ * Dexter UI Framework
+ * =============================================================================
+ *
+ * @file        utilities/_filters.scss
+ * @description [PT-BR] Utilitários de filtros CSS para imagens e elementos:
+ *                      escala de cinza (.filter-grayscale), sépia, desfoque (blur),
+ *                      inversão, brilho, contraste, saturação, rotação de matiz (hue)
+ *                      e efeitos suaves de transição no hover (700ms ease-in-out).
+ *              [EN]    CSS filter utilities for images and elements: grayscale
+ *                      (.filter-grayscale), sepia, blur, invert, brightness, contrast,
+ *                      saturation, hue-rotate, and smooth hover filter transitions
+ *                      (700ms ease-in-out).
+ *
+ * @author      Charles Corrêa
+ * @contact     E-mail: charlescorreaweb@gmail.com
+ * @website     https://charlescorrea.com.br
+ * @github      https://github.com/CharlesCorreaDev
+ *
+ * @repository  https://github.com/CharlesCorreaDev/Dexter-UI
+ * @issues      https://github.com/CharlesCorreaDev/Dexter-UI/issues/
+ * @wiki        https://github.com/CharlesCorreaDev/Dexter-UI/wiki/
+ * @releases    https://github.com/CharlesCorreaDev/Dexter-UI/releases/
+ * @tags        https://github.com/CharlesCorreaDev/Dexter-UI/tags/
+ *
+ * @copyright   2026 Charles Corrêa. Todos os direitos reservados / All rights reserved.
+ * @license     [PT-BR] MIT – consulte o arquivo LICENSE na raiz do repositório.
+ *              [EN]    MIT – see the LICENSE file at the repository root.
+ * =============================================================================
+ */
+
+/* @section Filtros de Imagem | Image Filters */
+
+@use "../abstracts" as *;
+
+// pt-BR: Escala de Cinza (Grayscale)
+// EN: Grayscale
+.filter-grayscale    { filter: grayscale(100%) !important; }
+.filter-grayscale-75 { filter: grayscale(75%) !important; }
+.filter-grayscale-50 { filter: grayscale(50%) !important; }
+.filter-grayscale-25 { filter: grayscale(25%) !important; }
+.filter-grayscale-0  { filter: grayscale(0%) !important; }
+
+// pt-BR: Sépia (Vintage)
+// EN: Sepia
+.filter-sepia    { filter: sepia(100%) !important; }
+.filter-sepia-75 { filter: sepia(75%) !important; }
+.filter-sepia-50 { filter: sepia(50%) !important; }
+.filter-sepia-25 { filter: sepia(25%) !important; }
+.filter-sepia-0  { filter: sepia(0%) !important; }
+
+// pt-BR: Desfoque (Blur)
+// EN: Blur
+.filter-blur-xs   { filter: blur(1px) !important; }
+.filter-blur-sm   { filter: blur(2px) !important; }
+.filter-blur      { filter: blur(4px) !important; }
+.filter-blur-md   { filter: blur(8px) !important; }
+.filter-blur-lg   { filter: blur(16px) !important; }
+.filter-blur-none { filter: blur(0) !important; }
+
+// pt-BR: Inversão (Invert)
+// EN: Invert
+.filter-invert    { filter: invert(100%) !important; }
+.filter-invert-75 { filter: invert(75%) !important; }
+.filter-invert-50 { filter: invert(50%) !important; }
+.filter-invert-0  { filter: invert(0%) !important; }
+
+// pt-BR: Brilho (Brightness)
+// EN: Brightness
+.filter-brightness-50  { filter: brightness(0.5) !important; }
+.filter-brightness-75  { filter: brightness(0.75) !important; }
+.filter-brightness-90  { filter: brightness(0.9) !important; }
+.filter-brightness-110 { filter: brightness(1.1) !important; }
+.filter-brightness-125 { filter: brightness(1.25) !important; }
+.filter-brightness-150 { filter: brightness(1.5) !important; }
+.filter-brightness-200 { filter: brightness(2) !important; }
+
+// pt-BR: Contraste (Contrast)
+// EN: Contrast
+.filter-contrast-50  { filter: contrast(0.5) !important; }
+.filter-contrast-75  { filter: contrast(0.75) !important; }
+.filter-contrast-125 { filter: contrast(1.25) !important; }
+.filter-contrast-150 { filter: contrast(1.5) !important; }
+.filter-contrast-200 { filter: contrast(2) !important; }
+
+// pt-BR: Saturação (Saturate)
+// EN: Saturate
+.filter-saturate-0   { filter: saturate(0) !important; }
+.filter-saturate-50  { filter: saturate(0.5) !important; }
+.filter-saturate-150 { filter: saturate(1.5) !important; }
+.filter-saturate-200 { filter: saturate(2) !important; }
+
+// pt-BR: Rotação de Matiz (Hue Rotate)
+// EN: Hue Rotate
+.filter-hue-30  { filter: hue-rotate(30deg) !important; }
+.filter-hue-60  { filter: hue-rotate(60deg) !important; }
+.filter-hue-90  { filter: hue-rotate(90deg) !important; }
+.filter-hue-180 { filter: hue-rotate(180deg) !important; }
+.filter-hue-270 { filter: hue-rotate(270deg) !important; }
+
+// pt-BR: Sombra Projetada (Drop Shadow compatível com recortes e PNGs transparentes)
+// EN: Drop Shadow (works with transparent PNGs and irregular shapes)
+.filter-drop-shadow-sm { filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15)) !important; }
+.filter-drop-shadow    { filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2)) !important; }
+.filter-drop-shadow-lg { filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.25)) !important; }
+
+// pt-BR: Reset de filtro
+// EN: Filter reset
+.filter-none { filter: none !important; }
+
+// -----------------------------------------------------------------------------
+// pt-BR: Efeitos de Filtro no Hover (Transições em 700ms ease-in-out)
+// EN: Filter Hover Effects (Transitions in 700ms ease-in-out)
+// -----------------------------------------------------------------------------
+.filter-transition {
+  transition: filter var(--#{$prefix}-transition-duration, 700ms) var(--#{$prefix}-transition-timing, ease-in-out) !important;
+}
+
+// pt-BR: Inicia com filtro e volta ao normal suavemente no hover
+// EN: Starts filtered and smoothly restores on hover
+.filter-hover-none {
+  @extend .filter-transition;
+  &:hover {
+    filter: none !important;
+  }
+}
+
+// pt-BR: Inicia normal e converte para escala de cinza no hover
+// EN: Starts normal and converts to grayscale on hover
+.filter-hover-grayscale {
+  @extend .filter-transition;
+  &:hover {
+    filter: grayscale(100%) !important;
+  }
+}
+
+// pt-BR: Inicia normal e aplica sépia vintage no hover
+// EN: Starts normal and applies vintage sepia on hover
+.filter-hover-sepia {
+  @extend .filter-transition;
+  &:hover {
+    filter: sepia(100%) !important;
+  }
+}
+
+// pt-BR: Inicia normal e desfoca no hover
+// EN: Starts normal and blurs on hover
+.filter-hover-blur {
+  @extend .filter-transition;
+  &:hover {
+    filter: blur(4px) !important;
+  }
+}
+
+// pt-BR: Inicia normal e eleva a saturação no hover
+// EN: Starts normal and boosts saturation on hover
+.filter-hover-saturate {
+  @extend .filter-transition;
+  &:hover {
+    filter: saturate(1.8) !important;
+  }
+}
